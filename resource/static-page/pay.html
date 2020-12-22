@@ -1,0 +1,127 @@
+<!-- HTML5 -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>快捷充值</title>
+	<meta charset="gbk">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+</head>
+<body>
+	<div class="content pay">
+		<div class="tabBar" title=""> <span class="goBack"> < </span>快捷充值</div>
+		<div class="cardsBlock">
+			<div class="top">
+				<div>￥ <text class="price">3999.00</text> 元</div>
+				<div class="des">到账 5000.00 元</div>	
+			</div>
+			<div class="cont">
+				<div class="item"><text class="tit">银行卡号</text> <input type="text" value="招商银行" disabled="" /></div>
+				<div class="item"><text class="tit">手机号</text> <input type="text" value="135**987" disabled="" /></div>
+				<div class="item"><text class="tit">验证码</text> <input type="text" placeholder="请输入验证码" /><div class="getCode" onclick="">获取验证码</div></div>
+				<div class="item clborder"><text class="tit">交易密码</text> <input type="text" placeholder="请输入交易密码" /></div>
+			</div>
+		</div>
+		<div class="des">
+			温馨提示：招商银行不承担网贷平台的投融资标的物及投融资人的审核责任，不对网贷平台业务提供明示或模示的担保或连带责任，网贷平台的交易风险由投融资人自行承担，与银行无关。
+		</div>
+		<div class="itBut"><div class="submitBut">确认协议并注册</div></div>
+	</div>
+	<style>
+		body,html{
+			margin: 0;
+			padding:0;
+		}
+	.content{
+		max-width: 750px;
+		width: 100%;
+		font-size: 14px;
+	}
+	.tabBar{
+		position:relative;
+		color:#666;
+		text-align: center;
+		line-height: 40px;
+		box-shadow: 0 2px 2px #e2e2e2;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.tabBar .goBack{
+		font-size: 22px;
+		position: absolute;
+		left: 15px;
+	}
+	input{
+		border:none;
+		width: 100%;
+		border-radius: 3px;
+		padding:0 10px;
+	}
+	.cardsBlock{
+		margin: 15px;
+		border-radius: 5px;
+		font-size: 12px;
+		-webkit-box-shadow: 0 0 5px #e2e2e2;
+		box-shadow: 0 0 5px #e2e2e2;
+	}
+	.pay .top{
+		padding: 15px;
+		font-size: 14px;
+		border-bottom: solid 1px #e2e2e2;
+	}
+	.pay  .top .price{
+		font-size: 28px;
+	}
+	.pay .top .des{
+		color:#666;
+		padding: 0;
+	}
+	.pay .cont{
+		padding: 15px;
+	}
+	.pay .cont .item{
+		display: flex;
+		line-height: 40px;
+		border-bottom: solid 1px #e2e2e2;
+	}
+	.pay .cont .item .tit{
+		display: block;
+		width: 80px;
+	}
+	.pay .des{
+		padding: 0 20px;
+		color:#999;
+		line-height: 20px;
+		font-size: 6px;
+	}
+	.pay .getCode{
+		background: linear-gradient(130deg, #8a8fef, #4f57eb);;
+		color:#fff;
+		width: 100px;
+		padding:2px 10px;
+		text-align: center;
+		border-radius: 5px;
+		margin: 5px 0;
+		height: 25px;
+		line-height: 25px;
+	}
+	.clborder{
+		border:none !important;
+	}
+    .submitBut{
+		background: linear-gradient(130deg, #8a8fef, #4f57eb);
+		padding: 5px 0px;
+		line-height: 2;
+		border-radius: 50px;
+		width: 80%;
+		margin: 0 auto;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		text-align: center;
+		color:#fff;
+	}
+	
+	</style>
+</body>
+</html> 
