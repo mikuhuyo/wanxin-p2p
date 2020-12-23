@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
                 .apiInfo(buildApiInfo())
                 .select()
                 // 要扫描的API(Controller)基础包
-                .apis(RequestHandlerSelectors.basePackage("com.wanxin.consumer.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.wanxin"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -36,7 +36,7 @@ public class SwaggerConfiguration {
         Contact contact = new Contact("岳立民", "https://github.com/YueLiMin-say", "yueliminvc@outlook.com");
         return new ApiInfoBuilder()
                 .title("万信金融P2P平台-用户服务API文档")
-                .description("包含用户服务api")
+                .description("用户服务api")
                 .contact(contact)
                 .version("1.0.0").build();
     }
