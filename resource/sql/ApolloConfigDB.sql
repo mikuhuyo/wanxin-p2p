@@ -33,21 +33,21 @@ CREATE TABLE `App` (
 -- Records of App
 -- ----------------------------
 BEGIN;
-INSERT INTO `App` VALUES (1, 'consumer-service', 'C端用户服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-01 00:55:29', 'apollo', '2019-07-16 11:56:42');
-INSERT INTO `App` VALUES (2, 'common-template', '通用配置模板', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-05 18:05:17', 'apollo', '2020-12-22 06:12:32');
-INSERT INTO `App` VALUES (3, 'transaction-service', '交易中心', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-07 00:40:14', 'apollo', '2019-07-16 11:56:44');
-INSERT INTO `App` VALUES (4, 'gateway-server', 'OAuth2.0网关服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-07 01:31:40', 'apollo', '2019-07-16 11:56:45');
-INSERT INTO `App` VALUES (5, 'uaa-service', '统一认证中心', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-07 19:03:38', 'apollo', '2019-07-16 11:56:46');
-INSERT INTO `App` VALUES (6, 'wanxindepository', '万信银行存管系统', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-08 21:29:38', 'apollo', '2019-07-16 11:56:47');
-INSERT INTO `App` VALUES (7, 'account_service', '统一账号服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-17 10:10:29', 'apollo', '2019-07-16 11:56:48');
-INSERT INTO `App` VALUES (8, 'depository-agent-service', '存管代理服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-17 10:32:21', 'apollo', '2019-07-16 11:56:49');
-INSERT INTO `App` VALUES (9, 'account-service', '统一账号微服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-17 13:06:12', 'apollo', '2019-07-16 11:56:49');
-INSERT INTO `App` VALUES (10, 'repayment-service', 'repayment-service', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-22 11:28:11', 'apollo', '2019-07-16 11:56:50');
-INSERT INTO `App` VALUES (11, 'test', '配置文件测试', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-31 14:24:24', 'apollo', '2019-07-16 11:56:51');
-INSERT INTO `App` VALUES (12, 'Balance-service', '对账服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-20 15:23:57', 'apollo', '2019-07-16 11:56:52');
-INSERT INTO `App` VALUES (13, 'reconciliation-service', '对账服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-20 15:36:13', 'apollo', '2019-07-16 11:56:53');
-INSERT INTO `App` VALUES (14, 'file-service', '文件存储微服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-26 15:48:12', 'apollo', '2019-07-16 11:56:56');
-INSERT INTO `App` VALUES (15, 'account-service', '统一账户服务', 'micro_service', '黑马程序员微服务项目之战狼组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-07-16 11:52:35', 'apollo', '2019-07-16 12:03:34');
+INSERT INTO `App` VALUES (1, 'consumer-service', 'C端用户服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-01 00:55:29', 'apollo', '2019-07-16 11:56:42');
+INSERT INTO `App` VALUES (2, 'common-template', '通用配置模板', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-05 18:05:17', 'apollo', '2020-12-22 06:12:32');
+INSERT INTO `App` VALUES (3, 'transaction-service', '交易中心', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-07 00:40:14', 'apollo', '2019-07-16 11:56:44');
+INSERT INTO `App` VALUES (4, 'gateway-server', 'OAuth2.0网关服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-07 01:31:40', 'apollo', '2019-07-16 11:56:45');
+INSERT INTO `App` VALUES (5, 'uaa-service', '统一认证中心', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-07 19:03:38', 'apollo', '2019-07-16 11:56:46');
+INSERT INTO `App` VALUES (6, 'wanxindepository', '万信银行存管系统', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2019-05-08 21:29:38', 'apollo', '2019-07-16 11:56:47');
+INSERT INTO `App` VALUES (7, 'account_service', '统一账号服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-17 10:10:29', 'apollo', '2019-07-16 11:56:48');
+INSERT INTO `App` VALUES (8, 'depository-agent-service', '存管代理服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-17 10:32:21', 'apollo', '2019-07-16 11:56:49');
+INSERT INTO `App` VALUES (9, 'account-service', '统一账号微服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-17 13:06:12', 'apollo', '2019-07-16 11:56:49');
+INSERT INTO `App` VALUES (10, 'repayment-service', 'repayment-service', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-22 11:28:11', 'apollo', '2019-07-16 11:56:50');
+INSERT INTO `App` VALUES (11, 'test', '配置文件测试', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-05-31 14:24:24', 'apollo', '2019-07-16 11:56:51');
+INSERT INTO `App` VALUES (12, 'Balance-service', '对账服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-20 15:23:57', 'apollo', '2019-07-16 11:56:52');
+INSERT INTO `App` VALUES (13, 'reconciliation-service', '对账服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-20 15:36:13', 'apollo', '2019-07-16 11:56:53');
+INSERT INTO `App` VALUES (14, 'file-service', '文件存储微服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-26 15:48:12', 'apollo', '2019-07-16 11:56:56');
+INSERT INTO `App` VALUES (15, 'account-service', '统一账户服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-07-16 11:52:35', 'apollo', '2019-07-16 12:03:34');
 COMMIT;
 
 -- ----------------------------
