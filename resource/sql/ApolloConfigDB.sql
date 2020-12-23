@@ -2,7 +2,6 @@ DROP DATABASE IF EXISTS `ApolloConfigDB`;
 CREATE DATABASE  `ApolloConfigDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `ApolloConfigDB`;
 
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -27,7 +26,7 @@ CREATE TABLE `App` (
   KEY `AppId` (`AppId`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Name` (`Name`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
 
 -- ----------------------------
 -- Records of App
@@ -48,6 +47,7 @@ INSERT INTO `App` VALUES (12, 'Balance-service', '对账服务', 'micro_service'
 INSERT INTO `App` VALUES (13, 'reconciliation-service', '对账服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-20 15:36:13', 'apollo', '2019-07-16 11:56:53');
 INSERT INTO `App` VALUES (14, 'file-service', '文件存储微服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-26 15:48:12', 'apollo', '2019-07-16 11:56:56');
 INSERT INTO `App` VALUES (15, 'account-service', '统一账户服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-07-16 11:52:35', 'apollo', '2019-07-16 12:03:34');
+INSERT INTO `App` VALUES (16, 'account-service', '统一账户服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2020-12-23 06:45:47', 'apollo', '2020-12-23 06:45:47');
 COMMIT;
 
 -- ----------------------------
@@ -70,7 +70,7 @@ CREATE TABLE `AppNamespace` (
   KEY `IX_AppId` (`AppId`),
   KEY `Name_AppId` (`Name`,`AppId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
 
 -- ----------------------------
 -- Records of AppNamespace
@@ -109,6 +109,7 @@ INSERT INTO `AppNamespace` VALUES (30, 'micro_service.file', 'file-service', 'pr
 INSERT INTO `AppNamespace` VALUES (31, 'micro_service.files', 'consumer-service', 'properties', b'1', '文件存储配置', b'0', 'apollo', '2019-06-27 18:43:05', 'apollo', '2019-06-27 18:43:05');
 INSERT INTO `AppNamespace` VALUES (32, 'micro_service.gateway-flow-rule', 'gateway-server', 'properties', b'1', '', b'0', 'apollo', '2019-07-03 14:43:16', 'apollo', '2019-07-03 14:43:16');
 INSERT INTO `AppNamespace` VALUES (33, 'application', 'account-service', 'properties', b'0', 'default app namespace', b'1', 'apollo', '2019-07-16 12:01:24', 'apollo', '2019-07-16 12:03:34');
+INSERT INTO `AppNamespace` VALUES (34, 'application', 'account-service', 'properties', b'0', 'default app namespace', b'0', 'apollo', '2020-12-23 06:45:48', 'apollo', '2020-12-23 06:45:48');
 COMMIT;
 
 -- ----------------------------
@@ -128,7 +129,7 @@ CREATE TABLE `Audit` (
   `DataChange_LastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=1943 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
+) ENGINE=InnoDB AUTO_INCREMENT=2002 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
 
 -- ----------------------------
 -- Records of Audit
@@ -2076,6 +2077,65 @@ INSERT INTO `Audit` VALUES (1939, 'Release', 280, 'INSERT', NULL, b'0', 'apollo'
 INSERT INTO `Audit` VALUES (1940, 'ReleaseHistory', 285, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:41:11', NULL, '2020-12-23 06:41:11');
 INSERT INTO `Audit` VALUES (1941, 'Release', 281, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:41:15', NULL, '2020-12-23 06:41:15');
 INSERT INTO `Audit` VALUES (1942, 'ReleaseHistory', 286, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:41:16', NULL, '2020-12-23 06:41:16');
+INSERT INTO `Audit` VALUES (1943, 'App', 16, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:45:48', NULL, '2020-12-23 06:45:48');
+INSERT INTO `Audit` VALUES (1944, 'AppNamespace', 34, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:45:48', NULL, '2020-12-23 06:45:48');
+INSERT INTO `Audit` VALUES (1945, 'Cluster', 26, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:45:48', NULL, '2020-12-23 06:45:48');
+INSERT INTO `Audit` VALUES (1946, 'Namespace', 191, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:45:48', NULL, '2020-12-23 06:45:48');
+INSERT INTO `Audit` VALUES (1947, 'Namespace', 192, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 06:49:00', NULL, '2020-12-23 06:49:00');
+INSERT INTO `Audit` VALUES (1948, 'Namespace', 193, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:01:50', NULL, '2020-12-23 07:01:50');
+INSERT INTO `Audit` VALUES (1949, 'Namespace', 194, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:02:11', NULL, '2020-12-23 07:02:11');
+INSERT INTO `Audit` VALUES (1950, 'Namespace', 195, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:02:24', NULL, '2020-12-23 07:02:24');
+INSERT INTO `Audit` VALUES (1951, 'Namespace', 196, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:02:38', NULL, '2020-12-23 07:02:38');
+INSERT INTO `Audit` VALUES (1952, 'Namespace', 197, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:02:51', NULL, '2020-12-23 07:02:51');
+INSERT INTO `Audit` VALUES (1953, 'Namespace', 198, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:03:07', NULL, '2020-12-23 07:03:07');
+INSERT INTO `Audit` VALUES (1954, 'Namespace', 199, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:03:32', NULL, '2020-12-23 07:03:32');
+INSERT INTO `Audit` VALUES (1955, 'Namespace', 200, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:04:09', NULL, '2020-12-23 07:04:09');
+INSERT INTO `Audit` VALUES (1956, 'Namespace', 201, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:04:24', NULL, '2020-12-23 07:04:24');
+INSERT INTO `Audit` VALUES (1957, 'Item', 472, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1958, 'Item', 473, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1959, 'Item', 474, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1960, 'Item', 475, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1961, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1962, 'Item', 460, 'DELETE', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1963, 'ItemSet', NULL, 'DELETE', NULL, b'0', 'apollo', '2020-12-23 07:08:39', NULL, '2020-12-23 07:08:39');
+INSERT INTO `Audit` VALUES (1964, 'Release', 282, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:45', NULL, '2020-12-23 07:08:45');
+INSERT INTO `Audit` VALUES (1965, 'ReleaseHistory', 287, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:08:45', NULL, '2020-12-23 07:08:45');
+INSERT INTO `Audit` VALUES (1966, 'Item', 476, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:04', NULL, '2020-12-23 07:18:04');
+INSERT INTO `Audit` VALUES (1967, 'Item', 477, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:04', NULL, '2020-12-23 07:18:04');
+INSERT INTO `Audit` VALUES (1968, 'Item', 478, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:04', NULL, '2020-12-23 07:18:04');
+INSERT INTO `Audit` VALUES (1969, 'Item', 479, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:04', NULL, '2020-12-23 07:18:04');
+INSERT INTO `Audit` VALUES (1970, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:04', NULL, '2020-12-23 07:18:04');
+INSERT INTO `Audit` VALUES (1971, 'Release', 283, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:08', NULL, '2020-12-23 07:18:08');
+INSERT INTO `Audit` VALUES (1972, 'ReleaseHistory', 288, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:18:08', NULL, '2020-12-23 07:18:08');
+INSERT INTO `Audit` VALUES (1973, 'Item', 480, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:27:16', NULL, '2020-12-23 07:27:16');
+INSERT INTO `Audit` VALUES (1974, 'Release', 284, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:27:20', NULL, '2020-12-23 07:27:20');
+INSERT INTO `Audit` VALUES (1975, 'ReleaseHistory', 289, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:27:20', NULL, '2020-12-23 07:27:20');
+INSERT INTO `Audit` VALUES (1976, 'Item', 481, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:27:44', NULL, '2020-12-23 07:27:44');
+INSERT INTO `Audit` VALUES (1977, 'Release', 285, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:27:48', NULL, '2020-12-23 07:27:48');
+INSERT INTO `Audit` VALUES (1978, 'ReleaseHistory', 290, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:27:48', NULL, '2020-12-23 07:27:48');
+INSERT INTO `Audit` VALUES (1979, 'Item', 482, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:28:14', NULL, '2020-12-23 07:28:14');
+INSERT INTO `Audit` VALUES (1980, 'Item', 483, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:31:20', NULL, '2020-12-23 07:31:20');
+INSERT INTO `Audit` VALUES (1981, 'Release', 286, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:31:26', NULL, '2020-12-23 07:31:26');
+INSERT INTO `Audit` VALUES (1982, 'ReleaseHistory', 291, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:31:26', NULL, '2020-12-23 07:31:26');
+INSERT INTO `Audit` VALUES (1983, 'Item', 82, 'UPDATE', NULL, b'0', 'apollo', '2020-12-23 07:31:53', NULL, '2020-12-23 07:31:53');
+INSERT INTO `Audit` VALUES (1984, 'Item', 73, 'UPDATE', NULL, b'0', 'apollo', '2020-12-23 07:32:03', NULL, '2020-12-23 07:32:03');
+INSERT INTO `Audit` VALUES (1985, 'Release', 287, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:32:08', NULL, '2020-12-23 07:32:08');
+INSERT INTO `Audit` VALUES (1986, 'ReleaseHistory', 292, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:32:08', NULL, '2020-12-23 07:32:08');
+INSERT INTO `Audit` VALUES (1987, 'Namespace', 202, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:33:17', NULL, '2020-12-23 07:33:17');
+INSERT INTO `Audit` VALUES (1988, 'Namespace', 192, 'DELETE', NULL, b'0', 'apollo', '2020-12-23 07:36:02', NULL, '2020-12-23 07:36:02');
+INSERT INTO `Audit` VALUES (1989, 'Namespace', 202, 'DELETE', NULL, b'0', 'apollo', '2020-12-23 07:37:24', NULL, '2020-12-23 07:37:24');
+INSERT INTO `Audit` VALUES (1990, 'Item', 484, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:37:39', NULL, '2020-12-23 07:37:39');
+INSERT INTO `Audit` VALUES (1991, 'Item', 485, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:37:48', NULL, '2020-12-23 07:37:48');
+INSERT INTO `Audit` VALUES (1992, 'Release', 288, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:37:52', NULL, '2020-12-23 07:37:52');
+INSERT INTO `Audit` VALUES (1993, 'ReleaseHistory', 293, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:37:52', NULL, '2020-12-23 07:37:52');
+INSERT INTO `Audit` VALUES (1994, 'Item', 486, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:44:55', NULL, '2020-12-23 07:44:55');
+INSERT INTO `Audit` VALUES (1995, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:44:55', NULL, '2020-12-23 07:44:55');
+INSERT INTO `Audit` VALUES (1996, 'Item', 78, 'UPDATE', NULL, b'0', 'apollo', '2020-12-23 07:44:55', NULL, '2020-12-23 07:44:55');
+INSERT INTO `Audit` VALUES (1997, 'Item', 79, 'UPDATE', NULL, b'0', 'apollo', '2020-12-23 07:44:55', NULL, '2020-12-23 07:44:55');
+INSERT INTO `Audit` VALUES (1998, 'Item', 82, 'UPDATE', NULL, b'0', 'apollo', '2020-12-23 07:44:55', NULL, '2020-12-23 07:44:55');
+INSERT INTO `Audit` VALUES (1999, 'ItemSet', NULL, 'UPDATE', NULL, b'0', 'apollo', '2020-12-23 07:44:55', NULL, '2020-12-23 07:44:55');
+INSERT INTO `Audit` VALUES (2000, 'Release', 289, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:44:58', NULL, '2020-12-23 07:44:58');
+INSERT INTO `Audit` VALUES (2001, 'ReleaseHistory', 294, 'INSERT', NULL, b'0', 'apollo', '2020-12-23 07:44:58', NULL, '2020-12-23 07:44:58');
 COMMIT;
 
 -- ----------------------------
@@ -2096,7 +2156,7 @@ CREATE TABLE `Cluster` (
   KEY `IX_AppId_Name` (`AppId`,`Name`),
   KEY `IX_ParentClusterId` (`ParentClusterId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COMMENT='集群';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='集群';
 
 -- ----------------------------
 -- Records of Cluster
@@ -2127,6 +2187,7 @@ INSERT INTO `Cluster` VALUES (22, 'default', 'file-service', 0, b'1', 'apollo', 
 INSERT INTO `Cluster` VALUES (23, 'default', 'account-service', 0, b'1', 'apollo', '2019-07-16 12:01:25', 'apollo', '2019-07-16 12:03:34');
 INSERT INTO `Cluster` VALUES (24, '20201222141332-df7a5a8cbda0256c', 'gateway-server', 8, b'0', 'apollo', '2020-12-22 06:13:33', 'apollo', '2020-12-22 06:13:33');
 INSERT INTO `Cluster` VALUES (25, '20201222143729-6ddf5a8cbda02575', 'wanxindepository', 10, b'0', 'apollo', '2020-12-22 06:37:30', 'apollo', '2020-12-22 06:37:30');
+INSERT INTO `Cluster` VALUES (26, 'default', 'account-service', 0, b'0', 'apollo', '2020-12-23 06:45:48', 'apollo', '2020-12-23 06:45:48');
 COMMIT;
 
 -- ----------------------------
@@ -2150,7 +2211,7 @@ CREATE TABLE `Commit` (
   KEY `AppId` (`AppId`(191)),
   KEY `ClusterName` (`ClusterName`(191)),
   KEY `NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=334 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
 
 -- ----------------------------
 -- Records of Commit
@@ -2478,6 +2539,17 @@ INSERT INTO `Commit` VALUES (319, '{\"createItems\":[],\"updateItems\":[{\"oldIt
 INSERT INTO `Commit` VALUES (320, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":5,\"key\":\"spring.datasource.driver-class-name\",\"value\":\"com.mysql.jdbc.Driver\",\"comment\":\"\",\"lineNum\":5,\"id\":5,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 02:47:33\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2019-05-06 02:47:33\"},\"newItem\":{\"namespaceId\":5,\"key\":\"spring.datasource.driver-class-name\",\"value\":\"com.mysql.cj.jdbc.Driver\",\"comment\":\"\",\"lineNum\":5,\"id\":5,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 02:47:33\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 14:40:13\"}}],\"deleteItems\":[]}', 'common-template', 'default', 'micro_service.spring-boot-mysql', NULL, b'0', 'apollo', '2020-12-23 06:40:14', 'apollo', '2020-12-23 06:40:14');
 INSERT INTO `Commit` VALUES (321, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":5,\"key\":\"spring.datasource.password\",\"value\":\"123\",\"comment\":\"\",\"lineNum\":3,\"id\":3,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 02:47:33\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2019-07-15 01:34:45\"},\"newItem\":{\"namespaceId\":5,\"key\":\"spring.datasource.password\",\"value\":\"yueliminvc@outlook.com\",\"comment\":\"\",\"lineNum\":3,\"id\":3,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 02:47:33\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 14:40:34\"}}],\"deleteItems\":[]}', 'common-template', 'default', 'micro_service.spring-boot-mysql', NULL, b'0', 'apollo', '2020-12-23 06:40:35', 'apollo', '2020-12-23 06:40:35');
 INSERT INTO `Commit` VALUES (322, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":7,\"key\":\"eureka.client.serviceUrl.defaultZone\",\"value\":\"http://localhost:53000/eureka/\",\"comment\":\"\",\"lineNum\":1,\"id\":25,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 02:50:44\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2019-07-15 03:26:29\"},\"newItem\":{\"namespaceId\":7,\"key\":\"eureka.client.serviceUrl.defaultZone\",\"value\":\"http://127.0.0.1:53000/eureka/\",\"comment\":\"\",\"lineNum\":1,\"id\":25,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 02:50:44\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 14:41:03\"}}],\"deleteItems\":[]}', 'common-template', 'default', 'micro_service.spring-eureka', NULL, b'0', 'apollo', '2020-12-23 06:41:04', 'apollo', '2020-12-23 06:41:04');
+INSERT INTO `Commit` VALUES (323, '{\"createItems\":[{\"namespaceId\":1,\"key\":\"server.servlet.context-path\",\"value\":\"/consumer\",\"comment\":\"\",\"lineNum\":2,\"id\":473,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:08:39\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:08:39\"},{\"namespaceId\":1,\"key\":\"swagger.enable\",\"value\":\"true\",\"comment\":\"\",\"lineNum\":4,\"id\":475,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:08:39\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:08:39\"}],\"updateItems\":[],\"deleteItems\":[]}', 'consumer-service', 'default', 'application', NULL, b'0', 'apollo', '2020-12-23 07:08:39', 'apollo', '2020-12-23 07:08:39');
+INSERT INTO `Commit` VALUES (324, '{\"createItems\":[{\"namespaceId\":191,\"key\":\"server.servlet.context-path\",\"value\":\"/account\",\"comment\":\"\",\"lineNum\":2,\"id\":477,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:18:03\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:18:03\"},{\"namespaceId\":191,\"key\":\"swagger.enable\",\"value\":\"true\",\"comment\":\"\",\"lineNum\":4,\"id\":479,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:18:03\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:18:03\"}],\"updateItems\":[],\"deleteItems\":[]}', 'account-service', 'default', 'application', NULL, b'0', 'apollo', '2020-12-23 07:18:04', 'apollo', '2020-12-23 07:18:04');
+INSERT INTO `Commit` VALUES (325, '{\"createItems\":[{\"namespaceId\":192,\"key\":\"spring.datasource.url\",\"value\":\"jdbc:mysql://192.168.158.164:3306/p2p_account?useUnicode\\u003dtrue\",\"comment\":\"\",\"lineNum\":1,\"id\":480,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:27:16\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:27:16\"}],\"updateItems\":[],\"deleteItems\":[]}', 'account-service', 'default', 'micro_service.spring-boot-mysql', NULL, b'1', 'apollo', '2020-12-23 07:27:17', 'apollo', '2020-12-23 07:36:02');
+INSERT INTO `Commit` VALUES (326, '{\"createItems\":[{\"namespaceId\":198,\"key\":\"spring.datasource.url\",\"value\":\"jdbc:mysql://192.168.158.164:3306/p2p_account?useUnicode\\u003dtrue\",\"comment\":\"\",\"lineNum\":1,\"id\":481,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:27:44\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:27:44\"}],\"updateItems\":[],\"deleteItems\":[]}', 'account-service', 'default', 'micro_service.spring-boot-druid', NULL, b'0', 'apollo', '2020-12-23 07:27:44', 'apollo', '2020-12-23 07:27:44');
+INSERT INTO `Commit` VALUES (327, '{\"createItems\":[{\"namespaceId\":200,\"key\":\"mybatis-plus.typeAliasesPackage\",\"value\":\"com.wanxin.account.entity\",\"comment\":\"\",\"lineNum\":1,\"id\":482,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:28:13\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:28:13\"}],\"updateItems\":[],\"deleteItems\":[]}', 'account-service', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:28:14', 'apollo', '2020-12-23 07:28:14');
+INSERT INTO `Commit` VALUES (328, '{\"createItems\":[{\"namespaceId\":200,\"key\":\"mybatis-plus.mapper-locations\",\"value\":\"classpath:com/wanxin/account/mapper/*.xml\",\"comment\":\"\",\"lineNum\":2,\"id\":483,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:31:20\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:31:20\"}],\"updateItems\":[],\"deleteItems\":[]}', 'account-service', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:31:20', 'apollo', '2020-12-23 07:31:20');
+INSERT INTO `Commit` VALUES (329, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":34,\"key\":\"mybatis-plus.mapper-locations\",\"value\":\"classpath:com/wanxin/*/mapper/xml/*.xml\",\"comment\":\"\",\"lineNum\":8,\"id\":82,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 09:14:05\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-22 14:32:55\"},\"newItem\":{\"namespaceId\":34,\"key\":\"mybatis-plus.mapper-locations\",\"value\":\"classpath:com/wanxin/*/mapper/*.xml\",\"comment\":\"\",\"lineNum\":8,\"id\":82,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 09:14:05\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:31:53\"}}],\"deleteItems\":[]}', 'common-template', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:31:53', 'apollo', '2020-12-23 07:31:53');
+INSERT INTO `Commit` VALUES (330, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":34,\"key\":\"mybatis-plus.typeAliasesPackage\",\"value\":\"com.wanxin.consumer.entity\",\"comment\":\"\",\"lineNum\":1,\"id\":73,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 06:58:55\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-22 14:32:41\"},\"newItem\":{\"namespaceId\":34,\"key\":\"mybatis-plus.typeAliasesPackage\",\"value\":\"com.wanxin.*.entity\",\"comment\":\"\",\"lineNum\":1,\"id\":73,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-06 06:58:55\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:32:02\"}}],\"deleteItems\":[]}', 'common-template', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:32:03', 'apollo', '2020-12-23 07:32:03');
+INSERT INTO `Commit` VALUES (331, '{\"createItems\":[{\"namespaceId\":35,\"key\":\"mybatis-plus.typeAliasesPackage\",\"value\":\"com.wanxin.consumer.entity\",\"comment\":\"\",\"lineNum\":1,\"id\":484,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:37:38\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:37:38\"}],\"updateItems\":[],\"deleteItems\":[]}', 'consumer-service', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:37:39', 'apollo', '2020-12-23 07:37:39');
+INSERT INTO `Commit` VALUES (332, '{\"createItems\":[{\"namespaceId\":35,\"key\":\"mybatis-plus.mapper-locations\",\"value\":\"classpath:com/wanxin/consumer/mapper/*.xml\",\"comment\":\"\",\"lineNum\":2,\"id\":485,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:37:48\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:37:48\"}],\"updateItems\":[],\"deleteItems\":[]}', 'consumer-service', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:37:48', 'apollo', '2020-12-23 07:37:48');
+INSERT INTO `Commit` VALUES (333, '{\"createItems\":[{\"namespaceId\":34,\"key\":\"mybatis-plus.global-config.banner\",\"value\":\"false\",\"comment\":\"\",\"lineNum\":6,\"id\":486,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-23 15:44:55\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-23 15:44:55\"}],\"updateItems\":[],\"deleteItems\":[]}', 'common-template', 'default', 'micro_service.mybatis-plus', NULL, b'0', 'apollo', '2020-12-23 07:44:55', 'apollo', '2020-12-23 07:44:55');
 COMMIT;
 
 -- ----------------------------
@@ -2519,7 +2591,7 @@ CREATE TABLE `Instance` (
   UNIQUE KEY `IX_UNIQUE_KEY` (`AppId`,`ClusterName`,`Ip`,`DataCenter`),
   KEY `IX_IP` (`Ip`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COMMENT='使用配置的应用实例';
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COMMENT='使用配置的应用实例';
 
 -- ----------------------------
 -- Records of Instance
@@ -2598,6 +2670,9 @@ INSERT INTO `Instance` VALUES (82, 'consumer-service', 'fat', '', '192.168.0.102
 INSERT INTO `Instance` VALUES (83, 'depository-agent-service', 'DEFAULT', '', '192.168.0.102', '2019-07-04 20:20:11', '2019-07-04 20:20:11');
 INSERT INTO `Instance` VALUES (84, 'transaction-service', 'default', '', '192.168.0.102', '2019-07-04 20:20:19', '2019-07-04 20:20:19');
 INSERT INTO `Instance` VALUES (85, 'consumer-service', 'default', '', '192.168.0.102', '2019-07-04 20:27:53', '2019-07-04 20:27:53');
+INSERT INTO `Instance` VALUES (86, 'consumer-service', 'default', '', '192.168.158.1', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `Instance` VALUES (87, 'gateway-server', 'default', '', '192.168.158.1', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `Instance` VALUES (88, 'account-service', 'default', '', '192.168.158.1', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
 COMMIT;
 
 -- ----------------------------
@@ -2619,7 +2694,7 @@ CREATE TABLE `InstanceConfig` (
   KEY `IX_ReleaseKey` (`ReleaseKey`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Valid_Namespace` (`ConfigAppId`,`ConfigClusterName`,`ConfigNamespaceName`,`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=961 DEFAULT CHARSET=utf8mb4 COMMENT='应用实例的配置信息';
+) ENGINE=InnoDB AUTO_INCREMENT=991 DEFAULT CHARSET=utf8mb4 COMMENT='应用实例的配置信息';
 
 -- ----------------------------
 -- Records of InstanceConfig
@@ -3172,6 +3247,36 @@ INSERT INTO `InstanceConfig` VALUES (957, 85, 'common-template', 'default', 'mic
 INSERT INTO `InstanceConfig` VALUES (958, 85, 'consumer-service', 'default', 'micro_service.mybatis-plus', '20190506103706-d524df137f2fbff8', '2019-07-04 20:27:48', '2019-07-04 20:27:48', '2019-07-04 20:27:48');
 INSERT INTO `InstanceConfig` VALUES (959, 85, 'common-template', 'default', 'micro_service.mybatis-plus', '20190506103648-83e2df137f2fbff7', '2019-07-04 20:27:48', '2019-07-04 20:27:48', '2019-07-04 20:27:48');
 INSERT INTO `InstanceConfig` VALUES (960, 85, 'common-template', 'default', 'micro_service.spring-rocketmq', '20190506163452-aededf137f57c0c5', '2019-07-04 20:27:48', '2019-07-04 20:27:48', '2019-07-04 20:27:48');
+INSERT INTO `InstanceConfig` VALUES (961, 86, 'consumer-service', 'default', 'application', '20201223150844-c3ecc84ad9afd916', '2020-12-23 07:08:45', '2020-12-23 06:50:03', '2020-12-23 07:08:45');
+INSERT INTO `InstanceConfig` VALUES (962, 86, 'consumer-service', 'default', 'micro_service.spring-boot-druid', '20190704202919-540ff119da52535d', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (963, 86, 'common-template', 'default', 'micro_service.spring-boot-druid', '20201222143347-02cd5a8cbda02571', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (964, 86, 'consumer-service', 'default', 'micro_service.spring-boot-http', '20190507091553-a493df137f2c9950', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (965, 86, 'common-template', 'default', 'micro_service.spring-boot-http', '20190714173524-5351e374105b7a86', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (966, 86, 'common-template', 'default', 'micro_service.spring-eureka', '20201223144111-61dfc84ad9afd914', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (967, 86, 'common-template', 'default', 'micro_service.spring-hystrix', '20190505105232-227d48b816809daf', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (968, 86, 'common-template', 'default', 'micro_service.spring-ribbon', '20190505105409-f73c48b816809db0', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (969, 86, 'common-template', 'default', 'micro_service.spring-boot-redis', '20201222143220-23465a8cbda0256e', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (970, 86, 'consumer-service', 'default', 'micro_service.mybatis-plus', '20201223153751-d524c84ad9afd91c', '2020-12-23 07:37:53', '2020-12-23 06:50:03', '2020-12-23 07:37:53');
+INSERT INTO `InstanceConfig` VALUES (971, 86, 'common-template', 'default', 'micro_service.mybatis-plus', '20201223154457-83e2c84ad9afd91d', '2020-12-23 07:44:59', '2020-12-23 06:50:03', '2020-12-23 07:45:00');
+INSERT INTO `InstanceConfig` VALUES (972, 86, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201222143400-aede5a8cbda02572', '2020-12-23 06:50:03', '2020-12-23 06:50:03', '2020-12-23 06:50:03');
+INSERT INTO `InstanceConfig` VALUES (973, 87, 'gateway-server', 'default', 'application', '20190714175150-df7ae374105b7a8a', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (974, 87, 'common-template', 'default', 'micro_service.spring-boot-http', '20190714173524-5351e374105b7a86', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (975, 87, 'common-template', 'default', 'micro_service.spring-eureka', '20201223144111-61dfc84ad9afd914', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (976, 87, 'common-template', 'default', 'micro_service.spring-hystrix', '20190505105232-227d48b816809daf', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (977, 87, 'gateway-server', 'default', 'micro_service.spring-ribbon', '20190604171641-640c27ebfa9b3329', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (978, 87, 'common-template', 'default', 'micro_service.spring-ribbon', '20190505105409-f73c48b816809db0', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (979, 87, 'common-template', 'default', 'micro_service.spring-boot-redis', '20201222143220-23465a8cbda0256e', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2020-12-23 06:50:10');
+INSERT INTO `InstanceConfig` VALUES (980, 88, 'account-service', 'default', 'application', '20201223151808-b163c84ad9afd917', '2020-12-23 07:24:34', '2020-12-23 07:24:34', '2020-12-23 07:24:34');
+INSERT INTO `InstanceConfig` VALUES (981, 88, 'common-template', 'default', 'micro_service.spring-boot-druid', '20201222143347-02cd5a8cbda02571', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (982, 88, 'common-template', 'default', 'micro_service.spring-boot-http', '20190714173524-5351e374105b7a86', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (983, 88, 'common-template', 'default', 'micro_service.spring-eureka', '20201223144111-61dfc84ad9afd914', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (984, 88, 'common-template', 'default', 'micro_service.spring-hystrix', '20190505105232-227d48b816809daf', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (985, 88, 'common-template', 'default', 'micro_service.spring-ribbon', '20190505105409-f73c48b816809db0', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (986, 88, 'common-template', 'default', 'micro_service.spring-boot-redis', '20201222143220-23465a8cbda0256e', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (987, 88, 'common-template', 'default', 'micro_service.mybatis-plus', '20201223154457-83e2c84ad9afd91d', '2020-12-23 07:44:59', '2020-12-23 07:24:35', '2020-12-23 07:45:00');
+INSERT INTO `InstanceConfig` VALUES (988, 88, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201222143400-aede5a8cbda02572', '2020-12-23 07:24:35', '2020-12-23 07:24:35', '2020-12-23 07:24:35');
+INSERT INTO `InstanceConfig` VALUES (989, 88, 'account-service', 'default', 'micro_service.spring-boot-druid', '20201223152747-4186c84ad9afd919', '2020-12-23 07:31:30', '2020-12-23 07:31:30', '2020-12-23 07:31:30');
+INSERT INTO `InstanceConfig` VALUES (990, 88, 'account-service', 'default', 'micro_service.mybatis-plus', '20201223153125-c29bc84ad9afd91a', '2020-12-23 07:31:30', '2020-12-23 07:31:30', '2020-12-23 07:31:30');
 COMMIT;
 
 -- ----------------------------
@@ -3193,7 +3298,7 @@ CREATE TABLE `Item` (
   PRIMARY KEY (`Id`),
   KEY `IX_GroupId` (`NamespaceId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=472 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
+) ENGINE=InnoDB AUTO_INCREMENT=487 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
 
 -- ----------------------------
 -- Records of Item
@@ -3271,16 +3376,16 @@ INSERT INTO `Item` VALUES (69, 30, 'spring.redis.shutdown-timeout', '100', '', 9
 INSERT INTO `Item` VALUES (70, 14, 'spring.datasource.url', 'jdbc:mysql://localhost:3306/p2p_consumer?useUnicode=true', '', 1, b'1', 'apollo', '2019-05-05 21:29:45', 'apollo', '2019-05-06 21:06:28');
 INSERT INTO `Item` VALUES (71, 12, 'spring.datasource.url', 'jdbc:mysql://localhost:3306/p2p_consumer?useUnicode=true', '', 1, b'1', 'apollo', '2019-05-05 21:29:45', 'apollo', '2019-05-06 21:01:26');
 INSERT INTO `Item` VALUES (72, 13, 'spring.datasource.url', 'jdbc:mysql://localhost:3306/p2p_consumer?useUnicode=true', '', 1, b'1', 'apollo', '2019-05-05 21:29:45', 'apollo', '2019-05-06 21:06:02');
-INSERT INTO `Item` VALUES (73, 34, 'mybatis-plus.typeAliasesPackage', 'com.wanxin.consumer.entity', '', 1, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2020-12-22 06:32:41');
+INSERT INTO `Item` VALUES (73, 34, 'mybatis-plus.typeAliasesPackage', 'com.wanxin.*.entity', '', 1, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2020-12-23 07:32:03');
 INSERT INTO `Item` VALUES (74, 34, 'mybatis-plus.global-config.id-type', '0', '', 2, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2019-05-05 22:58:55');
 INSERT INTO `Item` VALUES (75, 34, 'mybatis-plus.global-config.field-strategy', '0', '', 3, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2019-05-05 22:58:55');
 INSERT INTO `Item` VALUES (76, 34, 'mybatis-plus.global-config.db-column-underline', 'true', '', 4, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2019-05-05 22:58:55');
 INSERT INTO `Item` VALUES (77, 34, 'mybatis-plus.global-config.refresh-mapper', 'true', '', 5, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2019-05-05 22:58:55');
-INSERT INTO `Item` VALUES (78, 34, 'mybatis-plus.configuration.map-underscore-to-camel-case', 'true', '', 6, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2019-05-05 22:58:55');
-INSERT INTO `Item` VALUES (79, 34, 'mybatis-plus.configuration.cache-enabled', 'false', '', 7, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2019-05-05 22:58:55');
+INSERT INTO `Item` VALUES (78, 34, 'mybatis-plus.configuration.map-underscore-to-camel-case', 'true', '', 7, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2020-12-23 07:44:55');
+INSERT INTO `Item` VALUES (79, 34, 'mybatis-plus.configuration.cache-enabled', 'false', '', 8, b'0', 'apollo', '2019-05-05 22:58:55', 'apollo', '2020-12-23 07:44:55');
 INSERT INTO `Item` VALUES (80, 34, 'mybatis-plus.configuration.logImpl', 'LOG4J2', NULL, 8, b'1', 'apollo', '2019-05-05 23:15:49', 'apollo', '2019-05-05 23:16:17');
 INSERT INTO `Item` VALUES (81, 34, 'mybatis-plus.configuration.log-impl', 'LOG4J2', NULL, 8, b'1', 'apollo', '2019-05-05 23:16:42', 'apollo', '2019-05-06 00:59:46');
-INSERT INTO `Item` VALUES (82, 34, 'mybatis-plus.mapper-locations', 'classpath:com/wanxin/*/mapper/xml/*.xml', '', 8, b'0', 'apollo', '2019-05-06 01:14:05', 'apollo', '2020-12-22 06:32:55');
+INSERT INTO `Item` VALUES (82, 34, 'mybatis-plus.mapper-locations', 'classpath:com/wanxin/*/mapper/*.xml', '', 9, b'0', 'apollo', '2019-05-06 01:14:05', 'apollo', '2020-12-23 07:44:55');
 INSERT INTO `Item` VALUES (83, 35, 'mybatis-plus.mapper-locations', '', '', 1, b'1', 'apollo', '2019-05-06 01:17:53', 'apollo', '2019-05-06 01:18:40');
 INSERT INTO `Item` VALUES (84, 35, 'mybatis-plus.mapper-locations', '', '', 1, b'1', 'apollo', '2019-05-06 16:28:52', 'apollo', '2019-07-14 17:47:07');
 INSERT INTO `Item` VALUES (85, 2, 'spring.mvc.throw-exception-if-no-handler-found', 'true', NULL, 2, b'1', 'apollo', '2019-05-06 18:08:42', 'apollo', '2019-07-14 17:21:13');
@@ -3658,7 +3763,7 @@ INSERT INTO `Item` VALUES (456, 183, 'org.dromara.hmily.started', 'true', '', 1,
 INSERT INTO `Item` VALUES (457, 185, 'org.dromara.hmily.started', 'true', '', 1, b'1', 'apollo', '2019-07-03 20:14:27', 'apollo', '2019-07-14 17:21:32');
 INSERT INTO `Item` VALUES (458, 184, 'org.dromara.hmily.started', 'true', '', 1, b'1', 'apollo', '2019-07-03 20:14:27', 'apollo', '2019-07-14 17:21:13');
 INSERT INTO `Item` VALUES (459, 186, 'org.dromara.hmily.started', 'true', '', 1, b'1', 'apollo', '2019-07-03 20:14:27', 'apollo', '2019-07-14 17:21:21');
-INSERT INTO `Item` VALUES (460, 1, '', '', '', 1, b'0', 'apollo', '2019-07-14 17:46:00', 'apollo', '2019-07-14 17:46:00');
+INSERT INTO `Item` VALUES (460, 1, '', '', '', 1, b'1', 'apollo', '2019-07-14 17:46:00', 'apollo', '2020-12-23 07:08:39');
 INSERT INTO `Item` VALUES (461, 7, 'eureka.instance.registerWithEureka', 'true', '', 4, b'1', 'apollo', '2019-07-15 10:00:25', 'apollo', '2019-07-15 11:20:08');
 INSERT INTO `Item` VALUES (462, 7, 'eureka.instance.fetchRegistry', 'true', '', 5, b'1', 'apollo', '2019-07-15 10:00:25', 'apollo', '2019-07-15 11:20:08');
 INSERT INTO `Item` VALUES (463, 7, 'eureka.client.registry-fetch-interval-seconds', '5', '', 2, b'1', 'apollo', '2019-07-15 11:20:08', 'apollo', '2019-07-15 11:27:52');
@@ -3670,6 +3775,21 @@ INSERT INTO `Item` VALUES (468, 7, 'endpoints.health.sensitive', 'false', '', 9,
 INSERT INTO `Item` VALUES (469, 7, 'management.security.enabled', 'false', '', 4, b'1', 'apollo', '2019-07-15 11:30:12', 'apollo', '2019-07-15 11:35:09');
 INSERT INTO `Item` VALUES (470, 7, 'management.endpoints.web.exposure.include', 'refresh,health,info,env', '', 4, b'1', 'apollo', '2019-07-15 11:30:12', 'apollo', '2019-07-15 11:41:50');
 INSERT INTO `Item` VALUES (471, 7, 'endpoints.health.sensitive', 'false', '', 5, b'1', 'apollo', '2019-07-15 11:30:12', 'apollo', '2019-07-15 11:38:06');
+INSERT INTO `Item` VALUES (472, 1, '', '', '# 微服务访问路径', 1, b'0', 'apollo', '2020-12-23 07:08:39', 'apollo', '2020-12-23 07:08:39');
+INSERT INTO `Item` VALUES (473, 1, 'server.servlet.context-path', '/consumer', '', 2, b'0', 'apollo', '2020-12-23 07:08:39', 'apollo', '2020-12-23 07:08:39');
+INSERT INTO `Item` VALUES (474, 1, '', '', '# 开启swagger', 3, b'0', 'apollo', '2020-12-23 07:08:39', 'apollo', '2020-12-23 07:08:39');
+INSERT INTO `Item` VALUES (475, 1, 'swagger.enable', 'true', '', 4, b'0', 'apollo', '2020-12-23 07:08:39', 'apollo', '2020-12-23 07:08:39');
+INSERT INTO `Item` VALUES (476, 191, '', '', '# 微服务访问路径', 1, b'0', 'apollo', '2020-12-23 07:18:04', 'apollo', '2020-12-23 07:18:04');
+INSERT INTO `Item` VALUES (477, 191, 'server.servlet.context-path', '/account', '', 2, b'0', 'apollo', '2020-12-23 07:18:04', 'apollo', '2020-12-23 07:18:04');
+INSERT INTO `Item` VALUES (478, 191, '', '', '# 开启swagger', 3, b'0', 'apollo', '2020-12-23 07:18:04', 'apollo', '2020-12-23 07:18:04');
+INSERT INTO `Item` VALUES (479, 191, 'swagger.enable', 'true', '', 4, b'0', 'apollo', '2020-12-23 07:18:04', 'apollo', '2020-12-23 07:18:04');
+INSERT INTO `Item` VALUES (480, 192, 'spring.datasource.url', 'jdbc:mysql://192.168.158.164:3306/p2p_account?useUnicode=true', '', 1, b'1', 'apollo', '2020-12-23 07:27:16', 'apollo', '2020-12-23 07:36:02');
+INSERT INTO `Item` VALUES (481, 198, 'spring.datasource.url', 'jdbc:mysql://192.168.158.164:3306/p2p_account?useUnicode=true', '', 1, b'0', 'apollo', '2020-12-23 07:27:44', 'apollo', '2020-12-23 07:27:44');
+INSERT INTO `Item` VALUES (482, 200, 'mybatis-plus.typeAliasesPackage', 'com.wanxin.account.entity', '', 1, b'0', 'apollo', '2020-12-23 07:28:14', 'apollo', '2020-12-23 07:28:14');
+INSERT INTO `Item` VALUES (483, 200, 'mybatis-plus.mapper-locations', 'classpath:com/wanxin/account/mapper/*.xml', '', 2, b'0', 'apollo', '2020-12-23 07:31:20', 'apollo', '2020-12-23 07:31:20');
+INSERT INTO `Item` VALUES (484, 35, 'mybatis-plus.typeAliasesPackage', 'com.wanxin.consumer.entity', '', 1, b'0', 'apollo', '2020-12-23 07:37:39', 'apollo', '2020-12-23 07:37:39');
+INSERT INTO `Item` VALUES (485, 35, 'mybatis-plus.mapper-locations', 'classpath:com/wanxin/consumer/mapper/*.xml', '', 2, b'0', 'apollo', '2020-12-23 07:37:48', 'apollo', '2020-12-23 07:37:48');
+INSERT INTO `Item` VALUES (486, 34, 'mybatis-plus.global-config.banner', 'false', '', 6, b'0', 'apollo', '2020-12-23 07:44:55', 'apollo', '2020-12-23 07:44:55');
 COMMIT;
 
 -- ----------------------------
@@ -3690,7 +3810,7 @@ CREATE TABLE `Namespace` (
   KEY `AppId_ClusterName_NamespaceName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8mb4 COMMENT='命名空间';
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=utf8mb4 COMMENT='命名空间';
 
 -- ----------------------------
 -- Records of Namespace
@@ -3886,6 +4006,18 @@ INSERT INTO `Namespace` VALUES (187, 'uaa-service', 'default', 'micro_service.sp
 INSERT INTO `Namespace` VALUES (188, 'account-service', 'default', 'application', b'1', 'apollo', '2019-07-16 12:01:25', 'apollo', '2019-07-16 12:03:34');
 INSERT INTO `Namespace` VALUES (189, 'gateway-server', '20201222141332-df7a5a8cbda0256c', 'application', b'0', 'apollo', '2020-12-22 06:13:33', 'apollo', '2020-12-22 06:13:33');
 INSERT INTO `Namespace` VALUES (190, 'wanxindepository', '20201222143729-6ddf5a8cbda02575', 'application', b'0', 'apollo', '2020-12-22 06:37:30', 'apollo', '2020-12-22 06:37:30');
+INSERT INTO `Namespace` VALUES (191, 'account-service', 'default', 'application', b'0', 'apollo', '2020-12-23 06:45:48', 'apollo', '2020-12-23 06:45:48');
+INSERT INTO `Namespace` VALUES (192, 'account-service', 'default', 'micro_service.spring-boot-mysql', b'1', 'apollo', '2020-12-23 06:49:00', 'apollo', '2020-12-23 07:36:02');
+INSERT INTO `Namespace` VALUES (193, 'account-service', 'default', 'micro_service.spring-boot-http', b'0', 'apollo', '2020-12-23 07:01:49', 'apollo', '2020-12-23 07:01:49');
+INSERT INTO `Namespace` VALUES (194, 'account-service', 'default', 'micro_service.spring-eureka', b'0', 'apollo', '2020-12-23 07:02:11', 'apollo', '2020-12-23 07:02:11');
+INSERT INTO `Namespace` VALUES (195, 'account-service', 'default', 'micro_service.spring-cloud-feign', b'0', 'apollo', '2020-12-23 07:02:24', 'apollo', '2020-12-23 07:02:24');
+INSERT INTO `Namespace` VALUES (196, 'account-service', 'default', 'micro_service.spring-hystrix', b'0', 'apollo', '2020-12-23 07:02:38', 'apollo', '2020-12-23 07:02:38');
+INSERT INTO `Namespace` VALUES (197, 'account-service', 'default', 'micro_service.spring-ribbon', b'0', 'apollo', '2020-12-23 07:02:51', 'apollo', '2020-12-23 07:02:51');
+INSERT INTO `Namespace` VALUES (198, 'account-service', 'default', 'micro_service.spring-boot-druid', b'0', 'apollo', '2020-12-23 07:03:07', 'apollo', '2020-12-23 07:03:07');
+INSERT INTO `Namespace` VALUES (199, 'account-service', 'default', 'micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-23 07:03:32', 'apollo', '2020-12-23 07:03:32');
+INSERT INTO `Namespace` VALUES (200, 'account-service', 'default', 'micro_service.mybatis-plus', b'0', 'apollo', '2020-12-23 07:04:09', 'apollo', '2020-12-23 07:04:09');
+INSERT INTO `Namespace` VALUES (201, 'account-service', 'default', 'micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
+INSERT INTO `Namespace` VALUES (202, 'consumer-service', 'default', 'micro_service.spring-boot-mysql', b'1', 'apollo', '2020-12-23 07:33:17', 'apollo', '2020-12-23 07:37:24');
 COMMIT;
 
 -- ----------------------------
@@ -3928,7 +4060,7 @@ CREATE TABLE `Release` (
   KEY `AppId_ClusterName_GroupName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_ReleaseKey` (`ReleaseKey`)
-) ENGINE=InnoDB AUTO_INCREMENT=282 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
+) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
 
 -- ----------------------------
 -- Records of Release
@@ -4215,6 +4347,14 @@ INSERT INTO `Release` VALUES (278, '20201222143709-fe025a8cbda02574', '202012221
 INSERT INTO `Release` VALUES (279, '20201223144019-fe6dc84ad9afd913', '20201223144135-release', '', 'common-template', 'default', 'micro_service.spring-boot-mysql', '{\"spring.datasource.url\":\"jdbc:mysql://192.168.158.164:3306/p2p_consumer?useUnicode\\u003dtrue\",\"spring.datasource.username\":\"root\",\"spring.datasource.password\":\"123\",\"spring.datasource.type\":\"com.alibaba.druid.pool.DruidDataSource\",\"spring.datasource.driver-class-name\":\"com.mysql.cj.jdbc.Driver\",\"spring.datasource.initialSize\":\"5\",\"spring.datasource.minIdle\":\"5\",\"spring.datasource.maxActive\":\"20\",\"spring.datasource.maxWait\":\"60000\",\"spring.datasource.timeBetweenEvictionRunsMillis\":\"60000\",\"spring.datasource.minEvictableIdleTimeMillis\":\"300000\",\"spring.datasource.validationQuery\":\"SELECT user()\",\"spring.datasource.testWhileIdle\":\"true\",\"spring.datasource.testOnBorrow\":\"false\",\"spring.datasource.testOnReturn\":\"false\",\"spring.datasource.poolPreparedStatements\":\"true\",\"spring.datasource.connection-properties\":\"druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000\"}', b'0', b'0', 'apollo', '2020-12-23 06:40:20', 'apollo', '2020-12-23 06:40:20');
 INSERT INTO `Release` VALUES (280, '20201223144111-61dfc84ad9afd914', '20201223144227-release', '', 'common-template', 'default', 'micro_service.spring-eureka', '{\"eureka.client.serviceUrl.defaultZone\":\"http://127.0.0.1:53000/eureka/\",\"eureka.instance.preferIpAddress\":\"true\",\"eureka.instance.instance-id\":\"${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}\"}', b'0', b'0', 'apollo', '2020-12-23 06:41:11', 'apollo', '2020-12-23 06:41:11');
 INSERT INTO `Release` VALUES (281, '20201223144115-fe6dc84ad9afd915', '20201223144230-release', '', 'common-template', 'default', 'micro_service.spring-boot-mysql', '{\"spring.datasource.url\":\"jdbc:mysql://192.168.158.164:3306/p2p_consumer?useUnicode\\u003dtrue\",\"spring.datasource.username\":\"root\",\"spring.datasource.password\":\"yueliminvc@outlook.com\",\"spring.datasource.type\":\"com.alibaba.druid.pool.DruidDataSource\",\"spring.datasource.driver-class-name\":\"com.mysql.cj.jdbc.Driver\",\"spring.datasource.initialSize\":\"5\",\"spring.datasource.minIdle\":\"5\",\"spring.datasource.maxActive\":\"20\",\"spring.datasource.maxWait\":\"60000\",\"spring.datasource.timeBetweenEvictionRunsMillis\":\"60000\",\"spring.datasource.minEvictableIdleTimeMillis\":\"300000\",\"spring.datasource.validationQuery\":\"SELECT user()\",\"spring.datasource.testWhileIdle\":\"true\",\"spring.datasource.testOnBorrow\":\"false\",\"spring.datasource.testOnReturn\":\"false\",\"spring.datasource.poolPreparedStatements\":\"true\",\"spring.datasource.connection-properties\":\"druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000\"}', b'0', b'0', 'apollo', '2020-12-23 06:41:15', 'apollo', '2020-12-23 06:41:15');
+INSERT INTO `Release` VALUES (282, '20201223150844-c3ecc84ad9afd916', '20201223150957-release', '', 'consumer-service', 'default', 'application', '{\"server.servlet.context-path\":\"/consumer\",\"swagger.enable\":\"true\"}', b'0', b'0', 'apollo', '2020-12-23 07:08:45', 'apollo', '2020-12-23 07:08:45');
+INSERT INTO `Release` VALUES (283, '20201223151808-b163c84ad9afd917', '20201223151922-release', '', 'account-service', 'default', 'application', '{\"server.servlet.context-path\":\"/account\",\"swagger.enable\":\"true\"}', b'0', b'0', 'apollo', '2020-12-23 07:18:08', 'apollo', '2020-12-23 07:18:08');
+INSERT INTO `Release` VALUES (284, '20201223152719-3d26c84ad9afd918', '20201223152835-release', '', 'account-service', 'default', 'micro_service.spring-boot-mysql', '{\"spring.datasource.url\":\"jdbc:mysql://192.168.158.164:3306/p2p_account?useUnicode\\u003dtrue\"}', b'0', b'1', 'apollo', '2020-12-23 07:27:20', 'apollo', '2020-12-23 07:36:02');
+INSERT INTO `Release` VALUES (285, '20201223152747-4186c84ad9afd919', '20201223152903-release', '', 'account-service', 'default', 'micro_service.spring-boot-druid', '{\"spring.datasource.url\":\"jdbc:mysql://192.168.158.164:3306/p2p_account?useUnicode\\u003dtrue\"}', b'0', b'0', 'apollo', '2020-12-23 07:27:48', 'apollo', '2020-12-23 07:27:48');
+INSERT INTO `Release` VALUES (286, '20201223153125-c29bc84ad9afd91a', '20201223153241-release', '', 'account-service', 'default', 'micro_service.mybatis-plus', '{\"mybatis-plus.typeAliasesPackage\":\"com.wanxin.account.entity\",\"mybatis-plus.mapper-locations\":\"classpath:com/wanxin/account/mapper/*.xml\"}', b'0', b'0', 'apollo', '2020-12-23 07:31:26', 'apollo', '2020-12-23 07:31:26');
+INSERT INTO `Release` VALUES (287, '20201223153208-83e2c84ad9afd91b', '20201223153323-release', '', 'common-template', 'default', 'micro_service.mybatis-plus', '{\"mybatis-plus.typeAliasesPackage\":\"com.wanxin.*.entity\",\"mybatis-plus.global-config.id-type\":\"0\",\"mybatis-plus.global-config.field-strategy\":\"0\",\"mybatis-plus.global-config.db-column-underline\":\"true\",\"mybatis-plus.global-config.refresh-mapper\":\"true\",\"mybatis-plus.configuration.map-underscore-to-camel-case\":\"true\",\"mybatis-plus.configuration.cache-enabled\":\"false\",\"mybatis-plus.mapper-locations\":\"classpath:com/wanxin/*/mapper/*.xml\"}', b'0', b'0', 'apollo', '2020-12-23 07:32:08', 'apollo', '2020-12-23 07:32:08');
+INSERT INTO `Release` VALUES (288, '20201223153751-d524c84ad9afd91c', '20201223153907-release', '', 'consumer-service', 'default', 'micro_service.mybatis-plus', '{\"mybatis-plus.typeAliasesPackage\":\"com.wanxin.consumer.entity\",\"mybatis-plus.mapper-locations\":\"classpath:com/wanxin/consumer/mapper/*.xml\"}', b'0', b'0', 'apollo', '2020-12-23 07:37:52', 'apollo', '2020-12-23 07:37:52');
+INSERT INTO `Release` VALUES (289, '20201223154457-83e2c84ad9afd91d', '20201223154613-release', '', 'common-template', 'default', 'micro_service.mybatis-plus', '{\"mybatis-plus.typeAliasesPackage\":\"com.wanxin.*.entity\",\"mybatis-plus.global-config.id-type\":\"0\",\"mybatis-plus.global-config.field-strategy\":\"0\",\"mybatis-plus.global-config.db-column-underline\":\"true\",\"mybatis-plus.global-config.refresh-mapper\":\"true\",\"mybatis-plus.global-config.banner\":\"false\",\"mybatis-plus.configuration.map-underscore-to-camel-case\":\"true\",\"mybatis-plus.configuration.cache-enabled\":\"false\",\"mybatis-plus.mapper-locations\":\"classpath:com/wanxin/*/mapper/*.xml\"}', b'0', b'0', 'apollo', '2020-12-23 07:44:58', 'apollo', '2020-12-23 07:44:58');
 COMMIT;
 
 -- ----------------------------
@@ -4240,7 +4380,7 @@ CREATE TABLE `ReleaseHistory` (
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`,`BranchName`),
   KEY `IX_ReleaseId` (`ReleaseId`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=287 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
+) ENGINE=InnoDB AUTO_INCREMENT=295 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
 
 -- ----------------------------
 -- Records of ReleaseHistory
@@ -4532,6 +4672,14 @@ INSERT INTO `ReleaseHistory` VALUES (283, 'wanxindepository', 'default', 'micro_
 INSERT INTO `ReleaseHistory` VALUES (284, 'common-template', 'default', 'micro_service.spring-boot-mysql', 'default', 279, 271, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 06:40:20', 'apollo', '2020-12-23 06:40:20');
 INSERT INTO `ReleaseHistory` VALUES (285, 'common-template', 'default', 'micro_service.spring-eureka', 'default', 280, 270, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 06:41:11', 'apollo', '2020-12-23 06:41:11');
 INSERT INTO `ReleaseHistory` VALUES (286, 'common-template', 'default', 'micro_service.spring-boot-mysql', 'default', 281, 279, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 06:41:15', 'apollo', '2020-12-23 06:41:15');
+INSERT INTO `ReleaseHistory` VALUES (287, 'consumer-service', 'default', 'application', 'default', 282, 251, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:08:45', 'apollo', '2020-12-23 07:08:45');
+INSERT INTO `ReleaseHistory` VALUES (288, 'account-service', 'default', 'application', 'default', 283, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:18:08', 'apollo', '2020-12-23 07:18:08');
+INSERT INTO `ReleaseHistory` VALUES (289, 'account-service', 'default', 'micro_service.spring-boot-mysql', 'default', 284, 0, 0, '{\"isEmergencyPublish\":false}', b'1', 'apollo', '2020-12-23 07:27:20', 'apollo', '2020-12-23 07:36:02');
+INSERT INTO `ReleaseHistory` VALUES (290, 'account-service', 'default', 'micro_service.spring-boot-druid', 'default', 285, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:27:48', 'apollo', '2020-12-23 07:27:48');
+INSERT INTO `ReleaseHistory` VALUES (291, 'account-service', 'default', 'micro_service.mybatis-plus', 'default', 286, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:31:26', 'apollo', '2020-12-23 07:31:26');
+INSERT INTO `ReleaseHistory` VALUES (292, 'common-template', 'default', 'micro_service.mybatis-plus', 'default', 287, 273, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:32:08', 'apollo', '2020-12-23 07:32:08');
+INSERT INTO `ReleaseHistory` VALUES (293, 'consumer-service', 'default', 'micro_service.mybatis-plus', 'default', 288, 252, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:37:52', 'apollo', '2020-12-23 07:37:52');
+INSERT INTO `ReleaseHistory` VALUES (294, 'common-template', 'default', 'micro_service.mybatis-plus', 'default', 289, 287, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-23 07:44:58', 'apollo', '2020-12-23 07:44:58');
 COMMIT;
 
 -- ----------------------------
@@ -4545,7 +4693,7 @@ CREATE TABLE `ReleaseMessage` (
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Message` (`Message`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=444 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
+) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
 
 -- ----------------------------
 -- Records of ReleaseMessage
@@ -4554,8 +4702,6 @@ BEGIN;
 INSERT INTO `ReleaseMessage` VALUES (5, 'common-template+default+micro_service.spring-hystrix', '2019-05-05 18:52:32');
 INSERT INTO `ReleaseMessage` VALUES (6, 'common-template+default+micro_service.spring-ribbon', '2019-05-05 18:54:10');
 INSERT INTO `ReleaseMessage` VALUES (7, 'common-template+default+micro_service.spring-freemarker', '2019-05-05 18:55:14');
-INSERT INTO `ReleaseMessage` VALUES (41, 'consumer-service+default+micro_service.spring-boot-mysql', '2019-05-06 21:01:30');
-INSERT INTO `ReleaseMessage` VALUES (42, 'consumer-service+default+micro_service.spring-boot-mysql', '2019-05-06 21:05:09');
 INSERT INTO `ReleaseMessage` VALUES (43, 'consumer-service+xufan+micro_service.spring-boot-mysql', '2019-05-06 21:06:05');
 INSERT INTO `ReleaseMessage` VALUES (45, 'consumer-service+xufan+micro_service.spring-boot-mysql', '2019-05-06 21:06:16');
 INSERT INTO `ReleaseMessage` VALUES (47, 'consumer-service+fat+micro_service.spring-boot-mysql', '2019-05-06 21:06:31');
@@ -4577,7 +4723,6 @@ INSERT INTO `ReleaseMessage` VALUES (127, 'account_service+default+micro_service
 INSERT INTO `ReleaseMessage` VALUES (128, 'account_service+default+micro_service.spring-boot-druid', '2019-05-17 13:18:01');
 INSERT INTO `ReleaseMessage` VALUES (129, 'account_service+default+micro_service.spring-rocketmq', '2019-05-17 13:18:01');
 INSERT INTO `ReleaseMessage` VALUES (130, 'account_service+fat+application', '2019-05-17 13:18:01');
-INSERT INTO `ReleaseMessage` VALUES (138, 'account-service+default+micro_service.spring-boot-mysql', '2019-05-18 17:13:32');
 INSERT INTO `ReleaseMessage` VALUES (177, 'wanxindepository+default+micro_service.spring-rocketmq', '2019-05-31 08:58:04');
 INSERT INTO `ReleaseMessage` VALUES (180, 'test+default+application', '2019-05-31 14:26:27');
 INSERT INTO `ReleaseMessage` VALUES (187, 'gateway-server+default+micro_service.spring-ribbon', '2019-06-04 17:16:41');
@@ -4676,9 +4821,7 @@ INSERT INTO `ReleaseMessage` VALUES (359, 'account-service+default+micro_service
 INSERT INTO `ReleaseMessage` VALUES (360, 'account-service+default+micro_service.spring-ribbon', '2019-07-14 17:19:32');
 INSERT INTO `ReleaseMessage` VALUES (361, 'account-service+default+micro_service.spring-freemarker', '2019-07-14 17:19:32');
 INSERT INTO `ReleaseMessage` VALUES (362, 'account-service+default+micro_service.spring-boot-redis', '2019-07-14 17:19:32');
-INSERT INTO `ReleaseMessage` VALUES (363, 'account-service+default+micro_service.mybatis-plus', '2019-07-14 17:19:32');
 INSERT INTO `ReleaseMessage` VALUES (364, 'account-service+default+micro_service.spring-rocketmq', '2019-07-14 17:19:32');
-INSERT INTO `ReleaseMessage` VALUES (365, 'account-service+default+micro_service.spring-boot-druid', '2019-07-14 17:19:32');
 INSERT INTO `ReleaseMessage` VALUES (366, 'account-service+default+micro_service.spring-cloud-hmily', '2019-07-14 17:19:32');
 INSERT INTO `ReleaseMessage` VALUES (367, 'consumer-service+xufan+application', '2019-07-14 17:21:13');
 INSERT INTO `ReleaseMessage` VALUES (368, 'consumer-service+xufan+micro_service.spring-boot-http', '2019-07-14 17:21:13');
@@ -4717,21 +4860,25 @@ INSERT INTO `ReleaseMessage` VALUES (402, 'gateway-server+default+micro_service.
 INSERT INTO `ReleaseMessage` VALUES (403, 'common-template+default+micro_service.spring-cloud-feign', '2019-07-14 17:37:32');
 INSERT INTO `ReleaseMessage` VALUES (404, 'common-template+default+micro_service.spring-boot-es', '2019-07-14 17:40:03');
 INSERT INTO `ReleaseMessage` VALUES (405, 'common-template+default+micro_service.spring-zuul', '2019-07-14 17:42:49');
-INSERT INTO `ReleaseMessage` VALUES (409, 'consumer-service+default+application', '2019-07-14 17:46:05');
-INSERT INTO `ReleaseMessage` VALUES (410, 'consumer-service+default+micro_service.mybatis-plus', '2019-07-14 17:47:10');
 INSERT INTO `ReleaseMessage` VALUES (411, 'consumer-service+default+micro_service.files', '2019-07-14 17:48:03');
 INSERT INTO `ReleaseMessage` VALUES (412, 'consumer-service+default+micro_service.spring-cloud-hmily', '2019-07-14 17:48:29');
 INSERT INTO `ReleaseMessage` VALUES (413, 'gateway-server+default+micro_service.gateway-flow-rule', '2019-07-14 17:49:32');
 INSERT INTO `ReleaseMessage` VALUES (414, 'gateway-server+default+application', '2019-07-14 17:51:51');
-INSERT INTO `ReleaseMessage` VALUES (432, 'account-service+default+application', '2019-07-16 12:03:34');
 INSERT INTO `ReleaseMessage` VALUES (434, 'common-template+default+micro_service.spring-boot-redis', '2020-12-22 06:32:20');
-INSERT INTO `ReleaseMessage` VALUES (435, 'common-template+default+micro_service.mybatis-plus', '2020-12-22 06:33:07');
 INSERT INTO `ReleaseMessage` VALUES (437, 'common-template+default+micro_service.spring-boot-druid', '2020-12-22 06:33:48');
 INSERT INTO `ReleaseMessage` VALUES (438, 'common-template+default+micro_service.spring-rocketmq', '2020-12-22 06:34:01');
 INSERT INTO `ReleaseMessage` VALUES (439, 'wanxindepository+default+micro_service.mybatis-plus', '2020-12-22 06:36:24');
 INSERT INTO `ReleaseMessage` VALUES (440, 'wanxindepository+default+micro_service.spring-boot-druid', '2020-12-22 06:37:10');
 INSERT INTO `ReleaseMessage` VALUES (442, 'common-template+default+micro_service.spring-eureka', '2020-12-23 06:41:11');
 INSERT INTO `ReleaseMessage` VALUES (443, 'common-template+default+micro_service.spring-boot-mysql', '2020-12-23 06:41:16');
+INSERT INTO `ReleaseMessage` VALUES (444, 'consumer-service+default+application', '2020-12-23 07:08:45');
+INSERT INTO `ReleaseMessage` VALUES (445, 'account-service+default+application', '2020-12-23 07:18:08');
+INSERT INTO `ReleaseMessage` VALUES (447, 'account-service+default+micro_service.spring-boot-druid', '2020-12-23 07:27:48');
+INSERT INTO `ReleaseMessage` VALUES (448, 'account-service+default+micro_service.mybatis-plus', '2020-12-23 07:31:26');
+INSERT INTO `ReleaseMessage` VALUES (450, 'account-service+default+micro_service.spring-boot-mysql', '2020-12-23 07:36:02');
+INSERT INTO `ReleaseMessage` VALUES (451, 'consumer-service+default+micro_service.spring-boot-mysql', '2020-12-23 07:37:24');
+INSERT INTO `ReleaseMessage` VALUES (452, 'consumer-service+default+micro_service.mybatis-plus', '2020-12-23 07:37:52');
+INSERT INTO `ReleaseMessage` VALUES (453, 'common-template+default+micro_service.mybatis-plus', '2020-12-23 07:44:58');
 COMMIT;
 
 -- ----------------------------
