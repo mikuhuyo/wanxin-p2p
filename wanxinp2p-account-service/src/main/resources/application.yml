@@ -1,0 +1,20 @@
+server:
+  port: 53030
+
+spring:
+  application:
+    name: account-service
+
+# -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53050
+app:
+  id: account-service
+apollo:
+  meta: http://192.168.158.162:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: application,micro_service.spring-boot-druid,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-hystrix,micro_service.spring-ribbon,micro_service.spring-boot-redis,micro_service.mybatis-plus,micro_service.spring-rocketmq
+
+logging:
+  config: classpath:log4j2-dev.xml

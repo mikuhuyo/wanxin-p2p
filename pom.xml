@@ -14,6 +14,7 @@
         <module>wanxinp2p-consumer-service</module>
         <module>wanxinp2p-discover-server</module>
         <module>wanxinp2p-gateway-server</module>
+        <module>wanxinp2p-account-service</module>
     </modules>
 
     <parent>
