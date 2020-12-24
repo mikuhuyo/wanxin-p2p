@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
  * @since 1.8
  */
 public class IPUtil {
-
     public static String getIpAddr(HttpServletRequest request) {
 
         String ip = request.getHeader("x-forwarded-for");
@@ -50,6 +49,4 @@ public class IPUtil {
         }
         return ip;
     }
-
-
 }

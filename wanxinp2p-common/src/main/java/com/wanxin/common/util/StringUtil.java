@@ -1,6 +1,7 @@
 package com.wanxin.common.util;
 
 import java.io.File;
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
  * @version 1.0.0
  * @since 1.8
  */
-public class StringUtil {
+public class StringUtil implements Serializable {
 
     /**
      * yyyy-MM-dd日期格式
@@ -37,10 +38,10 @@ public class StringUtil {
     public static final String EMPTY_JSON = "{}";
 
     /**
-     * 字符串是否为空白 空白的定义如下： <br>
-     * 1、为null <br>
-     * 2、为不可见字符（如空格）<br>
-     * 3、""<br>
+     * 字符串是否为空白 空白的定义如下: <br>
+     * 1.为null <br>
+     * 2.为不可见字符(如空格)<br>
+     * 3.""<br>
      *
      * @param str 被检测的字符串
      * @return 是否为空
@@ -50,10 +51,10 @@ public class StringUtil {
     }
 
     /**
-     * 字符串是否为非空白 空白的定义如下： <br>
-     * 1、不为null <br>
-     * 2、不为不可见字符（如空格）<br>
-     * 3、不为""<br>
+     * 字符串是否为非空白 空白的定义如下: <br>
+     * 1.不为null <br>
+     * 2.不为不可见字符(如空格)<br>
+     * 3.不为""<br>
      *
      * @param str 被检测的字符串
      * @return 是否为非空
@@ -63,8 +64,9 @@ public class StringUtil {
     }
 
     /**
-     * 字符串是否为空，空的定义如下 1、为null <br>
-     * 2、为""<br>
+     * 字符串是否为空, 空的定义如下:
+     * 1.为null <br>
+     * 2.为""<br>
      *
      * @param str 被检测的字符串
      * @return 是否为空
@@ -74,9 +76,9 @@ public class StringUtil {
     }
 
     /**
-     * 字符串是否为非空白 空白的定义如下： <br>
-     * 1、不为null <br>
-     * 2、不为""<br>
+     * 字符串是否为非空白 空白的定义如下: <br>
+     * 1.不为null <br>
+     * 2.不为""<br>
      *
      * @param str 被检测的字符串
      * @return 是否为非空
@@ -99,7 +101,7 @@ public class StringUtil {
     }
 
     /**
-     * 指定字符串是否被同一字符包装（前后都有这些字符串）
+     * 指定字符串是否被同一字符包装(前后都有这些字符串)
      *
      * @param str     字符串
      * @param wrapper 包装字符串
@@ -110,7 +112,7 @@ public class StringUtil {
     }
 
     /**
-     * 指定字符串是否被同一字符包装（前后都有这些字符串）
+     * 指定字符串是否被同一字符包装(前后都有这些字符串)
      *
      * @param str     字符串
      * @param wrapper 包装字符
@@ -262,31 +264,31 @@ public class StringUtil {
     /**
      * 获取文件后缀
      *
-     * @param src 文件路径/名称 文件路径 C:\Users\Public\Pictures\Sample Pictures\test.jpg
+     * @param src 文件路径/名称 文件路径
      * @return 如果文件后缀 jpg
      */
     public static String getFileExt(String src) {
-
-        String filename = src.substring(src.lastIndexOf(File.separator) + 1, src.length());// 获取到文件名
+        // 获取到文件名
+        String filename = src.substring(src.lastIndexOf(File.separator) + 1, src.length());
 
         return filename.substring(filename.lastIndexOf(".") + 1);
     }
 
     /**
-     * 获取文件名称，不带文件后缀部分
+     * 获取文件名称,不带文件后缀部分
      *
-     * @param src 文件路径 C:\Users\Public\Pictures\Sample Pictures\test.jpg
+     * @param src 文件路径
      * @return 文件名称 不带文件后缀 test
      */
     public static String getFileName(String src) {
-
-        String filename = src.substring(src.lastIndexOf(File.separator) + 1, src.length());// 获取到文件名
+        // 获取到文件名
+        String filename = src.substring(src.lastIndexOf(File.separator) + 1, src.length());
 
         return filename.substring(0, filename.lastIndexOf("."));
     }
 
     /**
-     * 判断字符串是否为空（不能为空字符串）
+     * 判断字符串是否为空(不能为空字符串)
      *
      * @param src
      * @return
@@ -297,7 +299,7 @@ public class StringUtil {
     }
 
     /**
-     * 检查数组中，是否含有当前元素
+     * 检查数组中,是否含有当前元素
      *
      * @param arr
      * @param checkValue

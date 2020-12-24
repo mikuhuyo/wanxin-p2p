@@ -10,7 +10,7 @@ import java.io.*;
 public class FileUtil {
 
     /**
-     * 读取文件内容，作为字符串返回
+     * 读取文件内容, 作为字符串返回
      */
     public static String readFileAsString(String filePath) throws IOException {
         File file = new File(filePath);

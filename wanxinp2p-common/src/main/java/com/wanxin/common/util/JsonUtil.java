@@ -17,11 +17,9 @@ import java.util.Map;
  * @since 1.8
  */
 public class JsonUtil {
-
     public static String objectTojson(Object object) {
         return JSON.toJSONString(object, SerializerFeature.WriteDateUseDateFormat);
     }
-
 
     public static String listTojson(List list) {
         return JSON.toJSONString(list, SerializerFeature.WriteDateUseDateFormat);
@@ -38,7 +36,7 @@ public class JsonUtil {
         try {
             jsoMap = JSONObject.parseObject(strJson, Map.class);
         } catch (JSONException e) {
-            System.out.println("json转换Map出错：" + e.getMessage());
+            System.out.println("json转换Map出错: " + e.getMessage());
         }
 
         return jsoMap;
@@ -55,10 +53,8 @@ public class JsonUtil {
         try {
             list = JSONObject.parseObject(strJson, List.class);
         } catch (JSONException e) {
-            System.out.println("json转换List出错：" + e.getMessage());
+            System.out.println("json转换List出错: " + e.getMessage());
         }
         return list;
     }
-
-
 }

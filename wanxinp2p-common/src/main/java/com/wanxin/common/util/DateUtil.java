@@ -48,7 +48,7 @@ public class DateUtil {
     }
 
     /**
-     * 从给定的date，加上hour小时 求指定date时间后hour小时的时间
+     * 从给定的date, 加上hour小时 求指定date时间后hour小时的时间
      *
      * @param date 指定的时间
      * @param hour 多少小时后
@@ -64,7 +64,7 @@ public class DateUtil {
     }
 
     /**
-     * 从给定的date，加上increase天
+     * 从给定的date, 加上increase天
      *
      * @param date
      * @param increase
@@ -80,7 +80,7 @@ public class DateUtil {
     }
 
     /**
-     * 从给定的LocalDateTime，加上increase月
+     * 从给定的LocalDateTime, 加上increase月
      *
      * @param date
      * @param increase

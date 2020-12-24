@@ -12,10 +12,10 @@ import java.util.Map;
 public class IDCardUtil {
 
     /**
-     * 通过身份证号码获取出生日期、性别、年龄
+     * 通过身份证号码获取出生日期,性别,年龄
      *
      * @param idNumber
-     * @return 返回的出生日期格式：1990-01-01   性别格式：F-女，M-男
+     * @return 返回的出生日期格式：1990-01-01   性别格式：F-女,M-男
      */
     public static Map<String, String> getInfo(String idNumber) {
         String birthday = "";
@@ -42,9 +42,5 @@ public class IDCardUtil {
         map.put("age", age);
         map.put("gender", gender);
         return map;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(getInfo("658182198109222913"));
     }
 }

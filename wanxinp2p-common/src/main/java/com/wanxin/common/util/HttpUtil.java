@@ -19,11 +19,11 @@ public class HttpUtil {
         // 获取token地址
         String authHost = "https://aip.baidubce.com/oauth/2.0/token?";
         String getAccessTokenUrl = authHost
-                // 1. grant_type为固定参数
+                // 1.grant_type为固定参数
                 + "grant_type=client_credentials"
-                // 2. 官网获取的 API Key
+                // 2.官网获取的 API Key
                 + "&client_id=" + ak
-                // 3. 官网获取的 Secret Key
+                // 3.官网获取的 Secret Key
                 + "&client_secret=" + sk;
         URL realUrl = new URL(getAccessTokenUrl);
         // 打开和URL之间的连接
@@ -113,7 +113,7 @@ public class HttpUtil {
         }
         in.close();
         connection.disconnect();
-        //System.err.println("result:" + result);
+        // System.err.println("result:" + result);
         return result;
     }
 }

@@ -55,7 +55,6 @@ public class EncryptUtil {
         return encoded;
     }
 
-
     public static String decodeURL(String url) {
         String decoded = null;
         try {
@@ -65,23 +64,5 @@ public class EncryptUtil {
         }
         return decoded;
     }
-
-    public static void main(String[] args) {
-        String str = "abcd{'a':'b'}";
-        String encoded = EncryptUtil.encodeUTF8StringBase64(str);
-        String decoded = EncryptUtil.decodeUTF8StringBase64(encoded);
-        System.out.println(str);
-        System.out.println(encoded);
-        System.out.println(decoded);
-
-        String url = "== wo";
-        String urlEncoded = EncryptUtil.encodeURL(url);
-        String urlDecoded = EncryptUtil.decodeURL(urlEncoded);
-
-        System.out.println(url);
-        System.out.println(urlEncoded);
-        System.out.println(urlDecoded);
-    }
-
 
 }
