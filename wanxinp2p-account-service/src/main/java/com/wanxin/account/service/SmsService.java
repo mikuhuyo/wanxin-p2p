@@ -21,6 +21,12 @@ public class SmsService {
     @Value("${sms.enable}")
     private Boolean smsEnable;
 
+    /**
+     * 获取手机验证码
+     *
+     * @param mobile 手机号
+     * @return
+     */
     public RestResponse getSMSCode(String mobile) {
         if (smsEnable) {
             return OkHttpUtil.post(smsURL + "/generate?effectiveTime=300&name=sms", "{\"mobile\":" + mobile + "}");
@@ -29,6 +35,12 @@ public class SmsService {
         return RestResponse.success();
     }
 
+    /**
+     * 验证码校验
+     *
+     * @param key  秘钥
+     * @param code 验证码
+     */
     public void verifySmsCode(String key, String code) {
         if (smsEnable) {
             StringBuilder params = new StringBuilder("/verify?name=sms");
