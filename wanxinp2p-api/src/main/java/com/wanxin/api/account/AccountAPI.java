@@ -1,5 +1,7 @@
 package com.wanxin.api.account;
 
+import com.wanxin.api.account.model.AccountDTO;
+import com.wanxin.api.account.model.AccountRegisterDTO;
 import com.wanxin.common.domain.RestResponse;
 
 /**
@@ -8,6 +10,14 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface AccountAPI {
+    /**
+     * 用户注册
+     *
+     * @param accountRegisterDTO 注册信息实体类
+     * @return
+     */
+    RestResponse<AccountDTO> registry(AccountRegisterDTO accountRegisterDTO);
+
     /**
      * 校验手机号和验证码
      *

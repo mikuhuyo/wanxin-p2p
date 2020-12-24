@@ -2,15 +2,15 @@ package com.wanxin.account.controller;
 
 import com.wanxin.account.service.AccountService;
 import com.wanxin.api.account.AccountAPI;
+import com.wanxin.api.account.model.AccountDTO;
+import com.wanxin.api.account.model.AccountRegisterDTO;
 import com.wanxin.common.domain.RestResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author yuelimin
@@ -22,6 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController implements AccountAPI {
     @Autowired
     private AccountService accountService;
+
+    @Override
+    @PostMapping(value = "/l/accounts")
+    @ApiOperation("用户注册")
+    @ApiImplicitParam(
+            name = "accountRegisterDTO", value = "账户注册信息", required = true,
+            dataType = "AccountRegisterDTO", paramType = "body")
+    public RestResponse<AccountDTO> registry(@RequestBody AccountRegisterDTO accountRegisterDTO) {
+        return RestResponse.success(accountService.registry(accountRegisterDTO));
+    }
 
     @Override
     @GetMapping("/mobiles/{mobile}/key/{key}/code/{code}")
