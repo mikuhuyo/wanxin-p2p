@@ -3,6 +3,7 @@ package com.wanxin.account.controller;
 import com.wanxin.account.service.AccountService;
 import com.wanxin.api.account.AccountAPI;
 import com.wanxin.api.account.model.AccountDTO;
+import com.wanxin.api.account.model.AccountLoginDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
 import com.wanxin.common.domain.RestResponse;
 import io.swagger.annotations.Api;
@@ -22,6 +23,16 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController implements AccountAPI {
     @Autowired
     private AccountService accountService;
+
+    @Override
+    @PostMapping(value = "/l/accounts/session")
+    @ApiOperation("用户登录")
+    @ApiImplicitParam(
+            name = "accountLoginDTO", value = "登录信息", required = true,
+            dataType = "AccountLoginDTO", paramType = "body")
+    public RestResponse<AccountDTO> login(AccountLoginDTO accountLoginDTO) {
+        return RestResponse.success(accountService.login(accountLoginDTO));
+    }
 
     @Override
     @PostMapping(value = "/l/accounts")

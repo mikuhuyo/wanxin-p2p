@@ -1,10 +1,13 @@
 package com.wanxin.account.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wanxin.account.common.AccountErrorCode;
 import com.wanxin.account.entity.Account;
 import com.wanxin.account.mapper.AccountMapper;
 import com.wanxin.api.account.model.AccountDTO;
+import com.wanxin.api.account.model.AccountLoginDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
+import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.common.domain.StatusCode;
 import com.wanxin.common.util.PasswordUtil;
@@ -27,6 +30,54 @@ public class AccountServiceImpl implements AccountService {
 
     @Value("${sms.enable}")
     private Boolean smsEnable;
+
+    @Override
+    public AccountDTO login(AccountLoginDTO accountLoginDTO) {
+        Account account = null;
+        if ("c".equalsIgnoreCase(accountLoginDTO.getDomain())) {
+            //获取c端用户
+            account = getAccountByMobile(accountLoginDTO.getMobile());
+        } else {
+            //获取b端用户
+            account = getAccountByUsername(accountLoginDTO.getUsername());
+        }
+        if (account == null) {
+            // 用户不存在
+            throw new BusinessException(AccountErrorCode.E_130104);
+        }
+        AccountDTO accountDTO = convertAccountEntityToDTO(account);
+        // 如果smsEnable=true, 说明是短信验证码登录, 不做密码校验
+        if (smsEnable) {
+            return accountDTO;
+        }
+
+        // 验证密码
+        if (PasswordUtil.verify(accountLoginDTO.getPassword(), account.getPassword())) {
+            return accountDTO;
+        }
+
+        throw new BusinessException(AccountErrorCode.E_130105);
+    }
+
+    /**
+     * 根据手机获取账户信息
+     *
+     * @param mobile 手机号
+     * @return 账户实体
+     */
+    private Account getAccountByMobile(String mobile) {
+        return accountMapper.selectOne(new LambdaQueryWrapper<Account>().eq(Account::getMobile, mobile));
+    }
+
+    /**
+     * 根据用户名获取账户信息
+     *
+     * @param username 用户名
+     * @return 账户实体
+     */
+    private Account getAccountByUsername(String username) {
+        return accountMapper.selectOne(new LambdaQueryWrapper<Account>().eq(Account::getUsername, username));
+    }
 
     /**
      * 用户注册

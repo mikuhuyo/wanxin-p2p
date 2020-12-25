@@ -1,6 +1,7 @@
 package com.wanxin.account.service;
 
 import com.wanxin.api.account.model.AccountDTO;
+import com.wanxin.api.account.model.AccountLoginDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
 import com.wanxin.common.domain.RestResponse;
 
@@ -10,13 +11,21 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface AccountService {
-/**
- * 保存账户
- *
- * @param accountRegisterDTO 注册用户实体类
- * @return
- */
-AccountDTO registry(AccountRegisterDTO accountRegisterDTO);
+    /**
+     * 用户登录
+     *
+     * @param accountLoginDTO 登录信息
+     * @return
+     */
+    AccountDTO login(AccountLoginDTO accountLoginDTO);
+
+    /**
+     * 保存账户
+     *
+     * @param accountRegisterDTO 注册用户实体类
+     * @return
+     */
+    AccountDTO registry(AccountRegisterDTO accountRegisterDTO);
 
     /**
      * 手机号与验证码校验

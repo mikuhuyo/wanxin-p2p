@@ -1,6 +1,7 @@
 package com.wanxin.api.account;
 
 import com.wanxin.api.account.model.AccountDTO;
+import com.wanxin.api.account.model.AccountLoginDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
 import com.wanxin.common.domain.RestResponse;
 
@@ -10,6 +11,14 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface AccountAPI {
+    /**
+     * 用户登录
+     *
+     * @param accountLoginDTO 封装登录请求数据
+     * @return
+     */
+    RestResponse<AccountDTO> login(AccountLoginDTO accountLoginDTO);
+
     /**
      * 用户注册
      *
