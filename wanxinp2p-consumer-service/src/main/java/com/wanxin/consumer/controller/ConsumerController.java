@@ -1,11 +1,15 @@
 package com.wanxin.consumer.controller;
 
+import com.wanxin.api.consumer.ConsumerAPI;
+import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
+import com.wanxin.common.domain.RestResponse;
+import com.wanxin.consumer.service.ConsumerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,21 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(value = "用户服务API", tags = "Consumer")
-public class ConsumerController {
+public class ConsumerController implements ConsumerAPI {
+    @Autowired
+    private ConsumerService consumerService;
 
-    @Value("${server.servlet.context-path}")
-    private String path;
-
-    @ApiOperation("测试API-hello")
-    @GetMapping(path = "/hello")
-    public String hello() {
-        return "hello " + path;
-    }
-
-    @ApiOperation("测试API-hi")
-    @PostMapping(path = "/hi")
-    @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String")
-    public String hi(String name) {
-        return "hi," + name;
+    @Override
+    @PostMapping("/consumers")
+    @ApiOperation("用户注册")
+    @ApiImplicitParam(
+            name = "consumerRegisterDTO", value = "注册信息", required = true,
+            dataType = "AccountRegisterDTO", paramType = "body")
+    public RestResponse register(@RequestBody ConsumerRegisterDTO consumerRegisterDTO) {
+        consumerService.register(consumerRegisterDTO);
+        return RestResponse.success();
     }
 }
