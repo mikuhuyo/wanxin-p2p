@@ -22,7 +22,7 @@ CREATE TABLE `App` (
   KEY `AppId` (`AppId`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Name` (`Name`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COMMENT='应用表';
 
 -- ----------------------------
 -- Records of App
@@ -44,6 +44,7 @@ INSERT INTO `App` VALUES (13, 'reconciliation-service', '对账服务', 'micro_s
 INSERT INTO `App` VALUES (14, 'file-service', '文件存储微服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-06-26 15:48:12', 'apollo', '2019-07-16 11:55:59');
 INSERT INTO `App` VALUES (15, 'account-service', '统一账户服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'1', 'apollo', '2019-07-16 11:52:35', 'apollo', '2019-07-16 12:03:33');
 INSERT INTO `App` VALUES (16, 'account-service', '统一账户服务', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2020-12-23 06:45:47', 'apollo', '2020-12-23 06:45:47');
+INSERT INTO `App` VALUES (17, 'uaa-service', '认证中心', 'micro_service', '万信金融项目组', 'apollo', 'apollo@acme.com', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
 COMMIT;
 
 -- ----------------------------
@@ -66,7 +67,7 @@ CREATE TABLE `AppNamespace` (
   KEY `IX_AppId` (`AppId`),
   KEY `Name_AppId` (`Name`,`AppId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COMMENT='应用namespace定义';
 
 -- ----------------------------
 -- Records of AppNamespace
@@ -106,6 +107,7 @@ INSERT INTO `AppNamespace` VALUES (31, 'micro_service.files', 'consumer-service'
 INSERT INTO `AppNamespace` VALUES (32, 'micro_service.gateway-flow-rule', 'gateway-server', 'properties', b'1', '', b'0', 'apollo', '2019-07-03 14:43:16', 'apollo', '2019-07-03 14:43:16');
 INSERT INTO `AppNamespace` VALUES (33, 'application', 'account-service', 'properties', b'0', 'default app namespace', b'1', 'apollo', '2019-07-16 11:52:35', 'apollo', '2019-07-16 12:03:33');
 INSERT INTO `AppNamespace` VALUES (34, 'application', 'account-service', 'properties', b'0', 'default app namespace', b'0', 'apollo', '2020-12-23 06:45:47', 'apollo', '2020-12-23 06:45:47');
+INSERT INTO `AppNamespace` VALUES (35, 'application', 'uaa-service', 'properties', b'0', 'default app namespace', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
 COMMIT;
 
 -- ----------------------------
@@ -238,7 +240,7 @@ CREATE TABLE `Permission` (
   PRIMARY KEY (`Id`),
   KEY `IX_TargetId_PermissionType` (`TargetId`(191),`PermissionType`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=621 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
+) ENGINE=InnoDB AUTO_INCREMENT=661 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
 
 -- ----------------------------
 -- Records of Permission
@@ -864,6 +866,46 @@ INSERT INTO `Permission` VALUES (617, 'ModifyNamespace', 'account-service+micro_
 INSERT INTO `Permission` VALUES (618, 'ReleaseNamespace', 'account-service+micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `Permission` VALUES (619, 'ModifyNamespace', 'account-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `Permission` VALUES (620, 'ReleaseNamespace', 'account-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
+INSERT INTO `Permission` VALUES (621, 'CreateCluster', 'uaa-service', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (622, 'CreateNamespace', 'uaa-service', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (623, 'AssignRole', 'uaa-service', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (624, 'ManageAppMaster', 'uaa-service', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (625, 'ModifyNamespace', 'uaa-service+application', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (626, 'ReleaseNamespace', 'uaa-service+application', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (627, 'ModifyNamespace', 'uaa-service+application+DEV', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (628, 'ReleaseNamespace', 'uaa-service+application+DEV', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Permission` VALUES (629, 'ModifyNamespace', 'uaa-service+micro_service.spring-boot-http', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Permission` VALUES (630, 'ReleaseNamespace', 'uaa-service+micro_service.spring-boot-http', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Permission` VALUES (631, 'ModifyNamespace', 'uaa-service+micro_service.spring-boot-http+DEV', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Permission` VALUES (632, 'ReleaseNamespace', 'uaa-service+micro_service.spring-boot-http+DEV', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Permission` VALUES (633, 'ModifyNamespace', 'uaa-service+micro_service.spring-eureka', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Permission` VALUES (634, 'ReleaseNamespace', 'uaa-service+micro_service.spring-eureka', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Permission` VALUES (635, 'ModifyNamespace', 'uaa-service+micro_service.spring-eureka+DEV', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Permission` VALUES (636, 'ReleaseNamespace', 'uaa-service+micro_service.spring-eureka+DEV', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Permission` VALUES (637, 'ModifyNamespace', 'uaa-service+micro_service.spring-cloud-feign', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Permission` VALUES (638, 'ReleaseNamespace', 'uaa-service+micro_service.spring-cloud-feign', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Permission` VALUES (639, 'ModifyNamespace', 'uaa-service+micro_service.spring-cloud-feign+DEV', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Permission` VALUES (640, 'ReleaseNamespace', 'uaa-service+micro_service.spring-cloud-feign+DEV', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Permission` VALUES (641, 'ModifyNamespace', 'uaa-service+micro_service.spring-hystrix', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Permission` VALUES (642, 'ReleaseNamespace', 'uaa-service+micro_service.spring-hystrix', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Permission` VALUES (643, 'ModifyNamespace', 'uaa-service+micro_service.spring-hystrix+DEV', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Permission` VALUES (644, 'ReleaseNamespace', 'uaa-service+micro_service.spring-hystrix+DEV', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Permission` VALUES (645, 'ModifyNamespace', 'uaa-service+micro_service.spring-ribbon', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Permission` VALUES (646, 'ReleaseNamespace', 'uaa-service+micro_service.spring-ribbon', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Permission` VALUES (647, 'ModifyNamespace', 'uaa-service+micro_service.spring-ribbon+DEV', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Permission` VALUES (648, 'ReleaseNamespace', 'uaa-service+micro_service.spring-ribbon+DEV', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Permission` VALUES (649, 'ModifyNamespace', 'uaa-service+micro_service.spring-freemarker', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Permission` VALUES (650, 'ReleaseNamespace', 'uaa-service+micro_service.spring-freemarker', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Permission` VALUES (651, 'ModifyNamespace', 'uaa-service+micro_service.spring-freemarker+DEV', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Permission` VALUES (652, 'ReleaseNamespace', 'uaa-service+micro_service.spring-freemarker+DEV', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Permission` VALUES (653, 'ModifyNamespace', 'uaa-service+micro_service.spring-boot-druid', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Permission` VALUES (654, 'ReleaseNamespace', 'uaa-service+micro_service.spring-boot-druid', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Permission` VALUES (655, 'ModifyNamespace', 'uaa-service+micro_service.spring-boot-druid+DEV', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Permission` VALUES (656, 'ReleaseNamespace', 'uaa-service+micro_service.spring-boot-druid+DEV', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Permission` VALUES (657, 'ModifyNamespace', 'uaa-service+micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `Permission` VALUES (658, 'ReleaseNamespace', 'uaa-service+micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `Permission` VALUES (659, 'ModifyNamespace', 'uaa-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `Permission` VALUES (660, 'ReleaseNamespace', 'uaa-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
 COMMIT;
 
 -- ----------------------------
@@ -881,7 +923,7 @@ CREATE TABLE `Role` (
   PRIMARY KEY (`Id`),
   KEY `IX_RoleName` (`RoleName`(191)),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=589 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=627 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of Role
@@ -1475,6 +1517,44 @@ INSERT INTO `Role` VALUES (585, 'ModifyNamespace+account-service+micro_service.s
 INSERT INTO `Role` VALUES (586, 'ReleaseNamespace+account-service+micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `Role` VALUES (587, 'ModifyNamespace+account-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `Role` VALUES (588, 'ReleaseNamespace+account-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
+INSERT INTO `Role` VALUES (589, 'Master+uaa-service', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Role` VALUES (590, 'ManageAppMaster+uaa-service', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Role` VALUES (591, 'ModifyNamespace+uaa-service+application', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Role` VALUES (592, 'ReleaseNamespace+uaa-service+application', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Role` VALUES (593, 'ModifyNamespace+uaa-service+application+DEV', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Role` VALUES (594, 'ReleaseNamespace+uaa-service+application+DEV', b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `Role` VALUES (595, 'ModifyNamespace+uaa-service+micro_service.spring-boot-http', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Role` VALUES (596, 'ReleaseNamespace+uaa-service+micro_service.spring-boot-http', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Role` VALUES (597, 'ModifyNamespace+uaa-service+micro_service.spring-boot-http+DEV', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Role` VALUES (598, 'ReleaseNamespace+uaa-service+micro_service.spring-boot-http+DEV', b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `Role` VALUES (599, 'ModifyNamespace+uaa-service+micro_service.spring-eureka', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Role` VALUES (600, 'ReleaseNamespace+uaa-service+micro_service.spring-eureka', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Role` VALUES (601, 'ModifyNamespace+uaa-service+micro_service.spring-eureka+DEV', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Role` VALUES (602, 'ReleaseNamespace+uaa-service+micro_service.spring-eureka+DEV', b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `Role` VALUES (603, 'ModifyNamespace+uaa-service+micro_service.spring-cloud-feign', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Role` VALUES (604, 'ReleaseNamespace+uaa-service+micro_service.spring-cloud-feign', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Role` VALUES (605, 'ModifyNamespace+uaa-service+micro_service.spring-cloud-feign+DEV', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Role` VALUES (606, 'ReleaseNamespace+uaa-service+micro_service.spring-cloud-feign+DEV', b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `Role` VALUES (607, 'ModifyNamespace+uaa-service+micro_service.spring-hystrix', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Role` VALUES (608, 'ReleaseNamespace+uaa-service+micro_service.spring-hystrix', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Role` VALUES (609, 'ModifyNamespace+uaa-service+micro_service.spring-hystrix+DEV', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Role` VALUES (610, 'ReleaseNamespace+uaa-service+micro_service.spring-hystrix+DEV', b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `Role` VALUES (611, 'ModifyNamespace+uaa-service+micro_service.spring-ribbon', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Role` VALUES (612, 'ReleaseNamespace+uaa-service+micro_service.spring-ribbon', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Role` VALUES (613, 'ModifyNamespace+uaa-service+micro_service.spring-ribbon+DEV', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Role` VALUES (614, 'ReleaseNamespace+uaa-service+micro_service.spring-ribbon+DEV', b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `Role` VALUES (615, 'ModifyNamespace+uaa-service+micro_service.spring-freemarker', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Role` VALUES (616, 'ReleaseNamespace+uaa-service+micro_service.spring-freemarker', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Role` VALUES (617, 'ModifyNamespace+uaa-service+micro_service.spring-freemarker+DEV', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Role` VALUES (618, 'ReleaseNamespace+uaa-service+micro_service.spring-freemarker+DEV', b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `Role` VALUES (619, 'ModifyNamespace+uaa-service+micro_service.spring-boot-druid', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Role` VALUES (620, 'ReleaseNamespace+uaa-service+micro_service.spring-boot-druid', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Role` VALUES (621, 'ModifyNamespace+uaa-service+micro_service.spring-boot-druid+DEV', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Role` VALUES (622, 'ReleaseNamespace+uaa-service+micro_service.spring-boot-druid+DEV', b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `Role` VALUES (623, 'ModifyNamespace+uaa-service+micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `Role` VALUES (624, 'ReleaseNamespace+uaa-service+micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `Role` VALUES (625, 'ModifyNamespace+uaa-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `Role` VALUES (626, 'ReleaseNamespace+uaa-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
 COMMIT;
 
 -- ----------------------------
@@ -1494,7 +1574,7 @@ CREATE TABLE `RolePermission` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_PermissionId` (`PermissionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=621 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=661 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
 
 -- ----------------------------
 -- Records of RolePermission
@@ -2120,6 +2200,46 @@ INSERT INTO `RolePermission` VALUES (617, 585, 617, b'0', 'apollo', '2020-12-23 
 INSERT INTO `RolePermission` VALUES (618, 586, 618, b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `RolePermission` VALUES (619, 587, 619, b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `RolePermission` VALUES (620, 588, 620, b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
+INSERT INTO `RolePermission` VALUES (621, 589, 621, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (622, 589, 622, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (623, 589, 623, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (624, 590, 624, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (625, 591, 625, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (626, 592, 626, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (627, 593, 627, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (628, 594, 628, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `RolePermission` VALUES (629, 595, 629, b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `RolePermission` VALUES (630, 596, 630, b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `RolePermission` VALUES (631, 597, 631, b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `RolePermission` VALUES (632, 598, 632, b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `RolePermission` VALUES (633, 599, 633, b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `RolePermission` VALUES (634, 600, 634, b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `RolePermission` VALUES (635, 601, 635, b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `RolePermission` VALUES (636, 602, 636, b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `RolePermission` VALUES (637, 603, 637, b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `RolePermission` VALUES (638, 604, 638, b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `RolePermission` VALUES (639, 605, 639, b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `RolePermission` VALUES (640, 606, 640, b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `RolePermission` VALUES (641, 607, 641, b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `RolePermission` VALUES (642, 608, 642, b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `RolePermission` VALUES (643, 609, 643, b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `RolePermission` VALUES (644, 610, 644, b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `RolePermission` VALUES (645, 611, 645, b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `RolePermission` VALUES (646, 612, 646, b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `RolePermission` VALUES (647, 613, 647, b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `RolePermission` VALUES (648, 614, 648, b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `RolePermission` VALUES (649, 615, 649, b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `RolePermission` VALUES (650, 616, 650, b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `RolePermission` VALUES (651, 617, 651, b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `RolePermission` VALUES (652, 618, 652, b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `RolePermission` VALUES (653, 619, 653, b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `RolePermission` VALUES (654, 620, 654, b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `RolePermission` VALUES (655, 621, 655, b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `RolePermission` VALUES (656, 622, 656, b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `RolePermission` VALUES (657, 623, 657, b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `RolePermission` VALUES (658, 624, 658, b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `RolePermission` VALUES (659, 625, 659, b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `RolePermission` VALUES (660, 626, 660, b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
 COMMIT;
 
 -- ----------------------------
@@ -2171,7 +2291,7 @@ CREATE TABLE `UserRole` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_UserId_RoleId` (`UserId`,`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
 
 -- ----------------------------
 -- Records of UserRole
@@ -2477,6 +2597,25 @@ INSERT INTO `UserRole` VALUES (297, 'apollo', 581, b'0', 'apollo', '2020-12-23 0
 INSERT INTO `UserRole` VALUES (298, 'apollo', 582, b'0', 'apollo', '2020-12-23 07:04:09', 'apollo', '2020-12-23 07:04:09');
 INSERT INTO `UserRole` VALUES (299, 'apollo', 585, b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
 INSERT INTO `UserRole` VALUES (300, 'apollo', 586, b'0', 'apollo', '2020-12-23 07:04:24', 'apollo', '2020-12-23 07:04:24');
+INSERT INTO `UserRole` VALUES (301, 'apollo', 589, b'0', 'apollo', '2020-12-24 09:02:25', 'apollo', '2020-12-24 09:02:25');
+INSERT INTO `UserRole` VALUES (302, 'apollo', 591, b'0', 'apollo', '2020-12-24 09:02:26', 'apollo', '2020-12-24 09:02:26');
+INSERT INTO `UserRole` VALUES (303, 'apollo', 592, b'0', 'apollo', '2020-12-24 09:02:26', 'apollo', '2020-12-24 09:02:26');
+INSERT INTO `UserRole` VALUES (304, 'apollo', 595, b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `UserRole` VALUES (305, 'apollo', 596, b'0', 'apollo', '2020-12-24 09:02:47', 'apollo', '2020-12-24 09:02:47');
+INSERT INTO `UserRole` VALUES (306, 'apollo', 599, b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `UserRole` VALUES (307, 'apollo', 600, b'0', 'apollo', '2020-12-24 09:02:59', 'apollo', '2020-12-24 09:02:59');
+INSERT INTO `UserRole` VALUES (308, 'apollo', 603, b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `UserRole` VALUES (309, 'apollo', 604, b'0', 'apollo', '2020-12-24 09:03:13', 'apollo', '2020-12-24 09:03:13');
+INSERT INTO `UserRole` VALUES (310, 'apollo', 607, b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `UserRole` VALUES (311, 'apollo', 608, b'0', 'apollo', '2020-12-24 09:03:23', 'apollo', '2020-12-24 09:03:23');
+INSERT INTO `UserRole` VALUES (312, 'apollo', 611, b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `UserRole` VALUES (313, 'apollo', 612, b'0', 'apollo', '2020-12-24 09:03:38', 'apollo', '2020-12-24 09:03:38');
+INSERT INTO `UserRole` VALUES (314, 'apollo', 615, b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `UserRole` VALUES (315, 'apollo', 616, b'0', 'apollo', '2020-12-24 09:03:50', 'apollo', '2020-12-24 09:03:50');
+INSERT INTO `UserRole` VALUES (316, 'apollo', 619, b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `UserRole` VALUES (317, 'apollo', 620, b'0', 'apollo', '2020-12-24 09:04:04', 'apollo', '2020-12-24 09:04:04');
+INSERT INTO `UserRole` VALUES (318, 'apollo', 623, b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
+INSERT INTO `UserRole` VALUES (319, 'apollo', 624, b'0', 'apollo', '2020-12-24 09:36:39', 'apollo', '2020-12-24 09:36:39');
 COMMIT;
 
 -- ----------------------------
