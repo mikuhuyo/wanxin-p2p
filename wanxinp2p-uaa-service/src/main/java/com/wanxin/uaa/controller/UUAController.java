@@ -26,7 +26,7 @@ public class UUAController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UUAController.class);
 
-    @GetMapping(value = {"/login"})
+    @GetMapping("/login")
     public String login(Model model) {
         LOG.info("Go to login, IP: {}", WebUtils.getIp());
         return "login";
@@ -34,12 +34,12 @@ public class UUAController {
 
     @RequestMapping("/confirm_access")
     public String confirmAccess() {
-        return "/oauth_approval";
+        return "oauth_approval";
     }
 
     @RequestMapping("/oauth_error")
     public String oauthError() {
-        return "/oauth_error";
+        return "oauth_error";
     }
 
     @Autowired
@@ -48,7 +48,7 @@ public class UUAController {
     @Autowired
     private AccessTokenConverter accessTokenConverter;
 
-    @RequestMapping(value = "/oauth/check_token", method = RequestMethod.POST)
+    @RequestMapping(value = "/ocheck_token", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, ?> checkToken(@RequestParam("token") String value) {
         DefaultTokenServices tokenServices = (DefaultTokenServices) tokenService;

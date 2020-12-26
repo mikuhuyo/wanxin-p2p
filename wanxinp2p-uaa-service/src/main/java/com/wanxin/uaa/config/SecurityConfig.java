@@ -35,14 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public IntegrationUserDetailsAuthenticationHandler integrationUserDetailsAuthenticationHandler() {
-        IntegrationUserDetailsAuthenticationHandler authenticationHandler = new IntegrationUserDetailsAuthenticationHandler();
-        return authenticationHandler;
+        return new IntegrationUserDetailsAuthenticationHandler();
     }
 
     @Bean
     public IntegrationUserDetailsAuthenticationProvider integrationUserDetailsAuthenticationProvider() {
-        IntegrationUserDetailsAuthenticationProvider provider = new IntegrationUserDetailsAuthenticationProvider(integrationUserDetailsAuthenticationHandler());
-        return provider;
+        return new IntegrationUserDetailsAuthenticationProvider(integrationUserDetailsAuthenticationHandler());
     }
 
     @Autowired
@@ -53,10 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(integrationUserDetailsAuthenticationProvider());
     }
 
-
-    // 不定义没有password grant_type
-    @Override
     @Bean
+    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -65,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/public/**", "/webjars/**", "/v2/**", "/swagger**", "/static/**", "/resources/**");
-        //web.httpFirewall(new DefaultHttpFirewall());//StrictHttpFirewall 去除验url非法验证防火墙
+        // StrictHttpFirewall 去除验url非法验证防火墙
+        // web.httpFirewall(new DefaultHttpFirewall());
 
     }
 

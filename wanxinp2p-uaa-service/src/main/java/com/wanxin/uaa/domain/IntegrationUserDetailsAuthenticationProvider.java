@@ -25,23 +25,20 @@ public class IntegrationUserDetailsAuthenticationProvider extends AbstractUserDe
         this.authenticationHandler = authenticationHandler;
     }
 
+    @Override
     @SuppressWarnings("deprecation")
-    protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                  UsernamePasswordAuthenticationToken authentication)
-            throws AuthenticationException {
-        //仅在父类中验证用户的状态
+    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+        // 仅在父类中验证用户的状态
     }
 
 
-    protected final UserDetails retrieveUser(String username,
-                                             UsernamePasswordAuthenticationToken authentication)
-            throws AuthenticationException {
+    @Override
+    protected final UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
         try {
 
             UserDetails loadedUser = authenticationUser(authentication);
             if (loadedUser == null) {
-                throw new InternalAuthenticationServiceException(
-                        "UserDetailsService returned null, which is an interface contract violation");
+                throw new InternalAuthenticationServiceException("UserDetailsService returned null, which is an interface contract violation");
             }
             return loadedUser;
         } catch (UsernameNotFoundException ex) {
@@ -58,27 +55,25 @@ public class IntegrationUserDetailsAuthenticationProvider extends AbstractUserDe
         Object details = authentication.getDetails();
         String domain = null;
         String authenticationType = null;
-        if (details instanceof IntegrationWebAuthenticationDetails) { //网页(简化模式、授权码模式用户登录)认证
+        // 网页(简化模式, 授权码模式用户登录)认证
+        if (details instanceof IntegrationWebAuthenticationDetails) {
             IntegrationWebAuthenticationDetails webAuthenticationDetails = (IntegrationWebAuthenticationDetails) details;
             domain = webAuthenticationDetails.getDomain();
             authenticationType = webAuthenticationDetails.getAuthenticationType();
-        } else if (details instanceof Map) { //password模式认证
+        } else if (details instanceof Map) { // password模式认证
             Map<String, String> webAuthenticationDetails = (Map) details;
             domain = webAuthenticationDetails.get("domain");
             authenticationType = webAuthenticationDetails.get("authenticationType");
-        } else { //超出预估的情况
-            throw new InternalAuthenticationServiceException(
-                    "WebAuthenticationDetails type is not support");
+        } else { // 超出预估的情况
+            throw new InternalAuthenticationServiceException("WebAuthenticationDetails type is not support");
         }
 
         if (StringUtils.isBlank(domain)) {
-            throw new InternalAuthenticationServiceException(
-                    "domain is blank");
+            throw new InternalAuthenticationServiceException("domain is blank");
         }
 
         if (StringUtils.isBlank(authenticationType)) {
-            throw new InternalAuthenticationServiceException(
-                    "authenticationType is blank");
+            throw new InternalAuthenticationServiceException("authenticationType is blank");
         }
         return authenticationHandler.authentication(domain, authenticationType, authentication);
     }

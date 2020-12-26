@@ -40,7 +40,7 @@ public class UnifiedUserDetails implements UserDetails {
 
 
     /**
-     * 用户的角色权限集合，key为角色，value为角色下权限集合
+     * 用户的角色权限集合, key为角色, value为角色下权限集合
      */
     private Map<String, List<String>> userAuthorities = new HashMap<>();
 
