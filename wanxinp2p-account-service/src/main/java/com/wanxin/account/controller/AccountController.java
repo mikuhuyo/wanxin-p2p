@@ -30,7 +30,7 @@ public class AccountController implements AccountAPI {
     @ApiImplicitParam(
             name = "accountLoginDTO", value = "登录信息", required = true,
             dataType = "AccountLoginDTO", paramType = "body")
-    public RestResponse<AccountDTO> login(AccountLoginDTO accountLoginDTO) {
+    public RestResponse<AccountDTO> login(@RequestBody AccountLoginDTO accountLoginDTO) {
         return RestResponse.success(accountService.login(accountLoginDTO));
     }
 
