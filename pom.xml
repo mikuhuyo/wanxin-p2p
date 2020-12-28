@@ -32,112 +32,164 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!--跳过测试-->
         <skipTests>true</skipTests>
+
+        <spring.cloud.version>Greenwich.SR6</spring.cloud.version>
+        <apollo.client.version>1.3.0</apollo.client.version>
+        <hmily.version>2.1.1</hmily.version>
+        <kryo.version>4.0.2</kryo.version>
+        <elastic.job.version>2.1.5</elastic.job.version>
+        <elastic.job.starter.version>2.1.53</elastic.job.starter.version>
+        <swagger.version>2.9.2</swagger.version>
+        <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+        <javax.interceptor.api.version>1.2</javax.interceptor.api.version>
+        <fastsjson.version>1.2.47</fastsjson.version>
+        <alibaba.druid.version>1.1.16</alibaba.druid.version>
+        <mybatis.plus.version>3.1.2</mybatis.plus.version>
+        <sharding.jdbc.version>4.0.0-RC1</sharding.jdbc.version>
+        <okhttp.version>3.14.4</okhttp.version>
+        <alibaba.sentinel.version>1.6.2</alibaba.sentinel.version>
+        <rocketmq.starter.version>2.0.2</rocketmq.starter.version>
     </properties>
 
     <!--依赖管理-->
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo.client.version}</version>
+            </dependency>
+
             <!-- 分布式事务 -->
             <dependency>
                 <groupId>org.dromara</groupId>
                 <artifactId>hmily-springcloud</artifactId>
-                <version>2.0.4-RELEASE</version>
+                <version>${hmily.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring-boot-starter</artifactId>
+                        <groupId>org.springframework.boot</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-test</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>logback-core</artifactId>
+                        <groupId>ch.qos.logback</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>logback-classic</artifactId>
+                        <groupId>ch.qos.logback</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.esotericsoftware</groupId>
                 <artifactId>kryo</artifactId>
-                <version>4.0.2</version>
+                <version>${kryo.version}</version>
             </dependency>
 
             <!-- 分布式任务调度 -->
             <dependency>
                 <groupId>com.dangdang</groupId>
                 <artifactId>elastic-job-lite-core</artifactId>
-                <version>2.1.5</version>
+                <version>${elastic.job.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.dangdang</groupId>
                 <artifactId>elastic-job-lite-spring</artifactId>
-                <version>2.1.5</version>
+                <version>${elastic.job.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.kuhn-he</groupId>
                 <artifactId>elastic-job-lite-spring-boot-starter</artifactId>
-                <version>2.1.53</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Greenwich.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <version>${elastic.job.starter.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
-                <version>2.9.2</version>
+                <version>${swagger.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
-                <version>2.9.2</version>
+                <version>${swagger.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <version>${javax.servlet.api.version}</version>
                 <scope>provided</scope>
             </dependency>
 
             <dependency>
                 <groupId>javax.interceptor</groupId>
                 <artifactId>javax.interceptor-api</artifactId>
-                <version>1.2</version>
+                <version>${javax.interceptor.api.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.47</version>
+                <version>${fastsjson.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.ctrip.framework.apollo</groupId>
-                <artifactId>apollo-client</artifactId>
-                <version>1.3.0</version>
-            </dependency>
-
-            <!--            <dependency>-->
-            <!--                <groupId>com.ctrip.framework.apollo</groupId>-->
-            <!--                <artifactId>apollo-client</artifactId>-->
-            <!--                <version>1.7.0</version>-->
-            <!--            </dependency>-->
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.1.16</version>
+                <version>${alibaba.druid.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.1.2</version>
+                <version>${mybatis.plus.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>3.1.2</version>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding.jdbc.version}</version>
+            </dependency>
+
+            <!-- http 网络请求库 -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-typehandlers-jsr310</artifactId>
-                <version>1.0.2</version>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-zuul-adapter</artifactId>
+                <version>${alibaba.sentinel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-apollo</artifactId>
+                <version>${alibaba.sentinel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.starter.version}</version>
             </dependency>
 
             <dependency>
@@ -159,12 +211,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-spring-boot-starter</artifactId>
-                <version>2.0.2</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-jwt</artifactId>
                 <version>1.0.9.RELEASE</version>
@@ -175,31 +221,6 @@
                 <groupId>org.springframework.security.oauth.boot</groupId>
                 <artifactId>spring-security-oauth2-autoconfigure</artifactId>
                 <version>2.1.3.RELEASE</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.shardingsphere</groupId>
-                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-                <version>4.0.0-RC1</version>
-            </dependency>
-
-            <!-- http 网络请求库 -->
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>3.14.4</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-zuul-adapter</artifactId>
-                <version>1.6.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.csp</groupId>
-                <artifactId>sentinel-datasource-apollo</artifactId>
-                <version>1.6.2</version>
             </dependency>
 
         </dependencies>
