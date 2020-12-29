@@ -1,8 +1,0 @@
-DROP DATABASE IF EXISTS `p2p_undo_log`;
-CREATE DATABASE  `p2p_undo_log` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `p2p_undo_log`;
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
-SET FOREIGN_KEY_CHECKS = 1;
