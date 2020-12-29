@@ -1,0 +1,36 @@
+hmily:
+  server:
+    configMode: local
+    appName: account-service
+  config:
+    appName: account-service
+    serializer: kryo
+    contextTransmittalMode: threadLocal
+    scheduledThreadMax: 4
+    scheduledRecoveryDelay: 60
+    scheduledCleanDelay: 60
+    scheduledPhyDeletedDelay: 600
+    scheduledInitDelay: 30
+    recoverDelayTime: 60
+    cleanDelayTime: 180
+    limit: 200
+    retryMax: 10
+    bufferSize: 8192
+    consumerThreads: 16
+    asyncRepository: true
+    autoSql: true
+    phyDeleted: true
+    storeDays: 3
+    repository: mysql
+
+repository:
+  database:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url : jdbc:mysql://192.168.158.164:3306/hmily?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: yueliminvc@outlook.com
+    maxActive: 20
+    minIdle: 10
+    connectionTimeout: 30000
+    idleTimeout: 600000
+    maxLifetime: 1800000

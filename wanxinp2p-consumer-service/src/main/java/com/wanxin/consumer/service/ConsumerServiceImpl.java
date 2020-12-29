@@ -14,9 +14,12 @@ import com.wanxin.consumer.agent.AccountApiAgent;
 import com.wanxin.consumer.common.ConsumerErrorCode;
 import com.wanxin.consumer.entity.Consumer;
 import com.wanxin.consumer.mapper.ConsumerMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.dromara.hmily.annotation.HmilyTCC;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author yuelimin
@@ -24,6 +27,7 @@ import org.springframework.stereotype.Service;
  * @since 1.8
  */
 @Service
+@Slf4j
 public class ConsumerServiceImpl implements ConsumerService {
     @Autowired
     private ConsumerMapper consumerMapper;
@@ -36,6 +40,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     }
 
     @Override
+    @HmilyTCC(confirmMethod = "confirmRegister", cancelMethod = "cancelRegister")
     public void register(ConsumerRegisterDTO consumerRegisterDTO) {
         if (checkMobile(consumerRegisterDTO.getMobile()) == 1) {
             throw new BusinessException(ConsumerErrorCode.E_140107);
@@ -55,6 +60,18 @@ public class ConsumerServiceImpl implements ConsumerService {
         if (restResponse.getCode() != CommonErrorCode.SUCCESS.getCode()) {
             throw new BusinessException(ConsumerErrorCode.E_140106);
         }
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    public void confirmRegister(ConsumerRegisterDTO consumerRegisterDTO) {
+        log.info("confirm register");
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    public void cancelRegister(ConsumerRegisterDTO consumerRegisterDTO) {
+        // 删除用户信息
+        consumerMapper.delete(new LambdaQueryWrapper<Consumer>().eq(Consumer::getMobile, consumerRegisterDTO.getMobile()));
+        log.info("cancel register");
     }
 
     private ConsumerDTO getByMobile(String mobile) {

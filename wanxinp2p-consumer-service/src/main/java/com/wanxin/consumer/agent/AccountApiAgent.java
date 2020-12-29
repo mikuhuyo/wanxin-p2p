@@ -5,6 +5,7 @@ import com.wanxin.api.account.model.AccountRegisterDTO;
 import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.CommonErrorCode;
 import com.wanxin.common.domain.RestResponse;
+import org.dromara.hmily.annotation.Hmily;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ public interface AccountApiAgent {
      * @param accountRegisterDTO 用户注册信息
      * @return
      */
+    @Hmily
     @PostMapping(value = "/account/l/accounts")
     RestResponse<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO);
 }

@@ -11,10 +11,13 @@ import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.common.domain.StatusCode;
 import com.wanxin.common.util.PasswordUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.dromara.hmily.annotation.HmilyTCC;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author yuelimin
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Service;
  * @since 1.8
  */
 @Service
+@Slf4j
 public class AccountServiceImpl implements AccountService {
     @Autowired
     private SmsService smsService;
@@ -86,6 +90,8 @@ public class AccountServiceImpl implements AccountService {
      * @return
      */
     @Override
+    @Transactional(rollbackFor = {Exception.class})
+    @HmilyTCC(confirmMethod = "confirmRegister", cancelMethod = "cancelRegister")
     public AccountDTO registry(AccountRegisterDTO registerDTO) {
         Account account = new Account();
         account.setUsername(registerDTO.getUsername());
@@ -97,7 +103,21 @@ public class AccountServiceImpl implements AccountService {
         account.setDomain("c");
         account.setStatus(StatusCode.STATUS_OUT.getCode());
         accountMapper.insert(account);
+
+        System.out.println(10 / 0);
         return convertAccountEntityToDTO(account);
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    public void confirmRegister(AccountRegisterDTO registerDTO) {
+        log.info("confirm register");
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    public void cancelRegister(AccountRegisterDTO registerDTO) {
+        // 删除账号
+        accountMapper.delete(new LambdaQueryWrapper<Account>().eq(Account::getUsername, registerDTO.getUsername()));
+        log.info("cancel register");
     }
 
     /**
