@@ -69,33 +69,6 @@
             </dependency>
 
             <!-- 分布式事务 -->
-<!--            <dependency>-->
-<!--                <groupId>org.dromara</groupId>-->
-<!--                <artifactId>hmily-springcloud</artifactId>-->
-<!--                <version>${hmily.version}</version>-->
-<!--                <exclusions>-->
-<!--                    <exclusion>-->
-<!--                        <artifactId>spring-boot-starter</artifactId>-->
-<!--                        <groupId>org.springframework.boot</groupId>-->
-<!--                    </exclusion>-->
-<!--                    <exclusion>-->
-<!--                        <groupId>org.springframework.boot</groupId>-->
-<!--                        <artifactId>spring-boot-starter-test</artifactId>-->
-<!--                    </exclusion>-->
-<!--                    <exclusion>-->
-<!--                        <artifactId>logback-core</artifactId>-->
-<!--                        <groupId>ch.qos.logback</groupId>-->
-<!--                    </exclusion>-->
-<!--                    <exclusion>-->
-<!--                        <artifactId>slf4j-api</artifactId>-->
-<!--                        <groupId>org.slf4j</groupId>-->
-<!--                    </exclusion>-->
-<!--                    <exclusion>-->
-<!--                        <artifactId>logback-classic</artifactId>-->
-<!--                        <groupId>ch.qos.logback</groupId>-->
-<!--                    </exclusion>-->
-<!--                </exclusions>-->
-<!--            </dependency>-->
             <dependency>
                 <groupId>org.dromara</groupId>
                 <artifactId>hmily-spring-boot-starter-springcloud</artifactId>
