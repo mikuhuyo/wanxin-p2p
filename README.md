@@ -9,18 +9,13 @@
 
 ## 项目地址
 
-| Github地址                                             | 说明            |
-| ------------------------------------------------------ | --------------- |
-| https://github.com/YueLiMin-say                        | 个人页面        |
-| https://github.com/YueLiMin-say/wanxin-p2p-web.git     | 前端工程        |
-| https://github.com/YueLiMin-say/wanxin-p2p.git         | 后端工程        |
-| https://github.com/YueLiMin-say/wanxin-p2p-manager.git | 后台前端工程    |
-| https://github.com/YueLiMin-say/TencentSms.git         | Tencent短信服务 |
-| https://github.com/YueLiMin-say/minio.git              | 存储服务        |
-
-## 资源文件说明
-
-在项目目录下有一个`resource`的目录, 目录中有我们的`SQL`文件, 静态页面以及我们`Apollo`配置中心的`docker-compose`文件.
+| Github地址                                         | 说明            |
+| -------------------------------------------------- | --------------- |
+| https://github.com/mikuhuyo/wanxin-p2p-web.git     | 前端工程        |
+| https://github.com/mikuhuyo/wanxin-p2p.git         | 后端工程        |
+| https://github.com/mikuhuyo/wanxin-p2p-manager.git | 后台前端工程    |
+| https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务 |
+| https://github.com/mikuhuyo/minio.git              | 存储服务        |
 
 ## 模块端口
 
@@ -34,8 +29,8 @@
 | 交易中心服务(wanxinp2p-transaction-service)      | 53060  |
 | 存管代理服务(wanxinp2p-depository-agent-service) | 53070  |
 | 还款服务(wanxinp2p-repayment-service)            | 53080  |
-| 文件服务(wanxinp2p-file-service)                 | 56082  |
-| 短信验证码服务                                   | 56085  |
+| 文件服务(minio)                 | 56082  |
+| 短信验证码服务(tencent-sms)                                   | 56085  |
 | P2P平台前端(wanxin-p2p-web)                      | 8081   |
 | P2P平台管理端后台                                | 8079   |
 
