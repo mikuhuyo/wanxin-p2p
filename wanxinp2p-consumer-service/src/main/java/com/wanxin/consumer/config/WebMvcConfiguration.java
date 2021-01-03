@@ -88,6 +88,3 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
 }
-
-
-
