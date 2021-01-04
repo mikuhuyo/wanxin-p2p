@@ -9,13 +9,14 @@
 
 ## 项目地址
 
-| Github地址                                         | 说明            |
-| -------------------------------------------------- | --------------- |
-| https://github.com/mikuhuyo/wanxin-p2p-web.git     | 前端工程        |
-| https://github.com/mikuhuyo/wanxin-p2p.git         | 后端工程        |
-| https://github.com/mikuhuyo/wanxin-p2p-manager.git | 后台前端工程    |
-| https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务 |
-| https://github.com/mikuhuyo/minio.git              | 存储服务        |
+| Github地址                                         | 说明             |
+| -------------------------------------------------- | ---------------- |
+| https://github.com/mikuhuyo/wanxin-p2p-web.git     | 前端工程         |
+| https://github.com/mikuhuyo/wanxin-p2p.git         | 后端工程         |
+| https://github.com/mikuhuyo/wanxin-p2p-manager.git | 后台前端工程     |
+| https://github.com/mikuhuyo/wanxin-depository.git  | 后台银行存管系统 |
+| https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务  |
+| https://github.com/mikuhuyo/minio.git              | 存储服务         |
 
 ## 模块端口
 
