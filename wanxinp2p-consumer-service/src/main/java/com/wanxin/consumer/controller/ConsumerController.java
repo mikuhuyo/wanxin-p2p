@@ -5,6 +5,7 @@ import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
+import com.wanxin.consumer.common.SecurityUtil;
 import com.wanxin.consumer.service.ConsumerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,7 +31,8 @@ public class ConsumerController implements ConsumerAPI {
     @ApiOperation("生成开户请求数据")
     @ApiImplicitParam(name = "consumerRequest", value = "开户信息", required = true, dataType = "ConsumerRequest", paramType = "body")
     public RestResponse<GatewayRequest> createConsumer(@RequestBody ConsumerRequest consumerRequest) {
-        return null;
+        consumerRequest.setMobile(SecurityUtil.getUser().getMobile());
+        return consumerService.createConsumer(consumerRequest);
     }
 
     @Override

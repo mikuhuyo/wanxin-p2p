@@ -3,16 +3,19 @@ package com.wanxin.consumer.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.account.model.AccountDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
+import com.wanxin.api.consumer.model.BankCardDTO;
 import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
-import com.wanxin.common.domain.BusinessException;
-import com.wanxin.common.domain.CodePrefixCode;
-import com.wanxin.common.domain.CommonErrorCode;
-import com.wanxin.common.domain.RestResponse;
+import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
 import com.wanxin.consumer.agent.AccountApiAgent;
+import com.wanxin.consumer.agent.DepositoryAgentApiAgent;
 import com.wanxin.consumer.common.ConsumerErrorCode;
+import com.wanxin.consumer.entity.BankCard;
 import com.wanxin.consumer.entity.Consumer;
+import com.wanxin.consumer.mapper.BankCardMapper;
 import com.wanxin.consumer.mapper.ConsumerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hmily.annotation.HmilyTCC;
@@ -33,6 +36,61 @@ public class ConsumerServiceImpl implements ConsumerService {
     private ConsumerMapper consumerMapper;
     @Autowired
     private AccountApiAgent accountApiAgent;
+    @Autowired
+    private BankCardService bankCardService;
+    @Autowired
+    private BankCardMapper bankCardMapper;
+    @Autowired
+    private DepositoryAgentApiAgent depositoryAgentApiAgent;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) {
+        ConsumerDTO consumerDTO = getByMobile(consumerRequest.getMobile());
+
+        // 判断用户是否已开户
+        if (consumerDTO.getIsBindCard() == 1) {
+            throw new BusinessException(ConsumerErrorCode.E_140105);
+        }
+
+        // 判断银行卡是否已被绑定
+        BankCardDTO bankCardDTO = bankCardService.getByCardNumber(consumerRequest.getCardNumber());
+        if (bankCardDTO != null && bankCardDTO.getStatus() == StatusCode.STATUS_IN.getCode()) {
+            throw new BusinessException(ConsumerErrorCode.E_140151);
+        }
+
+        // 更新用户开户信息
+        consumerRequest.setId(consumerDTO.getId());
+        // 产生请求流水号和用户编号
+        consumerRequest.setUserNo(CodeNoUtil.getNo(CodePrefixCode.CODE_CONSUMER_PREFIX));
+        consumerRequest.setRequestNo(CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
+
+        // 设置查询条件和需要更新的数据
+        Consumer consumer = new Consumer();
+        consumer.setMobile(consumerDTO.getMobile());
+        consumer.setUserNo(consumerRequest.getUserNo());
+        consumer.setRequestNo(consumerRequest.getRequestNo());
+        consumer.setFullname(consumerRequest.getFullname());
+        consumer.setIdNumber(consumerRequest.getIdNumber());
+        consumer.setAuthList("ALL");
+        consumerMapper.update(consumer, new LambdaQueryWrapper<Consumer>().eq(Consumer::getMobile, consumerDTO.getMobile()));
+
+        // 保存用户绑卡信息
+        BankCard bankCard = new BankCard();
+        bankCard.setConsumerId(consumerDTO.getId());
+        bankCard.setBankCode(consumerRequest.getBankCode());
+        bankCard.setCardNumber(consumerRequest.getCardNumber());
+        bankCard.setMobile(consumerRequest.getMobile());
+        bankCard.setStatus(StatusCode.STATUS_OUT.getCode());
+
+        BankCardDTO existBankCard = bankCardService.getByConsumerId(bankCard.getConsumerId());
+        if (existBankCard != null) {
+            bankCard.setId(existBankCard.getId());
+            bankCardMapper.updateById(bankCard);
+        }
+        bankCardMapper.insert(bankCard);
+        return depositoryAgentApiAgent.createConsumer(consumerRequest);
+    }
 
     @Override
     public Integer checkMobile(String mobile) {
