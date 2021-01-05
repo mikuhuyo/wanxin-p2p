@@ -1,0 +1,20 @@
+server:
+  port: 53070
+
+spring:
+  application:
+    name: depository-agent-service
+
+# -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53070
+app:
+  id: depository-agent-service
+apollo:
+  meta: http://192.168.158.162:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: application,micro_service.spring-boot-druid,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-hystrix,micro_service.spring-cloud-feign,micro_service.spring-ribbon,micro_service.mybatis-plus,micro_service.spring-rocketmq,micro_service.spring-boot-redis
+
+logging:
+  config: classpath:log4j2-dev.xml
