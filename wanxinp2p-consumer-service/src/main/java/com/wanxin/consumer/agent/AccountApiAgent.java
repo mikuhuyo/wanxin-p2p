@@ -34,7 +34,7 @@ public interface AccountApiAgent {
 
 class AccountApiAgentConfiguration {
     @Bean
-    public AccountApiAgentFallback quickStartOpenFeignFallback() {
+    public AccountApiAgentFallback accountApiAgentFallback() {
         return new AccountApiAgentFallback();
     }
 }
