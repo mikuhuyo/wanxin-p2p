@@ -104,7 +104,6 @@ public class AccountServiceImpl implements AccountService {
         account.setStatus(StatusCode.STATUS_OUT.getCode());
         accountMapper.insert(account);
 
-        System.out.println(10 / 0);
         return convertAccountEntityToDTO(account);
     }
 
