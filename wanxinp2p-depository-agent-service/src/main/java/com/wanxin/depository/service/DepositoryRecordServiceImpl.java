@@ -1,6 +1,7 @@
 package com.wanxin.depository.service;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.StatusCode;
@@ -25,6 +26,14 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     private ConfigService configService;
     @Autowired
     private DepositoryRecordMapper depositoryRecordMapper;
+
+    @Override
+    public Boolean modifyRequestStatus(String requestNo, Integer requestsStatus) {
+        DepositoryRecord depositoryRecord = new DepositoryRecord();
+        depositoryRecord.setRequestStatus(requestsStatus);
+        depositoryRecord.setConfirmDate(LocalDateTime.now());
+        return depositoryRecordMapper.update(depositoryRecord, new LambdaQueryWrapper<DepositoryRecord>().eq(DepositoryRecord::getRequestNo, requestNo)) == 1;
+    }
 
     @Override
     public GatewayRequest createConsumer(ConsumerRequest consumerRequest) {
