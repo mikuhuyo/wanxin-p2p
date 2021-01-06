@@ -50,7 +50,7 @@
         <sharding.jdbc.version>4.0.0-RC1</sharding.jdbc.version>
         <okhttp.version>3.14.4</okhttp.version>
         <alibaba.sentinel.version>1.6.2</alibaba.sentinel.version>
-        <rocketmq.starter.version>2.0.2</rocketmq.starter.version>
+        <rocketmq.starter.version>2.0.4</rocketmq.starter.version>
     </properties>
 
     <!--依赖管理-->
