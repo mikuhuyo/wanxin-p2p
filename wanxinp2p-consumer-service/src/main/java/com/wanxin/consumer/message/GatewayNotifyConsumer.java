@@ -25,15 +25,10 @@ import java.util.List;
  */
 @Component
 public class GatewayNotifyConsumer {
-    @Value("${rocketmq.consumer.group}")
-    private String consumerGroup;
-    @Value("${spring.rocketmq.name-server}")
-    private String mqNameServer;
-
     @Autowired
     private ConsumerService consumerService;
 
-    public GatewayNotifyConsumer() throws MQClientException {
+    public GatewayNotifyConsumer(@Value("${rocketmq.consumer.group}") String consumerGroup, @Value("${spring.rocketmq.name-server}") String mqNameServer) throws MQClientException {
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer(consumerGroup);
         pushConsumer.setNamesrvAddr(mqNameServer);
         pushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
