@@ -242,7 +242,7 @@ CREATE TABLE `Permission` (
   PRIMARY KEY (`Id`),
   KEY `IX_TargetId_PermissionType` (`TargetId`(191),`PermissionType`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=701 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
+) ENGINE=InnoDB AUTO_INCREMENT=705 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
 
 -- ----------------------------
 -- Records of Permission
@@ -948,6 +948,10 @@ INSERT INTO `Permission` VALUES (697, 'ModifyNamespace', 'depository-agent-servi
 INSERT INTO `Permission` VALUES (698, 'ReleaseNamespace', 'depository-agent-service+micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `Permission` VALUES (699, 'ModifyNamespace', 'depository-agent-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `Permission` VALUES (700, 'ReleaseNamespace', 'depository-agent-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
+INSERT INTO `Permission` VALUES (701, 'ModifyNamespace', 'depository-agent-service+micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `Permission` VALUES (702, 'ReleaseNamespace', 'depository-agent-service+micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `Permission` VALUES (703, 'ModifyNamespace', 'depository-agent-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `Permission` VALUES (704, 'ReleaseNamespace', 'depository-agent-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
 COMMIT;
 
 -- ----------------------------
@@ -965,7 +969,7 @@ CREATE TABLE `Role` (
   PRIMARY KEY (`Id`),
   KEY `IX_RoleName` (`RoleName`(191)),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=665 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=669 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of Role
@@ -1635,6 +1639,10 @@ INSERT INTO `Role` VALUES (661, 'ModifyNamespace+depository-agent-service+micro_
 INSERT INTO `Role` VALUES (662, 'ReleaseNamespace+depository-agent-service+micro_service.spring-boot-redis', b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `Role` VALUES (663, 'ModifyNamespace+depository-agent-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `Role` VALUES (664, 'ReleaseNamespace+depository-agent-service+micro_service.spring-boot-redis+DEV', b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
+INSERT INTO `Role` VALUES (665, 'ModifyNamespace+depository-agent-service+micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `Role` VALUES (666, 'ReleaseNamespace+depository-agent-service+micro_service.spring-rocketmq', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `Role` VALUES (667, 'ModifyNamespace+depository-agent-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `Role` VALUES (668, 'ReleaseNamespace+depository-agent-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
 COMMIT;
 
 -- ----------------------------
@@ -1654,7 +1662,7 @@ CREATE TABLE `RolePermission` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_PermissionId` (`PermissionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=701 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=705 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
 
 -- ----------------------------
 -- Records of RolePermission
@@ -2360,6 +2368,10 @@ INSERT INTO `RolePermission` VALUES (697, 661, 697, b'0', 'apollo', '2020-12-24 
 INSERT INTO `RolePermission` VALUES (698, 662, 698, b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `RolePermission` VALUES (699, 663, 699, b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `RolePermission` VALUES (700, 664, 700, b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
+INSERT INTO `RolePermission` VALUES (701, 665, 701, b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `RolePermission` VALUES (702, 666, 702, b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `RolePermission` VALUES (703, 667, 703, b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `RolePermission` VALUES (704, 668, 704, b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
 COMMIT;
 
 -- ----------------------------
@@ -2411,7 +2423,7 @@ CREATE TABLE `UserRole` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_UserId_RoleId` (`UserId`,`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
 
 -- ----------------------------
 -- Records of UserRole
@@ -2755,6 +2767,8 @@ INSERT INTO `UserRole` VALUES (335, 'apollo', 657, b'0', 'apollo', '2020-12-24 1
 INSERT INTO `UserRole` VALUES (336, 'apollo', 658, b'0', 'apollo', '2020-12-24 17:44:17', 'apollo', '2020-12-24 17:44:17');
 INSERT INTO `UserRole` VALUES (337, 'apollo', 661, b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
 INSERT INTO `UserRole` VALUES (338, 'apollo', 662, b'0', 'apollo', '2020-12-24 17:44:43', 'apollo', '2020-12-24 17:44:43');
+INSERT INTO `UserRole` VALUES (339, 'apollo', 665, b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
+INSERT INTO `UserRole` VALUES (340, 'apollo', 666, b'0', 'apollo', '2020-12-24 19:22:47', 'apollo', '2020-12-24 19:22:47');
 COMMIT;
 
 -- ----------------------------
