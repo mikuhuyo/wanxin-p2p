@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * @since 1.8
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = false)
 public class DepositoryRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,7 +37,9 @@ public class DepositoryRecord implements Serializable {
     private String requestNo;
 
     /**
-     * 请求类型:1.用户信息(新增、编辑)、2.绑卡信息
+     * 请求类型:
+     * 1.用户信息(新增, 编辑)
+     * 2.绑卡信息
      */
     @TableField("REQUEST_TYPE")
     private String requestType;
