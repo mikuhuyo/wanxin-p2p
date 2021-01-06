@@ -2,6 +2,7 @@ package com.wanxin.consumer.service;
 
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
 
@@ -11,6 +12,14 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface ConsumerService {
+    /**
+     * 更新开户结果
+     *
+     * @param response
+     * @return
+     */
+    Boolean modifyResult(DepositoryConsumerResponse response);
+
     /**
      * 生成开户数据
      *

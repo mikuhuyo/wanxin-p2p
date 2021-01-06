@@ -7,6 +7,7 @@ import com.wanxin.api.consumer.model.BankCardDTO;
 import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
@@ -42,6 +43,32 @@ public class ConsumerServiceImpl implements ConsumerService {
     private BankCardMapper bankCardMapper;
     @Autowired
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean modifyResult(DepositoryConsumerResponse response) {
+        // 获取状态
+        int status = DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(response.getRespCode()) ? StatusCode.STATUS_IN.getCode() : StatusCode.STATUS_FAIL.getCode();
+        // 更新开户结果
+        Consumer consumer = getByRequestNo(response.getRequestNo());
+
+        Consumer update = new Consumer();
+        update.setId(consumer.getId());
+        update.setIsBindCard(status);
+        update.setStatus(status);
+        consumerMapper.updateById(update);
+
+        BankCard bankCard = new BankCard();
+        bankCard.setStatus(status);
+        bankCard.setBankCode(response.getBankCode());
+        bankCard.setBankName(response.getBankName());
+        // 更新银行卡信息
+        return bankCardMapper.update(bankCard, new LambdaQueryWrapper<BankCard>().eq(BankCard::getConsumerId, consumer.getId())) == 1;
+    }
+
+    private Consumer getByRequestNo(String requestNo) {
+        return consumerMapper.selectOne(new LambdaQueryWrapper<Consumer>().eq(Consumer::getRequestNo, requestNo));
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
