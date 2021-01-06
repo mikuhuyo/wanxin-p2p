@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: account-service
+  main:
+    banner-mode: 'off'
 
 # -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53050
 app:

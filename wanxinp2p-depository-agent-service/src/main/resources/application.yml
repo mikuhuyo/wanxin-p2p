@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: depository-agent-service
+  main:
+    banner-mode: 'off'
 
 # -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53070
 app:

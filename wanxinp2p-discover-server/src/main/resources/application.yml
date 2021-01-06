@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: hnradio-discovery
+  main:
+    banner-mode: 'off'
 
 eureka:
   server:
