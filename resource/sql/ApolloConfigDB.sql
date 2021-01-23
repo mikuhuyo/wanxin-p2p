@@ -129,7 +129,7 @@ CREATE TABLE `Audit` (
   `DataChange_LastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=2296 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
+) ENGINE=InnoDB AUTO_INCREMENT=2304 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
 
 -- ----------------------------
 -- Records of Audit
@@ -2430,6 +2430,14 @@ INSERT INTO `Audit` VALUES (2292, 'Item', 549, 'INSERT', NULL, b'0', 'apollo', '
 INSERT INTO `Audit` VALUES (2293, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 19:55:21', NULL, '2020-12-24 19:55:21');
 INSERT INTO `Audit` VALUES (2294, 'Release', 334, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 19:55:24', NULL, '2020-12-24 19:55:24');
 INSERT INTO `Audit` VALUES (2295, 'ReleaseHistory', 339, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 19:55:24', NULL, '2020-12-24 19:55:24');
+INSERT INTO `Audit` VALUES (2296, 'Item', 550, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 20:29:48', NULL, '2020-12-24 20:29:48');
+INSERT INTO `Audit` VALUES (2297, 'Item', 551, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 20:29:48', NULL, '2020-12-24 20:29:48');
+INSERT INTO `Audit` VALUES (2298, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 20:29:48', NULL, '2020-12-24 20:29:48');
+INSERT INTO `Audit` VALUES (2299, 'Item', 531, 'DELETE', NULL, b'0', 'apollo', '2020-12-24 20:29:48', NULL, '2020-12-24 20:29:48');
+INSERT INTO `Audit` VALUES (2300, 'Item', 532, 'DELETE', NULL, b'0', 'apollo', '2020-12-24 20:29:48', NULL, '2020-12-24 20:29:48');
+INSERT INTO `Audit` VALUES (2301, 'ItemSet', NULL, 'DELETE', NULL, b'0', 'apollo', '2020-12-24 20:29:48', NULL, '2020-12-24 20:29:48');
+INSERT INTO `Audit` VALUES (2302, 'Release', 335, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 20:29:53', NULL, '2020-12-24 20:29:53');
+INSERT INTO `Audit` VALUES (2303, 'ReleaseHistory', 340, 'INSERT', NULL, b'0', 'apollo', '2020-12-24 20:29:53', NULL, '2020-12-24 20:29:53');
 COMMIT;
 
 -- ----------------------------
@@ -2507,7 +2515,7 @@ CREATE TABLE `Commit` (
   KEY `AppId` (`AppId`(191)),
   KEY `ClusterName` (`ClusterName`(191)),
   KEY `NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=374 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=375 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
 
 -- ----------------------------
 -- Records of Commit
@@ -2886,6 +2894,7 @@ INSERT INTO `Commit` VALUES (370, '{\"createItems\":[{\"namespaceId\":203,\"key\
 INSERT INTO `Commit` VALUES (371, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":94,\"key\":\"server.servlet.context-path\",\"value\":\"/depository\",\"comment\":\"\",\"lineNum\":1,\"id\":196,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2019-05-09 05:36:39\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 03:52:07\"}]}', 'wanxin-depository', 'default', 'micro_service.spring-boot-http', NULL, b'0', 'apollo', '2020-12-24 19:52:07', 'apollo', '2020-12-24 19:52:07');
 INSERT INTO `Commit` VALUES (372, '{\"createItems\":[{\"namespaceId\":93,\"key\":\"server.servlet.context-path\",\"value\":\"/depository\",\"comment\":\"\",\"lineNum\":1,\"id\":547,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 03:52:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 03:52:22\"}],\"updateItems\":[],\"deleteItems\":[]}', 'wanxin-depository', 'default', 'application', NULL, b'0', 'apollo', '2020-12-24 19:52:23', 'apollo', '2020-12-24 19:52:23');
 INSERT INTO `Commit` VALUES (373, '{\"createItems\":[{\"namespaceId\":191,\"key\":\"sms.enable\",\"value\":\"true\",\"comment\":\"\",\"lineNum\":5,\"id\":549,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 03:55:21\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 03:55:21\"}],\"updateItems\":[],\"deleteItems\":[]}', 'account-service', 'default', 'application', NULL, b'0', 'apollo', '2020-12-24 19:55:21', 'apollo', '2020-12-24 19:55:21');
+INSERT INTO `Commit` VALUES (374, '{\"createItems\":[{\"namespaceId\":42,\"key\":\"rocketmq.name-server\",\"value\":\"192.168.158.164:9876\",\"comment\":\"\",\"lineNum\":1,\"id\":550,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 04:29:47\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 04:29:47\"},{\"namespaceId\":42,\"key\":\"rocketmq.producer.group\",\"value\":\"my-group\",\"comment\":\"\",\"lineNum\":2,\"id\":551,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 04:29:47\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 04:29:47\"}],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":42,\"key\":\"spring.rocketmq.name-server\",\"value\":\"192.168.158.164:9876\",\"comment\":\"\",\"lineNum\":1,\"id\":531,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 03:18:14\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 04:29:47\"},{\"namespaceId\":42,\"key\":\"spring.rocketmq.producer.group\",\"value\":\"my-group\",\"comment\":\"\",\"lineNum\":2,\"id\":532,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 03:18:14\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 04:29:47\"}]}', 'common-template', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2020-12-24 20:29:48', 'apollo', '2020-12-24 20:29:48');
 COMMIT;
 
 -- ----------------------------
@@ -3711,7 +3720,7 @@ CREATE TABLE `Item` (
   PRIMARY KEY (`Id`),
   KEY `IX_GroupId` (`NamespaceId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=550 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
+) ENGINE=InnoDB AUTO_INCREMENT=552 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
 
 -- ----------------------------
 -- Records of Item
@@ -4247,8 +4256,8 @@ INSERT INTO `Item` VALUES (527, 213, 'p2p.privateKey', 'MIIBVAIBADANBgkqhkiG9w0B
 INSERT INTO `Item` VALUES (528, 213, 'p2p.publicKey', 'MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKZKjaBEvudPDolCyuVCBLmfVsSFBu3wfdldLxItRcjSYMzHNoIuYcvHhnMmMi1iXRLeYdbwvI3JQoBHDGN5ad0CAwEAAQ==', '', 3, b'0', 'apollo', '2020-12-24 17:46:19', 'apollo', '2020-12-24 17:46:19');
 INSERT INTO `Item` VALUES (529, 213, 'p2p.code', 'wanxinp2p', '', 4, b'0', 'apollo', '2020-12-24 17:46:19', 'apollo', '2020-12-24 17:46:19');
 INSERT INTO `Item` VALUES (530, 213, 'depository.url', 'http://127.0.0.1:55010/depository', '', 5, b'0', 'apollo', '2020-12-24 17:46:19', 'apollo', '2020-12-24 17:46:19');
-INSERT INTO `Item` VALUES (531, 42, 'spring.rocketmq.name-server', '192.168.158.164:9876', '', 1, b'0', 'apollo', '2020-12-24 19:18:14', 'apollo', '2020-12-24 19:18:14');
-INSERT INTO `Item` VALUES (532, 42, 'spring.rocketmq.producer.group', 'my-group', '', 2, b'0', 'apollo', '2020-12-24 19:18:14', 'apollo', '2020-12-24 19:18:14');
+INSERT INTO `Item` VALUES (531, 42, 'spring.rocketmq.name-server', '192.168.158.164:9876', '', 1, b'1', 'apollo', '2020-12-24 19:18:14', 'apollo', '2020-12-24 20:29:48');
+INSERT INTO `Item` VALUES (532, 42, 'spring.rocketmq.producer.group', 'my-group', '', 2, b'1', 'apollo', '2020-12-24 19:18:14', 'apollo', '2020-12-24 20:29:48');
 INSERT INTO `Item` VALUES (533, 222, 'spring.rocketmq.producer.group', 'CID_P2P_GATEWAY_NOTIFY', '', 1, b'1', 'apollo', '2020-12-24 19:20:51', 'apollo', '2020-12-24 19:26:20');
 INSERT INTO `Item` VALUES (534, 1, '', '', '', 3, b'1', 'apollo', '2020-12-24 19:26:43', 'apollo', '2020-12-24 19:51:02');
 INSERT INTO `Item` VALUES (535, 1, '', '', '# rocket mq', 4, b'1', 'apollo', '2020-12-24 19:26:43', 'apollo', '2020-12-24 19:51:02');
@@ -4266,6 +4275,8 @@ INSERT INTO `Item` VALUES (546, 94, '', '', '', 1, b'0', 'apollo', '2020-12-24 1
 INSERT INTO `Item` VALUES (547, 93, 'server.servlet.context-path', '/depository', '', 1, b'0', 'apollo', '2020-12-24 19:52:23', 'apollo', '2020-12-24 19:52:23');
 INSERT INTO `Item` VALUES (548, 93, '', '', '', 2, b'0', 'apollo', '2020-12-24 19:52:23', 'apollo', '2020-12-24 19:52:23');
 INSERT INTO `Item` VALUES (549, 191, 'sms.enable', 'true', '', 5, b'0', 'apollo', '2020-12-24 19:55:21', 'apollo', '2020-12-24 19:55:21');
+INSERT INTO `Item` VALUES (550, 42, 'rocketmq.name-server', '192.168.158.164:9876', '', 1, b'0', 'apollo', '2020-12-24 20:29:48', 'apollo', '2020-12-24 20:29:48');
+INSERT INTO `Item` VALUES (551, 42, 'rocketmq.producer.group', 'my-group', '', 2, b'0', 'apollo', '2020-12-24 20:29:48', 'apollo', '2020-12-24 20:29:48');
 COMMIT;
 
 -- ----------------------------
@@ -4557,7 +4568,7 @@ CREATE TABLE `Release` (
   KEY `AppId_ClusterName_GroupName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_ReleaseKey` (`ReleaseKey`)
-) ENGINE=InnoDB AUTO_INCREMENT=335 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
+) ENGINE=InnoDB AUTO_INCREMENT=336 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
 
 -- ----------------------------
 -- Records of Release
@@ -4897,6 +4908,7 @@ INSERT INTO `Release` VALUES (331, '20201225035209-50e139410fbc5fd2', '202101061
 INSERT INTO `Release` VALUES (332, '20201225035225-703a39410fbc5fd3', '20210106170444-release', '', 'wanxin-depository', 'default', 'application', '{\"server.servlet.context-path\":\"/depository\",\"depository.privateKey\":\"MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAkpw/hOMJv344p/S68eQM7qeMjxv0oqW7dl0KSibhI41/wqRnWNWXoDtdacnfeAEudtMZVSbkj5e8UQbltJZVuQIDAQABAkBrkkVw5X0DikNbyM9aKG/ss/cIEgT/SgcwI7gnDDvo7wntxxPuVZ7P+gkhFqb1ByCLdH/GlsXEZW88HCA9M2ZhAiEA65BsW0uGPhnVRS7hJhLZpuuugKVNyJBBO6jGATe0g/UCIQCfVEZ0bvYd5pA165XwXs7ZFGU99rG410EEh7JRxzx0NQIgdNL9ShGck/PP1y22r2Et3CCKPHa+qrcQAvxipnvv5HkCIBITUoblC8DqplOnrXP+nYLdIHs+IH1y1ip4Zo+GheI9AiBdsG0ql4Unbt1ctYm6XdmqE5rdFD+iDFQRS1FFmUVNUQ\\u003d\\u003d\",\"depository.publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJKcP4TjCb9+OKf0uvHkDO6njI8b9KKlu3ZdCkom4SONf8KkZ1jVl6A7XWnJ33gBLnbTGVUm5I+XvFEG5bSWVbkCAwEAAQ\\u003d\\u003d\",\"client-info.clients[wanxinp2p].clientId\":\"wanxinp2p\",\"client-info.clients[wanxinp2p].clientName\":\"万信p2p平台\",\"client-info.clients[wanxinp2p].privateKey\":\"MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApkqNoES+508OiULK5UIEuZ9WxIUG7fB92V0vEi1FyNJgzMc2gi5hy8eGcyYyLWJdEt5h1vC8jclCgEcMY3lp3QIDAQABAkAUhQia6UDBXEEH8QUGazIYEbBsSZoETHPLGbOQQ6Pj1tb6CVC57kioBjwtNBnY2jBDWi5K815LnOBcJSSjJPwhAiEA2eO6VZMTkdjQAkpB5dhy/0C3i8zs0c0M1rPoTA/RpkUCIQDDYHJPqHLkQyd//7sEeYcm8cMBTvDKBXyiuGk8eLRauQIgQo6IlalGmg+Dgp+SP5Z9kjD/oCmp0XB0UoVEGS/f140CIQCsG9YXHgi31ACD3T9eHcBVKjvidyveix7UKSdrQdl+4QIgNCtRVLV+783e7PX5hRXD+knsWTQxDEMEsHi1KsAWtPk\\u003d\",\"client-info.clients[wanxinp2p].publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKZKjaBEvudPDolCyuVCBLmfVsSFBu3wfdldLxItRcjSYMzHNoIuYcvHhnMmMi1iXRLeYdbwvI3JQoBHDGN5ad0CAwEAAQ\\u003d\\u003d\",\"client-info.clients[wanxinp2p].notifyUrl\":\"http://127.0.0.1:53070/depository-agent/\"}', b'0', b'0', 'apollo', '2020-12-24 19:52:26', 'apollo', '2020-12-24 19:52:26');
 INSERT INTO `Release` VALUES (333, '20201225035225-6a6039410fbc5fd4', '20210106170444-release', '', 'wanxin-depository', '20201222143729-6ddf5a8cbda02575', 'application', '{\"server.servlet.context-path\":\"/depository\",\"depository.privateKey\":\"MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAkpw/hOMJv344p/S68eQM7qeMjxv0oqW7dl0KSibhI41/wqRnWNWXoDtdacnfeAEudtMZVSbkj5e8UQbltJZVuQIDAQABAkBrkkVw5X0DikNbyM9aKG/ss/cIEgT/SgcwI7gnDDvo7wntxxPuVZ7P+gkhFqb1ByCLdH/GlsXEZW88HCA9M2ZhAiEA65BsW0uGPhnVRS7hJhLZpuuugKVNyJBBO6jGATe0g/UCIQCfVEZ0bvYd5pA165XwXs7ZFGU99rG410EEh7JRxzx0NQIgdNL9ShGck/PP1y22r2Et3CCKPHa+qrcQAvxipnvv5HkCIBITUoblC8DqplOnrXP+nYLdIHs+IH1y1ip4Zo+GheI9AiBdsG0ql4Unbt1ctYm6XdmqE5rdFD+iDFQRS1FFmUVNUQ\\u003d\\u003d\",\"depository.publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJKcP4TjCb9+OKf0uvHkDO6njI8b9KKlu3ZdCkom4SONf8KkZ1jVl6A7XWnJ33gBLnbTGVUm5I+XvFEG5bSWVbkCAwEAAQ\\u003d\\u003d\",\"client-info.clients[wanxinp2p].clientId\":\"wanxinp2p\",\"client-info.clients[wanxinp2p].clientName\":\"万信p2p平台\",\"client-info.clients[wanxinp2p].privateKey\":\"MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApkqNoES+508OiULK5UIEuZ9WxIUG7fB92V0vEi1FyNJgzMc2gi5hy8eGcyYyLWJdEt5h1vC8jclCgEcMY3lp3QIDAQABAkAUhQia6UDBXEEH8QUGazIYEbBsSZoETHPLGbOQQ6Pj1tb6CVC57kioBjwtNBnY2jBDWi5K815LnOBcJSSjJPwhAiEA2eO6VZMTkdjQAkpB5dhy/0C3i8zs0c0M1rPoTA/RpkUCIQDDYHJPqHLkQyd//7sEeYcm8cMBTvDKBXyiuGk8eLRauQIgQo6IlalGmg+Dgp+SP5Z9kjD/oCmp0XB0UoVEGS/f140CIQCsG9YXHgi31ACD3T9eHcBVKjvidyveix7UKSdrQdl+4QIgNCtRVLV+783e7PX5hRXD+knsWTQxDEMEsHi1KsAWtPk\\u003d\",\"client-info.clients[wanxinp2p].publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKZKjaBEvudPDolCyuVCBLmfVsSFBu3wfdldLxItRcjSYMzHNoIuYcvHhnMmMi1iXRLeYdbwvI3JQoBHDGN5ad0CAwEAAQ\\u003d\\u003d\",\"client-info.clients[wanxinp2p].notifyUrl\":\"http://127.0.0.1:53070/depository-agent/\"}', b'0', b'0', 'apollo', '2020-12-24 19:52:26', 'apollo', '2020-12-24 19:52:26');
 INSERT INTO `Release` VALUES (334, '20201225035524-b16339410fbc5fd5', '20210106170743-release', '', 'account-service', 'default', 'application', '{\"server.servlet.context-path\":\"/account\",\"sms.enable\":\"true\",\"sms.url\":\"http://127.0.0.1:56085/tencent\"}', b'0', b'0', 'apollo', '2020-12-24 19:55:24', 'apollo', '2020-12-24 19:55:24');
+INSERT INTO `Release` VALUES (335, '20201225042952-aede39410fbc5fd6', '20210123095153-release', '', 'common-template', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.name-server\":\"192.168.158.164:9876\",\"rocketmq.producer.group\":\"my-group\"}', b'0', b'0', 'apollo', '2020-12-24 20:29:53', 'apollo', '2020-12-24 20:29:53');
 COMMIT;
 
 -- ----------------------------
@@ -4922,7 +4934,7 @@ CREATE TABLE `ReleaseHistory` (
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`,`BranchName`),
   KEY `IX_ReleaseId` (`ReleaseId`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
+) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
 
 -- ----------------------------
 -- Records of ReleaseHistory
@@ -5267,6 +5279,7 @@ INSERT INTO `ReleaseHistory` VALUES (336, 'wanxin-depository', 'default', 'micro
 INSERT INTO `ReleaseHistory` VALUES (337, 'wanxin-depository', 'default', 'application', 'default', 332, 308, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-24 19:52:26', 'apollo', '2020-12-24 19:52:26');
 INSERT INTO `ReleaseHistory` VALUES (338, 'wanxin-depository', 'default', 'application', '20201222143729-6ddf5a8cbda02575', 333, 309, 5, '{\"baseReleaseId\":332,\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-24 19:52:26', 'apollo', '2020-12-24 19:52:26');
 INSERT INTO `ReleaseHistory` VALUES (339, 'account-service', 'default', 'application', 'default', 334, 326, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-24 19:55:24', 'apollo', '2020-12-24 19:55:24');
+INSERT INTO `ReleaseHistory` VALUES (340, 'common-template', 'default', 'micro_service.spring-rocketmq', 'default', 335, 315, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-24 20:29:53', 'apollo', '2020-12-24 20:29:53');
 COMMIT;
 
 -- ----------------------------
@@ -5280,7 +5293,7 @@ CREATE TABLE `ReleaseMessage` (
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Message` (`Message`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=494 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
+) ENGINE=InnoDB AUTO_INCREMENT=495 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
 
 -- ----------------------------
 -- Records of ReleaseMessage
@@ -5454,7 +5467,6 @@ INSERT INTO `ReleaseMessage` VALUES (461, 'uaa-service+default+micro_service.spr
 INSERT INTO `ReleaseMessage` VALUES (465, 'common-template+default+micro_service.spring-freemarker', '2020-12-24 11:41:45');
 INSERT INTO `ReleaseMessage` VALUES (467, 'account-service+default+micro_service.spring-rocketmq', '2020-12-24 13:41:18');
 INSERT INTO `ReleaseMessage` VALUES (476, 'depository-agent-service+default+application', '2020-12-24 17:46:24');
-INSERT INTO `ReleaseMessage` VALUES (477, 'common-template+default+micro_service.spring-rocketmq', '2020-12-24 19:18:17');
 INSERT INTO `ReleaseMessage` VALUES (479, 'consumer-service+default+micro_service.spring-rocketmq', '2020-12-24 19:26:23');
 INSERT INTO `ReleaseMessage` VALUES (482, 'gateway-server+default+application', '2020-12-24 19:42:57');
 INSERT INTO `ReleaseMessage` VALUES (483, 'common-template+default+application', '2020-12-24 19:43:46');
@@ -5466,6 +5478,7 @@ INSERT INTO `ReleaseMessage` VALUES (490, 'uaa-service+default+application', '20
 INSERT INTO `ReleaseMessage` VALUES (491, 'wanxin-depository+default+micro_service.spring-boot-http', '2020-12-24 19:52:10');
 INSERT INTO `ReleaseMessage` VALUES (492, 'wanxin-depository+default+application', '2020-12-24 19:52:26');
 INSERT INTO `ReleaseMessage` VALUES (493, 'account-service+default+application', '2020-12-24 19:55:24');
+INSERT INTO `ReleaseMessage` VALUES (494, 'common-template+default+micro_service.spring-rocketmq', '2020-12-24 20:29:53');
 COMMIT;
 
 -- ----------------------------

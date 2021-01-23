@@ -1,5 +1,6 @@
 version: '3.1'
 services:
+  # apollo
   apollo-configservice:
     container_name: apollo-configservice
     image: apolloconfig/apollo-configservice
@@ -32,7 +33,6 @@ services:
       - SPRING_DATASOURCE_PASSWORD=yueliminvc@outlook.com
     restart: always
     network_mode: "host"
-
   apollo-portal:
     depends_on:
       - apollo-adminservice
@@ -52,7 +52,6 @@ services:
       - DEV_META=http://127.0.0.1:8080
     restart: always
     network_mode: "host"
-
 #volumes:
 #  logs:
 #    driver: local
