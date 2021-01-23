@@ -2,9 +2,8 @@ package com.wanxin.depository.message;
 
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * <p>
@@ -17,10 +16,10 @@ import javax.annotation.Resource;
  */
 @Component
 public class GatewayMessageProducer {
-    @Resource
-    private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate template;
 
     public void personalRegister(DepositoryConsumerResponse response) {
-        rocketMQTemplate.convertAndSend("TP_GATEWAY_NOTIFY_AGENT:PERSONAL_REGISTER", response);
+        template.convertAndSend("TP_GATEWAY_NOTIFY_AGENT:PERSONAL_REGISTER", response);
     }
 }
