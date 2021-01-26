@@ -38,9 +38,7 @@ public class ConsumerController implements ConsumerAPI {
     @Override
     @PostMapping("/consumers")
     @ApiOperation("用户注册")
-    @ApiImplicitParam(
-            name = "consumerRegisterDTO", value = "注册信息", required = true,
-            dataType = "AccountRegisterDTO", paramType = "body")
+    @ApiImplicitParam(name = "consumerRegisterDTO", value = "注册信息", required = true, dataType = "AccountRegisterDTO", paramType = "body")
     public RestResponse register(@RequestBody ConsumerRegisterDTO consumerRegisterDTO) {
         consumerService.register(consumerRegisterDTO);
         return RestResponse.success();
