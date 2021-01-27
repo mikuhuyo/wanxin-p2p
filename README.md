@@ -23,17 +23,34 @@
 | 工程                                             | 端口号 |
 | ------------------------------------------------ | ------ |
 | 注册与发现(wanxinp2p-discover-server)            | 53000  |
-| 网关wanxinp2p-gateway-server)                    | 53010  |
-| uaa(wanxinp2p-uaa-service)                       | 53020  |
+| 网关(wanxinp2p-gateway-server)                   | 53010  |
+| uaa认证(wanxinp2p-uaa-service)                   | 53020  |
 | 统一账号服务(wanxinp2p-account-service)          | 53030  |
 | 用户中心服务(wanxinp2p-consumer-service)         | 53050  |
 | 交易中心服务(wanxinp2p-transaction-service)      | 53060  |
 | 存管代理服务(wanxinp2p-depository-agent-service) | 53070  |
 | 还款服务(wanxinp2p-repayment-service)            | 53080  |
-| 文件服务(minio)                 | 56082  |
-| 短信验证码服务(tencent-sms)                                   | 56085  |
+| 文件服务(wanxinp2p-file-service)                 | 56082  |
 | P2P平台前端(wanxin-p2p-web)                      | 8081   |
-| P2P平台管理端后台                                | 8079   |
+| P2P平台管理端后台(wanxin-p2p-manager)            | 8079   |
+| 短信验证码服务                                   | 56085  |
+| 银行存管系统                                     | 55010  |
+
+### 数据库说明
+
+| 数据库名称             | 数据内容                  |
+| ---------------------- | ------------------------- |
+| `p2p_uaa`              | 统一认证数据              |
+| `p2p_account`          | 统一账户数据              |
+| `p2p_consumer`         | 用户中心数据              |
+| `p2p_transaction_0`    | 交易中心数据库1           |
+| `p2p_transaction_1`    | 交易中心数据库2           |
+| `p2p_repayment`        | 还款中心数据              |
+| `p2p_file`             | 文件存储服务              |
+| `p2p_bank_depository`  | 银行存管系统              |
+| `p2p_depository_agent` | 银行存管代理服务数据      |
+| `p2p_reconciliation`   | 对账数据                  |
+| `hmily`                | 分布式事务框架Hmily数据库 |
 
 ## 技术架构
 
