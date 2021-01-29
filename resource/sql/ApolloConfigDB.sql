@@ -129,7 +129,7 @@ CREATE TABLE `Audit` (
   `DataChange_LastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=2362 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
+) ENGINE=InnoDB AUTO_INCREMENT=2365 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
 
 -- ----------------------------
 -- Records of Audit
@@ -2496,6 +2496,9 @@ INSERT INTO `Audit` VALUES (2358, 'ReleaseHistory', 347, 'INSERT', NULL, b'0', '
 INSERT INTO `Audit` VALUES (2359, 'Item', 568, 'INSERT', NULL, b'0', 'apollo', '2020-12-25 02:08:51', NULL, '2020-12-25 02:08:51');
 INSERT INTO `Audit` VALUES (2360, 'Release', 343, 'INSERT', NULL, b'0', 'apollo', '2020-12-25 02:08:56', NULL, '2020-12-25 02:08:56');
 INSERT INTO `Audit` VALUES (2361, 'ReleaseHistory', 348, 'INSERT', NULL, b'0', 'apollo', '2020-12-25 02:08:56', NULL, '2020-12-25 02:08:56');
+INSERT INTO `Audit` VALUES (2362, 'Item', 566, 'UPDATE', NULL, b'0', 'apollo', '2020-12-25 03:22:46', NULL, '2020-12-25 03:22:46');
+INSERT INTO `Audit` VALUES (2363, 'Release', 344, 'INSERT', NULL, b'0', 'apollo', '2020-12-25 03:22:49', NULL, '2020-12-25 03:22:49');
+INSERT INTO `Audit` VALUES (2364, 'ReleaseHistory', 349, 'INSERT', NULL, b'0', 'apollo', '2020-12-25 03:22:49', NULL, '2020-12-25 03:22:49');
 COMMIT;
 
 -- ----------------------------
@@ -2573,7 +2576,7 @@ CREATE TABLE `Commit` (
   KEY `AppId` (`AppId`(191)),
   KEY `ClusterName` (`ClusterName`(191)),
   KEY `NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=382 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
 
 -- ----------------------------
 -- Records of Commit
@@ -2960,6 +2963,7 @@ INSERT INTO `Commit` VALUES (378, '{\"createItems\":[],\"updateItems\":[{\"oldIt
 INSERT INTO `Commit` VALUES (379, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":214,\"key\":\"server.servlet.context-path\",\"value\":\"/depository-agent\",\"comment\":\"\",\"lineNum\":1,\"id\":563,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 09:32:24\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 09:48:39\"}]}', 'depository-agent-service', 'default', 'micro_service.spring-boot-http', NULL, b'0', 'apollo', '2020-12-25 01:48:40', 'apollo', '2020-12-25 01:48:40');
 INSERT INTO `Commit` VALUES (380, '{\"createItems\":[{\"namespaceId\":213,\"key\":\"server.servlet.context-path\",\"value\":\"/depository-agent\",\"comment\":\"\",\"lineNum\":2,\"id\":566,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 09:49:05\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 09:49:05\"}],\"updateItems\":[],\"deleteItems\":[]}', 'depository-agent-service', 'default', 'application', NULL, b'0', 'apollo', '2020-12-25 01:49:06', 'apollo', '2020-12-25 01:49:06');
 INSERT INTO `Commit` VALUES (381, '{\"createItems\":[{\"namespaceId\":215,\"key\":\"spring.datasource.url\",\"value\":\"jdbc:mysql://192.168.158.164:3306/p2p_depository_agent?useUnicode\\u003dtrue\",\"comment\":\"\",\"lineNum\":1,\"id\":568,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 10:08:50\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 10:08:50\"}],\"updateItems\":[],\"deleteItems\":[]}', 'depository-agent-service', 'default', 'micro_service.spring-boot-druid', NULL, b'0', 'apollo', '2020-12-25 02:08:51', 'apollo', '2020-12-25 02:08:51');
+INSERT INTO `Commit` VALUES (382, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":213,\"key\":\"server.servlet.context-path\",\"value\":\"/depository-agent\",\"comment\":\"\",\"lineNum\":2,\"id\":566,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 09:49:06\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 09:49:06\"},\"newItem\":{\"namespaceId\":213,\"key\":\"server.servlet.context-path\",\"value\":\"/depository\",\"comment\":\"\",\"lineNum\":2,\"id\":566,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2020-12-25 09:49:06\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2020-12-25 11:22:46\"}}],\"deleteItems\":[]}', 'depository-agent-service', 'default', 'application', NULL, b'0', 'apollo', '2020-12-25 03:22:46', 'apollo', '2020-12-25 03:22:46');
 COMMIT;
 
 -- ----------------------------
@@ -3754,7 +3758,7 @@ INSERT INTO `InstanceConfig` VALUES (1047, 94, 'wanxin-depository', 'default', '
 INSERT INTO `InstanceConfig` VALUES (1048, 94, 'common-template', 'default', 'micro_service.mybatis-plus', '20201223154457-83e2c84ad9afd91d', '2020-12-24 17:11:27', '2020-12-24 17:11:27', '2020-12-24 17:11:27');
 INSERT INTO `InstanceConfig` VALUES (1049, 94, 'wanxin-depository', 'default', 'micro_service.spring-rocketmq', '20190531085804-aa1389aa577963ec', '2020-12-24 17:11:27', '2020-12-24 17:11:27', '2020-12-24 17:11:27');
 INSERT INTO `InstanceConfig` VALUES (1050, 94, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201225042952-aede39410fbc5fd6', '2020-12-24 20:54:11', '2020-12-24 17:11:27', '2020-12-24 20:54:12');
-INSERT INTO `InstanceConfig` VALUES (1051, 95, 'depository-agent-service', 'default', 'application', '20201225094908-b80639410fbc5fdd', '2020-12-25 01:49:09', '2020-12-24 19:40:24', '2020-12-25 01:49:10');
+INSERT INTO `InstanceConfig` VALUES (1051, 95, 'depository-agent-service', 'default', 'application', '20201225112249-b80639410fbc5fdf', '2020-12-25 03:22:50', '2020-12-24 19:40:24', '2020-12-25 03:22:51');
 INSERT INTO `InstanceConfig` VALUES (1052, 95, 'common-template', 'default', 'micro_service.spring-boot-druid', '20201222143347-02cd5a8cbda02571', '2020-12-24 19:40:24', '2020-12-24 19:40:24', '2020-12-24 19:40:24');
 INSERT INTO `InstanceConfig` VALUES (1053, 95, 'common-template', 'default', 'micro_service.spring-boot-http', '20201225034929-535139410fbc5fcc', '2020-12-24 19:49:30', '2020-12-24 19:40:24', '2020-12-24 19:49:30');
 INSERT INTO `InstanceConfig` VALUES (1054, 95, 'common-template', 'default', 'micro_service.spring-eureka', '20201223144111-61dfc84ad9afd914', '2020-12-24 19:40:24', '2020-12-24 19:40:24', '2020-12-24 19:40:24');
@@ -4360,7 +4364,7 @@ INSERT INTO `Item` VALUES (562, 77, 'zuul.routes.depository-agent-service-router
 INSERT INTO `Item` VALUES (563, 214, 'server.servlet.context-path', '/depository-agent', '', 1, b'1', 'apollo', '2020-12-25 01:32:24', 'apollo', '2020-12-25 01:48:40');
 INSERT INTO `Item` VALUES (564, 214, '', '', '', 1, b'0', 'apollo', '2020-12-25 01:48:40', 'apollo', '2020-12-25 01:48:40');
 INSERT INTO `Item` VALUES (565, 213, '', '', '# path', 1, b'0', 'apollo', '2020-12-25 01:49:06', 'apollo', '2020-12-25 01:49:06');
-INSERT INTO `Item` VALUES (566, 213, 'server.servlet.context-path', '/depository-agent', '', 2, b'0', 'apollo', '2020-12-25 01:49:06', 'apollo', '2020-12-25 01:49:06');
+INSERT INTO `Item` VALUES (566, 213, 'server.servlet.context-path', '/depository', '', 2, b'0', 'apollo', '2020-12-25 01:49:06', 'apollo', '2020-12-25 03:22:46');
 INSERT INTO `Item` VALUES (567, 213, '', '', '', 3, b'0', 'apollo', '2020-12-25 01:49:06', 'apollo', '2020-12-25 01:49:06');
 INSERT INTO `Item` VALUES (568, 215, 'spring.datasource.url', 'jdbc:mysql://192.168.158.164:3306/p2p_depository_agent?useUnicode=true', '', 1, b'0', 'apollo', '2020-12-25 02:08:51', 'apollo', '2020-12-25 02:08:51');
 COMMIT;
@@ -4660,7 +4664,7 @@ CREATE TABLE `Release` (
   KEY `AppId_ClusterName_GroupName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_ReleaseKey` (`ReleaseKey`)
-) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
+) ENGINE=InnoDB AUTO_INCREMENT=345 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
 
 -- ----------------------------
 -- Records of Release
@@ -5009,6 +5013,7 @@ INSERT INTO `Release` VALUES (340, '20201225093253-98ad39410fbc5fdb', '202101281
 INSERT INTO `Release` VALUES (341, '20201225094843-98ad39410fbc5fdc', '20210128160046-release', '', 'depository-agent-service', 'default', 'micro_service.spring-boot-http', '{}', b'0', b'0', 'apollo', '2020-12-25 01:48:43', 'apollo', '2020-12-25 01:48:43');
 INSERT INTO `Release` VALUES (342, '20201225094908-b80639410fbc5fdd', '20210128160111-release', '', 'depository-agent-service', 'default', 'application', '{\"server.servlet.context-path\":\"/depository-agent\",\"depository.publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJKcP4TjCb9+OKf0uvHkDO6njI8b9KKlu3ZdCkom4SONf8KkZ1jVl6A7XWnJ33gBLnbTGVUm5I+XvFEG5bSWVbkCAwEAAQ\\u003d\\u003d\",\"p2p.privateKey\":\"MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApkqNoES+508OiULK5UIEuZ9WxIUG7fB92V0vEi1FyNJgzMc2gi5hy8eGcyYyLWJdEt5h1vC8jclCgEcMY3lp3QIDAQABAkAUhQia6UDBXEEH8QUGazIYEbBsSZoETHPLGbOQQ6Pj1tb6CVC57kioBjwtNBnY2jBDWi5K815LnOBcJSSjJPwhAiEA2eO6VZMTkdjQAkpB5dhy/0C3i8zs0c0M1rPoTA/RpkUCIQDDYHJPqHLkQyd//7sEeYcm8cMBTvDKBXyiuGk8eLRauQIgQo6IlalGmg+Dgp+SP5Z9kjD/oCmp0XB0UoVEGS/f140CIQCsG9YXHgi31ACD3T9eHcBVKjvidyveix7UKSdrQdl+4QIgNCtRVLV+783e7PX5hRXD+knsWTQxDEMEsHi1KsAWtPk\\u003d\",\"p2p.publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKZKjaBEvudPDolCyuVCBLmfVsSFBu3wfdldLxItRcjSYMzHNoIuYcvHhnMmMi1iXRLeYdbwvI3JQoBHDGN5ad0CAwEAAQ\\u003d\\u003d\",\"p2p.code\":\"wanxinp2p\",\"depository.url\":\"http://127.0.0.1:55010/depository\"}', b'0', b'0', 'apollo', '2020-12-25 01:49:08', 'apollo', '2020-12-25 01:49:08');
 INSERT INTO `Release` VALUES (343, '20201225100856-482939410fbc5fde', '20210128162058-release', '', 'depository-agent-service', 'default', 'micro_service.spring-boot-druid', '{\"spring.datasource.url\":\"jdbc:mysql://192.168.158.164:3306/p2p_depository_agent?useUnicode\\u003dtrue\"}', b'0', b'0', 'apollo', '2020-12-25 02:08:56', 'apollo', '2020-12-25 02:08:56');
+INSERT INTO `Release` VALUES (344, '20201225112249-b80639410fbc5fdf', '20210129194008-release', '', 'depository-agent-service', 'default', 'application', '{\"server.servlet.context-path\":\"/depository\",\"depository.publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJKcP4TjCb9+OKf0uvHkDO6njI8b9KKlu3ZdCkom4SONf8KkZ1jVl6A7XWnJ33gBLnbTGVUm5I+XvFEG5bSWVbkCAwEAAQ\\u003d\\u003d\",\"p2p.privateKey\":\"MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEApkqNoES+508OiULK5UIEuZ9WxIUG7fB92V0vEi1FyNJgzMc2gi5hy8eGcyYyLWJdEt5h1vC8jclCgEcMY3lp3QIDAQABAkAUhQia6UDBXEEH8QUGazIYEbBsSZoETHPLGbOQQ6Pj1tb6CVC57kioBjwtNBnY2jBDWi5K815LnOBcJSSjJPwhAiEA2eO6VZMTkdjQAkpB5dhy/0C3i8zs0c0M1rPoTA/RpkUCIQDDYHJPqHLkQyd//7sEeYcm8cMBTvDKBXyiuGk8eLRauQIgQo6IlalGmg+Dgp+SP5Z9kjD/oCmp0XB0UoVEGS/f140CIQCsG9YXHgi31ACD3T9eHcBVKjvidyveix7UKSdrQdl+4QIgNCtRVLV+783e7PX5hRXD+knsWTQxDEMEsHi1KsAWtPk\\u003d\",\"p2p.publicKey\":\"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKZKjaBEvudPDolCyuVCBLmfVsSFBu3wfdldLxItRcjSYMzHNoIuYcvHhnMmMi1iXRLeYdbwvI3JQoBHDGN5ad0CAwEAAQ\\u003d\\u003d\",\"p2p.code\":\"wanxinp2p\",\"depository.url\":\"http://127.0.0.1:55010/depository\"}', b'0', b'0', 'apollo', '2020-12-25 03:22:49', 'apollo', '2020-12-25 03:22:49');
 COMMIT;
 
 -- ----------------------------
@@ -5034,7 +5039,7 @@ CREATE TABLE `ReleaseHistory` (
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`,`BranchName`),
   KEY `IX_ReleaseId` (`ReleaseId`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
+) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
 
 -- ----------------------------
 -- Records of ReleaseHistory
@@ -5388,6 +5393,7 @@ INSERT INTO `ReleaseHistory` VALUES (345, 'depository-agent-service', 'default',
 INSERT INTO `ReleaseHistory` VALUES (346, 'depository-agent-service', 'default', 'micro_service.spring-boot-http', 'default', 341, 340, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-25 01:48:43', 'apollo', '2020-12-25 01:48:43');
 INSERT INTO `ReleaseHistory` VALUES (347, 'depository-agent-service', 'default', 'application', 'default', 342, 314, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-25 01:49:08', 'apollo', '2020-12-25 01:49:08');
 INSERT INTO `ReleaseHistory` VALUES (348, 'depository-agent-service', 'default', 'micro_service.spring-boot-druid', 'default', 343, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-25 02:08:56', 'apollo', '2020-12-25 02:08:56');
+INSERT INTO `ReleaseHistory` VALUES (349, 'depository-agent-service', 'default', 'application', 'default', 344, 342, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2020-12-25 03:22:49', 'apollo', '2020-12-25 03:22:49');
 COMMIT;
 
 -- ----------------------------
@@ -5401,7 +5407,7 @@ CREATE TABLE `ReleaseMessage` (
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Message` (`Message`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=506 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
+) ENGINE=InnoDB AUTO_INCREMENT=507 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
 
 -- ----------------------------
 -- Records of ReleaseMessage
@@ -5586,8 +5592,8 @@ INSERT INTO `ReleaseMessage` VALUES (498, 'uaa-service+default+micro_service.spr
 INSERT INTO `ReleaseMessage` VALUES (499, 'depository-agent-service+default+micro_service.spring-cloud-feign', '2020-12-25 00:22:00');
 INSERT INTO `ReleaseMessage` VALUES (500, 'gateway-server+default+application', '2020-12-25 01:29:05');
 INSERT INTO `ReleaseMessage` VALUES (503, 'depository-agent-service+default+micro_service.spring-boot-http', '2020-12-25 01:48:43');
-INSERT INTO `ReleaseMessage` VALUES (504, 'depository-agent-service+default+application', '2020-12-25 01:49:08');
 INSERT INTO `ReleaseMessage` VALUES (505, 'depository-agent-service+default+micro_service.spring-boot-druid', '2020-12-25 02:08:56');
+INSERT INTO `ReleaseMessage` VALUES (506, 'depository-agent-service+default+application', '2020-12-25 03:22:49');
 COMMIT;
 
 -- ----------------------------
