@@ -61,21 +61,10 @@ public enum CommonErrorCode implements ErrorCode {
     private int code;
     private String desc;
 
-    @Override
-    public int getCode() {
-        return code;
-    }
-
-    @Override
-    public String getDesc() {
-        return desc;
-    }
-
     private CommonErrorCode(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
-
 
     public static CommonErrorCode setErrorCode(int code) {
         for (CommonErrorCode errorCode : CommonErrorCode.values()) {
@@ -84,5 +73,15 @@ public enum CommonErrorCode implements ErrorCode {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getDesc() {
+        return desc;
     }
 }

@@ -25,6 +25,10 @@ import java.util.Map;
 public class UUAController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UUAController.class);
+    @Autowired
+    private AuthorizationServerTokenServices tokenService;
+    @Autowired
+    private AccessTokenConverter accessTokenConverter;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -41,12 +45,6 @@ public class UUAController {
     public String oauthError() {
         return "oauth_error";
     }
-
-    @Autowired
-    private AuthorizationServerTokenServices tokenService;
-
-    @Autowired
-    private AccessTokenConverter accessTokenConverter;
 
     @RequestMapping(value = "/ocheck_token", method = RequestMethod.POST)
     @ResponseBody

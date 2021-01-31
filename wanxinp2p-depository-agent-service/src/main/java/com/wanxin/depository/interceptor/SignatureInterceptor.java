@@ -27,14 +27,30 @@ import java.net.URLEncoder;
 public class SignatureInterceptor implements Interceptor {
 
     private final String METHOD_GET = "GET";
-
-    @Autowired
-    private ConfigService configService;
-
     /**
      * 签名的编码
      */
     private final String INPUT_CHARSET = "UTF-8";
+    @Autowired
+    private ConfigService configService;
+
+    /**
+     * 获取url中参数
+     *
+     * @param url
+     * @param name
+     * @return
+     */
+    public static String getParam(String url, String name) {
+        String params = url.substring(url.indexOf("?") + 1, url.length());
+        final String[] splitter = params.split("&");
+        for (String str : splitter) {
+            if (str.startsWith(name + "=")) {
+                return str.substring(name.length() + 1);
+            }
+        }
+        return "";
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -93,23 +109,5 @@ public class SignatureInterceptor implements Interceptor {
         }
         // 返回结果集
         return response;
-    }
-
-    /**
-     * 获取url中参数
-     *
-     * @param url
-     * @param name
-     * @return
-     */
-    public static String getParam(String url, String name) {
-        String params = url.substring(url.indexOf("?") + 1, url.length());
-        final String[] splitter = params.split("&");
-        for (String str : splitter) {
-            if (str.startsWith(name + "=")) {
-                return str.substring(name.length() + 1);
-            }
-        }
-        return "";
     }
 }

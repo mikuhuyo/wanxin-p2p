@@ -1,4 +1,3 @@
-
 package com.wanxin.common.util;
 
 import com.alibaba.fastjson.JSON;

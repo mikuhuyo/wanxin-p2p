@@ -36,6 +36,10 @@ public class StringUtil implements Serializable {
     public static final String HTML_GT = "&gt;";
 
     public static final String EMPTY_JSON = "{}";
+    /**
+     * 将下划线映射到骆驼命名使用的正则表达式, 预编译正则用于提高效率
+     */
+    private static Pattern patternForUTC = Pattern.compile("_([a-z]){1}");
 
     /**
      * 字符串是否为空白 空白的定义如下: <br>
@@ -86,7 +90,6 @@ public class StringUtil implements Serializable {
     public static boolean isNotEmpty(String str) {
         return false == isEmpty(str);
     }
-
 
     /**
      * 指定字符串是否被包装
@@ -317,11 +320,6 @@ public class StringUtil implements Serializable {
         }
         return checkFlag;
     }
-
-    /**
-     * 将下划线映射到骆驼命名使用的正则表达式, 预编译正则用于提高效率
-     */
-    private static Pattern patternForUTC = Pattern.compile("_([a-z]){1}");
 
     /**
      * 将下划线映射到骆驼命名

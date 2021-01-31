@@ -16,18 +16,17 @@ public class WebUtils {
 
     private static ThreadLocal<String> ipThreadLocal = new ThreadLocal<>();
 
-    public static void setIp(String ip) {
-        ipThreadLocal.set(ip);
+    // private
+    private WebUtils() {
     }
 
     public static String getIp() {
         return ipThreadLocal.get();
     }
 
-    // private
-    private WebUtils() {
+    public static void setIp(String ip) {
+        ipThreadLocal.set(ip);
     }
-
 
     /**
      * Retrieve client ip address

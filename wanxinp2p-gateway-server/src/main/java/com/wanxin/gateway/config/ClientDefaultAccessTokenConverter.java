@@ -24,8 +24,8 @@ import java.util.*;
  */
 public class ClientDefaultAccessTokenConverter implements AccessTokenConverter {
 
+    public static final String CLIENT_AUTHORITIES = "client_authorities";
     private UserAuthenticationConverter userTokenConverter = new DefaultUserAuthenticationConverter();
-
     private boolean includeGrantType;
 
     /**
@@ -45,8 +45,6 @@ public class ClientDefaultAccessTokenConverter implements AccessTokenConverter {
     public void setIncludeGrantType(boolean includeGrantType) {
         this.includeGrantType = includeGrantType;
     }
-
-    public static final String CLIENT_AUTHORITIES = "client_authorities";
 
     @Override
     public Map<String, ?> convertAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {

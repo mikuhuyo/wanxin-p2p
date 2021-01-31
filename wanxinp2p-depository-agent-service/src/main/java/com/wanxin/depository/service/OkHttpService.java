@@ -33,6 +33,8 @@ public class OkHttpService {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(signatureInterceptor).build();
         Request request = new Request.Builder().url(url).build();
         try (Response response = okHttpClient.newCall(request).execute()) {
+            // 断言
+            assert response.body() != null;
             return response.body().string();
         } catch (IOException e) {
             log.warn("请求出现异常: ", e);

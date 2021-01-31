@@ -19,12 +19,11 @@ import java.util.concurrent.TimeUnit;
  * @since 1.8
  */
 public class OkHttpUtil {
+    private static final MediaType JSON_TYPE = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient okHttpClient = new OkHttpClient().newBuilder().retryOnConnectionFailure(true)
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS).build();
-
-    private static final MediaType JSON_TYPE = MediaType.parse("application/json; charset=utf-8");
 
     /**
      * 发送post请求

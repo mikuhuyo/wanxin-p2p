@@ -20,21 +20,10 @@ public enum DepositoryErrorCode implements ErrorCode {
     private int code;
     private String desc;
 
-    @Override
-    public int getCode() {
-        return code;
-    }
-
-    @Override
-    public String getDesc() {
-        return desc;
-    }
-
     private DepositoryErrorCode(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
-
 
     public static DepositoryErrorCode setErrorCode(int code) {
         for (DepositoryErrorCode errorCode : DepositoryErrorCode.values()) {
@@ -43,5 +32,15 @@ public enum DepositoryErrorCode implements ErrorCode {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getDesc() {
+        return desc;
     }
 }

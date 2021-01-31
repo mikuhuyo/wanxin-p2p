@@ -17,17 +17,17 @@ public class ApplicationContextHelper implements ApplicationContextAware {
     public ApplicationContextHelper() {
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        ApplicationContextHelper.applicationContext = applicationContext;
-    }
-
     public static Object getBean(String beanName) {
         return applicationContext != null ? applicationContext.getBean(beanName) : null;
     }
 
     public static Object getBean(Class clazz) {
         return applicationContext != null ? applicationContext.getBean(clazz) : null;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ApplicationContextHelper.applicationContext = applicationContext;
     }
 }
 

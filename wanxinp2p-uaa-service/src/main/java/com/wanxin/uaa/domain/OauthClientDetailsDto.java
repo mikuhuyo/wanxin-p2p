@@ -63,6 +63,13 @@ public class OauthClientDetailsDto implements Serializable {
         this.authorizedGrantTypes = clientDetails.authorizedGrantTypes();
     }
 
+    public static List<OauthClientDetailsDto> toDtos(List<OauthClientDetails> clientDetailses) {
+        List<OauthClientDetailsDto> dtos = new ArrayList<>(clientDetailses.size());
+        for (OauthClientDetails clientDetailse : clientDetailses) {
+            dtos.add(new OauthClientDetailsDto(clientDetailse));
+        }
+        return dtos;
+    }
 
     public String getCreateTime() {
         return createTime;
@@ -108,16 +115,15 @@ public class OauthClientDetailsDto implements Serializable {
         return scope;
     }
 
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     public String getScopeWithBlank() {
         if (scope != null && scope.contains(",")) {
             return scope.replaceAll(",", " ");
         }
         return scope;
-    }
-
-    public void setScope(String scope) {
-        this.scope = scope;
     }
 
     public String getAuthorizedGrantTypes() {
@@ -175,15 +181,6 @@ public class OauthClientDetailsDto implements Serializable {
     public void setTrusted(boolean trusted) {
         this.trusted = trusted;
     }
-
-    public static List<OauthClientDetailsDto> toDtos(List<OauthClientDetails> clientDetailses) {
-        List<OauthClientDetailsDto> dtos = new ArrayList<>(clientDetailses.size());
-        for (OauthClientDetails clientDetailse : clientDetailses) {
-            dtos.add(new OauthClientDetailsDto(clientDetailse));
-        }
-        return dtos;
-    }
-
 
     public boolean isContainsAuthorizationCode() {
         return this.authorizedGrantTypes.contains("authorization_code");

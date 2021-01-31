@@ -24,6 +24,15 @@ public class RestResponse<T> {
     @ApiModelProperty("响应内容")
     private T result;
 
+    public RestResponse() {
+        this(0, "");
+    }
+
+    public RestResponse(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public static <T> RestResponse<T> success() {
         return new RestResponse<T>();
     }
@@ -39,15 +48,6 @@ public class RestResponse<T> {
         response.setCode(-2);
         response.setMsg(msg);
         return response;
-    }
-
-    public RestResponse() {
-        this(0, "");
-    }
-
-    public RestResponse(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
     }
 
     public int getCode() {

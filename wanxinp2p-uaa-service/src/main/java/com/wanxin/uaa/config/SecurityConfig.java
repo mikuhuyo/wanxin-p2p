@@ -33,6 +33,9 @@ import java.util.List;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> integrationWebAuthenticationDetailsSource;
+
     @Bean
     public IntegrationUserDetailsAuthenticationHandler integrationUserDetailsAuthenticationHandler() {
         return new IntegrationUserDetailsAuthenticationHandler();
@@ -42,9 +45,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public IntegrationUserDetailsAuthenticationProvider integrationUserDetailsAuthenticationProvider() {
         return new IntegrationUserDetailsAuthenticationProvider(integrationUserDetailsAuthenticationHandler());
     }
-
-    @Autowired
-    private AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> integrationWebAuthenticationDetailsSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
