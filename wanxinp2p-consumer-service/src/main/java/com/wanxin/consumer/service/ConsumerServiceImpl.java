@@ -19,6 +19,7 @@ import com.wanxin.consumer.entity.Consumer;
 import com.wanxin.consumer.mapper.BankCardMapper;
 import com.wanxin.consumer.mapper.ConsumerMapper;
 import com.wanxin.consumer.utils.CheckBankCardUtil;
+import com.wanxin.consumer.utils.IdCardUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hmily.annotation.HmilyTCC;
 import org.springframework.beans.BeanUtils;
@@ -101,6 +102,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         consumer.setUserNo(consumerRequest.getUserNo());
         consumer.setRequestNo(consumerRequest.getRequestNo());
         consumer.setFullname(consumerRequest.getFullname());
+        if (!IdCardUtil.isValidatedAllIdcard(consumerRequest.getIdNumber())) {
+            throw new BusinessException(ConsumerErrorCode.E_140110);
+        }
         consumer.setIdNumber(consumerRequest.getIdNumber());
         consumer.setAuthList("ALL");
         consumerMapper.update(consumer, new LambdaQueryWrapper<Consumer>().eq(Consumer::getMobile, consumerDTO.getMobile()));
