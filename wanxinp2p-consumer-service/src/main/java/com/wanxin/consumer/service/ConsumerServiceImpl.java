@@ -18,6 +18,7 @@ import com.wanxin.consumer.entity.BankCard;
 import com.wanxin.consumer.entity.Consumer;
 import com.wanxin.consumer.mapper.BankCardMapper;
 import com.wanxin.consumer.mapper.ConsumerMapper;
+import com.wanxin.consumer.utils.CheckBankCardUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hmily.annotation.HmilyTCC;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +44,8 @@ public class ConsumerServiceImpl implements ConsumerService {
     private BankCardMapper bankCardMapper;
     @Autowired
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
+    @Autowired
+    private CheckBankCardUtil checkBankCardUtil;
 
     @Override
     @Transactional(rollbackFor = Exception.class)

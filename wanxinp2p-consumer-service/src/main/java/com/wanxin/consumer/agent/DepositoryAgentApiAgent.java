@@ -26,7 +26,7 @@ public interface DepositoryAgentApiAgent {
      * @param consumerRequest
      * @return
      */
-    @PostMapping("/depository-agent/l/consumers")
+    @PostMapping("/depository/l/consumers")
     RestResponse<GatewayRequest> createConsumer(@RequestBody ConsumerRequest consumerRequest);
 }
 

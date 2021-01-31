@@ -10,8 +10,10 @@ import com.wanxin.common.util.RSAUtil;
 import com.wanxin.depository.common.constant.DepositoryRequestTypeCode;
 import com.wanxin.depository.entity.DepositoryRecord;
 import com.wanxin.depository.mapper.DepositoryRecordMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
  * @version 1.0.0
  * @since 1.8
  */
+@Slf4j
 @Service
 public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     @Autowired
@@ -36,6 +39,7 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public GatewayRequest createConsumer(ConsumerRequest consumerRequest) {
         // 保存交易记录
         saveDepositoryRecord(consumerRequest);
@@ -62,4 +66,5 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
         depositoryRecord.setRequestStatus(StatusCode.STATUS_OUT.getCode());
         depositoryRecordMapper.insert(depositoryRecord);
     }
+
 }

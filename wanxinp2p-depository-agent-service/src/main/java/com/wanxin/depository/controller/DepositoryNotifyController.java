@@ -35,7 +35,7 @@ public class DepositoryNotifyController {
     @ApiOperation("接受银行存管系统开户回调结果")
     @GetMapping(value = "/gateway")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serviceName", value = "请求的存管接口名", required = true, dataType = "String", paramType = "query", defaultValue = "PERSONAL_REGISTER"),
+            @ApiImplicitParam(name = "serviceName", value = "请求的存管接口名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "platformNo", value = "平台编号, 平台与存管系统签约时获取", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "signature", value = "对reqData参数的签名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "reqData", value = "业务数据报文, json格式", required = true, dataType = "String", paramType = "query")
