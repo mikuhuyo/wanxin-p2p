@@ -6,6 +6,8 @@ import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
 
+import java.io.IOException;
+
 /**
  * @author yuelimin
  * @version 1.0.0
@@ -26,7 +28,7 @@ public interface ConsumerService {
      * @param consumerRequest
      * @return
      */
-    RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest);
+    RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) throws IOException;
 
     /**
      * 检测用户是否存在

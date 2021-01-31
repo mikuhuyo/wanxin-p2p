@@ -6,7 +6,6 @@ import com.wanxin.consumer.common.ConsumerErrorCode;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
@@ -16,9 +15,8 @@ import java.util.Map;
  * @version 1.0.0
  * @since 1.8
  */
-@Component
 public class CheckBankCardUtil {
-    public void checkBankCard(String cardNumber) throws IOException {
+    public static void checkBankCard(String cardNumber) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
                 .url("https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo=" + cardNumber + "&cardBinCheck=true")

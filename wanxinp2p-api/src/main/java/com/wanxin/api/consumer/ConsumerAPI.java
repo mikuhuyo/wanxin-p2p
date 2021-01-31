@@ -5,6 +5,8 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
 
+import java.io.IOException;
+
 /**
  * @author yuelimin
  * @version 1.0.0
@@ -17,7 +19,7 @@ public interface ConsumerAPI {
      * @param consumerRequest 开户数据
      * @return
      */
-    RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest);
+    RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) throws IOException;
 
 
     /**

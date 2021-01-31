@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 /**
  * @author yuelimin
  * @version 1.0.0
@@ -30,7 +32,7 @@ public class ConsumerController implements ConsumerAPI {
     @PostMapping("/my/consumers")
     @ApiOperation("生成开户请求数据")
     @ApiImplicitParam(name = "consumerRequest", value = "开户信息", required = true, dataType = "ConsumerRequest", paramType = "body")
-    public RestResponse<GatewayRequest> createConsumer(@RequestBody ConsumerRequest consumerRequest) {
+    public RestResponse<GatewayRequest> createConsumer(@RequestBody ConsumerRequest consumerRequest) throws IOException {
         consumerRequest.setMobile(SecurityUtil.getUser().getMobile());
         return consumerService.createConsumer(consumerRequest);
     }

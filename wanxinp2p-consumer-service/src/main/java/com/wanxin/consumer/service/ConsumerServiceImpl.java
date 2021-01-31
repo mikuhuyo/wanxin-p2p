@@ -27,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+
 /**
  * @author yuelimin
  * @version 1.0.0
@@ -45,8 +47,6 @@ public class ConsumerServiceImpl implements ConsumerService {
     private BankCardMapper bankCardMapper;
     @Autowired
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
-    @Autowired
-    private CheckBankCardUtil checkBankCardUtil;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -76,7 +76,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) {
+    public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) throws IOException {
         ConsumerDTO consumerDTO = getByMobile(consumerRequest.getMobile());
 
         // 判断用户是否已开户
@@ -113,6 +113,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         BankCard bankCard = new BankCard();
         bankCard.setConsumerId(consumerDTO.getId());
         bankCard.setBankCode(consumerRequest.getBankCode());
+        CheckBankCardUtil.checkBankCard(consumerRequest.getCardNumber());
         bankCard.setCardNumber(consumerRequest.getCardNumber());
         bankCard.setMobile(consumerRequest.getMobile());
         bankCard.setStatus(StatusCode.STATUS_OUT.getCode());
