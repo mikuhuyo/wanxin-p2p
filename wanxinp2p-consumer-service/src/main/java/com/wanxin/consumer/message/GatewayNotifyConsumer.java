@@ -37,16 +37,14 @@ public class GatewayNotifyConsumer {
         // 注册监听器
         pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
-                                                            ConsumeConcurrentlyContext context) {
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 try {
                     Message message = msgs.get(0);
                     String topic = message.getTopic();
                     String tag = message.getTags();
                     String body = new String(message.getBody(), StandardCharsets.UTF_8);
                     if ("PERSONAL_REGISTER".equals(tag)) {
-                        DepositoryConsumerResponse response = JSON.parseObject(body,
-                                DepositoryConsumerResponse.class);
+                        DepositoryConsumerResponse response = JSON.parseObject(body, DepositoryConsumerResponse.class);
                         consumerService.modifyResult(response);
                     }
                 } catch (Exception e) {

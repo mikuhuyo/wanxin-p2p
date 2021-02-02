@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(value = "银行存管系统通知服务", tags = "depository-agent")
 public class DepositoryNotifyController {
-
     @Autowired
     private DepositoryRecordService depositoryRecordService;
     @Autowired
@@ -40,7 +39,7 @@ public class DepositoryNotifyController {
             @ApiImplicitParam(name = "signature", value = "对reqData参数的签名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "reqData", value = "业务数据报文, json格式", required = true, dataType = "String", paramType = "query")
     })
-    public String receiveDepositoryCreateConsumerResult(@RequestParam("serviceName") String serviceName, @RequestParam("platformNo") String platformNo, @RequestParam("signature") String signature, @RequestParam("reqData") String reqData) {
+    public String receiveDepositoryCreateConsumerResult(@RequestParam(name = "serviceName", defaultValue = "PERSONAL_REGISTER") String serviceName, @RequestParam("platformNo") String platformNo, @RequestParam("signature") String signature, @RequestParam("reqData") String reqData) {
         // 更新数据
         DepositoryConsumerResponse response = JSON.parseObject(EncryptUtil.decodeUTF8StringBase64(reqData), DepositoryConsumerResponse.class);
         depositoryRecordService.modifyRequestStatus(response.getRequestNo(), response.getStatus());
