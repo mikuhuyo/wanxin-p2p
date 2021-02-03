@@ -11,6 +11,10 @@
 | https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务  |
 | https://github.com/mikuhuyo/minio.git              | 存储服务         |
 
+> 觉得写得蛮OK的就给打赏一杯咖啡吧.
+
+<img src="./resource/image/wechat.png" style="zoom:33%;" /><img src="./resource/image/alipay.jpg" style="zoom:33%;" />
+
 ## 项目介绍
 
 万信金融是一个P2P(person-to-person)金融平台, 采用银行存管模式, 为用户提供方便, 快捷, 安心的P2P金融服务.
