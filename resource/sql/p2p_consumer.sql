@@ -19,7 +19,7 @@ CREATE TABLE `bank_card` (
   `STATUS` bit(1) DEFAULT NULL COMMENT '可用状态',
   PRIMARY KEY (`ID`),
   KEY `FK_Reference_1` (`CONSUMER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COMMENT='用户绑定银行卡信息';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户绑定银行卡信息';
 
 -- ----------------------------
 -- Table structure for consumer
@@ -40,7 +40,7 @@ CREATE TABLE `consumer` (
   `STATUS` tinyint(1) DEFAULT NULL COMMENT '可用状态',
   `REQUEST_NO` varchar(50) DEFAULT NULL COMMENT '请求流水号',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='c端用户信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='c端用户信息表';
 
 -- ----------------------------
 -- Table structure for consumer_details
@@ -58,7 +58,7 @@ CREATE TABLE `consumer_details` (
   `CONTACT_MOBILE` varchar(20) DEFAULT NULL COMMENT '联系人电话',
   `CREATE_DATE` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='用户详细信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户详细信息表';
 
 -- ----------------------------
 -- Table structure for recharge_record
@@ -73,7 +73,7 @@ CREATE TABLE `recharge_record` (
   `REQUEST_NO` varchar(50) DEFAULT NULL COMMENT '请求流水号',
   `CALLBACK_STATUS` tinyint(1) DEFAULT NULL COMMENT '回调状态',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='充值记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='充值记录表';
 
 -- ----------------------------
 -- Table structure for withdraw_record
@@ -89,7 +89,7 @@ CREATE TABLE `withdraw_record` (
   `REQUEST_NO` varchar(50) DEFAULT NULL COMMENT '请求流水号',
   `CALLBACK_STATUS` tinyint(1) DEFAULT NULL COMMENT '回调状态',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='提现记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='提现记录表';
 
 -- ----------------------------
 -- View structure for balance_record_view

@@ -18,7 +18,7 @@ CREATE TABLE `account` (
   `STATUS` tinyint(1) DEFAULT NULL COMMENT '账号状态',
   `DOMAIN` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1129286208275427331 DEFAULT CHARSET=utf8 COMMENT='账号信息';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账号信息';
 
 -- ----------------------------
 -- Records of account
