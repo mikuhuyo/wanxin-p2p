@@ -47,6 +47,8 @@ public class ConsumerServiceImpl implements ConsumerService {
     private BankCardMapper bankCardMapper;
     @Autowired
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
+    @Autowired
+    private CheckBankCardUtil checkBankCardUtil;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -80,6 +82,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         ConsumerDTO consumerDTO = getByMobile(consumerRequest.getMobile());
 
         // 判断用户是否已开户
+        assert consumerDTO != null;
         if (consumerDTO.getIsBindCard() == 1) {
             throw new BusinessException(ConsumerErrorCode.E_140105);
         }
@@ -112,8 +115,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         // 保存用户绑卡信息
         BankCard bankCard = new BankCard();
         bankCard.setConsumerId(consumerDTO.getId());
-        bankCard.setBankCode(consumerRequest.getBankCode());
-        CheckBankCardUtil.checkBankCard(consumerRequest.getCardNumber());
+        String[] split = checkBankCardUtil.checkBankCard(consumerRequest.getCardNumber()).split("-");
+        bankCard.setBankCode(split[0]);
+        bankCard.setBankName(split[1]);
         bankCard.setCardNumber(consumerRequest.getCardNumber());
         bankCard.setMobile(consumerRequest.getMobile());
         bankCard.setStatus(StatusCode.STATUS_OUT.getCode());
@@ -122,8 +126,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         if (existBankCard != null) {
             bankCard.setId(existBankCard.getId());
             bankCardMapper.updateById(bankCard);
+        } else {
+            bankCardMapper.insert(bankCard);
         }
-        bankCardMapper.insert(bankCard);
         return depositoryAgentApiAgent.createConsumer(consumerRequest);
     }
 
