@@ -111,10 +111,97 @@
 | `p2p_reconciliation`   | 对账数据                  |
 | `hmily`                | 分布式事务框架Hmily数据库 |
 
-### 环境搭建
+### Apollo环境搭建
 
 环境搭建比较容易出错就是Apollo配置中心的搭建, 我这里已经给出了`docker-compose.yml`文件直接执行就好了.
+
+```shell script
+# 拉取镜像
+docker pull mysql:5.7
+
+# 创建容器
+docker run --name mysql \
+--privileged=true \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=yueliminvc@outlook.com \
+-d mysql:5.7
+```
 
 首先创建Apollo配置中心之前我们需要创建MySQL的环境, 我这里推荐`MySQL 5.7`, 创建完成之后执行Apollo配置中心的数据库脚本.
 
 在`wanxin-p2p/resource/docker/`目录下执行`docker-compose up -d`, 等待执行完毕进行测试就OK了.
+
+### 准备工程环境-数据库
+
+```shell script
+docker pull mysql:5.7
+
+docker run --name mysql \
+--privileged=true \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=yueliminvc@outlook.com \
+-d mysql:5.7
+
+docker pull redis:4
+
+docker run --name redis -p 6379:6379  \
+-d redis:4 \
+--requirepass "yueliminvc@outlook.com" \
+--appendonly yes
+```
+
+### 准备工程环境-消息中间件
+
+创建配置文件: `broker.conf``
+
+```properties
+brokerClusterName = DefaultCluster
+brokerName = broker-a
+brokerId = 0
+deleteWhen = 04
+fileReservedTime = 48
+brokerRole = ASYNC_MASTER
+flushDiskType = ASYNC_FLUSH
+brokerIP1 = 192.168.158.164
+listenPort=10911
+# 是否允许 Broker 自动创建Topic, 建议线下开启, 线上关闭
+autoCreateTopicEnable = true
+# 是否允许 Broker 自动创建订阅组, 建议线下开启, 线上关闭
+autoCreateSubscriptionGroup = true
+```
+
+创建容器
+
+```shell script
+systemctl start firewalld.service
+
+# rocketmq
+docker pull rocketmqinc/rocketmq:4.4.0
+
+docker run -d -p 9876:9876 \
+-v /root/docker/rocketmq/namesrv/logs:/root/logs \
+-v /root/docker/rocketmq/namesrv/store:/root/store \
+--name rmqnamesrv \
+-e "MAX_POSSIBLE_HEAP=100000000" rocketmqinc/rocketmq:4.4.0 sh mqnamesrv
+
+docker run -d -p 10911:10911 -p 10909:10909 \
+--privileged=true \
+-v /root/docker/rocketmq/broker/logs:/root/logs \
+-v /root/docker/rocketmq/broker/store:/root/store \
+-v /root/docker/rocketmq/broker/conf/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf \
+--name rmqbroker \
+--link rmqnamesrv:namesrv \
+-e "NAMESRV_ADDR=namesrv:9876" \
+-e "MAX_POSSIBLE_HEAP=200000000" \
+rocketmqinc/rocketmq:4.4.0 sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
+
+# 监控
+docker pull styletang/rocketmq-console-ng
+
+docker run -d --name rmqconsole \
+-p 8080:8080 \
+-e "JAVA_OPTS=-Drocketmq.namesrv.addr=192.168.158.164:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false" \
+styletang/rocketmq-console-ng
+
+systemctl stop firewalld.service
+```
