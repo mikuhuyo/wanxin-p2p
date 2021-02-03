@@ -13,7 +13,8 @@
 
 > 觉得写得蛮OK的就给打赏一杯咖啡吧.
 
-<img src="./resource/image/wechat.png" style="zoom:33%;" /><img src="./resource/image/alipay.jpg" style="zoom:33%;" />
+<img src="./resource/image/wechat.png" style="zoom:33%;" />
+<img src="./resource/image/alipay.jpg" style="zoom:33%;" />
 
 ## 项目介绍
 
