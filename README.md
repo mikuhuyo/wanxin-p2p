@@ -152,7 +152,7 @@ docker run --name redis -p 6379:6379  \
 
 ### 准备工程环境-消息中间件
 
-创建配置文件: `broker.conf``
+创建配置文件: `broker.conf`
 
 ```properties
 brokerClusterName = DefaultCluster
