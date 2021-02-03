@@ -284,9 +284,9 @@ public class CheckBankCardUtil {
                 this.bankName = "AEON信贷财务亚洲有限公司";
             } else if ("MABDA".equals(this.bankCode)) {
                 this.bankName = "澳门BDA";
-            } else {
-                throw new BusinessException(ConsumerErrorCode.E_140109);
             }
+        } else {
+            throw new BusinessException(ConsumerErrorCode.E_140109);
         }
 
         return this.bankCode + "-" + this.bankName;
