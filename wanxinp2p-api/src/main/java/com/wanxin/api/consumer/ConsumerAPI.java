@@ -1,5 +1,6 @@
 package com.wanxin.api.consumer;
 
+import com.wanxin.api.consumer.model.BankCardDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
@@ -13,6 +14,13 @@ import java.io.IOException;
  * @since 1.8
  */
 public interface ConsumerAPI {
+    /**
+     * 获取银行卡信息
+     *
+     * @return
+     */
+    RestResponse<BankCardDTO> getBankCard();
+
     /**
      * 生成开户请求数据
      *

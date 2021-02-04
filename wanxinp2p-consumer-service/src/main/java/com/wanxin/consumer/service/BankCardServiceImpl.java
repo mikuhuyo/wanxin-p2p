@@ -19,6 +19,12 @@ public class BankCardServiceImpl implements BankCardService {
     private BankCardMapper bankCardMapper;
 
     @Override
+    public BankCardDTO getByUserMobile(String mobile) {
+        BankCard bankCard = bankCardMapper.selectOne(new LambdaQueryWrapper<BankCard>().eq(BankCard::getMobile, mobile));
+        return convertBankCardEntityToDTO(bankCard);
+    }
+
+    @Override
     public BankCardDTO getByConsumerId(Long consumerId) {
         LambdaQueryWrapper<BankCard> eq = new LambdaQueryWrapper<BankCard>().eq(BankCard::getConsumerId, consumerId);
         return convertBankCardEntityToDTO(bankCardMapper.selectOne(eq));

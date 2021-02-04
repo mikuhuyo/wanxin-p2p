@@ -1,16 +1,19 @@
 package com.wanxin.consumer.controller;
 
 import com.wanxin.api.consumer.ConsumerAPI;
+import com.wanxin.api.consumer.model.BankCardDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.consumer.common.SecurityUtil;
+import com.wanxin.consumer.service.BankCardService;
 import com.wanxin.consumer.service.ConsumerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +30,15 @@ import java.io.IOException;
 public class ConsumerController implements ConsumerAPI {
     @Autowired
     private ConsumerService consumerService;
+    @Autowired
+    private BankCardService bankCardService;
+
+    @Override
+    @GetMapping("/my/bank-cards")
+    @ApiOperation("获取用户银行卡信息")
+    public RestResponse<BankCardDTO> getBankCard() {
+        return RestResponse.success(bankCardService.getByUserMobile(SecurityUtil.getUser().getMobile()));
+    }
 
     @Override
     @PostMapping("/my/consumers")

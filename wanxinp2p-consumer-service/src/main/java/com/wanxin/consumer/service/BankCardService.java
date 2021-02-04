@@ -9,6 +9,14 @@ import com.wanxin.api.consumer.model.BankCardDTO;
  */
 public interface BankCardService {
     /**
+     * 根据用户手机号码获取银行卡信息
+     *
+     * @param mobile 用户手机号
+     * @return
+     */
+    BankCardDTO getByUserMobile(String mobile);
+
+    /**
      * 获取银行卡信息
      *
      * @param consumerId 用户id
