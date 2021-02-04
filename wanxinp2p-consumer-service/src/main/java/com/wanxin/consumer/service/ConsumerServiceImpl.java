@@ -51,6 +51,11 @@ public class ConsumerServiceImpl implements ConsumerService {
     private CheckBankCardUtil checkBankCardUtil;
 
     @Override
+    public ConsumerDTO getConsumerByMobile(String mobile) {
+        return getByMobile(mobile);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Boolean modifyResult(DepositoryConsumerResponse response) {
         // 获取状态

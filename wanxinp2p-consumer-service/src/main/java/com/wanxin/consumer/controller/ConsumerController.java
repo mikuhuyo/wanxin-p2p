@@ -2,6 +2,7 @@ package com.wanxin.consumer.controller;
 
 import com.wanxin.api.consumer.ConsumerAPI;
 import com.wanxin.api.consumer.model.BankCardDTO;
+import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
@@ -32,6 +33,13 @@ public class ConsumerController implements ConsumerAPI {
     private ConsumerService consumerService;
     @Autowired
     private BankCardService bankCardService;
+
+    @Override
+    @GetMapping("/my/consumers")
+    @ApiOperation("获取用户信息")
+    public RestResponse<ConsumerDTO> getConsumer() {
+        return RestResponse.success(consumerService.getConsumerByMobile(SecurityUtil.getUser().getMobile()));
+    }
 
     @Override
     @GetMapping("/my/bank-cards")

@@ -1,5 +1,6 @@
 package com.wanxin.consumer.service;
 
+import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
@@ -14,6 +15,14 @@ import java.io.IOException;
  * @since 1.8
  */
 public interface ConsumerService {
+    /**
+     * 根据手机号获取用户信息
+     *
+     * @param mobile 手机号
+     * @return
+     */
+    ConsumerDTO getConsumerByMobile(String mobile);
+
     /**
      * 更新开户结果
      *
