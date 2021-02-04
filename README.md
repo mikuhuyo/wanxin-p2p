@@ -4,6 +4,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/issues)
 [![GitHub stars](https://img.shields.io/github/stars/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/network)
+![Java version](https://img.shields.io/badge/Jdk-1.8-yellow)
+![SpringBoot version](https://img.shields.io/badge/SpringBoot-2.1.13-brightgreen)
+![SpringCloud version](https://img.shields.io/badge/SpringCloud-Greenwich.SR6-ff69b4)
 
 ## 项目预览
 
@@ -25,29 +28,9 @@
 
 ![](./resource/image/open-an-account-07.png)
 
-## 依赖项目
-
-| Github地址                                         | 说明             |
-| -------------------------------------------------- | ---------------- |
-| https://github.com/mikuhuyo/wanxin-p2p-web.git     | 前端工程         |
-| https://github.com/mikuhuyo/wanxin-p2p.git         | 后端工程         |
-| https://github.com/mikuhuyo/wanxin-p2p-manager.git | 后台前端工程     |
-| https://github.com/mikuhuyo/wanxin-depository.git  | 后台银行存管系统 |
-| https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务  |
-| https://github.com/mikuhuyo/minio.git              | 存储服务         |
-
-## 觉得写得蛮OK的就给打赏一杯咖啡吧.
+## 觉得项目不错就给打赏一杯咖啡吧.
 
 ![](./resource/image/alipays.png)![](./resource/image/wechats.png)
-
-## 项目介绍
-
-> 项目搭建环境视频: https://b23.tv/fwfAyE
-
-万信金融是一个P2P(person-to-person)金融平台, 采用银行存管模式, 为用户提供方便, 快捷, 安心的P2P金融服务.
-项目包括交易平台和业务支撑两个部分, 交易平台主要实现理财服务, 包括: 借钱, 出借等模块;
-
-业务支撑包括: 标的管理, 对账管理, 风控管理等模块, 项目采用先进的互联网分布式系统架构进行研发, 保证了P2P双方交易的安全性, 快捷性及稳定性.
 
 ## For this repo
 
@@ -58,6 +41,26 @@
 ### Forkers
 
 [![Forkers repo roster for @mikuhuyo/wanxin-p2p](https://reporoster.com/forks/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/network/members)
+
+## 项目介绍
+
+> 项目搭建环境视频: https://b23.tv/fwfAyE
+
+万信金融是一个P2P(person-to-person)金融平台, 采用银行存管模式, 为用户提供方便, 快捷, 安心的P2P金融服务.
+项目包括交易平台和业务支撑两个部分, 交易平台主要实现理财服务, 包括: 借钱, 出借等模块;
+
+业务支撑包括: 标的管理, 对账管理, 风控管理等模块, 项目采用先进的互联网分布式系统架构进行研发, 保证了P2P双方交易的安全性, 快捷性及稳定性.
+
+## 其它工程
+
+| Github地址                                         | 说明             |
+| -------------------------------------------------- | ---------------- |
+| https://github.com/mikuhuyo/wanxin-p2p-web.git     | 前端工程         |
+| https://github.com/mikuhuyo/wanxin-p2p.git         | 后端工程         |
+| https://github.com/mikuhuyo/wanxin-p2p-manager.git | 后台前端工程     |
+| https://github.com/mikuhuyo/wanxin-depository.git  | 后台银行存管系统 |
+| https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务  |
+| https://github.com/mikuhuyo/minio.git              | 存储服务         |
 
 ## 技术架构
 
@@ -94,7 +97,7 @@
 - 短信验证系统方案
   - 短信验证服务+第三方短信平台(腾讯)
 
-## 项目环境搭建与说明
+## 项目环境启动/搭建与说明
 
 ### 端口与工程说明
 
@@ -226,3 +229,28 @@ styletang/rocketmq-console-ng
 
 systemctl stop firewalld.service
 ```
+
+### 项目启动
+
+拉取前端工程(其中有详细的启动说明): `git clone https://github.com/mikuhuyo/wanxin-p2p-web.git`
+
+拉取后台前端工程(其中有详细的启动说明): `git clone https://github.com/mikuhuyo/wanxin-p2p-manager.git`
+
+拉取后端工程: `git clone https://github.com/mikuhuyo/wanxin-p2p.git`
+
+---
+
+后端工程启动顺序:
+
+```shell script
+# 优先启动后端, 按照顺序启动这几个服务之后, 其它的服务只要启动完成就行.
+1.DiscoverServerApplication
+2.GatewayServerApplication
+3.UAAServiceApplication
+4.DepositoryAgentServiceApplication
+
+# 启动前端工程 wanxin-p2p-web
+
+# 启动后台前端工程 wanxin-p2p-manager
+```
+
