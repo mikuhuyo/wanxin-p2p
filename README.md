@@ -5,7 +5,27 @@
 [![GitHub stars](https://img.shields.io/github/stars/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/network)
 
-> 依赖项目
+## 项目预览
+
+### 用户登录/注册
+
+![](./resource/image/open-an-account-01.png)
+
+### 开通存管
+
+![](./resource/image/open-an-account-02.png)
+
+![](./resource/image/open-an-account-03.png)
+
+![](./resource/image/open-an-account-04.png)
+
+![](./resource/image/open-an-account-05.png)
+
+![](./resource/image/open-an-account-06.png)
+
+![](./resource/image/open-an-account-07.png)
+
+## 依赖项目
 
 | Github地址                                         | 说明             |
 | -------------------------------------------------- | ---------------- |
@@ -16,7 +36,7 @@
 | https://github.com/mikuhuyo/tencent-sms.git        | Tencent短信服务  |
 | https://github.com/mikuhuyo/minio.git              | 存储服务         |
 
-> 觉得写得蛮OK的就给打赏一杯咖啡吧.
+## 觉得写得蛮OK的就给打赏一杯咖啡吧.
 
 ![](./resource/image/alipays.png)![](./resource/image/wechats.png)
 
@@ -73,22 +93,6 @@
   - 百度AI
 - 短信验证系统方案
   - 短信验证服务+第三方短信平台(腾讯)
-
-## 项目预览
-
-### 用户登录/注册
-
-![](./resource/image/open-an-account-01.png)
-
-### 开通存管
-
-![](./resource/image/open-an-account-02.png)
-
-![](./resource/image/open-an-account-03.png)
-
-![](./resource/image/open-an-account-04.png)
-
-![](./resource/image/open-an-account-05.png)
 
 ## 项目环境搭建与说明
 
