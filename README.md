@@ -24,6 +24,16 @@
 
 业务支撑包括: 标的管理, 对账管理, 风控管理等模块, 项目采用先进的互联网分布式系统架构进行研发, 保证了P2P双方交易的安全性, 快捷性及稳定性.
 
+## For this repo
+
+### Stargazers
+
+[![Stargazers repo roster for @mikuhuyo/wanxin-p2p](https://reporoster.com/stars/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/stargazers)
+
+### Forkers
+
+[![Forkers repo roster for @mikuhuyo/wanxin-p2p](https://reporoster.com/forks/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/network/members)
+
 ## 技术架构
 
 ### 功能架构图
