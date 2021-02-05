@@ -180,3 +180,7 @@
 ## 觉得项目不错就给打赏一杯咖啡吧.
 
 ![](./resource/image/alipays.png)![](./resource/image/wechats.png)
+
+## 环境搭建
+
+请看Wiki: https://github.com/mikuhuyo/wanxin-p2p/wiki
