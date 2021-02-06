@@ -1,0 +1,68 @@
+server:
+  port: 53060
+
+spring:
+  application:
+    name: transaction-service
+  main:
+    banner-mode: 'off'
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      names: db0,db1
+      db0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.158.164:3306/p2p_transaction_0?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: yueliminvc@outlook.com
+      db1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.158.164:3306/p2p_transaction_1?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: yueliminvc@outlook.com
+    sharding:
+      default-database-strategy:
+        inline:
+          sharding-column: CONSUMER_ID
+          algorithm-expression: db$->{CONSUMER_ID % 2}
+      binding-tables: project,tender
+      tables:
+        project:
+          actualDataNodes: db$->{0..1}.project_$->{0..1}
+          database‐strategy:
+            inline:
+              sharding‐column: ID
+              algorithm‐expression: db$->{ID % 2}
+          tableStrategy:
+            inline:
+              shardingColumn: ID
+              algorithmExpression: project_$->{ID % 2}
+        tender:
+          actualDataNodes: db$->{0..1}.tender_$->{0..1}
+          database‐strategy:
+            inline:
+              sharding‐column: PROJECT_ID
+              algorithm‐expression: db$->{PROJECT_ID % 2}
+          tableStrategy:
+            inline:
+              shardingColumn: PROJECT_ID
+              algorithmExpression: tender_$->{PROJECT_ID % 2}
+    props:
+      sql:
+        show: true
+
+# -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53060
+app:
+  id: transaction-service
+apollo:
+  meta: http://192.168.158.162:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: application,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-hystrix,micro_service.spring-feign,micro_service.spring-ribbon,micro_service.mybatis-plus
+
+logging:
+  config: classpath:log4j2-dev.xml
