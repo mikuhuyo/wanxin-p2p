@@ -100,7 +100,7 @@ public class RSAUtil {
 
         InputStream ins = new ByteArrayInputStream(decoder.decode(content));
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
-        //rsa解密的字节大小最多是128，将需要解密的内容，按128位拆开解密
+        //rsa解密的字节大小最多是128, 将需要解密的内容, 按128位拆开解密
         byte[] buf = new byte[128];
         int bufl;
 

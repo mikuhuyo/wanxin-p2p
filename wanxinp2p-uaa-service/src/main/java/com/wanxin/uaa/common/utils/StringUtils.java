@@ -188,7 +188,7 @@ public abstract class StringUtils {
      * 获取类的get/set属性名称集合.
      *
      * @param clazz 类
-     * @param isGet 是否获取读方法，true为读方法，false为写方法
+     * @param isGet 是否获取读方法, true为读方法, false为写方法
      * @return 属性名称集合
      */
     public static Set<String> getClassProperties(Class<?> clazz, boolean isGet) {

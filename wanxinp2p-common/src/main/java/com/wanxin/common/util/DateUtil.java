@@ -215,7 +215,7 @@ public class DateUtil {
             begin = cad.getTime();
         }
         cad.setTime(begin);
-        if (null == end) {// 如果结束日期为空 ，设置结束日期为下月的第一天
+        if (null == end) {// 如果结束日期为空 , 设置结束日期为下月的第一天
             day_month = cad.getActualMaximum(Calendar.DAY_OF_MONTH); // 获取当月天数
             cad.set(Calendar.DAY_OF_MONTH, day_month + 1);
             end = cad.getTime();
@@ -381,7 +381,7 @@ public class DateUtil {
         SimpleDateFormat mf = new SimpleDateFormat("yyyy-MM");
         Date date = mf.parse(month);
         calendar.setTime(date);
-        calendar.roll(Calendar.DATE, -1);// api解释roll()：向指定日历字段添加指定（有符号的）时间量，不更改更大的字段
+        calendar.roll(Calendar.DATE, -1);// api解释roll()：向指定日历字段添加指定（有符号的）时间量, 不更改更大的字段
         return sdf.format(calendar.getTime());
     }
 
