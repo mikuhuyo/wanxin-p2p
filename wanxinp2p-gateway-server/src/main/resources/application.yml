@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: gateway-server
+  main:
+    allow-bean-definition-overriding: true
 
 # -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53010
 app:

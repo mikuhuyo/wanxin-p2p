@@ -6,6 +6,7 @@ spring:
     name: depository-agent-service
   main:
     banner-mode: 'off'
+    allow-bean-definition-overriding: true
 
 # -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53070
 app:

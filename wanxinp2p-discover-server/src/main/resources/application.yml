@@ -8,6 +8,7 @@ spring:
     name: hnradio-discovery
   main:
     banner-mode: 'off'
+    allow-bean-definition-overriding: true
 
 eureka:
   server:
