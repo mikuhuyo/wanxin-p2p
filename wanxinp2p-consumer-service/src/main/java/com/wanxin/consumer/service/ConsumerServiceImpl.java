@@ -28,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * @author yuelimin
@@ -110,6 +111,8 @@ public class ConsumerServiceImpl implements ConsumerService {
         consumer.setUserNo(consumerRequest.getUserNo());
         consumer.setRequestNo(consumerRequest.getRequestNo());
         consumer.setFullname(consumerRequest.getFullname());
+        // 设置默认可贷额度
+        consumer.setLoanAmount(new BigDecimal("2000"));
         if (!IdCardUtil.isValidatedAllIdcard(consumerRequest.getIdNumber())) {
             throw new BusinessException(ConsumerErrorCode.E_140110);
         }
