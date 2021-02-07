@@ -1,5 +1,6 @@
 package com.wanxin.uaa.controller;
 
+import com.wanxin.common.domain.RestResponse;
 import com.wanxin.uaa.common.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,12 @@ public class UUAController {
         return "login";
     }
 
+    @ResponseBody
+    @PostMapping("/oauth/logout")
+    public RestResponse logout() {
+        return RestResponse.success();
+    }
+
     @RequestMapping("/confirm_access")
     public String confirmAccess() {
         return "oauth_approval";
@@ -46,8 +53,8 @@ public class UUAController {
         return "oauth_error";
     }
 
-    @RequestMapping(value = "/ocheck_token", method = RequestMethod.POST)
     @ResponseBody
+    @GetMapping(value = "/oauth/check_token")
     public Map<String, ?> checkToken(@RequestParam("token") String value) {
         DefaultTokenServices tokenServices = (DefaultTokenServices) tokenService;
 
