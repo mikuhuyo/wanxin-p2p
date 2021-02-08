@@ -24,7 +24,7 @@ public interface ConsumerApiAgent {
      *
      * @return
      */
-    @GetMapping("/my/consumers")
+    @GetMapping("/consumer/my/consumers")
     RestResponse<ConsumerDTO> getCurrentLoginConsumer();
 }
 
