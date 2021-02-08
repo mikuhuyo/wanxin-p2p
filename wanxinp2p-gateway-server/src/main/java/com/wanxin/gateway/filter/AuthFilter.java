@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author yuelimin
+ */
 @Component
 public class AuthFilter extends ZuulFilter {
     @Override
@@ -35,29 +38,21 @@ public class AuthFilter extends ZuulFilter {
 
     @Override
     public Object run() {
+        // 获得请求的上下文
+        RequestContext requestContext = RequestContext.getCurrentContext();
         // 获取Spring Security OAuth2的认证信息对象
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !(authentication instanceof OAuth2Authentication)) {
+        if (!(authentication instanceof OAuth2Authentication)) {
             // 无token访问网关内资源, 直接返回null
             return null;
         }
+
         // 将当前登录的用户以及接入客户端的信息放入Map中
         OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
-
         Map<String, String> jsonToken = new HashMap<>(oauth2Authentication.getOAuth2Request().getRequestParameters());
-        // 将jsonToken写入转发微服务的request中
-        RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-        // 关键步骤, 一定要get一下, 下面这行代码才能取到值
-        request.getParameterMap();
-        Map<String, List<String>> requestQueryParams = ctx.getRequestQueryParams();
-        if (requestQueryParams == null) {
-            requestQueryParams = new HashMap<>();
+        if(jsonToken.get("mobile") != null) {
+            requestContext.addZuulRequestHeader("jsonToken", EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(jsonToken)));
         }
-        List<String> arrayList = new ArrayList<>();
-        arrayList.add(EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(jsonToken)));
-        requestQueryParams.put("jsonToken", arrayList);
-        ctx.setRequestQueryParams(requestQueryParams);
         return null;
     }
 }
