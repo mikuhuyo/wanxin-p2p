@@ -120,6 +120,7 @@ Ps: 万万没想到写文档和注释是这么痛苦.
 | Elastic-Job | 分布式任务调度 |
 | RocketMQ | 消息中间件 |
 | Hmily | 分布式事务框架 |
+| ShardingSphere | 分库分表中间件 |
 
 ## 架构图
 
