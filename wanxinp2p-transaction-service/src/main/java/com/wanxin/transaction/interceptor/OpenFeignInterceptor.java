@@ -1,4 +1,4 @@
-package com.wanxin.transaction.config;
+package com.wanxin.transaction.interceptor;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Configuration
-public class OpenFeignConfiguration implements RequestInterceptor {
+public class OpenFeignInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {

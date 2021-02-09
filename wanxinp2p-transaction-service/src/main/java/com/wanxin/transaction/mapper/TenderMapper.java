@@ -2,11 +2,7 @@ package com.wanxin.transaction.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wanxin.transaction.entity.Tender;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * <p>
