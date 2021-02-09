@@ -40,27 +40,30 @@ public class ProjectServiceImpl implements ProjectService {
     public PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy) {
         LambdaQueryWrapper<Project> queryWrapper = new LambdaQueryWrapper<>();
 
-        // 标的类型
-        if (StringUtils.isNotBlank(projectQueryDTO.getType())) {
-            queryWrapper.eq(Project::getType, projectQueryDTO.getType());
-        }
-        // 起止年化利率(投资人) -- 区间
-        if (null != projectQueryDTO.getStartAnnualRate()) {
-            queryWrapper.ge(Project::getAnnualRate, projectQueryDTO.getStartAnnualRate());
-        }
-        if (null != projectQueryDTO.getEndAnnualRate()) {
-            queryWrapper.le(Project::getAnnualRate, projectQueryDTO.getStartAnnualRate());
-        }
-        // 借款期限 -- 区间
-        if (null != projectQueryDTO.getStartPeriod()) {
-            queryWrapper.ge(Project::getPeriod, projectQueryDTO.getStartPeriod());
-        }
-        if (null != projectQueryDTO.getEndPeriod()) {
-            queryWrapper.le(Project::getPeriod, projectQueryDTO.getEndPeriod());
-        }
-        // 标的状态
-        if (StringUtils.isNotBlank(projectQueryDTO.getProjectStatus())) {
-            queryWrapper.eq(Project::getProjectStatus, projectQueryDTO.getProjectStatus());
+        if (projectQueryDTO != null) {
+            // 标的类型
+            if (StringUtils.isNotBlank(projectQueryDTO.getType())) {
+                queryWrapper.eq(Project::getType, projectQueryDTO.getType());
+            }
+
+            // 起止年化利率(投资人) -- 区间
+            if (null != projectQueryDTO.getStartAnnualRate()) {
+                queryWrapper.ge(Project::getAnnualRate, projectQueryDTO.getStartAnnualRate());
+            }
+            if (null != projectQueryDTO.getEndAnnualRate()) {
+                queryWrapper.le(Project::getAnnualRate, projectQueryDTO.getStartAnnualRate());
+            }
+            // 借款期限 -- 区间
+            if (null != projectQueryDTO.getStartPeriod()) {
+                queryWrapper.ge(Project::getPeriod, projectQueryDTO.getStartPeriod());
+            }
+            if (null != projectQueryDTO.getEndPeriod()) {
+                queryWrapper.le(Project::getPeriod, projectQueryDTO.getEndPeriod());
+            }
+            // 标的状态
+            if (StringUtils.isNotBlank(projectQueryDTO.getProjectStatus())) {
+                queryWrapper.eq(Project::getProjectStatus, projectQueryDTO.getProjectStatus());
+            }
         }
 
         // 排序
@@ -74,10 +77,6 @@ public class ProjectServiceImpl implements ProjectService {
         } else {
             queryWrapper.orderByDesc(Project::getCreateDate);
         }
-
-        projectMapper.selectList(null).forEach(project -> {
-            System.out.println(project);
-        });
 
         // 执行查询
         IPage<Project> iPage = projectMapper.selectPage(new Page<Project>(pageNo, pageSize), queryWrapper);
