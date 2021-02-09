@@ -1,7 +1,6 @@
 package com.wanxin.transaction.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanxin.api.consumer.model.ConsumerDTO;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy) {
         LambdaQueryWrapper<Project> queryWrapper = new LambdaQueryWrapper<>();
+
         // 标的类型
         if (StringUtils.isNotBlank(projectQueryDTO.getType())) {
             queryWrapper.eq(Project::getType, projectQueryDTO.getType());
@@ -61,9 +62,6 @@ public class ProjectServiceImpl implements ProjectService {
         if (StringUtils.isNotBlank(projectQueryDTO.getProjectStatus())) {
             queryWrapper.eq(Project::getProjectStatus, projectQueryDTO.getProjectStatus());
         }
-        //分页
-        // 构造分页对象
-        Page<Project> page = new Page<>(pageNo, pageSize);
 
         // 排序
         if (StringUtils.isNotBlank(order) && StringUtils.isNotBlank(sortBy)) {
@@ -77,15 +75,19 @@ public class ProjectServiceImpl implements ProjectService {
             queryWrapper.orderByDesc(Project::getCreateDate);
         }
 
+        projectMapper.selectList(null).forEach(project -> {
+            System.out.println(project);
+        });
+
         // 执行查询
-        IPage<Project> iPage = projectMapper.selectPage(page, queryWrapper);
+        IPage<Project> iPage = projectMapper.selectPage(new Page<Project>(pageNo, pageSize), queryWrapper);
 
         // 封装结果
         List<ProjectDTO> projectDTOList = convertProjectEntityListToDTOList(iPage.getRecords());
         return new PageVO<>(projectDTOList, iPage.getTotal(), pageNo, pageSize);
     }
 
-    private List<ProjectDTO> convertProjectEntityListToDTOList(java.util.List<Project> projectList) {
+    private List<ProjectDTO> convertProjectEntityListToDTOList(List<Project> projectList) {
         if (projectList == null) {
             return null;
         }
@@ -114,7 +116,8 @@ public class ProjectServiceImpl implements ProjectService {
         // 标的可用状态修改, 未同步
         projectDTO.setStatus(StatusCode.STATUS_OUT.getCode());
         // 设置标的创建时间
-        projectDTO.setCreateDate(LocalDateTime.now());
+        // projectDTO.setCreateDate(LocalDateTime.now());
+        projectDTO.setCreateDate(new Date());
         // 设置还款方式
         projectDTO.setRepaymentWay(RepaymentWayCode.FIXED_REPAYMENT.getCode());
         // 设置标的类型

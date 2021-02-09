@@ -1,13 +1,12 @@
 package com.wanxin.api.transaction.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <P>
@@ -22,7 +21,6 @@ import java.time.LocalDateTime;
 @ApiModel(value = "TenderOverviewDTO", description = "投标信息预览")
 public class TenderOverviewDTO {
 
-    @JsonSerialize(using = ToStringSerializer.class)
     @ApiModelProperty("主键")
     private Long id;
 
@@ -39,6 +37,7 @@ public class TenderOverviewDTO {
     private String tenderWay = "手动出借";
 
     @ApiModelProperty("创建时间")
-    private LocalDateTime createDate;
+    // private LocalDateTime createDate;
+    private Date createDate;
 
 }

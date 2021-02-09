@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -78,7 +79,8 @@ public class Tender implements Serializable {
      * 创建时间
      */
     @TableField("CREATE_DATE")
-    private LocalDateTime createDate;
+    // private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 投标/债权转让 请求流水号

@@ -1,11 +1,10 @@
 package com.wanxin.api.transaction.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -21,7 +20,6 @@ public class TenderDTO {
     /**
      * 主键
      */
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     /**
@@ -62,7 +60,8 @@ public class TenderDTO {
     /**
      * 创建时间
      */
-    private LocalDateTime createDate;
+    // private LocalDateTime createDate;
+    private Date createDate;
 
     /**
      * 投标/债权转让 请求流水号
