@@ -3,6 +3,8 @@ package com.wanxin.depository.service;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.consumer.model.RechargeRequest;
+import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.StatusCode;
 import com.wanxin.common.util.EncryptUtil;
@@ -30,6 +32,43 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     @Autowired
     private DepositoryRecordMapper depositoryRecordMapper;
 
+    private String personalRegistry = "PERSONAL_REGISTER";
+    private String recharge = "RECHARGE";
+    private String withdraw = "WITHDRAW";
+
+    private GatewayRequest encapsulatedGatewayRequest(String serviceName, Object data, String uri) {
+        String depositoryUrl = configService.getDepositoryUrl() + uri;
+        String p2pCode = configService.getP2pCode();
+        String p2pPrivateKeyKey = configService.getP2pPrivateKey();
+
+        // 签名数据
+        String reqData = JSON.toJSONString(data);
+        String sign = RSAUtil.sign(reqData, p2pPrivateKeyKey, "utf-8");
+
+        // 签名数据
+        reqData = EncryptUtil.encodeURL(EncryptUtil.encodeUTF8StringBase64(reqData));
+        sign = EncryptUtil.encodeURL(sign);
+
+        GatewayRequest gatewayRequest = new GatewayRequest();
+        gatewayRequest.setServiceName(serviceName);
+        gatewayRequest.setPlatformNo(p2pCode);
+        gatewayRequest.setReqData(reqData);
+        gatewayRequest.setSignature(sign);
+        gatewayRequest.setDepositoryUrl(depositoryUrl);
+
+        return gatewayRequest;
+    }
+
+    @Override
+    public GatewayRequest withdrawRecords(WithdrawRequest withdrawRequest) {
+        return encapsulatedGatewayRequest(this.withdraw, withdrawRequest, "/gateway");
+    }
+
+    @Override
+    public GatewayRequest rechargeRecords(RechargeRequest rechargeRequest) {
+        return encapsulatedGatewayRequest(this.recharge, rechargeRequest, "/gateway");
+    }
+
     @Override
     public Boolean modifyRequestStatus(String requestNo, Integer requestsStatus) {
         DepositoryRecord depositoryRecord = new DepositoryRecord();
@@ -41,19 +80,7 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public GatewayRequest createConsumer(ConsumerRequest consumerRequest) {
-        // 保存交易记录
-        saveDepositoryRecord(consumerRequest);
-
-        // 签名数据并返回
-        String reqData = JSON.toJSONString(consumerRequest);
-        String sign = RSAUtil.sign(reqData, configService.getP2pPrivateKey(), "utf-8");
-        GatewayRequest gatewayRequest = new GatewayRequest();
-        gatewayRequest.setServiceName("PERSONAL_REGISTER");
-        gatewayRequest.setPlatformNo(configService.getP2pCode());
-        gatewayRequest.setReqData(EncryptUtil.encodeURL(EncryptUtil.encodeUTF8StringBase64(reqData)));
-        gatewayRequest.setSignature(EncryptUtil.encodeURL(sign));
-        gatewayRequest.setDepositoryUrl(configService.getDepositoryUrl() + "/gateway");
-        return gatewayRequest;
+        return encapsulatedGatewayRequest(personalRegistry, consumerRequest, "/gateway");
     }
 
     private void saveDepositoryRecord(ConsumerRequest consumerRequest) {

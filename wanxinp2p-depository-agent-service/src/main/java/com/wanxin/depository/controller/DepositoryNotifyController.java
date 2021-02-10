@@ -1,7 +1,10 @@
 package com.wanxin.depository.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
+import com.wanxin.api.depository.model.DepositoryRechargeResponse;
+import com.wanxin.api.depository.model.DepositoryWithdrawResponse;
 import com.wanxin.common.util.EncryptUtil;
 import com.wanxin.depository.message.GatewayMessageProducer;
 import com.wanxin.depository.service.DepositoryRecordService;
@@ -31,15 +34,43 @@ public class DepositoryNotifyController {
     @Autowired
     private GatewayMessageProducer gatewayMessageProducer;
 
-    @ApiOperation("接受银行存管系统开户回调结果")
-    @GetMapping(value = "/gateway")
+    @GetMapping(value = "/gateway", params = "serviceName=WITHDRAW")
+    @ApiOperation("接受银行存管系统提现返回结果")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "serviceName", value = "请求的存管接口名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "platformNo", value = "平台编号, 平台与存管系统签约时获取", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "signature", value = "对reqData参数的签名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "reqData", value = "业务数据报文, json格式", required = true, dataType = "String", paramType = "query")
     })
-    public String receiveDepositoryCreateConsumerResult(@RequestParam(name = "serviceName", defaultValue = "PERSONAL_REGISTER") String serviceName, @RequestParam("platformNo") String platformNo, @RequestParam("signature") String signature, @RequestParam("reqData") String reqData) {
+    public String receiveDepositoryWithdrawResult(@RequestParam(name = "serviceName") String serviceName, @RequestParam("platformNo") String platformNo, @RequestParam("signature") String signature, @RequestParam("reqData") String reqData) {
+        DepositoryWithdrawResponse depositoryWithdrawResponse = JSON.parseObject(EncryptUtil.decodeUTF8StringBase64(reqData), DepositoryWithdrawResponse.class);
+        gatewayMessageProducer.personalWithdraw(depositoryWithdrawResponse);
+        return "OK";
+    }
+
+    @GetMapping(value = "/gateway", params = "serviceName=RECHARGE")
+    @ApiOperation("接受银行存管系统充值返回结果")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "serviceName", value = "请求的存管接口名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "platformNo", value = "平台编号, 平台与存管系统签约时获取", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "signature", value = "对reqData参数的签名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "reqData", value = "业务数据报文, json格式", required = true, dataType = "String", paramType = "query")
+    })
+    public String receiveDepositoryRechargeResult(@RequestParam(name = "serviceName") String serviceName, @RequestParam("platformNo") String platformNo, @RequestParam("signature") String signature, @RequestParam("reqData") String reqData) {
+        DepositoryRechargeResponse depositoryRechargeResponse = JSON.parseObject(EncryptUtil.decodeUTF8StringBase64(reqData), DepositoryRechargeResponse.class);
+        gatewayMessageProducer.personalRecharge(depositoryRechargeResponse);
+        return "OK";
+    }
+
+    @GetMapping(value = "/gateway", params = "PERSONAL_REGISTER")
+    @ApiOperation("接受银行存管系统开户回调结果")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "serviceName", value = "请求的存管接口名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "platformNo", value = "平台编号, 平台与存管系统签约时获取", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "signature", value = "对reqData参数的签名", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "reqData", value = "业务数据报文, json格式", required = true, dataType = "String", paramType = "query")
+    })
+    public String receiveDepositoryCreateConsumerResult(@RequestParam(name = "serviceName") String serviceName, @RequestParam("platformNo") String platformNo, @RequestParam("signature") String signature, @RequestParam("reqData") String reqData) {
         // 更新数据
         DepositoryConsumerResponse response = JSON.parseObject(EncryptUtil.decodeUTF8StringBase64(reqData), DepositoryConsumerResponse.class);
         depositoryRecordService.modifyRequestStatus(response.getRequestNo(), response.getStatus());

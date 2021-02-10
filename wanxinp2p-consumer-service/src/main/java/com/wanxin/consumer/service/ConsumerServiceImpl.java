@@ -1,13 +1,13 @@
 package com.wanxin.consumer.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.account.model.AccountDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
-import com.wanxin.api.consumer.model.BankCardDTO;
-import com.wanxin.api.consumer.model.ConsumerDTO;
-import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
-import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.consumer.model.*;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
+import com.wanxin.api.depository.model.DepositoryRechargeResponse;
+import com.wanxin.api.depository.model.DepositoryWithdrawResponse;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
@@ -16,10 +16,16 @@ import com.wanxin.consumer.agent.DepositoryAgentApiAgent;
 import com.wanxin.consumer.common.ConsumerErrorCode;
 import com.wanxin.consumer.entity.BankCard;
 import com.wanxin.consumer.entity.Consumer;
+import com.wanxin.consumer.entity.RechargeRecord;
+import com.wanxin.consumer.entity.WithdrawRecord;
 import com.wanxin.consumer.mapper.BankCardMapper;
 import com.wanxin.consumer.mapper.ConsumerMapper;
+import com.wanxin.consumer.mapper.RechargeRecordMapper;
+import com.wanxin.consumer.mapper.WithdrawRecordMapper;
+import com.wanxin.consumer.utils.ApolloConfigUtil;
 import com.wanxin.consumer.utils.CheckBankCardUtil;
 import com.wanxin.consumer.utils.IdCardUtil;
+import com.wanxin.consumer.utils.OkHttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hmily.annotation.HmilyTCC;
 import org.springframework.beans.BeanUtils;
@@ -29,14 +35,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * @author yuelimin
  * @version 1.0.0
  * @since 1.8
  */
-@Service
 @Slf4j
+@Service
 public class ConsumerServiceImpl implements ConsumerService {
     @Autowired
     private ConsumerMapper consumerMapper;
@@ -50,6 +58,110 @@ public class ConsumerServiceImpl implements ConsumerService {
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
     @Autowired
     private CheckBankCardUtil checkBankCardUtil;
+    @Autowired
+    private RechargeRecordMapper rechargeRecordMapper;
+    @Autowired
+    private WithdrawRecordMapper withdrawRecordMapper;
+
+    @Override
+    public RestResponse<GatewayRequest> createWithdrawRecord(String amount, String fallbackUrl, String mobile) {
+        ConsumerDTO consumer = getByMobile(mobile);
+        assert consumer != null;
+
+        String userNo = consumer.getUserNo();
+        Long id = consumer.getId();
+        String requestNo = CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX);
+
+        saveWithdrawRecord(id, userNo, amount, requestNo);
+
+        WithdrawRequest withdrawRequest = new WithdrawRequest();
+        withdrawRequest.setAmount(new BigDecimal(amount));
+        withdrawRequest.setCardNumber(consumer.getIdNumber());
+        withdrawRequest.setMobile(mobile);
+        withdrawRequest.setRequestNo(requestNo);
+        withdrawRequest.setCallbackURL(fallbackUrl);
+        return depositoryAgentApiAgent.createWithdrawRecord(withdrawRequest);
+    }
+
+    private void saveWithdrawRecord(Long cid, String userNo, String amount, String requestNo)  {
+        WithdrawRecord withdrawRecord = new WithdrawRecord();
+        withdrawRecord.setConsumerId(cid);
+        withdrawRecord.setUserNo(userNo);
+        withdrawRecord.setAmount(new BigDecimal(amount));
+        withdrawRecord.setCreateDate(LocalDateTime.now());
+        withdrawRecord.setCallbackStatus(0);
+
+        withdrawRecordMapper.insert(withdrawRecord);
+    }
+
+    @Override
+    public Boolean modifyWithdrawRecordResult(DepositoryWithdrawResponse depositoryWithdrawResponse) {
+        if (!"SUCCESS".equals(depositoryWithdrawResponse.getTransactionStatus().toLowerCase())) {
+            throw new BusinessException(ConsumerErrorCode.E_140141);
+        }
+
+        String requestNo = depositoryWithdrawResponse.getRequestNo();
+        WithdrawRecord withdrawRecord = new WithdrawRecord();
+        withdrawRecord.setCallbackStatus(1);
+
+        return withdrawRecordMapper.update(withdrawRecord, new LambdaQueryWrapper<WithdrawRecord>().eq(WithdrawRecord::getRequestNo, requestNo)) == 1;
+    }
+
+    @Override
+    public RestResponse<GatewayRequest> createRechargeRecord(String amount, String fallback, String mobile) {
+        ConsumerDTO consumer = getByMobile(mobile);
+        assert consumer != null;
+
+        String userNo = consumer.getUserNo();
+        Long id = consumer.getId();
+        String requestNo = CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX);
+
+        saveRechargeRecord(amount, userNo, requestNo, id);
+
+        RechargeRequest rechargeRequest = new RechargeRequest();
+        rechargeRequest.setAmount(new BigDecimal(amount));
+        rechargeRequest.setCallbackUrl(fallback);
+        rechargeRequest.setUserNo(userNo);
+        rechargeRequest.setRequestNo(requestNo);
+        return depositoryAgentApiAgent.createRechargeRecord(rechargeRequest);
+    }
+
+    private void saveRechargeRecord(String amount, String userNo, String requestNo, Long id) {
+        RechargeRecord rechargeRecord = new RechargeRecord();
+        rechargeRecord.setAmount(new BigDecimal(amount));
+        rechargeRecord.setUserNo(userNo);
+        rechargeRecord.setRequestNo(requestNo);
+        rechargeRecord.setCallbackStatus(0);
+        rechargeRecord.setConsumerId(id);
+        rechargeRecord.setCreateDate(LocalDateTime.now());
+
+        rechargeRecordMapper.insert(rechargeRecord);
+    }
+
+    @Override
+    public Boolean modifyRechargeRecordResult(DepositoryRechargeResponse depositoryRechargeResponse) {
+        if (!"SUCCESS".equals(depositoryRechargeResponse.getTransactionStatus().toLowerCase())) {
+            throw  new BusinessException(ConsumerErrorCode.E_140131);
+        }
+
+        String requestNo = depositoryRechargeResponse.getRequestNo();
+        RechargeRecord rechargeRecord = new RechargeRecord();
+        rechargeRecord.setCallbackStatus(1);
+        return rechargeRecordMapper.update(rechargeRecord, new LambdaQueryWrapper<RechargeRecord>().eq(RechargeRecord::getRequestNo, requestNo)) == 1;
+    }
+
+    @Override
+    public BalanceDetailsDTO getBalanceDetailsByUserNo(String userNo) throws IOException {
+        String info = OkHttpUtil.doSyncGet(ApolloConfigUtil.getDepositoryUrl() + "/balance-details/" + userNo);
+        Map map = JSONObject.parseObject(info, Map.class);
+        BalanceDetailsDTO balanceDetailsDTO = new BalanceDetailsDTO();
+        balanceDetailsDTO.setUserNo(map.get("userNo").toString());
+        balanceDetailsDTO.setAppCode(map.get("appCode").toString());
+        balanceDetailsDTO.setBalance((BigDecimal) map.get("balance"));
+        balanceDetailsDTO.setFreezeAmount((BigDecimal) map.get("freezeAmount"));
+        balanceDetailsDTO.setChangeType((Integer) map.get("changeType"));
+        return balanceDetailsDTO;
+    }
 
     @Override
     public ConsumerDTO getConsumerByMobile(String mobile) {

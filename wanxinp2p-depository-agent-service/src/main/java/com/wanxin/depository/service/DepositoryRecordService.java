@@ -1,6 +1,8 @@
 package com.wanxin.depository.service;
 
 import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.consumer.model.RechargeRequest;
+import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 
 /**
@@ -9,6 +11,22 @@ import com.wanxin.api.depository.model.GatewayRequest;
  * @since 1.8
  */
 public interface DepositoryRecordService {
+    /**
+     * 生成用户提现数据
+     *
+     * @param withdrawRequest
+     * @return
+     */
+    GatewayRequest withdrawRecords(WithdrawRequest withdrawRequest);
+
+    /**
+     * 生成用户充值数据
+     *
+     * @param rechargeRequest
+     * @return
+     */
+    GatewayRequest rechargeRecords(RechargeRequest rechargeRequest);
+
     /**
      * 根据请求流水号更新请求状态
      *

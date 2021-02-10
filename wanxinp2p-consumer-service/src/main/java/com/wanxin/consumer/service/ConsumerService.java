@@ -1,9 +1,12 @@
 package com.wanxin.consumer.service;
 
+import com.wanxin.api.consumer.model.BalanceDetailsDTO;
 import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
+import com.wanxin.api.depository.model.DepositoryRechargeResponse;
+import com.wanxin.api.depository.model.DepositoryWithdrawResponse;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
 
@@ -15,6 +18,50 @@ import java.io.IOException;
  * @since 1.8
  */
 public interface ConsumerService {
+    /**
+     * 生成用户提现数据
+     *
+     * @param amount      提现金额
+     * @param fallbackUrl 回调地址
+     * @param mobile      手机号
+     * @return
+     */
+    RestResponse<GatewayRequest> createWithdrawRecord(String amount, String fallbackUrl, String mobile);
+
+    /**
+     * 更新提现回调回调状态
+     *
+     * @param depositoryWithdrawResponse
+     * @return
+     */
+    Boolean modifyWithdrawRecordResult(DepositoryWithdrawResponse depositoryWithdrawResponse);
+
+    /**
+     * 生成用户充值数据
+     *
+     * @param amount   充值金额
+     * @param fallback 回调地址
+     * @param mobile   手机号
+     * @return
+     */
+    RestResponse<GatewayRequest> createRechargeRecord(String amount, String fallback, String mobile);
+
+    /**
+     * 更新充值回调状态
+     *
+     * @param depositoryRechargeResponse
+     * @return
+     */
+    Boolean modifyRechargeRecordResult(DepositoryRechargeResponse depositoryRechargeResponse);
+
+    /**
+     * 根据用户流水号查询用户余额信息
+     *
+     * @param userNo 用户流水号
+     * @return
+     */
+    BalanceDetailsDTO getBalanceDetailsByUserNo(String userNo) throws IOException;
+
     /**
      * 根据手机号获取用户信息
      *

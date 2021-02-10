@@ -25,7 +25,6 @@ public class SecurityUtil {
         if (servletRequestAttributes != null) {
             HttpServletRequest request = servletRequestAttributes.getRequest();
 
-            System.out.println(request.getHeader("Authorization"));
             Map jwt = JSONObject.parseObject(EncryptUtil.decodeBase64(request.getHeader("jsonToken")), Map.class);
             if (jwt.get("mobile").toString() != null && !"".equals(jwt.get("mobile").toString())) {
                 loginUser.setMobile(jwt.get("mobile").toString());

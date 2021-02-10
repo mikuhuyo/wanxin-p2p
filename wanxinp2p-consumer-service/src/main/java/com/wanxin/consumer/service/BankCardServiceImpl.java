@@ -17,11 +17,16 @@ import org.springframework.stereotype.Service;
 public class BankCardServiceImpl implements BankCardService {
     @Autowired
     private BankCardMapper bankCardMapper;
+    @Autowired
+    private ConsumerService consumerService;
 
     @Override
     public BankCardDTO getByUserMobile(String mobile) {
         BankCard bankCard = bankCardMapper.selectOne(new LambdaQueryWrapper<BankCard>().eq(BankCard::getMobile, mobile));
-        return convertBankCardEntityToDTO(bankCard);
+        String name = consumerService.getConsumerByMobile(mobile).getFullname();
+        BankCardDTO bankCardDTO = convertBankCardEntityToDTO(bankCard);
+        bankCardDTO.setFullName(name);
+        return bankCardDTO;
     }
 
     @Override

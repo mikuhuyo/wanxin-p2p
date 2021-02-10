@@ -1,6 +1,8 @@
 package com.wanxin.api.depository;
 
 import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.consumer.model.RechargeRequest;
+import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
 
@@ -14,6 +16,22 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface DepositoryAgentAPI {
+    /**
+     * 生成用户提现数据
+     *
+     * @param withdrawRequest
+     * @return
+     */
+    RestResponse<GatewayRequest> createWithdrawRecord(WithdrawRequest withdrawRequest);
+
+    /**
+     * 生成用户充值数据
+     *
+     * @param rechargeRequest
+     * @return
+     */
+    RestResponse<GatewayRequest> createRechargeRecord(RechargeRequest rechargeRequest);
+
     /**
      * 开通存管账户
      *

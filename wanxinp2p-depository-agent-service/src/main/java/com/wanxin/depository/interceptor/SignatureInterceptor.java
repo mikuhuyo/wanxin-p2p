@@ -67,7 +67,6 @@ public class SignatureInterceptor implements Interceptor {
             String jsonString = EncryptUtil.decodeUTF8StringBase64(reqData);
             final String serviceName = getParam(url, "serviceName");
             final String platformNo = getParam(url, "platformNo");
-            //
             String base = url.substring(0, url.indexOf("?") + 1);
 
             // 进行签名

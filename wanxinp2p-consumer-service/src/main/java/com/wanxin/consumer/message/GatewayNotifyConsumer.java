@@ -2,6 +2,8 @@ package com.wanxin.consumer.message;
 
 import com.alibaba.fastjson.JSON;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
+import com.wanxin.api.depository.model.DepositoryRechargeResponse;
+import com.wanxin.api.depository.model.DepositoryWithdrawResponse;
 import com.wanxin.consumer.service.ConsumerService;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
@@ -46,6 +48,16 @@ public class GatewayNotifyConsumer {
                     if ("PERSONAL_REGISTER".equals(tag)) {
                         DepositoryConsumerResponse response = JSON.parseObject(body, DepositoryConsumerResponse.class);
                         consumerService.modifyResult(response);
+                    }
+
+                    if ("RECHARGE".equals(tag)) {
+                        DepositoryRechargeResponse depositoryRechargeResponse = JSON.parseObject(body, DepositoryRechargeResponse.class);
+                        consumerService.modifyRechargeRecordResult(depositoryRechargeResponse);
+                    }
+
+                    if ("WITHDRAW".equals(tag)) {
+                        DepositoryWithdrawResponse depositoryWithdrawResponse = JSON.parseObject(body, DepositoryWithdrawResponse.class);
+                        // TODO 完成修改提现状态
                     }
                 } catch (Exception e) {
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
