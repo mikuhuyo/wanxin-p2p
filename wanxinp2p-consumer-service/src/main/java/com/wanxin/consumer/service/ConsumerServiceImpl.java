@@ -78,8 +78,10 @@ public class ConsumerServiceImpl implements ConsumerService {
         withdrawRequest.setAmount(new BigDecimal(amount));
         withdrawRequest.setCardNumber(consumer.getIdNumber());
         withdrawRequest.setMobile(mobile);
+        withdrawRequest.setUserNo(userNo);
         withdrawRequest.setRequestNo(requestNo);
         withdrawRequest.setCallbackURL(fallbackUrl);
+        withdrawRequest.setCommission(new BigDecimal("0"));
         return depositoryAgentApiAgent.createWithdrawRecord(withdrawRequest);
     }
 
