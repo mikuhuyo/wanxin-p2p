@@ -33,7 +33,7 @@ public class SwaggerConfiguration {
     }
 
     private ApiInfo buildApiInfo() {
-        Contact contact = new Contact("岳立民", "https://github.com/YueLiMin-say", "yueliminvc@outlook.com");
+        Contact contact = new Contact("岳立民", "https://github.com/mikuhuyo", "yueliminvc@outlook.com");
         return new ApiInfoBuilder()
                 .title("万信金融P2P平台-银行存管代理API文档")
                 .description("银行存管代理api")
