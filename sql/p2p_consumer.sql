@@ -37,7 +37,8 @@ CREATE TABLE `consumer` (
   `AUTH_LIST` varchar(50) DEFAULT NULL COMMENT '存管授权列表',
   `IS_BIND_CARD` tinyint(1) DEFAULT NULL COMMENT '是否已绑定银行卡',
   `LOAN_AMOUNT` decimal(10,0) DEFAULT NULL,
-  `STATUS` tinyint(1) DEFAULT NULL COMMENT '可用状态',
+  `STATUS` tinyint(1) DEFAULT NULL COMMENT '可用状态-0 不可用, 1 可用',
+  `IS_CARD_AUTH` tinyint(1) DEFAULT NULL COMMENT '是否进行身份验证-0 未验证, 1 已验证',
   `REQUEST_NO` varchar(50) DEFAULT NULL COMMENT '请求流水号',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='c端用户信息表';
