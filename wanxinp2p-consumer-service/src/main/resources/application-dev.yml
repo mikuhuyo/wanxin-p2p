@@ -1,0 +1,24 @@
+# -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53050
+app:
+  id: consumer-service
+apollo:
+  meta: http://192.168.158.162:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: application,micro_service.spring-boot-druid,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-hystrix,micro_service.spring-ribbon,micro_service.spring-boot-redis,micro_service.mybatis-plus,micro_service.spring-rocketmq
+
+logging:
+  config: classpath:log4j2-dev.xml
+
+minio:
+  appId: 'dbc1db6113fe489981f97409e8696788'
+  accessKey: 'JDJhJDEwJGdNRGJRZGd4NGhwNWNHd0M5ODIuUU9SeEVDOHZzbzExbU1ZZTVObUxBTUJ1RW5RU3pBOGlP'
+  secretKey: 'JDJhJDEwJGdNRGJRZGd4NGhwNWNHd0M5ODIuUU9TTkJvMmhLcjQyL1Q0aW94UFhBUlFrTUpVTkJRelhT'
+  uploadUrl: 'http://127.0.0.1:56090/minio/image'
+
+baidu:
+  appId: 23658488
+  accessKey: 'h5BZdSGIcTyoDzXA6CrHLMt3'
+  secretKey: 'WtcHuBscFcQhyBjvzgazebXpkgPPwvkx'

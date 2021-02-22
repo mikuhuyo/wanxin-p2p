@@ -1,0 +1,24 @@
+# -Denv=dev -Dapollo.cluster=DEFAULT -Dserver.port=53000
+eureka:
+  server:
+    # 关闭服务器自我保护，客户端心跳检测15分钟内错误达到80%服务会保护，导致别人还认为是好用的服务
+    enable-self-preservation: false
+    # 清理间隔（单位毫秒，默认是60*1000）5秒将客户端剔除的服务在服务注册列表中剔除#
+    eviction-interval-timer-in-ms: 10000
+    # eureka是CAP理论种基于AP策略，为了保证强一致性关闭此切换CP 默认不关闭 false关闭
+    # shouldUseReadOnlyResponseCache: true
+  client:
+    # false:不作为一个客户端注册到注册中心
+    register-with-eureka: false
+    # 为true时，可以启动，但报异常：Cannot execute request on any known server
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://127.0.0.1:${server.port}/eureka/
+  instance:
+    hostname: ${spring.cloud.client.ip-address}
+    # 注册时使用IP地址，而不是服务名
+    prefer-ip-address: true
+
+# 日志配置
+logging:
+  config: classpath:log4j2-dev.xml
