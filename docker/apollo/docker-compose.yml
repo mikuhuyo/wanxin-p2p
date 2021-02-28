@@ -1,5 +1,20 @@
 version: '3.1'
 services:
+  # mysql
+  mysql:
+    container_name: mysql
+    image: docker.io/mysql:5.7
+    restart: always
+    network_mode: "host"
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "yueliminvc@outlook.com"
+      TZ: Asia/Shanghai
+    ports:
+      - "3306"
+    volumes:
+      - "./db:/var/lib/mysql"
+      - "./init:/docker-entrypoint-initdb.d"
   # apollo
   apollo-configservice:
     container_name: apollo-configservice
