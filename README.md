@@ -47,7 +47,6 @@ Ps: 万万没想到写文档和注释是这么痛苦.
 ```shell script
 # docker
 # resource
-# sql
 # wanxinp2p-account-service
 # wanxinp2p-api
 # wanxinp2p-common
