@@ -230,6 +230,8 @@ public class ConsumerServiceImpl implements ConsumerService {
         if (!IdCardUtil.isValidatedAllIdcard(consumerRequest.getIdNumber())) {
             throw new BusinessException(ConsumerErrorCode.E_140110);
         }
+        consumer.setStatus(0);
+        consumer.setIsCardAuth(0);
         consumer.setIdNumber(consumerRequest.getIdNumber());
         consumer.setAuthList("ALL");
         consumerMapper.update(consumer, new LambdaQueryWrapper<Consumer>().eq(Consumer::getMobile, consumerDTO.getMobile()));
@@ -245,11 +247,11 @@ public class ConsumerServiceImpl implements ConsumerService {
         bankCard.setStatus(StatusCode.STATUS_OUT.getCode());
 
         BankCardDTO existBankCard = bankCardService.getByConsumerId(bankCard.getConsumerId());
-        if (existBankCard != null) {
+        if (existBankCard == null) {
+            bankCardMapper.insert(bankCard);
+        } else {
             bankCard.setId(existBankCard.getId());
             bankCardMapper.updateById(bankCard);
-        } else {
-            bankCardMapper.insert(bankCard);
         }
         return depositoryAgentApiAgent.createConsumer(consumerRequest);
     }
