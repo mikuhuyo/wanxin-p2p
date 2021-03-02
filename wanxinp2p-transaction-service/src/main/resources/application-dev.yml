@@ -22,7 +22,7 @@ spring:
       binding-tables: project,tender
       tables:
         project:
-          actualDataNodes: db$->{0..1}.project_$->{0..1}
+          actualDataNodes: db$->{0..1}.project
           database‐strategy:
             inline:
               sharding‐column: ID
@@ -30,9 +30,9 @@ spring:
           tableStrategy:
             inline:
               shardingColumn: ID
-              algorithmExpression: project_$->{ID % 2}
+              algorithmExpression: project
         tender:
-          actualDataNodes: db$->{0..1}.tender_$->{0..1}
+          actualDataNodes: db$->{0..1}.tender
           database‐strategy:
             inline:
               sharding‐column: PROJECT_ID
@@ -40,7 +40,7 @@ spring:
           tableStrategy:
             inline:
               shardingColumn: PROJECT_ID
-              algorithmExpression: tender_$->{PROJECT_ID % 2}
+              algorithmExpression: tender
     props:
       sql:
         show: true
