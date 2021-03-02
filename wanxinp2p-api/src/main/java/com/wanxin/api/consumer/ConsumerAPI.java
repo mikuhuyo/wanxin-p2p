@@ -6,7 +6,6 @@ import com.wanxin.common.domain.RestResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * @author yuelimin
@@ -15,20 +14,28 @@ import java.util.Map;
  */
 public interface ConsumerAPI {
     /**
+     * 保存用户详细信息(主要存储身份证文件标识)
+     *
+     * @param consumerDetailsDTO 封装用户详情信息
+     * @return 提示信息-成功或者失败
+     */
+    RestResponse<String> saveConsumerDetails(ConsumerDetailsDTO consumerDetailsDTO);
+
+    /**
      * 获取文件上传秘钥
      *
-     * @return Map集合
+     * @return 上传凭证
      */
-    RestResponse<Map> applyUploadCertificate();
+    RestResponse<FileTokenDTO> applyUploadCertificate();
 
     /**
      * 提交身份证图片给百度AI进行识别
      *
      * @param multipartFile 上传的身份证图片文件
      * @param flag          身份证正反面(取值 front 或者 back)
-     * @return Map集合 识别成功后把身份证上的姓名和身份证号存到map中返回
+     * @return ORC识别信息
      */
-    RestResponse<Map> imageRecognition(MultipartFile multipartFile, String flag) throws IOException;
+    RestResponse<IdCardDTO> imageRecognition(MultipartFile multipartFile, String flag) throws IOException;
 
     /**
      * 生成提现数据
