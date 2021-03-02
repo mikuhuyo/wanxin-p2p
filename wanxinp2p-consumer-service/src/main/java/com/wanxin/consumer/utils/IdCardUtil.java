@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @Slf4j
 public class IdCardUtil {
+
     /**
      * 省, 直辖市代码表:
      * 11 : 北京
@@ -395,7 +396,6 @@ public class IdCardUtil {
         }
         return a;
     }
-
 
     /**
      * 通过身份证号码获取出生日期, 性别, 年龄
