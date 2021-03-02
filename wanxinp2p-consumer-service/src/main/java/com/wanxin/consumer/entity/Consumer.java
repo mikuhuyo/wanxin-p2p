@@ -81,10 +81,16 @@ public class Consumer implements Serializable {
     private Integer isBindCard;
 
     /**
-     * 可用状态
+     * 可用状态 0 不可用, 1 可用
      */
     @TableField("STATUS")
     private Integer status;
+
+    /**
+     * 是否进行身份验证 0 未验证, 1 已验证
+     */
+    @TableField("IS_CARD_AUTH")
+    private Integer isCardAuth;
 
     /**
      * 可贷额度
