@@ -4,8 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 /**
  * @author yuelimin
  * @version 1.0.0
@@ -25,7 +23,4 @@ public class IdCardDTO {
 
     @ApiModelProperty("ORC识别身份证地址")
     private String idCardAddress;
-
-    @ApiModelProperty("ORC识别上传时间")
-    private LocalDateTime uploadTime;
 }
