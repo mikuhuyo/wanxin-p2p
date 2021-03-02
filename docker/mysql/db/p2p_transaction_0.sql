@@ -6,10 +6,10 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for claim_0
+-- Table structure for claim
 -- ----------------------------
-DROP TABLE IF EXISTS `claim_0`;
-CREATE TABLE `claim_0` (
+DROP TABLE IF EXISTS `claim`;
+CREATE TABLE `claim` (
   `ID` bigint(20) NOT NULL COMMENT '主键',
   `PROJECT_ID` bigint(20) DEFAULT NULL COMMENT '标的标识',
   `PROJECT_NO` varchar(50) DEFAULT NULL COMMENT '标的编码',
@@ -23,10 +23,10 @@ CREATE TABLE `claim_0` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='债权转让标的附加信息';
 
 -- ----------------------------
--- Table structure for project_0
+-- Table structure for project
 -- ----------------------------
-DROP TABLE IF EXISTS `project_0`;
-CREATE TABLE `project_0` (
+DROP TABLE IF EXISTS `project`;
+CREATE TABLE `project` (
   `ID` bigint(20) NOT NULL COMMENT '主键',
   `CONSUMER_ID` bigint(20) NOT NULL COMMENT '发标人用户标识',
   `USER_NO` varchar(50) DEFAULT NULL COMMENT '发标人用户编码',
@@ -48,10 +48,10 @@ CREATE TABLE `project_0` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标的信息表';
 
 -- ----------------------------
--- Table structure for tender_0
+-- Table structure for tender
 -- ----------------------------
-DROP TABLE IF EXISTS `tender_0`;
-CREATE TABLE `tender_0` (
+DROP TABLE IF EXISTS `tender`;
+CREATE TABLE `tender` (
   `ID` bigint(20) NOT NULL COMMENT '主键',
   `CONSUMER_ID` bigint(20) NOT NULL COMMENT '投标人用户标识',
   `CONSUMER_USERNAME` varchar(50) DEFAULT NULL COMMENT '投标人用户名',
