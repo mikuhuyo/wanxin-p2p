@@ -1,6 +1,6 @@
 package com.wanxin.transaction.controller;
 
-import com.wanxin.api.transaction.TransactionApi;
+import com.wanxin.api.transaction.TransactionAPI;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.api.transaction.model.ProjectQueryDTO;
 import com.wanxin.common.domain.PageVO;
@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author yuelimin
@@ -23,9 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(value = "支付服务中心API", tags = "Transaction")
-public class TransactionController implements TransactionApi {
+public class TransactionController implements TransactionAPI {
     @Autowired
     private ProjectService projectService;
+
+    @Override
+    @PutMapping("/m/projects/{id}/projectStatus/{approveStatus}")
+    @ApiOperation("管理员审核标的信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "标的id", required = true, dataType = "long", paramType = "path"),
+            @ApiImplicitParam(name = "approveStatus", value = "审批状态", required = true, dataType = "ref", paramType = "path")
+    })
+    public RestResponse<String> projectsApprovalStatus(@PathVariable("id") Long id, @PathVariable("approveStatus") String approveStatus) {
+        String result = projectService.projectsApprovalStatus(id, approveStatus);
+        return RestResponse.success(result);
+    }
 
     @Override
     @PostMapping("/projects/q")
@@ -51,5 +60,12 @@ public class TransactionController implements TransactionApi {
     @ApiImplicitParam(name = "project", value = "标的信息", required = true, dataType = "Project", paramType = "body")
     public RestResponse<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
         return RestResponse.success(projectService.createProject(projectDTO));
+    }
+
+    @Override
+    @GetMapping("/my/qualifications")
+    @ApiOperation("借款人发标资格查询")
+    public RestResponse<Integer> qualifications() {
+        return RestResponse.success(projectService.queryQualifications());
     }
 }

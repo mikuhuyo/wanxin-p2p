@@ -9,6 +9,7 @@ import com.wanxin.api.transaction.model.ProjectQueryDTO;
 import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
 import com.wanxin.transaction.agent.ConsumerApiAgent;
+import com.wanxin.transaction.common.constant.TransactionErrorCode;
 import com.wanxin.transaction.entity.Project;
 import com.wanxin.transaction.mapper.ProjectMapper;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +35,26 @@ public class ProjectServiceImpl implements ProjectService {
     private ConsumerApiAgent consumerApiAgent;
     @Autowired
     private ProjectMapper projectMapper;
+
+    @Override
+    public String projectsApprovalStatus(Long id, String approveStatus) {
+        // 根据id查询标的信息并转换为DTO对象
+        Project project = projectMapper.selectById(id);
+        ProjectDTO projectDTO = convertProjectEntityToDTO(project);
+
+        // 生成流水号
+        // projectDTO.setRequestNo();
+
+        // 通过feign远程访问存管代理服务, 把标的信息传输过去
+        // RestResponse<String> restResponse = depositoryAgentApiAgent.createProject(projectDTO);
+        //
+        // if (DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(restResponse.getResult())) {
+        //     // 根据结果修改状态
+        //     update(Wrappers.<Project>lambdaUpdate().set(Project::getStatus, Integer.parseInt(approveStatus)).eq(Project::getId, id));
+        //     return "success";
+        // }
+        throw new BusinessException(TransactionErrorCode.E_150113);
+    }
 
     @Override
     public PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy) {
@@ -132,8 +152,7 @@ public class ProjectServiceImpl implements ProjectService {
         // 判断男女
         String sex = Integer.parseInt(consumer.getResult().getIdNumber().substring(16, 17)) % 2 == 0 ? "女士" : "先生";
         // 构造借款次数查询条件
-        LambdaQueryWrapper<Project> eq = new LambdaQueryWrapper<Project>()
-                .eq(Project::getConsumerId, consumer.getResult().getId());
+        LambdaQueryWrapper<Project> eq = new LambdaQueryWrapper<Project>().eq(Project::getConsumerId, consumer.getResult().getId());
         // 设置标的名字, 姓名 + 性别 + 第N次借款
         project.setName(consumer.getResult().getFullname() + sex + "第" + (projectMapper.selectCount(eq) + 1) + "次借款");
         projectMapper.insert(project);
@@ -141,6 +160,22 @@ public class ProjectServiceImpl implements ProjectService {
         projectDTO.setId(project.getId());
         projectDTO.setName(project.getName());
         return projectDTO;
+    }
+
+    @Override
+    public Integer queryQualifications() {
+        // 判断是否绑定银行卡
+        ConsumerDTO result = consumerApiAgent.getCurrentLoginConsumer().getResult();
+        if (!result.getIsBindCard().equals(1)) {
+            return 0;
+        }
+
+        // 判断是否以发标
+        Integer count = projectMapper.selectCount(new LambdaQueryWrapper<Project>().eq(Project::getConsumerId, result.getId()).eq(Project::getStatus, 0));
+        if (!count.equals(0)) {
+            return 0;
+        }
+        return 1;
     }
 
     private Project convertProjectDTOToEntity(ProjectDTO projectDTO) {
