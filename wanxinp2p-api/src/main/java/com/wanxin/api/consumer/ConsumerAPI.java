@@ -3,8 +3,10 @@ package com.wanxin.api.consumer;
 import com.wanxin.api.consumer.model.*;
 import com.wanxin.api.depository.model.GatewayRequest;
 import com.wanxin.common.domain.RestResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author yuelimin
@@ -12,6 +14,22 @@ import java.io.IOException;
  * @since 1.8
  */
 public interface ConsumerAPI {
+    /**
+     * 获取文件上传秘钥
+     *
+     * @return Map集合
+     */
+    RestResponse<Map> applyUploadCertificate();
+
+    /**
+     * 提交身份证图片给百度AI进行识别
+     *
+     * @param multipartFile 上传的身份证图片文件
+     * @param flag          身份证正反面(取值 front 或者 back)
+     * @return Map集合 识别成功后把身份证上的姓名和身份证号存到map中返回
+     */
+    RestResponse<Map> imageRecognition(MultipartFile multipartFile, String flag) throws IOException;
+
     /**
      * 生成提现数据
      *

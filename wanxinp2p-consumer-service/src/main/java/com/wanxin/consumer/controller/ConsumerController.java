@@ -7,14 +7,20 @@ import com.wanxin.common.domain.RestResponse;
 import com.wanxin.consumer.common.SecurityUtil;
 import com.wanxin.consumer.service.BankCardService;
 import com.wanxin.consumer.service.ConsumerService;
+import com.wanxin.consumer.utils.BaiDuOrcIdCardUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author yuelimin
@@ -28,6 +34,48 @@ public class ConsumerController implements ConsumerAPI {
     private ConsumerService consumerService;
     @Autowired
     private BankCardService bankCardService;
+
+    @Value("${minio.appId}")
+    private String appId;
+    @Value("${minio.accessKey}")
+    private String accessKey;
+    @Value("${minio.secretKey}")
+    private String secretKey;
+
+    @Override
+    @GetMapping("/my/applyUploadCertificate")
+    @ApiOperation("获取文件上传密钥对")
+    public RestResponse<Map> applyUploadCertificate() {
+        Map<String, String> map = new HashMap<>();
+        map.put("AppId", appId);
+        map.put("AccessKey", accessKey);
+        map.put("SecretKey", secretKey);
+        return RestResponse.success(map);
+    }
+
+    @Override
+    @PostMapping("/my/imageRecognition")
+    @ApiOperation("提交身份证图片给百度AI进行识别")
+    @ApiImplicitParam(name = "flag", value = "正反面", required = true, dataType = "string", paramType = "query")
+    public RestResponse<Map> imageRecognition(@RequestParam("file") MultipartFile multipartFile, @RequestParam("flag") String flag) throws IOException {
+        String info = null;
+        if ("front".equals(flag)) {
+            info = BaiDuOrcIdCardUtil.idCardFront(multipartFile.getBytes());
+        }
+
+        if ("back".equals(flag)) {
+            // 我们并不需要识别国徽面.
+            // info = BaiDuOrcIdCardUtil.idCardBack(multipartFile.getBytes());
+            return RestResponse.success();
+        }
+
+        JSONObject jsonObject = new JSONObject(info);
+        Map<String, String> map = new HashMap<>();
+        map.put("flag", flag);
+        map.put("idName", jsonObject.getJSONObject("words_result").getJSONObject("姓名").getString("words"));
+        map.put("idCard", jsonObject.getJSONObject("words_result").getJSONObject("公民身份号码").getString("words"));
+        return RestResponse.success(map);
+    }
 
     @Override
     @GetMapping("/my/withdraw-records")
