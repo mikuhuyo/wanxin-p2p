@@ -48,6 +48,9 @@ public class ConsumerDTO {
     @ApiModelProperty("启用状态")
     private Integer status;
 
+    @ApiModelProperty("是否进行身份校验证")
+    private Integer isCardAuth;
+
     @ApiModelProperty("可贷额度")
     private BigDecimal loanAmount;
 
