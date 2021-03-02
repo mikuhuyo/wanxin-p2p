@@ -234,6 +234,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         consumer.setIsCardAuth(0);
         consumer.setIdNumber(consumerRequest.getIdNumber());
         consumer.setAuthList("ALL");
+        consumer.setIsBindCard(1);
         consumerMapper.update(consumer, new LambdaQueryWrapper<Consumer>().eq(Consumer::getMobile, consumerDTO.getMobile()));
 
         // 保存用户绑卡信息
