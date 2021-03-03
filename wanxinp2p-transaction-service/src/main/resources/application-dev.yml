@@ -27,20 +27,20 @@ spring:
             inline:
               sharding‐column: ID
               algorithm‐expression: db$->{ID % 2}
-          tableStrategy:
-            inline:
-              shardingColumn: ID
-              algorithmExpression: project
+#          tableStrategy:
+#            inline:
+#              shardingColumn: ID
+#              algorithmExpression: project
         tender:
           actualDataNodes: db$->{0..1}.tender
           database‐strategy:
             inline:
               sharding‐column: PROJECT_ID
               algorithm‐expression: db$->{PROJECT_ID % 2}
-          tableStrategy:
-            inline:
-              shardingColumn: PROJECT_ID
-              algorithmExpression: tender
+#          tableStrategy:
+#            inline:
+#              shardingColumn: PROJECT_ID
+#              algorithmExpression: tender
     props:
       sql:
         show: true
