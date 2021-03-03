@@ -1,5 +1,7 @@
 # 万信金融(wanxin-p2p)
 
+![logo](./resource/image/log.png)
+
 [![GitHub license](https://img.shields.io/github/license/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/blob/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/issues)
 [![GitHub stars](https://img.shields.io/github/stars/mikuhuyo/wanxin-p2p)](https://github.com/mikuhuyo/wanxin-p2p/stargazers)
