@@ -1,5 +1,6 @@
 package com.wanxin.api.transaction.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -88,6 +89,7 @@ public class ProjectDTO {
      * 创建时间
      */
     // private LocalDateTime createDate;
+    @JsonDeserialize(using = DateJsonDeserializer.class)
     private Date createDate;
 
     /**

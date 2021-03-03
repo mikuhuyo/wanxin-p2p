@@ -3,7 +3,10 @@ package com.wanxin.depository.service;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
+import com.wanxin.api.depository.model.DepositoryBaseResponse;
+import com.wanxin.api.depository.model.DepositoryResponseDTO;
 import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.api.transaction.model.ProjectDTO;
 
 /**
  * @author yuelimin
@@ -11,6 +14,14 @@ import com.wanxin.api.depository.model.GatewayRequest;
  * @since 1.8
  */
 public interface DepositoryRecordService {
+    /**
+     * 保存标的
+     *
+     * @param projectDTO 标的信息
+     * @return
+     */
+    DepositoryResponseDTO<DepositoryBaseResponse> createProject(ProjectDTO projectDTO);
+
     /**
      * 生成用户提现数据
      *

@@ -1,10 +1,14 @@
 package com.wanxin.depository.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.DepositoryAgentAPI;
+import com.wanxin.api.depository.model.DepositoryBaseResponse;
+import com.wanxin.api.depository.model.DepositoryResponseDTO;
 import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.depository.service.DepositoryRecordService;
 import io.swagger.annotations.Api;
@@ -12,7 +16,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -28,6 +34,19 @@ import org.springframework.web.bind.annotation.*;
 public class DepositoryAgentController implements DepositoryAgentAPI {
     @Autowired
     private DepositoryRecordService depositoryRecordService;
+
+    @Override
+    @PostMapping("/l/create-project")
+    @ApiOperation(value = "向银行存管系统发送标的信息")
+    @ApiImplicitParam(name = "projectDTO", value = "向银行存管系统发送标的信息", required = true, dataType = "ProjectDTO", paramType = "body")
+    public RestResponse<String> createProject(@RequestBody ProjectDTO projectDTO) {
+        DepositoryResponseDTO<DepositoryBaseResponse> depositoryResponse = depositoryRecordService.createProject(projectDTO);
+        RestResponse<String> restResponse = new RestResponse<String>();
+        DepositoryBaseResponse depositoryBaseResponse = JSONObject.parseObject(JSONObject.toJSONString(depositoryResponse.getRespData()), DepositoryBaseResponse.class);
+        restResponse.setResult(depositoryBaseResponse.getRespCode());
+        restResponse.setMsg(depositoryBaseResponse.getRespMsg());
+        return restResponse;
+    }
 
     @Override
     @PostMapping("/l/withdraws")

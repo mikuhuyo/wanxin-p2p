@@ -2,6 +2,7 @@ package com.wanxin.transaction.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
@@ -9,6 +10,7 @@ import com.wanxin.api.transaction.model.ProjectQueryDTO;
 import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
 import com.wanxin.transaction.agent.ConsumerApiAgent;
+import com.wanxin.transaction.agent.DepositoryAgentApiAgent;
 import com.wanxin.transaction.common.constant.TransactionErrorCode;
 import com.wanxin.transaction.entity.Project;
 import com.wanxin.transaction.mapper.ProjectMapper;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +38,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ConsumerApiAgent consumerApiAgent;
     @Autowired
     private ProjectMapper projectMapper;
+    @Autowired
+    private DepositoryAgentApiAgent depositoryAgentApiAgent;
 
     @Override
     public String projectsApprovalStatus(Long id, String approveStatus) {
@@ -43,16 +48,20 @@ public class ProjectServiceImpl implements ProjectService {
         ProjectDTO projectDTO = convertProjectEntityToDTO(project);
 
         // 生成流水号
-        // projectDTO.setRequestNo();
+        projectDTO.setRequestNo(CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
 
         // 通过feign远程访问存管代理服务, 把标的信息传输过去
-        // RestResponse<String> restResponse = depositoryAgentApiAgent.createProject(projectDTO);
-        //
-        // if (DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(restResponse.getResult())) {
-        //     // 根据结果修改状态
-        //     update(Wrappers.<Project>lambdaUpdate().set(Project::getStatus, Integer.parseInt(approveStatus)).eq(Project::getId, id));
-        //     return "success";
-        // }
+        RestResponse<String> restResponse = depositoryAgentApiAgent.createProject(projectDTO);
+
+        if (DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(restResponse.getResult())) {
+            // 根据结果修改状态
+            Project pro = new Project();
+            pro.setId(project.getId());
+            pro.setStatus(Integer.parseInt(approveStatus));
+            projectMapper.updateById(pro);
+            return "success";
+        }
+
         throw new BusinessException(TransactionErrorCode.E_150113);
     }
 
@@ -135,7 +144,6 @@ public class ProjectServiceImpl implements ProjectService {
         // 标的可用状态修改, 未同步
         projectDTO.setStatus(StatusCode.STATUS_OUT.getCode());
         // 设置标的创建时间
-        // projectDTO.setCreateDate(LocalDateTime.now());
         projectDTO.setCreateDate(new Date());
         // 设置还款方式
         projectDTO.setRepaymentWay(RepaymentWayCode.FIXED_REPAYMENT.getCode());

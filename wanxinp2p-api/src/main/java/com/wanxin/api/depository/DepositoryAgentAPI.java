@@ -4,6 +4,7 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.RestResponse;
 
 /**
@@ -16,6 +17,14 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface DepositoryAgentAPI {
+    /**
+     * 保存标的信息
+     *
+     * @param projectDTO 标的信息
+     * @return 返回提示信息
+     */
+    RestResponse<String> createProject(ProjectDTO projectDTO);
+
     /**
      * 生成用户提现数据
      *
