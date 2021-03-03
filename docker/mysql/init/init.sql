@@ -699,6 +699,7 @@ CREATE TABLE `project` (
   `CREATE_DATE` datetime DEFAULT NULL COMMENT '创建时间',
   `STATUS` tinyint(1) DEFAULT NULL COMMENT '可用状态',
   `IS_ASSIGNMENT` tinyint(4) DEFAULT NULL COMMENT '是否是债权出让标',
+  `REQUEST_NO` varchar(50) NULL COMMENT '发标请求流水号',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标的信息表';
 
@@ -773,6 +774,7 @@ CREATE TABLE `project` (
   `CREATE_DATE` datetime DEFAULT NULL COMMENT '创建时间',
   `STATUS` tinyint(1) DEFAULT NULL COMMENT '可用状态',
   `IS_ASSIGNMENT` tinyint(4) DEFAULT NULL COMMENT '是否是债权出让标',
+  `REQUEST_NO` varchar(50) NULL COMMENT '发标请求流水号',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='标的信息表';
 
