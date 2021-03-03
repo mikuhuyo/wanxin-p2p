@@ -430,6 +430,7 @@ CREATE TABLE `depository_bank_card` (
   `MOBILE` varchar(50) DEFAULT NULL COMMENT '银行预留手机号',
   `APP_CODE` varchar(50) DEFAULT NULL COMMENT '应用编码',
   `REQUEST_NO` varchar(50) DEFAULT NULL COMMENT '请求流水号',
+  `RESPONSE_DATA` text NULL COMMENT '处理结果',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='存管用户绑定银行卡信息';
 

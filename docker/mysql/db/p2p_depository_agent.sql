@@ -19,6 +19,7 @@ CREATE TABLE `depository_record` (
   `IS_SYN` tinyint(1) DEFAULT NULL COMMENT '是否是同步调用',
   `REQUEST_STATUS` tinyint(1) DEFAULT NULL COMMENT '数据同步状态',
   `CONFIRM_DATE` datetime DEFAULT NULL COMMENT '消息确认时间',
+  `RESPONSE_DATA` text NULL COMMENT '处理结果',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='存管交易记录表';
 
