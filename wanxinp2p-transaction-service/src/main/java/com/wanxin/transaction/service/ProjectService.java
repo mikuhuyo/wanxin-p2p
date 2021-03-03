@@ -23,13 +23,11 @@ public interface ProjectService {
      * 根据分页条件检索标的信息
      *
      * @param projectQueryDTO 查询实体
-     * @param order           排序
      * @param pageNo          页码
      * @param pageSize        条数
-     * @param sortBy          查询条件
      * @return
      */
-    PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy);
+    PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, Integer pageNo, Integer pageSize);
 
     /**
      * 创建标的

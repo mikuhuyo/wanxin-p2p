@@ -2,7 +2,6 @@ package com.wanxin.transaction.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
@@ -14,13 +13,11 @@ import com.wanxin.transaction.agent.DepositoryAgentApiAgent;
 import com.wanxin.transaction.common.constant.TransactionErrorCode;
 import com.wanxin.transaction.entity.Project;
 import com.wanxin.transaction.mapper.ProjectMapper;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,46 +63,44 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy) {
+    public PageVO<ProjectDTO> queryProjectsByQueryDTO(ProjectQueryDTO projectQueryDTO, Integer pageNo, Integer pageSize) {
         LambdaQueryWrapper<Project> queryWrapper = new LambdaQueryWrapper<>();
 
         if (projectQueryDTO != null) {
             // 标的类型
-            if (StringUtils.isNotBlank(projectQueryDTO.getType())) {
+            if (projectQueryDTO.getType() != null) {
                 queryWrapper.eq(Project::getType, projectQueryDTO.getType());
             }
 
             // 起止年化利率(投资人) -- 区间
-            if (null != projectQueryDTO.getStartAnnualRate()) {
+            if (projectQueryDTO.getStartAnnualRate() != null) {
                 queryWrapper.ge(Project::getAnnualRate, projectQueryDTO.getStartAnnualRate());
             }
-            if (null != projectQueryDTO.getEndAnnualRate()) {
+            if (projectQueryDTO.getEndAnnualRate() != null) {
                 queryWrapper.le(Project::getAnnualRate, projectQueryDTO.getStartAnnualRate());
             }
+
             // 借款期限 -- 区间
-            if (null != projectQueryDTO.getStartPeriod()) {
+            if (projectQueryDTO.getStartPeriod() != null) {
                 queryWrapper.ge(Project::getPeriod, projectQueryDTO.getStartPeriod());
             }
-            if (null != projectQueryDTO.getEndPeriod()) {
+            if (projectQueryDTO.getEndPeriod() != null) {
                 queryWrapper.le(Project::getPeriod, projectQueryDTO.getEndPeriod());
             }
+
             // 标的状态
-            if (StringUtils.isNotBlank(projectQueryDTO.getProjectStatus())) {
+            if (projectQueryDTO.getProjectStatus() != null) {
                 queryWrapper.eq(Project::getProjectStatus, projectQueryDTO.getProjectStatus());
+            }
+
+            // 标的可用状态
+            if (projectQueryDTO.getStatus() != null) {
+                queryWrapper.eq(Project::getStatus, projectQueryDTO.getStatus());
             }
         }
 
         // 排序
-        if (StringUtils.isNotBlank(order) && StringUtils.isNotBlank(sortBy)) {
-            if ("asc".equals(order.toLowerCase())) {
-                // sortBy
-                queryWrapper.orderByAsc(Project::getId);
-            } else if ("desc".equals(order.toLowerCase())) {
-                queryWrapper.orderByDesc(Project::getId);
-            }
-        } else {
-            queryWrapper.orderByDesc(Project::getCreateDate);
-        }
+        queryWrapper.orderByDesc(Project::getCreateDate);
 
         // 执行查询
         IPage<Project> iPage = projectMapper.selectPage(new Page<Project>(pageNo, pageSize), queryWrapper);

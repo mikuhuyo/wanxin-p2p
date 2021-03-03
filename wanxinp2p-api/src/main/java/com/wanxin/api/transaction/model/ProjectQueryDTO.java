@@ -46,4 +46,7 @@ public class ProjectQueryDTO {
     @ApiModelProperty("标的状态")
     private String projectStatus;
 
+    @ApiModelProperty("标的可用状态")
+    private String status;
+
 }

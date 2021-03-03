@@ -41,17 +41,14 @@ public class TransactionController implements TransactionAPI {
     @ApiOperation("检索标的信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "projectQueryDTO", value = "标的信息查询对象", required = false, dataType = "ProjectQueryDTO", paramType = "body"),
-            @ApiImplicitParam(name = "order", value = "顺序", required = false, dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "pageNo", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "sortBy", value = "排序字段", required = false, dataType = "string", paramType = "query")})
+            @ApiImplicitParam(name = "pageNo", value = "页码", required = true, dataType = "int", paramType = "query", example = "1"),
+            @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true, dataType = "int", paramType = "query", example = "5")
+    })
     public RestResponse<PageVO<ProjectDTO>> queryProjects(
             @RequestBody(required = false) ProjectQueryDTO projectQueryDTO,
-            @RequestParam(value = "order", required = false) String order,
-            @RequestParam(value = "pageNo", required = true) Integer pageNo,
-            @RequestParam(value = "pageSize", required = true) Integer pageSize,
-            @RequestParam(value = "sortBy", required = false) String sortBy) {
-        return RestResponse.success(projectService.queryProjectsByQueryDTO(projectQueryDTO, order, pageNo, pageSize, sortBy));
+            @RequestParam(value = "pageNo", required = true, defaultValue = "1") Integer pageNo,
+            @RequestParam(value = "pageSize", required = true, defaultValue = "5") Integer pageSize) {
+        return RestResponse.success(projectService.queryProjectsByQueryDTO(projectQueryDTO, pageNo, pageSize));
     }
 
     @Override

@@ -24,13 +24,11 @@ public interface TransactionAPI {
      * 检索标的信息
      *
      * @param projectQueryDTO 封装查询条件
-     * @param order           排序
      * @param pageNo          页码
      * @param pageSize        条数
-     * @param sortBy          查询条件
      * @return
      */
-    RestResponse<PageVO<ProjectDTO>> queryProjects(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy);
+    RestResponse<PageVO<ProjectDTO>> queryProjects(ProjectQueryDTO projectQueryDTO, Integer pageNo, Integer pageSize);
 
     /**
      * 借款人发标

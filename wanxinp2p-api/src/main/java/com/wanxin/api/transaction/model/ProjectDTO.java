@@ -71,7 +71,7 @@ public class ProjectDTO {
     private BigDecimal commissionAnnualRate;
 
     /**
-     * 还款方式5.4.1
+     * 还款方式
      */
     private String repaymentWay;
 
@@ -82,6 +82,11 @@ public class ProjectDTO {
 
     /**
      * 标的状态
+     *
+     * COLLECTING 募集中
+     * MISCARRY 流标
+     * REPAYING 还款中
+     * FULLY 满标
      */
     private String projectStatus;
 
