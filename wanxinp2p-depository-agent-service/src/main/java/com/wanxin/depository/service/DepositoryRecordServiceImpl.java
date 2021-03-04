@@ -2,19 +2,18 @@ package com.wanxin.depository.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
-import com.wanxin.api.depository.model.DepositoryBaseResponse;
-import com.wanxin.api.depository.model.DepositoryResponseDTO;
-import com.wanxin.api.depository.model.GatewayRequest;
-import com.wanxin.api.depository.model.ProjectRequestDataDTO;
+import com.wanxin.api.depository.model.*;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.StatusCode;
 import com.wanxin.common.util.EncryptUtil;
 import com.wanxin.common.util.RSAUtil;
+import com.wanxin.depository.common.cache.RedisCache;
 import com.wanxin.depository.common.constant.DepositoryErrorCode;
 import com.wanxin.depository.common.constant.DepositoryRequestTypeCode;
 import com.wanxin.depository.entity.DepositoryRecord;
@@ -22,6 +21,7 @@ import com.wanxin.depository.mapper.DepositoryRecordMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +41,8 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     private DepositoryRecordMapper depositoryRecordMapper;
     @Autowired
     private OkHttpService okHttpService;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     private String personalRegistry = "PERSONAL_REGISTER";
     private String recharge = "RECHARGE";
@@ -69,9 +71,77 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
         return gatewayRequest;
     }
 
+    /**
+     * 实现幂等性
+     *
+     * @param depositoryRecord 存管记录信息
+     * @return
+     */
+    private DepositoryResponseDTO<DepositoryBaseResponse> handleIdempotent(DepositoryRecord depositoryRecord) {
+        // 根据requestNo查询交易记录
+        String requestNo = depositoryRecord.getRequestNo();
+        DepositoryRecordDTO depositoryRecordDTO = getByRequestNo(requestNo);
+        // 交易记录不存在则新增交易记录
+        if (depositoryRecordDTO == null) {
+            //保存交易记录
+            saveDepositoryRecord(depositoryRecord.getRequestNo(), depositoryRecord.getRequestType(), depositoryRecord.getObjectType(), depositoryRecord.getObjectId());
+            return null;
+        }
+
+        // 交易记录存在并且数据状态为未同步, 则利用redis原子性自增, 来争夺请求执行权
+        if (StatusCode.STATUS_OUT.getCode() == depositoryRecordDTO.getRequestStatus()) {
+            RedisCache cache = new RedisCache(stringRedisTemplate);
+            // 如果requestNo不存在则返回1, 如果已经存在, 则会返回(requestNo已存在个数+1)
+            Long count = cache.incrBy(requestNo, 1L);
+            if (count == 1) {
+                // 设置requestNo有效期5秒
+                cache.expire(requestNo, 5);
+                return null;
+            }
+            // 若count大于1, 说明已有线程在执行该操作, 直接返回"正在处理"
+            if (count > 1) {
+                throw new BusinessException(DepositoryErrorCode.E_160103);
+            }
+        }
+
+        // 交易记录存在并且数据状态为已同步, 直接返回处理结果
+        return JSONObject.parseObject(
+                depositoryRecordDTO.getResponseData(),
+                new TypeReference<DepositoryResponseDTO<DepositoryBaseResponse>>() {
+                }
+        );
+    }
+
+    private DepositoryRecordDTO getByRequestNo(String requestNo) {
+        DepositoryRecord depositoryRecord = getEntityByRequestNo(requestNo);
+        if (depositoryRecord == null) {
+            return null;
+        }
+        DepositoryRecordDTO depositoryRecordDTO = new DepositoryRecordDTO();
+        BeanUtils.copyProperties(depositoryRecord, depositoryRecordDTO);
+        return depositoryRecordDTO;
+    }
+
+    private DepositoryRecord getEntityByRequestNo(String requestNo) {
+        return depositoryRecordMapper.selectOne(new LambdaQueryWrapper<DepositoryRecord>().eq(DepositoryRecord::getRequestNo, requestNo));
+    }
+
     @Override
     public DepositoryResponseDTO<DepositoryBaseResponse> createProject(ProjectDTO projectDTO) {
-        DepositoryRecord depositoryRecord = saveDepositoryRecord(projectDTO.getRequestNo(), DepositoryRequestTypeCode.CREATE.getCode(), "Project", projectDTO.getId());
+        DepositoryRecord depositoryRecord = new DepositoryRecord(
+                projectDTO.getRequestNo(),
+                DepositoryRequestTypeCode.CREATE.getCode(), "Project",
+                projectDTO.getId());
+
+        // 幂等性实现
+        DepositoryResponseDTO<DepositoryBaseResponse> responseDTO = handleIdempotent(depositoryRecord);
+        if (responseDTO != null) {
+            return responseDTO;
+        }
+        // 根据requestNo获取交易记录
+        depositoryRecord = getEntityByRequestNo(projectDTO.getRequestNo());
+
+        // DepositoryRecord depositoryRecord = saveDepositoryRecord(projectDTO.getRequestNo(), DepositoryRequestTypeCode.CREATE.getCode(), "Project", projectDTO.getId());
 
         ProjectRequestDataDTO projectRequestDataDTO = convertProjectDTOToProjectRequestDataDTO(projectDTO, depositoryRecord.getRequestNo());
         // 转换为JSON
@@ -98,7 +168,12 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
                 + "&platformNo=" + platformNo
                 + "&reqData=" + reqData);
 
-        DepositoryResponseDTO<DepositoryBaseResponse> depositoryResponse = JSONObject.parseObject(responseBody, DepositoryResponseDTO.class);
+        depositoryRecord.setResponseData(responseBody);
+
+        DepositoryResponseDTO<DepositoryBaseResponse> depositoryResponse = JSONObject.parseObject(
+                responseBody,
+                new TypeReference<DepositoryResponseDTO<DepositoryBaseResponse>>() {}
+        );
 
         // 响应后, 根据结果更新数据库( 进行签名判断 )
         // 判断签名(signature)是为 false, 如果是说明验签失败!
@@ -186,17 +261,6 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     @Transactional(rollbackFor = Exception.class)
     public GatewayRequest createConsumer(ConsumerRequest consumerRequest) {
         return encapsulatedGatewayRequest(personalRegistry, consumerRequest, "/gateway");
-    }
-
-    private void saveDepositoryRecord(ConsumerRequest consumerRequest) {
-        DepositoryRecord depositoryRecord = new DepositoryRecord();
-        depositoryRecord.setRequestNo(consumerRequest.getRequestNo());
-        depositoryRecord.setRequestType(DepositoryRequestTypeCode.CONSUMER_CREATE.getCode());
-        depositoryRecord.setObjectType("Consumer");
-        depositoryRecord.setObjectId(consumerRequest.getId());
-        depositoryRecord.setCreateDate(LocalDateTime.now());
-        depositoryRecord.setRequestStatus(StatusCode.STATUS_OUT.getCode());
-        depositoryRecordMapper.insert(depositoryRecord);
     }
 
 }

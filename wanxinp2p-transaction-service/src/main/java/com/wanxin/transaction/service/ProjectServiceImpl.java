@@ -44,8 +44,15 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectMapper.selectById(id);
         ProjectDTO projectDTO = convertProjectEntityToDTO(project);
 
-        // 生成流水号
-        projectDTO.setRequestNo(CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
+        // 生成流水号(不存在才生成)
+        if (project.getRequestNo() == null) {
+            projectDTO.setRequestNo(CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
+            // 根据结果修改状态
+            Project pro = new Project();
+            pro.setId(project.getId());
+            pro.setRequestNo(projectDTO.getRequestNo());
+            projectMapper.updateById(pro);
+        }
 
         // 通过feign远程访问存管代理服务, 把标的信息传输过去
         RestResponse<String> restResponse = depositoryAgentApiAgent.createProject(projectDTO);
