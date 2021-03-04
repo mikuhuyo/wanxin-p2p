@@ -18,9 +18,9 @@ logging:
   config: classpath:log4j2-dev.xml
 
 minio:
-  appId: 'dbc1db6113fe489981f97409e8696788'
-  accessKey: 'JDJhJDEwJGdNRGJRZGd4NGhwNWNHd0M5ODIuUU9SeEVDOHZzbzExbU1ZZTVObUxBTUJ1RW5RU3pBOGlP'
-  secretKey: 'JDJhJDEwJGdNRGJRZGd4NGhwNWNHd0M5ODIuUU9TTkJvMmhLcjQyL1Q0aW94UFhBUlFrTUpVTkJRelhT'
+  appId: '76fc8986f43f488487f43dfdb3fe9c35'
+  accessKey: 'JDJhJDEwJHZPTjMvcmV5OUg4RHJCTURMN3dIZWVpVktQTEY0aHlySEU1TFJPOWFKNnFTWnk4ZDFoZUVP'
+  secretKey: 'JDJhJDEwJHZPTjMvcmV5OUg4RHJCTURMN3dIZWVRZE05eTRVUUwxV3RJelRKeEozNThyMGlpRDh6YjlP'
   uploadUrl: 'http://127.0.0.1:56090/minio/image'
 
 baidu:
