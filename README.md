@@ -62,32 +62,6 @@ Ps: 万万没想到写文档和注释是这么痛苦.
 # wanxinp2p-uaa-service
 ```
 
-## 项目演示(部分)
-
-### 后台管理
-
-### 前台门户
-
-用户注册/登录
-
-![](./resource/image/open-an-account-01.png)
-
-开通存管
-
-![](./resource/image/open-an-account-02.png)
-
-![](./resource/image/open-an-account-03.png)
-
-![](./resource/image/open-an-account-04.png)
-
-![](./resource/image/open-an-account-05.png)
-
-![](./resource/image/open-an-account-06.png)
-
-个人页面
-
-![](./resource/image/open-an-account-07.png)
-
 ## 技术选型
 
 ### 前端技术
