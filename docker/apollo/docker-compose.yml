@@ -13,8 +13,8 @@ services:
     ports:
       - "3306"
     volumes:
-      - "./db:/var/lib/mysql"
-      - "./init:/docker-entrypoint-initdb.d"
+      - "/root/wanxin-p2p/docker/apollo/db:/var/lib/mysql"
+      - "/root/wanxin-p2p/docker/apollo/init:/docker-entrypoint-initdb.d"
   # apollo
   apollo-configservice:
     container_name: apollo-configservice

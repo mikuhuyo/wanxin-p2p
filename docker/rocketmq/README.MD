@@ -14,7 +14,7 @@ docker run -d -p 10911:10911 -p 10909:10909 \
 --privileged=true \
 -v /root/docker/rocketmq/broker/logs:/root/logs \
 -v /root/docker/rocketmq/broker/store:/root/store \
--v ./conf/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf \
+-v /root/wanxin-p2p/docker/rocketmq/conf/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf \
 --name rmqbroker \
 --link rmqnamesrv:namesrv \
 -e "NAMESRV_ADDR=namesrv:9876" \

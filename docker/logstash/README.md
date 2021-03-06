@@ -7,7 +7,6 @@ docker run -it --name logstash \
 --privileged=true \
 -p 5044:5044 \
 -p 5045:5045 \
--p 9600:9600 \
--v ./conf/:/usr/share/logstash/conf.d \
+-v /root/wanxin-p2p/docker/logstash/:/usr/share/logstash/conf.d \
 logstash:6.4.0
 ```

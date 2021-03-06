@@ -12,5 +12,5 @@ services:
     ports:
       - "3306"
     volumes:
-      - "./db:/var/lib/mysql"
-      - "./init:/docker-entrypoint-initdb.d"
+      - "/root/wanxin-p2p/docker/mysql/db:/var/lib/mysql"
+      - "/root/wanxin-p2p/docker/mysql/init:/docker-entrypoint-initdb.d"
