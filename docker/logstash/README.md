@@ -8,6 +8,6 @@ docker run -it --name logstash \
 -p 5044:5044 \
 -p 5045:5045 \
 -p 9600:9600 \
--v ./conf.d/:/usr/share/logstash/conf.d \
+-v ./conf/:/usr/share/logstash/conf.d \
 logstash:6.4.0
 ```
