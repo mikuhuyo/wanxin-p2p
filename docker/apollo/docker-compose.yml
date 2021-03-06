@@ -5,16 +5,17 @@ services:
     container_name: mysql
     image: docker.io/mysql:5.7
     restart: always
-    network_mode: "host"
+    network_mode: host
     hostname: mysql
+    build: ./
     environment:
       MYSQL_ROOT_PASSWORD: "yueliminvc@outlook.com"
       TZ: Asia/Shanghai
     ports:
       - "3306"
     volumes:
-      - "/root/wanxin-p2p/docker/apollo/db:/var/lib/mysql"
-      - "/root/wanxin-p2p/docker/apollo/init:/docker-entrypoint-initdb.d"
+      - "./db:/var/lib/mysql"
+      - "./init:/docker-entrypoint-initdb.d"
   # apollo
   apollo-configservice:
     container_name: apollo-configservice

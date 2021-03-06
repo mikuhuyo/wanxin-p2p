@@ -6,11 +6,12 @@ services:
     restart: 'always'
     network_mode: 'host'
     hostname: 'mysql'
+    build: ./
     environment:
       MYSQL_ROOT_PASSWORD: "yueliminvc@outlook.com"
       TZ: 'Asia/Shanghai'
     ports:
       - "3306"
     volumes:
-      - "/root/wanxin-p2p/docker/mysql/db:/var/lib/mysql"
-      - "/root/wanxin-p2p/docker/mysql/init:/docker-entrypoint-initdb.d"
+      - "./db:/var/lib/mysql"
+      - "./init:/docker-entrypoint-initdb.d"
