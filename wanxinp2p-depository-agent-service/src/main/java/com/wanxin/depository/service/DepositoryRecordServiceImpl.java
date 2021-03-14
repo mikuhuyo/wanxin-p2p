@@ -232,8 +232,6 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
         // 设置数据同步状态
         depositoryRecord.setRequestStatus(StatusCode.STATUS_OUT.getCode());
 
-        System.out.println(depositoryRecord);
-
         // 保存数据
         depositoryRecordMapper.insert(depositoryRecord);
         return depositoryRecord;
