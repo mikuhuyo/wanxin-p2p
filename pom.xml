@@ -55,6 +55,7 @@
         <alibaba.sentinel.version>1.6.2</alibaba.sentinel.version>
         <rocketmq.starter.version>2.0.4</rocketmq.starter.version>
         <baidu.api.version>4.15.0</baidu.api.version>
+        <elasticsearch.version>7.2.0</elasticsearch.version>
     </properties>
 
     <!--依赖管理-->
@@ -214,6 +215,17 @@
                 <groupId>com.baidu.aip</groupId>
                 <artifactId>java-sdk</artifactId>
                 <version>${baidu.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
             </dependency>
 
             <dependency>
