@@ -1,0 +1,11 @@
+server:
+  port: 53090
+
+spring:
+  application:
+    name: content-search-service
+  main:
+    banner-mode: 'off'
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
