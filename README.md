@@ -139,9 +139,9 @@ Ps: 万万没想到写文档和注释是这么痛苦.
 | MongoDB       | 4  |
 | RocketMQ      | 4.4.0 |
 | Nginx         | 1.10   |
-| Elasticsearch | 6.4.2 |
-| Logstash      | 6.4.2  |
-| Kibana        | 6.4.2  |
+| Elasticsearch | 7.3.1 |
+| Logstash      | 7.3.1  |
+| Kibana        | 7.3.1  |
 
 ## 特别鸣谢
 
