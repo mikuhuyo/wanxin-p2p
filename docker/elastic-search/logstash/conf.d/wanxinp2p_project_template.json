@@ -1,7 +1,7 @@
 {
     "mappings":{
         "properties":{
-            "isassignment":{
+            "isAssignment":{
                 "type":"keyword"
             },
             "amount":{
@@ -10,35 +10,35 @@
             "period":{
                 "type":"integer"
             },
-            "repaymentway":{
+            "repaymentWay":{
                 "type":"keyword"
             },
-            "consumerid":{
+            "consumerId":{
                 "type":"long"
             },
-            "userno":{
+            "userNo":{
                 "type":"keyword"
             },
             "description":{
                 "analyzer":"ik_max_word",
                 "type":"text"
             },
-            "annualrate":{
+            "annualRate":{
                 "type":"double"
             },
             "type":{
                 "type":"keyword"
             },
-            "borrowerannualrate":{
+            "borrowerAnnualRate":{
                 "type":"double"
             },
-            "projectstatus":{
+            "projectStatus":{
                 "type":"keyword"
             },
-            "projectno":{
+            "projectNo":{
                 "type":"keyword"
             },
-            "commissionannualrate":{
+            "commissionAnnualRate":{
                 "type":"keyword"
             },
             "name":{
@@ -48,10 +48,10 @@
             "id":{
                 "type":"long"
             },
-            "createdate":{
+            "createDate":{
                 "type":"date"
             },
-            "modifydate":{
+            "modifyDate":{
                 "type":"date"
             },
             "status":{
