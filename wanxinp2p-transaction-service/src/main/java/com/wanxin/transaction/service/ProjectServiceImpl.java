@@ -51,6 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
             Project pro = new Project();
             pro.setId(project.getId());
             pro.setRequestNo(projectDTO.getRequestNo());
+            pro.setModifyDate(new Date());
             projectMapper.updateById(pro);
         }
 
@@ -62,6 +63,7 @@ public class ProjectServiceImpl implements ProjectService {
             Project pro = new Project();
             pro.setId(project.getId());
             pro.setStatus(Integer.parseInt(approveStatus));
+            pro.setModifyDate(new Date());
             projectMapper.updateById(pro);
             return "success";
         }

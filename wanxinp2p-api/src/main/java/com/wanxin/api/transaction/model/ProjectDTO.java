@@ -127,4 +127,9 @@ public class ProjectDTO {
      */
     private Integer tenderCount;
 
+    /**
+     * 修改时间
+     */
+    @JsonDeserialize(using = DateJsonDeserializer.class)
+    private Date modifyDate;
 }

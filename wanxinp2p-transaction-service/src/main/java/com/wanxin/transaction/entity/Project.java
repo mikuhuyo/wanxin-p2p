@@ -136,4 +136,10 @@ public class Project implements Serializable {
      */
     @TableField("REQUEST_NO")
     private String requestNo;
+
+    /**
+     * 修改时间
+     */
+    @TableField("MODIFY_DATE")
+    private Date modifyDate;
 }
