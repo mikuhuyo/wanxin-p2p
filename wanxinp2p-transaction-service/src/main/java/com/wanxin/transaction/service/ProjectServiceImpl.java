@@ -59,11 +59,22 @@ public class ProjectServiceImpl implements ProjectService {
         RestResponse<String> restResponse = depositoryAgentApiAgent.createProject(projectDTO);
 
         if (DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(restResponse.getResult())) {
+            int status = Integer.parseInt(approveStatus);
+
             // 根据结果修改状态
             Project pro = new Project();
+            if (status == 2) {
+                pro.setProjectStatus(ProjectCode.FULLY.getCode());
+            }
+
+            if (status == 4) {
+                pro.setProjectStatus(ProjectCode.MISCARRY.getCode());
+            }
+
             pro.setId(project.getId());
-            pro.setStatus(Integer.parseInt(approveStatus));
+            pro.setStatus(1);
             pro.setModifyDate(new Date());
+
             projectMapper.updateById(pro);
             return "success";
         }

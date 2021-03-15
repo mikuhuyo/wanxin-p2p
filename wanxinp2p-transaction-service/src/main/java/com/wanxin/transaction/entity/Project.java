@@ -108,6 +108,11 @@ public class Project implements Serializable {
 
     /**
      * 标的状态
+     *
+     * COLLECTING: 募集中 1
+     * FULLY: 满标 2
+     * REPAYING: 还款中 3
+     * MISCARRY: 流标 4
      */
     @TableField("PROJECT_STATUS")
     private String projectStatus;

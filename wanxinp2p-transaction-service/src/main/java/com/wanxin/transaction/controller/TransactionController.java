@@ -29,7 +29,7 @@ public class TransactionController implements TransactionAPI {
     @ApiOperation("管理员审核标的信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "标的id", required = true, dataType = "long", paramType = "path"),
-            @ApiImplicitParam(name = "approveStatus", value = "审批状态", required = true, dataType = "ref", paramType = "path")
+            @ApiImplicitParam(name = "approveStatus", value = "审批状态", required = true, dataType = "string", paramType = "path")
     })
     public RestResponse<String> projectsApprovalStatus(@PathVariable("id") Long id, @PathVariable("approveStatus") String approveStatus) {
         String result = projectService.projectsApprovalStatus(id, approveStatus);

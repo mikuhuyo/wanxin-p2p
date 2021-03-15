@@ -91,6 +91,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         withdrawRecord.setUserNo(userNo);
         withdrawRecord.setAmount(new BigDecimal(amount));
         withdrawRecord.setCreateDate(LocalDateTime.now());
+        withdrawRecord.setRequestNo(requestNo);
         withdrawRecord.setCallbackStatus(0);
 
         withdrawRecordMapper.insert(withdrawRecord);
