@@ -1,24 +1,24 @@
-## ELK环境搭建(version 7.3.1)
+## ELK环境搭建(version 7.5.2)
 
 ### ElasticSearch环境
 
 ```shell script
 # 拉取容器
-docker pull elasticsearch:7.3.1
-docker pull kibana:7.3.1
-docker pull logstash:7.3.1
+docker pull elasticsearch:7.5.2
+docker pull kibana:7.5.2
+docker pull logstash:7.5.2
 
 docker run -id --name es \
 -e "discovery.type=single-node" \
 -e "cluster.name=elasticsearch" \
 --privileged=true \
 -p 9200:9200 \
--p 9300:9300 elasticsearch:7.3.1
+-p 9300:9300 elasticsearch:7.5.2
 
 docker exec -it es /bin/bash
 
 # 安装插件
-elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.3.1/elasticsearch-analysis-ik-7.3.1.zip
+elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.5.2/elasticsearch-analysis-ik-7.5.2.zip
 ```
 
 修改配置文件: `elasticsearch.yml`
@@ -44,7 +44,7 @@ http.cors.allow-origin: "*"
 docker run -id \
 --name kibana \
 --link es:elasticsearch \
--p 5601:5601 kibana:7.3.1
+-p 5601:5601 kibana:7.5.2
 ```
 
 执行(自动添加索引, 你看着办):
@@ -153,7 +153,7 @@ docker run -id --name logstash \
 -p 9600:9600 \
 -v /root/docker/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml \
 -v /root/docker/logstash/conf.d:/usr/share/logstash/conf.d \
-logstash:7.3.1
+logstash:7.5.2
 
 docker exec -it logstash /bin/bash
 
@@ -222,14 +222,4 @@ output {
   }
 }
 
-```
-
-安装插件(Logstash好像是已经集成了): `jdbc`
-
-```shell script
-# 安装插件
-./bin/logstash-plugin install --no-verify logstash-input-jdbc
-./bin/logstash-plugin install --no-verify logstash-output-jdbc
-
-./bin/logstash-plugin list
 ```
