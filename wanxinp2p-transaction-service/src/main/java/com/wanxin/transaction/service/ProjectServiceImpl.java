@@ -9,6 +9,7 @@ import com.wanxin.api.transaction.model.ProjectQueryDTO;
 import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
 import com.wanxin.transaction.agent.ConsumerApiAgent;
+import com.wanxin.transaction.agent.ContentSearchApiAgent;
 import com.wanxin.transaction.agent.DepositoryAgentApiAgent;
 import com.wanxin.transaction.common.constant.TransactionErrorCode;
 import com.wanxin.transaction.entity.Project;
@@ -37,6 +38,19 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectMapper projectMapper;
     @Autowired
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
+    @Autowired
+    private ContentSearchApiAgent contentSearchApiAgent;
+
+    @Override
+    public PageVO<ProjectDTO> queryProjects(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy) {
+        RestResponse<PageVO<ProjectDTO>> esResponse = contentSearchApiAgent.queryProjectIndex(projectQueryDTO, pageNo, pageSize, sortBy, order);
+
+        if (!esResponse.isSuccessful()) {
+            throw new BusinessException(CommonErrorCode.UNKOWN);
+        }
+
+        return esResponse.getResult();
+    }
 
     @Override
     public String projectsApprovalStatus(Long id, String approveStatus) {

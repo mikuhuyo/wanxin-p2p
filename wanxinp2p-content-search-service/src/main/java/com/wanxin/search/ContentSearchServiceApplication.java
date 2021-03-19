@@ -11,8 +11,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class ContentSearchApplication {
+public class ContentSearchServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ContentSearchApplication.class, args);
+        SpringApplication.run(ContentSearchServiceApplication.class, args);
     }
 }

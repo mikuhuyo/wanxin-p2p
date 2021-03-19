@@ -14,16 +14,15 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ElasticsearchConfig {
-
     @Value("${wanxinp2p.es.host}")
     private String es_host;
 
     @Bean
-    public RestHighLevelClient restHighLevelClient(){
+    public RestHighLevelClient restHighLevelClient() {
         // 创建RestHighLevelClient客户端
-        String ip=es_host.split(":")[0];
-        int port=Integer.parseInt(es_host.split(":")[1]);
-        HttpHost httpHost=new HttpHost(ip,port);
+        String ip = es_host.split(":")[0];
+        int port = Integer.parseInt(es_host.split(":")[1]);
+        HttpHost httpHost = new HttpHost(ip, port);
         return new RestHighLevelClient(RestClient.builder(httpHost));
     }
 

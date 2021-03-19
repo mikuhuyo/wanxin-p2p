@@ -12,6 +12,18 @@ import com.wanxin.common.domain.RestResponse;
  */
 public interface TransactionAPI {
     /**
+     * 标的信息快速检索
+     *
+     * @param projectQueryDTO 查询请求体
+     * @param pageNo          页码
+     * @param pageSize        数据条数
+     * @param sortBy          排序
+     * @param order           顺序
+     * @return
+     */
+    RestResponse<PageVO<ProjectDTO>> queryProjects(ProjectQueryDTO projectQueryDTO, Integer pageNo, Integer pageSize, String sortBy, String order);
+
+    /**
      * 管理员审核标的信息
      *
      * @param id            标的id

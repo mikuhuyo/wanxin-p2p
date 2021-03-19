@@ -11,6 +11,18 @@ import com.wanxin.common.domain.PageVO;
  */
 public interface ProjectService {
     /**
+     * ES文档查询
+     *
+     * @param projectQueryDTO
+     * @param order
+     * @param pageNo
+     * @param pageSize
+     * @param sortBy
+     * @return
+     */
+    PageVO<ProjectDTO> queryProjects(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy);
+
+    /**
      * 管理员审核标的信息
      *
      * @param id            标的id
