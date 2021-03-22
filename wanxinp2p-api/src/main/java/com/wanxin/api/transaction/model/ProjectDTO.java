@@ -1,5 +1,6 @@
 package com.wanxin.api.transaction.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  * @since 1.8
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ProjectDTO {
 
     /**

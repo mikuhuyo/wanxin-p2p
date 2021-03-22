@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -102,6 +103,8 @@ public class ContentSearchServiceImpl implements ContentSearchService {
                 projectDTO.setPeriod(period);
                 projectDTO.setName(name);
                 projectDTO.setDescription(description);
+                projectDTO.setId((Long) sourceAsMap.get("id"));
+                projectDTO.setAnnualRate(new BigDecimal((Double) sourceAsMap.get("annualrate")));
                 list.add(projectDTO);
             }
         } catch (Exception e) {
