@@ -413,12 +413,16 @@ public class IdCardUtil {
         boolean flag = true;
         if (number.length == 15) {
             for (int x = 0; x < number.length; x++) {
-                if (!flag) return new HashMap<String, String>();
+                if (!flag) {
+                    return new HashMap<String, String>();
+                }
                 flag = Character.isDigit(number[x]);
             }
         } else if (number.length == 18) {
             for (int x = 0; x < number.length - 1; x++) {
-                if (!flag) return new HashMap<String, String>();
+                if (!flag) {
+                    return new HashMap<String, String>();
+                }
                 flag = Character.isDigit(number[x]);
             }
         }
@@ -433,8 +437,11 @@ public class IdCardUtil {
             birthday = certificateNo.substring(6, 10) + "-"
                     + certificateNo.substring(10, 12) + "-"
                     + certificateNo.substring(12, 14);
+            // sexCode = Integer.parseInt(certificateNo.substring(certificateNo.length() - 4,
+            //         certificateNo.length() - 1)) % 2 == 0 ? "F" : "M";
+
             sexCode = Integer.parseInt(certificateNo.substring(certificateNo.length() - 4,
-                    certificateNo.length() - 1)) % 2 == 0 ? "F" : "M";
+                    certificateNo.length() - 1)) % 2 == 0 ? "女" : "男";
             age = (year - Integer.parseInt(certificateNo.substring(6, 10))) + "";
         }
         Map<String, String> map = new HashMap<String, String>();
