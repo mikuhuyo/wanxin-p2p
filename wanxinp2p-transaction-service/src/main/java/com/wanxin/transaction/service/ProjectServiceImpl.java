@@ -6,20 +6,26 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanxin.api.consumer.model.ConsumerDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.api.transaction.model.ProjectQueryDTO;
+import com.wanxin.api.transaction.model.TenderOverviewDTO;
 import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
+import com.wanxin.common.util.CommonUtil;
 import com.wanxin.transaction.agent.ConsumerApiAgent;
 import com.wanxin.transaction.agent.ContentSearchApiAgent;
 import com.wanxin.transaction.agent.DepositoryAgentApiAgent;
 import com.wanxin.transaction.common.constant.TransactionErrorCode;
 import com.wanxin.transaction.entity.Project;
+import com.wanxin.transaction.entity.Tender;
 import com.wanxin.transaction.mapper.ProjectMapper;
+import com.wanxin.transaction.mapper.TenderMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +46,55 @@ public class ProjectServiceImpl implements ProjectService {
     private DepositoryAgentApiAgent depositoryAgentApiAgent;
     @Autowired
     private ContentSearchApiAgent contentSearchApiAgent;
+    @Autowired
+    private TenderMapper tenderMapper;
+
+    @Override
+    public List<TenderOverviewDTO> queryTendersByProjectId(Long id) {
+        List<Tender> tenderList = tenderMapper.selectList(new LambdaQueryWrapper<Tender>().eq(Tender::getProjectId, id));
+        List<TenderOverviewDTO> tenderOverviewDTOList = new ArrayList<>();
+        tenderList.forEach(tender -> {
+            TenderOverviewDTO tenderOverviewDTO = new TenderOverviewDTO();
+            BeanUtils.copyProperties(tender, tenderOverviewDTO);
+            tenderOverviewDTO.setConsumerUsername(CommonUtil.hiddenMobile(tenderOverviewDTO.getConsumerUsername()));
+            tenderOverviewDTOList.add(tenderOverviewDTO);
+        });
+
+        return tenderOverviewDTOList;
+    }
+
+    @Override
+    public List<ProjectDTO> queryProjectsIds(String ids) {
+        // 构件查询对象
+        LambdaQueryWrapper<Project> queryWrapper = new LambdaQueryWrapper<>();
+        // 获取id列表集合
+        List<Long> list = new ArrayList<Long>();
+        Arrays.asList(ids.split(",")).forEach(id -> {
+            list.add(Long.parseLong(id));
+        });
+
+        // 查询
+        List<Project> projects = projectMapper.selectList(queryWrapper.in(Project::getId, list));
+        List<ProjectDTO> projectDTOList = new ArrayList<>();
+        projects.forEach(project -> {
+            ProjectDTO projectDTO = convertProjectEntityToDTO(project);
+            projectDTO.setRemainingAmount(getProjectRemainingAmount(project));
+            projectDTO.setTenderCount(tenderMapper.selectCount(new LambdaQueryWrapper<Tender>().eq(Tender::getProjectId, project.getId())));
+        });
+        return projectDTOList;
+    }
+
+    private BigDecimal getProjectRemainingAmount(Project project) {
+        // 根据标的id在投标表查询已投金额
+        List<BigDecimal> decimalList = tenderMapper.selectAmountInvestedByProjectId(project.getId());
+        // 求和结果集
+        BigDecimal amountInvested = new BigDecimal("0.0");
+        for (BigDecimal d : decimalList) {
+            amountInvested = amountInvested.add(d);
+        }
+        // 得到剩余额度
+        return project.getAmount().subtract(amountInvested);
+    }
 
     @Override
     public PageVO<ProjectDTO> queryProjects(ProjectQueryDTO projectQueryDTO, String order, Integer pageNo, Integer pageSize, String sortBy) {

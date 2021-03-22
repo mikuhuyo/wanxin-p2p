@@ -2,8 +2,11 @@ package com.wanxin.api.transaction;
 
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.api.transaction.model.ProjectQueryDTO;
+import com.wanxin.api.transaction.model.TenderOverviewDTO;
 import com.wanxin.common.domain.PageVO;
 import com.wanxin.common.domain.RestResponse;
+
+import java.util.List;
 
 /**
  * @author yuelimin
@@ -11,6 +14,22 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface TransactionAPI {
+    /**
+     * 根据标的id查询投标记录
+     *
+     * @param id
+     * @return
+     */
+    RestResponse<List<TenderOverviewDTO>> queryTendersByProjectId(Long id);
+
+    /**
+     * 通过ids获取多个标的
+     *
+     * @param ids 标的id
+     * @return
+     */
+    RestResponse<List<ProjectDTO>> queryProjectsIds(String ids);
+
     /**
      * 标的信息快速检索
      *

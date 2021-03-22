@@ -3,6 +3,7 @@ package com.wanxin.transaction.controller;
 import com.wanxin.api.transaction.TransactionAPI;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.api.transaction.model.ProjectQueryDTO;
+import com.wanxin.api.transaction.model.TenderOverviewDTO;
 import com.wanxin.common.domain.PageVO;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.transaction.service.ProjectService;
@@ -12,6 +13,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author yuelimin
@@ -23,6 +26,22 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController implements TransactionAPI {
     @Autowired
     private ProjectService projectService;
+
+    @Override
+    @GetMapping("/tenders/projects/{id}")
+    @ApiOperation("根据标的id查询投标记录")
+    @ApiImplicitParam(name = "id", value = "标的id", required = true, dataType = "string", paramType = "path")
+    public RestResponse<List<TenderOverviewDTO>> queryTendersByProjectId(@PathVariable("id") Long id) {
+        return RestResponse.success(projectService.queryTendersByProjectId(id));
+    }
+
+    @Override
+    @GetMapping("/projects/{ids}")
+    @ApiOperation("通过ids获取多个标的")
+    @ApiImplicitParam(name = "ids", value = "标的id", required = true, dataType = "string", paramType = "path")
+    public RestResponse<List<ProjectDTO>> queryProjectsIds(@PathVariable("ids") String ids) {
+        return RestResponse.success(projectService.queryProjectsIds(ids));
+    }
 
     @Override
     @PostMapping("/projects/indexes/q")
