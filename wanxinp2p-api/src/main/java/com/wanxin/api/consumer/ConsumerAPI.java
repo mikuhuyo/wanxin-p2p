@@ -14,6 +14,14 @@ import java.io.IOException;
  */
 public interface ConsumerAPI {
     /**
+     * 获取借款人用户信息
+     *
+     * @param id
+     * @return
+     */
+    RestResponse<BorrowerDTO> getBorrower(Long id);
+
+    /**
      * 保存用户详细信息(主要存储身份证文件标识)
      *
      * @param consumerDetailsDTO 封装用户详情信息

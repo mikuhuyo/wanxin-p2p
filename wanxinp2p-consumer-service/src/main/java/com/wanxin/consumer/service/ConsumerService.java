@@ -1,9 +1,6 @@
 package com.wanxin.consumer.service;
 
-import com.wanxin.api.consumer.model.BalanceDetailsDTO;
-import com.wanxin.api.consumer.model.ConsumerDTO;
-import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
-import com.wanxin.api.consumer.model.ConsumerRequest;
+import com.wanxin.api.consumer.model.*;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import com.wanxin.api.depository.model.DepositoryRechargeResponse;
 import com.wanxin.api.depository.model.DepositoryWithdrawResponse;
@@ -18,6 +15,14 @@ import java.io.IOException;
  * @since 1.8
  */
 public interface ConsumerService {
+    /**
+     * 获取借款人基本信息
+     *
+     * @param id
+     * @return
+     */
+    BorrowerDTO getBorrower(Long id);
+
     /**
      * 生成用户提现数据
      *

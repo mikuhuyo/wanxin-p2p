@@ -44,6 +44,14 @@ public class ConsumerController implements ConsumerAPI {
     private ConsumerDetailsService consumerDetailsService;
 
     @Override
+    @GetMapping("/my/borrowers/{id}")
+    @ApiOperation("获取借款人用户信息")
+    @ApiImplicitParam(name = "id", value = "用户标识", required = true, dataType = "Long", paramType = "path")
+    public RestResponse<BorrowerDTO> getBorrower(@PathVariable("id") Long id) {
+        return RestResponse.success(consumerService.getBorrower(id));
+    }
+
+    @Override
     @PostMapping("/my/saveConsumerDetails")
     @ApiOperation(value = "保存用户详细信息", notes = "主要存储身份证文件标识")
     @ApiImplicitParam(name = "consumerDetailsDTO", value = "用户详细信息", dataType = "ConsumerDetailsDTO", paramType = "body")

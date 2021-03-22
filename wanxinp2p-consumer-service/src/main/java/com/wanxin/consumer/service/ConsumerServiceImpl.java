@@ -64,6 +64,27 @@ public class ConsumerServiceImpl implements ConsumerService {
     private WithdrawRecordMapper withdrawRecordMapper;
 
     @Override
+    public BorrowerDTO getBorrower(Long id) {
+        ConsumerDTO consumerDTO = get(id);
+        BorrowerDTO borrowerDTO = new BorrowerDTO();
+        BeanUtils.copyProperties(consumerDTO, borrowerDTO);
+        Map<String, String> cardInfo = IdCardUtil.getBirAgeSex(borrowerDTO.getIdNumber());
+        borrowerDTO.setAge(new Integer(cardInfo.get("age")));
+        borrowerDTO.setBirthday(cardInfo.get("birthday"));
+        borrowerDTO.setGender(cardInfo.get("sexCode"));
+        return borrowerDTO;
+    }
+
+    private ConsumerDTO get(Long id) {
+        Consumer entity = consumerMapper.selectById(id);
+        if (entity == null) {
+            log.info("id为{}的用户信息不存在", id);
+            throw new BusinessException(ConsumerErrorCode.E_140101);
+        }
+        return convertConsumerEntityToDTO(entity);
+    }
+
+    @Override
     public RestResponse<GatewayRequest> createWithdrawRecord(String amount, String fallbackUrl, String mobile) {
         ConsumerDTO consumer = getByMobile(mobile);
         assert consumer != null;
@@ -85,7 +106,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         return depositoryAgentApiAgent.createWithdrawRecord(withdrawRequest);
     }
 
-    private void saveWithdrawRecord(Long cid, String userNo, String amount, String requestNo)  {
+    private void saveWithdrawRecord(Long cid, String userNo, String amount, String requestNo) {
         WithdrawRecord withdrawRecord = new WithdrawRecord();
         withdrawRecord.setConsumerId(cid);
         withdrawRecord.setUserNo(userNo);
@@ -144,7 +165,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     @Override
     public Boolean modifyRechargeRecordResult(DepositoryRechargeResponse depositoryRechargeResponse) {
         if (!"SUCCESS".equals(depositoryRechargeResponse.getTransactionStatus().toLowerCase())) {
-            throw  new BusinessException(ConsumerErrorCode.E_140131);
+            throw new BusinessException(ConsumerErrorCode.E_140131);
         }
 
         String requestNo = depositoryRechargeResponse.getRequestNo();
