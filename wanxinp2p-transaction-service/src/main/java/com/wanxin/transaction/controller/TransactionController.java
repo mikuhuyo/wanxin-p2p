@@ -1,9 +1,7 @@
 package com.wanxin.transaction.controller;
 
 import com.wanxin.api.transaction.TransactionAPI;
-import com.wanxin.api.transaction.model.ProjectDTO;
-import com.wanxin.api.transaction.model.ProjectQueryDTO;
-import com.wanxin.api.transaction.model.TenderOverviewDTO;
+import com.wanxin.api.transaction.model.*;
 import com.wanxin.common.domain.PageVO;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.transaction.service.ProjectService;
@@ -26,6 +24,14 @@ import java.util.List;
 public class TransactionController implements TransactionAPI {
     @Autowired
     private ProjectService projectService;
+
+    @Override
+    @PostMapping("/my/tenders")
+    @ApiOperation("用户投标")
+    @ApiImplicitParam(name = "projectInvestDTO", value = "投标信息", required = true, dataType = "ProjectInvestDTO", paramType = "body")
+    public RestResponse<TenderDTO> createTender(@RequestBody ProjectInvestDTO projectInvestDTO) {
+        return RestResponse.success(projectService.createTender(projectInvestDTO));
+    }
 
     @Override
     @GetMapping("/tenders/projects/{id}")
@@ -51,7 +57,8 @@ public class TransactionController implements TransactionAPI {
             @ApiImplicitParam(name = "pageNo", value = "页码", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "sortBy", value = "排序字段", required = false, dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "order", value = "顺序", required = false, dataType = "string", paramType = "query")})
+            @ApiImplicitParam(name = "order", value = "顺序", required = false, dataType = "string", paramType = "query")
+    })
     public RestResponse<PageVO<ProjectDTO>> queryProjects(@RequestBody ProjectQueryDTO projectQueryDTO, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize, @RequestParam(value = "sortBy", required = false) String sortBy, @RequestParam(value = "order", required = false) String order) {
 
         PageVO<ProjectDTO> projects = projectService.queryProjects(projectQueryDTO, order, pageNo, pageSize, sortBy);

@@ -1,8 +1,6 @@
 package com.wanxin.transaction.service;
 
-import com.wanxin.api.transaction.model.ProjectDTO;
-import com.wanxin.api.transaction.model.ProjectQueryDTO;
-import com.wanxin.api.transaction.model.TenderOverviewDTO;
+import com.wanxin.api.transaction.model.*;
 import com.wanxin.common.domain.PageVO;
 
 import java.util.List;
@@ -13,6 +11,14 @@ import java.util.List;
  * @since 1.8
  */
 public interface ProjectService {
+    /**
+     * 用户投标
+     *
+     * @param projectInvestDTO
+     * @return
+     */
+    TenderDTO createTender(ProjectInvestDTO projectInvestDTO);
+
     /**
      * 根据标的id查询投标记录
      *
