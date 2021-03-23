@@ -6,6 +6,7 @@ import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.DepositoryBaseResponse;
 import com.wanxin.api.depository.model.DepositoryResponseDTO;
 import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
 import com.wanxin.api.transaction.model.ProjectDTO;
 
 /**
@@ -14,6 +15,14 @@ import com.wanxin.api.transaction.model.ProjectDTO;
  * @since 1.8
  */
 public interface DepositoryRecordService {
+    /**
+     * 投标预处理
+     *
+     * @param userAutoPreTransactionRequest
+     * @return
+     */
+    DepositoryResponseDTO<DepositoryBaseResponse> userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest);
+
     /**
      * 保存标的
      *

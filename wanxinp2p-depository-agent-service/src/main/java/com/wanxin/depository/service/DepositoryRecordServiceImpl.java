@@ -127,6 +127,28 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     }
 
     @Override
+    public DepositoryResponseDTO<DepositoryBaseResponse> userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest) {
+        DepositoryRecord depositoryRecord = new DepositoryRecord(userAutoPreTransactionRequest.getRequestNo(), userAutoPreTransactionRequest.getBizType(), "UserAutoPreTransactionRequest", userAutoPreTransactionRequest.getId());
+        // 幂等性实现
+        DepositoryResponseDTO<DepositoryBaseResponse> responseDTO = handleIdempotent(depositoryRecord);
+        if (responseDTO != null) {
+            return responseDTO;
+        }
+
+        // 根据requestNo获取交易记录
+        getEntityByRequestNo(userAutoPreTransactionRequest.getRequestNo());
+        // userAutoPreTransactionRequest 转为 json 用于数据签名
+        String jsonString = JSON.toJSONString(userAutoPreTransactionRequest);
+        // 业务数据报文, 对json数据进行base64编码处理方便传输
+        String reqData = EncryptUtil.encodeUTF8StringBase64(jsonString);
+        // 发送请求, 获取结果
+        // 拼接银行存管系统请求地址
+        String url = configService.getDepositoryUrl() + "/service";
+        // 向银行存管系统发送请求
+        return sendHttpGet("USER_AUTO_PRE_TRANSACTION", url, reqData, depositoryRecord);
+    }
+
+    @Override
     public DepositoryResponseDTO<DepositoryBaseResponse> createProject(ProjectDTO projectDTO) {
         DepositoryRecord depositoryRecord = new DepositoryRecord(
                 projectDTO.getRequestNo(),
@@ -157,7 +179,8 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
         return sendHttpGet("CREATE_PROJECT", url, reqData, depositoryRecord);
     }
 
-    private DepositoryResponseDTO<DepositoryBaseResponse> sendHttpGet(String serviceName, String url, String reqData, DepositoryRecord depositoryRecord) {
+    private DepositoryResponseDTO<DepositoryBaseResponse> sendHttpGet(String serviceName, String url, String
+            reqData, DepositoryRecord depositoryRecord) {
         // 银行存管系统接收的4大参数: serviceName, platformNo, reqData, signature
         // signature会在okHttp拦截器(SignatureInterceptor)中处理
         // 平台编号
@@ -172,7 +195,8 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
 
         DepositoryResponseDTO<DepositoryBaseResponse> depositoryResponse = JSONObject.parseObject(
                 responseBody,
-                new TypeReference<DepositoryResponseDTO<DepositoryBaseResponse>>() {}
+                new TypeReference<DepositoryResponseDTO<DepositoryBaseResponse>>() {
+                }
         );
 
         // 响应后, 根据结果更新数据库( 进行签名判断 )
@@ -217,7 +241,8 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     /**
      * 保存交易记录
      */
-    private DepositoryRecord saveDepositoryRecord(String requestNo, String requestType, String objectType, Long objectId) {
+    private DepositoryRecord saveDepositoryRecord(String requestNo, String requestType, String objectType, Long
+            objectId) {
         DepositoryRecord depositoryRecord = new DepositoryRecord();
         // 设置请求流水号
         depositoryRecord.setRequestNo(requestNo);

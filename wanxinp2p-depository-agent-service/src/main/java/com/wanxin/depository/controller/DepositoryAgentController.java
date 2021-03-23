@@ -8,6 +8,7 @@ import com.wanxin.api.depository.DepositoryAgentAPI;
 import com.wanxin.api.depository.model.DepositoryBaseResponse;
 import com.wanxin.api.depository.model.DepositoryResponseDTO;
 import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.depository.service.DepositoryRecordService;
@@ -34,6 +35,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class DepositoryAgentController implements DepositoryAgentAPI {
     @Autowired
     private DepositoryRecordService depositoryRecordService;
+
+    @Override
+    @PostMapping("/l/user-auto-pre-transaction")
+    @ApiOperation(value = "预授权处理")
+    @ApiImplicitParam(name = "userAutoPreTransactionRequest", value = "平台向存管系统发送标的信息", required = true, dataType = "UserAutoPreTransactionRequest", paramType = "body")
+    public RestResponse<String> userAutoPreTransaction(@RequestBody UserAutoPreTransactionRequest userAutoPreTransactionRequest) {
+        return getRestResponse(depositoryRecordService.userAutoPreTransaction(userAutoPreTransactionRequest));
+    }
+
+    /**
+     * 统一处理响应信息
+     *
+     * @param depositoryResponse
+     * @return
+     */
+    private RestResponse<String> getRestResponse(DepositoryResponseDTO<DepositoryBaseResponse> depositoryResponse) {
+        RestResponse<String> restResponse = new RestResponse<>();
+        restResponse.setResult(depositoryResponse.getRespData().getRespCode());
+        restResponse.setMsg(depositoryResponse.getRespData().getRespMsg());
+        return restResponse;
+    }
 
     @Override
     @PostMapping("/l/create-project")

@@ -4,6 +4,7 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.GatewayRequest;
+import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.RestResponse;
 
@@ -17,6 +18,14 @@ import com.wanxin.common.domain.RestResponse;
  * @since 1.8
  */
 public interface DepositoryAgentAPI {
+    /**
+     * 预授权处理
+     *
+     * @param userAutoPreTransactionRequest 预授权处理信息
+     * @return
+     */
+    RestResponse<String> userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest);
+
     /**
      * 保存标的信息
      *
