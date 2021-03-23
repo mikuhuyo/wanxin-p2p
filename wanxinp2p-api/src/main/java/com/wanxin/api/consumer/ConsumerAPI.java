@@ -6,6 +6,7 @@ import com.wanxin.common.domain.RestResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * @author yuelimin
@@ -13,6 +14,36 @@ import java.io.IOException;
  * @since 1.8
  */
 public interface ConsumerAPI {
+    /**
+     * 获取当前登录用户银行卡明细
+     *
+     * @return
+     */
+    RestResponse<BigDecimal> getMyBankCardDetails();
+
+    /**
+     * 银行卡ID获取银行卡余额明细
+     *
+     * @param id
+     * @return
+     */
+    RestResponse<BigDecimal> getBankCardDetails(Long id);
+
+    /**
+     * 获取当前登录用户余额信息
+     *
+     * @return
+     */
+    RestResponse<BalanceDetailsDTO> getMyBalance();
+
+    /**
+     * 根据用户流水号获取用户余额信息
+     *
+     * @param userNo 用户编码
+     * @return
+     */
+    RestResponse<BalanceDetailsDTO> getBalance(String userNo);
+
     /**
      * 获取借款人用户信息
      *
@@ -68,7 +99,7 @@ public interface ConsumerAPI {
      *
      * @return
      */
-    RestResponse<BalanceDetailsDTO> getBalances() throws IOException;
+    // RestResponse<BalanceDetailsDTO> getBalances() throws IOException;
 
     /**
      * 获取用户信息

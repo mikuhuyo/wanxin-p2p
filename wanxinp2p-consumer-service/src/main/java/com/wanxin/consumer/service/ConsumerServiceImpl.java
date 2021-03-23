@@ -174,18 +174,18 @@ public class ConsumerServiceImpl implements ConsumerService {
         return rechargeRecordMapper.update(rechargeRecord, new LambdaQueryWrapper<RechargeRecord>().eq(RechargeRecord::getRequestNo, requestNo)) == 1;
     }
 
-    @Override
-    public BalanceDetailsDTO getBalanceDetailsByUserNo(String userNo) throws IOException {
-        String info = OkHttpUtil.doSyncGet(ApolloConfigUtil.getDepositoryUrl() + "/balance-details/" + userNo);
-        Map map = JSONObject.parseObject(info, Map.class);
-        BalanceDetailsDTO balanceDetailsDTO = new BalanceDetailsDTO();
-        balanceDetailsDTO.setUserNo(map.get("userNo").toString());
-        balanceDetailsDTO.setAppCode(map.get("appCode").toString());
-        balanceDetailsDTO.setBalance((BigDecimal) map.get("balance"));
-        balanceDetailsDTO.setFreezeAmount((BigDecimal) map.get("freezeAmount"));
-        balanceDetailsDTO.setChangeType((Integer) map.get("changeType"));
-        return balanceDetailsDTO;
-    }
+    // @Override
+    // public BalanceDetailsDTO getBalanceDetailsByUserNo(String userNo) throws IOException {
+    //     String info = OkHttpUtil.doSyncGet(ApolloConfigUtil.getDepositoryUrl() + "/balance-details/" + userNo);
+    //     Map map = JSONObject.parseObject(info, Map.class);
+    //     BalanceDetailsDTO balanceDetailsDTO = new BalanceDetailsDTO();
+    //     balanceDetailsDTO.setUserNo(map.get("userNo").toString());
+    //     balanceDetailsDTO.setAppCode(map.get("appCode").toString());
+    //     balanceDetailsDTO.setBalance((BigDecimal) map.get("balance"));
+    //     balanceDetailsDTO.setFreezeAmount((BigDecimal) map.get("freezeAmount"));
+    //     balanceDetailsDTO.setChangeType((Integer) map.get("changeType"));
+    //     return balanceDetailsDTO;
+    // }
 
     @Override
     public ConsumerDTO getConsumerByMobile(String mobile) {

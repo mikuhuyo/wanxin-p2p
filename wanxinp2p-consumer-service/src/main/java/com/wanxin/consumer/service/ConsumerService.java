@@ -65,7 +65,7 @@ public interface ConsumerService {
      * @param userNo 用户流水号
      * @return
      */
-    BalanceDetailsDTO getBalanceDetailsByUserNo(String userNo) throws IOException;
+    // BalanceDetailsDTO getBalanceDetailsByUserNo(String userNo) throws IOException;
 
     /**
      * 根据手机号获取用户信息

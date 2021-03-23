@@ -1,5 +1,6 @@
 package com.wanxin.consumer.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.wanxin.api.consumer.ConsumerAPI;
 import com.wanxin.api.consumer.model.*;
 import com.wanxin.api.depository.model.GatewayRequest;
@@ -13,6 +14,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,12 +25,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * @author yuelimin
  * @version 1.0.0
  * @since 1.8
  */
+@Slf4j
 @RestController
 @Api(value = "用户服务API", tags = "Consumer")
 public class ConsumerController implements ConsumerAPI {
@@ -42,6 +50,76 @@ public class ConsumerController implements ConsumerAPI {
     private BankCardService bankCardService;
     @Autowired
     private ConsumerDetailsService consumerDetailsService;
+
+    @Value("${depository.url}")
+    private String depositoryUrl;
+    private final OkHttpClient okHttpClient = new OkHttpClient().newBuilder().build();
+
+    private RestResponse<BalanceDetailsDTO> getBalanceFromDepository(String userNo) {
+        String url = depositoryUrl + "/balance-details/" + userNo;
+        BalanceDetailsDTO balanceDetailsDTO;
+        Request request = new Request.Builder().url(url).build();
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                assert response.body() != null;
+                String responseBody = response.body().string();
+                balanceDetailsDTO = JSON.parseObject(responseBody, BalanceDetailsDTO.class);
+                return RestResponse.success(balanceDetailsDTO);
+            }
+        } catch (IOException e) {
+            log.warn("调用存管系统{}获取余额失败 ", url);
+        }
+        return RestResponse.validfail("获取失败");
+    }
+
+    private RestResponse<BigDecimal> getBankCardDetailsFromDepository(String bankCardId) {
+        String url = depositoryUrl + "/bank-cards/card-number/" + bankCardId;
+        Request request = new Request.Builder().url(url).build();
+        try(Response response = okHttpClient.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                assert response.body() != null;
+                String body = response.body().string();
+                Map map = JSON.parseObject(body, Map.class);
+                return RestResponse.success(new BigDecimal(map.get("result").toString()));
+            }
+        } catch (IOException e) {
+            log.warn("调用存管系统{}获取银行卡明细失败 ", url);
+        }
+        return RestResponse.validfail("获取银行卡明细失败");
+    }
+
+    @Override
+    @GetMapping("/my/bank-card-details")
+    @ApiOperation("获取用户银行卡明细")
+    public RestResponse<BigDecimal> getMyBankCardDetails() {
+        String mobile = SecurityUtil.getUser().getMobile();
+        return getBankCardDetailsFromDepository(
+                bankCardService.getByConsumerId(consumerService.getConsumerByMobile(mobile).getId()).getCardNumber()
+        );
+    }
+
+    @Override
+    @GetMapping("/l/bank-card-details/{id}")
+    @ApiOperation("获取用户银行卡明细")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "long")
+    public RestResponse<BigDecimal> getBankCardDetails(@PathVariable("id") Long id) {
+        return getBankCardDetailsFromDepository(bankCardService.getByConsumerId(id).getCardNumber());
+    }
+
+    @Override
+    @GetMapping("/my/balances")
+    @ApiOperation("获取当前登录用户余额信息")
+    public RestResponse<BalanceDetailsDTO> getMyBalance() {
+        return getBalanceFromDepository(consumerService.getConsumerByMobile(SecurityUtil.getUser().getMobile()).getUserNo());
+    }
+
+    @Override
+    @GetMapping("/l/balances/{userNo}")
+    @ApiOperation("获取用户可用余额")
+    @ApiImplicitParam(name = "userNo", value = "用户编码", required = true, dataType = "String")
+    public RestResponse<BalanceDetailsDTO> getBalance(@PathVariable("userNo") String userNo) {
+        return getBalanceFromDepository(userNo);
+    }
 
     @Override
     @GetMapping("/my/borrowers/{id}")
@@ -121,13 +199,13 @@ public class ConsumerController implements ConsumerAPI {
         return consumerService.createRechargeRecord(amount, callbackUrl, SecurityUtil.getUser().getMobile());
     }
 
-    @Override
-    @ApiOperation("获取用户余额信息")
-    @GetMapping("/my/balances")
-    public RestResponse<BalanceDetailsDTO> getBalances() throws IOException {
-        String userNo = consumerService.getConsumerByMobile(SecurityUtil.getUser().getMobile()).getUserNo();
-        return RestResponse.success(consumerService.getBalanceDetailsByUserNo(userNo));
-    }
+    // @Override
+    // @ApiOperation("获取用户余额信息")
+    // @GetMapping("/my/balances")
+    // public RestResponse<BalanceDetailsDTO> getBalances() throws IOException {
+    //     String userNo = consumerService.getConsumerByMobile(SecurityUtil.getUser().getMobile()).getUserNo();
+    //     return RestResponse.success(consumerService.getBalanceDetailsByUserNo(userNo));
+    // }
 
     @Override
     @GetMapping("/my/consumers")
