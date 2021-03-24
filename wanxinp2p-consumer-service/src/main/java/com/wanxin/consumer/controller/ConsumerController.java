@@ -57,13 +57,12 @@ public class ConsumerController implements ConsumerAPI {
 
     private RestResponse<BalanceDetailsDTO> getBalanceFromDepository(String userNo) {
         String url = depositoryUrl + "/balance-details/" + userNo;
-        BalanceDetailsDTO balanceDetailsDTO;
         Request request = new Request.Builder().url(url).build();
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                balanceDetailsDTO = JSON.parseObject(responseBody, BalanceDetailsDTO.class);
+                BalanceDetailsDTO balanceDetailsDTO = JSON.parseObject(responseBody, BalanceDetailsDTO.class);
                 return RestResponse.success(balanceDetailsDTO);
             }
         } catch (IOException e) {

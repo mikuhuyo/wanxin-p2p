@@ -39,7 +39,7 @@ public class BalanceDetailsDTO implements Serializable {
     @ApiModelProperty(value = "应用编码")
     private String appCode;
 
-    @ApiModelProperty(value = "账户变动时间")
-    private LocalDateTime createDate;
+    // @ApiModelProperty(value = "账户变动时间")
+    // private LocalDateTime createDate;
 
 }
