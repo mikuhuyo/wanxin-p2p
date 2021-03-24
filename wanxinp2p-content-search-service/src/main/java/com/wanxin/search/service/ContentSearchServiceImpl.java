@@ -56,6 +56,14 @@ public class ContentSearchServiceImpl implements ContentSearchService {
             boolQueryBuilder.must(QueryBuilders.rangeQuery("period").lte(queryParamsDTO.getEndPeriod()));
         }
 
+        // 默认为满标查询
+        boolQueryBuilder.must(QueryBuilders.termQuery("projectstatus", "FULLY"));
+
+        // 精确匹配状态为满标
+        if (queryParamsDTO.getProjectStatus() != null) {
+            boolQueryBuilder.must(QueryBuilders.termQuery("projectstatus", "FULLY"));
+        }
+
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(boolQueryBuilder);
 
@@ -93,21 +101,19 @@ public class ContentSearchServiceImpl implements ContentSearchService {
             for (SearchHit hit : searchHits) {
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
                 String projectstatus = (String) sourceAsMap.get("projectstatus");
-                if ("fully".equals(projectstatus.toLowerCase())) {
-                    ProjectDTO projectDTO = new ProjectDTO();
-                    Double amount = (Double) sourceAsMap.get("amount");
-                    Integer period = Integer.parseInt(sourceAsMap.get("period").toString());
-                    String name = (String) sourceAsMap.get("name");
-                    String description = (String) sourceAsMap.get("description");
-                    projectDTO.setAmount(new BigDecimal(amount));
-                    projectDTO.setProjectStatus(projectstatus);
-                    projectDTO.setPeriod(period);
-                    projectDTO.setName(name);
-                    projectDTO.setDescription(description);
-                    projectDTO.setId((Long) sourceAsMap.get("id"));
-                    projectDTO.setAnnualRate(new BigDecimal((Double) sourceAsMap.get("annualrate")));
-                    list.add(projectDTO);
-                }
+                ProjectDTO projectDTO = new ProjectDTO();
+                Double amount = (Double) sourceAsMap.get("amount");
+                Integer period = Integer.parseInt(sourceAsMap.get("period").toString());
+                String name = (String) sourceAsMap.get("name");
+                String description = (String) sourceAsMap.get("description");
+                projectDTO.setAmount(new BigDecimal(amount));
+                projectDTO.setProjectStatus(projectstatus);
+                projectDTO.setPeriod(period);
+                projectDTO.setName(name);
+                projectDTO.setDescription(description);
+                projectDTO.setId((Long) sourceAsMap.get("id"));
+                projectDTO.setAnnualRate(new BigDecimal((Double) sourceAsMap.get("annualrate")));
+                list.add(projectDTO);
             }
         } catch (Exception e) {
             e.printStackTrace();
