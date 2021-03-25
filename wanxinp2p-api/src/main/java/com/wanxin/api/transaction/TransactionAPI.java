@@ -13,6 +13,16 @@ import java.util.List;
  */
 public interface TransactionAPI {
     /**
+     * 满标放款审核
+     *
+     * @param id            标的id
+     * @param approveStatus 审核状态
+     * @param commission    平台佣金
+     * @return
+     */
+    RestResponse<String> loansApprovalStatus(Long id, String approveStatus, String commission);
+
+    /**
      * 用户投标
      *
      * @param projectInvestDTO

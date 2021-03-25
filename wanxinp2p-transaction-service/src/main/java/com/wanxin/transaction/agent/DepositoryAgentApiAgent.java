@@ -1,6 +1,8 @@
 package com.wanxin.transaction.agent;
 
+import com.wanxin.api.depository.model.LoanRequest;
 import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
+import com.wanxin.api.transaction.model.ModifyProjectStatusDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.CommonErrorCode;
@@ -22,6 +24,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 )
 public interface DepositoryAgentApiAgent {
     /**
+     * 放款
+     *
+     * @param loanRequest
+     * @return
+     */
+    @PostMapping("/depository/l/confirm-loan")
+    RestResponse<String> confirmLoan(LoanRequest loanRequest);
+
+    /**
+     * 修改标的状态
+     *
+     * @param modifyProjectStatusDTO
+     * @return
+     */
+    @PostMapping("/depository/l/modify-project-status")
+    RestResponse<String> modifyProjectStatus(ModifyProjectStatusDTO modifyProjectStatusDTO);
+
+    /**
      * 预处理冻结远程调用
      *
      * @param userAutoPreTransactionRequest 预处理信息
@@ -36,11 +56,21 @@ public interface DepositoryAgentApiAgent {
      * @param projectDTO 项目信息
      * @return 提示信息
      */
-    @PostMapping(value = "/depository/l/create-project")
+    @PostMapping("/depository/l/create-project")
     RestResponse<String> createProject(@RequestBody ProjectDTO projectDTO);
 }
 
 class DepositoryAgentApiAgentFallback implements DepositoryAgentApiAgent {
+
+    @Override
+    public RestResponse<String> confirmLoan(LoanRequest loanRequest) {
+        throw new BusinessException(CommonErrorCode.E_999996);
+    }
+
+    @Override
+    public RestResponse<String> modifyProjectStatus(ModifyProjectStatusDTO modifyProjectStatusDTO) {
+        throw new BusinessException(CommonErrorCode.E_999996);
+    }
 
     @Override
     public RestResponse<String> userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest) {

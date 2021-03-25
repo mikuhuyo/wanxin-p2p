@@ -3,8 +3,9 @@ package com.wanxin.transaction.service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wanxin.api.consumer.model.BalanceDetailsDTO;
 import com.wanxin.api.consumer.model.ConsumerDTO;
+import com.wanxin.api.depository.model.LoanDetailRequest;
+import com.wanxin.api.depository.model.LoanRequest;
 import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
 import com.wanxin.api.transaction.model.*;
 import com.wanxin.common.domain.*;
@@ -21,6 +22,7 @@ import com.wanxin.transaction.entity.Tender;
 import com.wanxin.transaction.mapper.ProjectMapper;
 import com.wanxin.transaction.mapper.TenderMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,142 @@ public class ProjectServiceImpl implements ProjectService {
     private TenderMapper tenderMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String loansApprovalStatus(Long id, String approveStatus, String commission) {
+        if ("3".equals(approveStatus)) {
+            Project project = new Project();
+            project.setId(id);
+            project.setProjectStatus(ProjectCode.MISCARRY.getCode());
+            projectMapper.updateById(project);
+        } else if ("4".equals(approveStatus)) {
+            // 第一阶段: 生成放款明细
+            // 获取标的信息
+            final Project project = projectMapper.selectById(id);
+
+            // 构造查询参数, 获取所有投标信息
+            final List<Tender> tenderList = tenderMapper.selectList(new LambdaQueryWrapper<Tender>().eq(Tender::getProjectId, id));
+            // 生成还款明细
+            final LoanRequest loanRequest = generateLoanRequest(project, tenderList, commission);
+
+            // 第二阶段: 放款
+            // 请求存管代理服务
+            final RestResponse<String> restResponse = depositoryAgentApiAgent.confirmLoan(loanRequest);
+
+            if (DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(restResponse.getResult())) {
+                // 响应成功, 更新投标信息: 已放款
+                updateTenderStatusAlreadyLoan(tenderList);
+                // 第三阶段: 修改标的业务状态
+                // 调用存管代理服务，修改状态为还款中
+                // 构造请求参数
+                ModifyProjectStatusDTO modifyProjectStatusDTO = new ModifyProjectStatusDTO();
+                // 业务实体id
+                modifyProjectStatusDTO.setId(project.getId());
+                // 业务状态
+                modifyProjectStatusDTO.setProjectStatus(ProjectCode.REPAYING.getCode());
+
+                // 请求流水号
+                modifyProjectStatusDTO.setRequestNo(loanRequest.getRequestNo());
+                // 执行请求
+                final RestResponse<String> modifyProjectProjectStatus = depositoryAgentApiAgent.modifyProjectStatus(modifyProjectStatusDTO);
+                if (DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(modifyProjectProjectStatus.getResult())) {
+                    // 如果处理成功, 就修改标的状态为还款中
+                    project.setProjectStatus(ProjectCode.REPAYING.getCode());
+
+                    projectMapper.updateById(project);
+
+                    // 第四阶段: 启动还款
+                    // 封装调用还款服务请求对象的数据
+                    ProjectWithTendersDTO projectWithTendersDTO = new ProjectWithTendersDTO();
+                    // 封装标的信息
+                    projectWithTendersDTO.setProject(convertProjectEntityToDTO(project));
+                    // 封装投标信息
+                    projectWithTendersDTO.setTenders(convertTenderEntityListToDTOList(tenderList));
+                    // 封装投资人让利
+                    projectWithTendersDTO.setCommissionInvestorAnnualRate(configService.getCommissionInvestorAnnualRate());
+                    // 封装借款人让利
+                    projectWithTendersDTO.setCommissionBorrowerAnnualRate(configService.getCommissionBorrowerAnnualRate());
+                    // 调用还款服务, 启动还款(生成还款计划, 应收明细)
+                    return "审核成功";
+                } else {
+                    log.warn("审核满标放款失败-标的ID为: {}, 存管代理服务返回的状态为-{}", project.getId(), restResponse.getResult());
+                    throw new BusinessException(TransactionErrorCode.E_150113);
+                }
+            } else {
+                log.warn("审核满标放款失败-标的ID为: {}, 存管代理服务返回的状态为-{}", project.getId(), restResponse.getResult());
+                throw new BusinessException(TransactionErrorCode.E_150113);
+            }
+        }
+
+        return "审核拒绝";
+    }
+
+    /**
+     * 根据标的及投标信息生成放款明细
+     *
+     * @param project
+     * @param tenderList
+     * @param commission
+     * @return
+     */
+    public LoanRequest generateLoanRequest(Project project, List<Tender> tenderList, String commission) {
+        LoanRequest loanRequest = new LoanRequest();
+        // 设置标的id
+        loanRequest.setId(project.getId());
+        // 设置平台佣金
+        if (StringUtils.isNotBlank(commission)) {
+            loanRequest.setCommission(new BigDecimal(commission));
+        }
+        // 设置标的编码
+        loanRequest.setProjectNo(project.getProjectNo());
+        // 设置请求流水号(标的不没有需要生成新的)
+        loanRequest.setRequestNo(CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
+        // 处理放款明细
+        List<LoanDetailRequest> details = new ArrayList<>();
+        tenderList.forEach(tender -> {
+            final LoanDetailRequest loanDetailRequest = new LoanDetailRequest();
+            // 设置放款金额
+            loanDetailRequest.setAmount(tender.getAmount());
+            // 设置预处理业务流水号
+            loanDetailRequest.setPreRequestNo(tender.getRequestNo());
+            details.add(loanDetailRequest);
+        });
+        // 设置放款明细
+        loanRequest.setDetails(details);
+
+        // 返回封装好的数据
+        return loanRequest;
+    }
+
+    /**
+     * 更新投标信息: 已放款
+     *
+     * @param tenderList
+     */
+    private void updateTenderStatusAlreadyLoan(List<Tender> tenderList) {
+        tenderList.forEach(tender -> {
+            // 设置状态为已放款
+            tender.setTenderStatus(TradingCode.LOAN.getCode());
+            // 更新数据库
+            tenderMapper.updateById(tender);
+        });
+    }
+
+    private List<TenderDTO> convertTenderEntityListToDTOList(List<Tender> records) {
+        if (records == null) {
+            return null;
+        }
+
+        List<TenderDTO> dtoList = new ArrayList<>();
+        records.forEach(tender -> {
+            TenderDTO tenderDTO = new TenderDTO();
+            BeanUtils.copyProperties(tender, tenderDTO);
+            dtoList.add(tenderDTO);
+        });
+
+        return dtoList;
+    }
+
+    @Override
     public TenderDTO createTender(ProjectInvestDTO projectInvestDTO) {
         // 获得投标金额
         BigDecimal amount = new BigDecimal(projectInvestDTO.getAmount());
@@ -66,8 +204,7 @@ public class ProjectServiceImpl implements ProjectService {
         // 通过手机号查询用户信息
         RestResponse<ConsumerDTO> restResponse = consumerApiAgent.getCurrentLoginConsumer();
         // 通过用户编号查询账户余额
-        RestResponse<BalanceDetailsDTO> balanceDetailsDTORestResponse = consumerApiAgent.getBalance(restResponse.getResult().getUserNo());
-        BigDecimal myBalance = balanceDetailsDTORestResponse.getResult().getBalance();
+        BigDecimal myBalance = consumerApiAgent.getBalance(restResponse.getResult().getUserNo()).getResult().getBalance();
         if (myBalance.compareTo(amount) < 0) {
             throw new BusinessException(TransactionErrorCode.E_150112);
         }
@@ -159,7 +296,7 @@ public class ProjectServiceImpl implements ProjectService {
                 Double ceil = Math.ceil(project.getPeriod() / 30.0);
                 Integer month = ceil.intValue();
                 // 计算预期收益
-                tenderDTO.setExpectedIncome(IncomeCalcUtil.getIncomeTotalInterest(new BigDecimal(projectInvestDTO.getAmount()),configService.getAnnualRate(), month));
+                tenderDTO.setExpectedIncome(IncomeCalcUtil.getIncomeTotalInterest(new BigDecimal(projectInvestDTO.getAmount()), configService.getAnnualRate(), month));
                 return tenderDTO;
             } else {
                 log.warn("投标失败-标的ID: {}-存管代理服务返回的状态为-{}", projectInvestDTO.getId(), restResponse.getResult());
