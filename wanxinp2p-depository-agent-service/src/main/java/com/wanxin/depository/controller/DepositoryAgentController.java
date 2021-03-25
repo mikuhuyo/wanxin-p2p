@@ -6,6 +6,7 @@ import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.DepositoryAgentAPI;
 import com.wanxin.api.depository.model.*;
+import com.wanxin.api.transaction.model.ModifyProjectStatusDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.depository.service.DepositoryRecordService;
@@ -32,6 +33,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class DepositoryAgentController implements DepositoryAgentAPI {
     @Autowired
     private DepositoryRecordService depositoryRecordService;
+
+    @Override
+    @PostMapping("l/modify-project-status")
+    @ApiOperation(value = "修改标的状态")
+    @ApiImplicitParam(name = "modifyProjectStatusDTO", value = "修改标的状态DTO", required = true, dataType = "ModifyProjectStatusDTO", paramType = "body")
+    public RestResponse<String> modifyProjectStatus(@RequestBody ModifyProjectStatusDTO modifyProjectStatusDTO) {
+        return getRestResponse(depositoryRecordService.modifyProjectStatus(modifyProjectStatusDTO));
+    }
 
     @Override
     @PostMapping("l/confirm-loan")

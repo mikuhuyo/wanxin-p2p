@@ -4,6 +4,7 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.*;
+import com.wanxin.api.transaction.model.ModifyProjectStatusDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 
 /**
@@ -12,6 +13,14 @@ import com.wanxin.api.transaction.model.ProjectDTO;
  * @since 1.8
  */
 public interface DepositoryRecordService {
+    /**
+     * 修改标的状态
+     *
+     * @param modifyProjectStatusDTO
+     * @return
+     */
+    DepositoryResponseDTO<DepositoryBaseResponse> modifyProjectStatus(ModifyProjectStatusDTO modifyProjectStatusDTO);
+
     /**
      * 审核满标放款
      *

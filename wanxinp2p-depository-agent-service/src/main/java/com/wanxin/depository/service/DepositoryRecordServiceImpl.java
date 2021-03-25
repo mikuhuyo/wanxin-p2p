@@ -8,6 +8,7 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.*;
+import com.wanxin.api.transaction.model.ModifyProjectStatusDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.StatusCode;
@@ -124,6 +125,28 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
 
     private DepositoryRecord getEntityByRequestNo(String requestNo) {
         return depositoryRecordMapper.selectOne(new LambdaQueryWrapper<DepositoryRecord>().eq(DepositoryRecord::getRequestNo, requestNo));
+    }
+
+    @Override
+    public DepositoryResponseDTO<DepositoryBaseResponse> modifyProjectStatus(ModifyProjectStatusDTO modifyProjectStatusDTO) {
+        DepositoryRecord depositoryRecord = new DepositoryRecord(modifyProjectStatusDTO.getRequestNo(), DepositoryRequestTypeCode.MODIFY_STATUS.getCode(), "Project", modifyProjectStatusDTO.getId());
+
+        // 幂等性实现
+        DepositoryResponseDTO<DepositoryBaseResponse> responseDTO = handleIdempotent(depositoryRecord);
+        if (responseDTO != null) {
+            return responseDTO;
+        }
+        // 根据requestNo获取交易记录
+        handleIdempotent(depositoryRecord);
+        depositoryRecord = getEntityByRequestNo(modifyProjectStatusDTO.getRequestNo());
+        // loanRequest 转为 json 进行数据签名
+        final String jsonString = JSON.toJSONString(modifyProjectStatusDTO);
+        // 业务数据报文
+        String reqData = EncryptUtil.encodeUTF8StringBase64(jsonString);
+        // 拼接银行存管系统请求地址
+        String url = configService.getDepositoryUrl() + "/service";
+        // 封装通用方法, 请求银行存管系统
+        return sendHttpGet("MODIFY_PROJECT", url, reqData, depositoryRecord);
     }
 
     @Override
