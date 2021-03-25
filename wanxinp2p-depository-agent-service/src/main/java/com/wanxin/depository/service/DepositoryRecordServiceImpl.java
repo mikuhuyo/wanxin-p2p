@@ -127,6 +127,26 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
     }
 
     @Override
+    public DepositoryResponseDTO<DepositoryBaseResponse> confirmLoan(LoanRequest loanRequest) {
+        DepositoryRecord depositoryRecord = new DepositoryRecord(loanRequest.getRequestNo(), DepositoryRequestTypeCode.FULL_LOAN.getCode(), "LoanRequest", loanRequest.getId());
+        // 幂等性实现
+        DepositoryResponseDTO<DepositoryBaseResponse> responseDTO = handleIdempotent(depositoryRecord);
+        if (responseDTO != null) {
+            return responseDTO;
+        }
+        // 根据requestNo获取交易记录
+        depositoryRecord = getEntityByRequestNo(loanRequest.getRequestNo());
+        // loanRequest 转为 json 用于数据签名
+        final String jsonString = JSON.toJSONString(loanRequest);
+        // 业务数据报文, json数据base64编码处理方便传输
+        String reqData = EncryptUtil.encodeUTF8StringBase64(jsonString);
+        // 拼接银行存管系统请求地址
+        String url = configService.getDepositoryUrl() + "/service";
+        // 封装通用方法, 请求银行存管系统
+        return sendHttpGet("CONFIRM_LOAN", url, reqData, depositoryRecord);
+    }
+
+    @Override
     public DepositoryResponseDTO<DepositoryBaseResponse> userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest) {
         DepositoryRecord depositoryRecord = new DepositoryRecord(userAutoPreTransactionRequest.getRequestNo(), userAutoPreTransactionRequest.getBizType(), "UserAutoPreTransactionRequest", userAutoPreTransactionRequest.getId());
         // 幂等性实现

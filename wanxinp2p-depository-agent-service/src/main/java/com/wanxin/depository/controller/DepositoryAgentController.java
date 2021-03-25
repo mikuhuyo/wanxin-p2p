@@ -5,10 +5,7 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.DepositoryAgentAPI;
-import com.wanxin.api.depository.model.DepositoryBaseResponse;
-import com.wanxin.api.depository.model.DepositoryResponseDTO;
-import com.wanxin.api.depository.model.GatewayRequest;
-import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
+import com.wanxin.api.depository.model.*;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.RestResponse;
 import com.wanxin.depository.service.DepositoryRecordService;
@@ -35,6 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class DepositoryAgentController implements DepositoryAgentAPI {
     @Autowired
     private DepositoryRecordService depositoryRecordService;
+
+    @Override
+    @PostMapping("l/confirm-loan")
+    @ApiOperation(value = "审核标的满标放款")
+    @ApiImplicitParam(name = "loanRequest", value = "标的满标放款信息", required = true, dataType = "LoanRequest", paramType = "body")
+    public RestResponse<String> confirmLoan(@RequestBody LoanRequest loanRequest) {
+        return getRestResponse(depositoryRecordService.confirmLoan(loanRequest));
+    }
 
     @Override
     @PostMapping("/l/user-auto-pre-transaction")

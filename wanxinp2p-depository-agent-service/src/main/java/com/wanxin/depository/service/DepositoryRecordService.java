@@ -3,10 +3,7 @@ package com.wanxin.depository.service;
 import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
-import com.wanxin.api.depository.model.DepositoryBaseResponse;
-import com.wanxin.api.depository.model.DepositoryResponseDTO;
-import com.wanxin.api.depository.model.GatewayRequest;
-import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
+import com.wanxin.api.depository.model.*;
 import com.wanxin.api.transaction.model.ProjectDTO;
 
 /**
@@ -15,6 +12,14 @@ import com.wanxin.api.transaction.model.ProjectDTO;
  * @since 1.8
  */
 public interface DepositoryRecordService {
+    /**
+     * 审核满标放款
+     *
+     * @param loanRequest
+     * @return
+     */
+    DepositoryResponseDTO<DepositoryBaseResponse> confirmLoan(LoanRequest loanRequest);
+
     /**
      * 投标预处理
      *
