@@ -1,0 +1,11 @@
+server:
+  port: 53080
+
+spring:
+  application:
+    name: repayment-service
+  main:
+    banner-mode: 'off'
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
