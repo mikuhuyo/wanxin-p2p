@@ -136,12 +136,12 @@ Ps: 万万没想到写文档和注释是这么痛苦.
 | MySQL      | 5.7    |
 | Apollo | Last |
 | Redis         | 4    |
-| MongoDB       | 4  |
 | RocketMQ      | 4.4.0 |
 | Nginx         | 1.10   |
 | Elasticsearch | 7.5.2 |
 | Logstash      | 7.5.2  |
 | Kibana        | 7.5.2  |
+| Zookeeper  | 3.6.2 |
 
 ## 特别鸣谢
 
