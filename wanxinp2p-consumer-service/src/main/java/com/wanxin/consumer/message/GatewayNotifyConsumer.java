@@ -57,7 +57,7 @@ public class GatewayNotifyConsumer {
 
                     if ("WITHDRAW".equals(tag)) {
                         DepositoryWithdrawResponse depositoryWithdrawResponse = JSON.parseObject(body, DepositoryWithdrawResponse.class);
-                        // TODO 完成修改提现状态
+                        consumerService.modifyWithdrawRecordResult(depositoryWithdrawResponse);
                     }
                 } catch (Exception e) {
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
