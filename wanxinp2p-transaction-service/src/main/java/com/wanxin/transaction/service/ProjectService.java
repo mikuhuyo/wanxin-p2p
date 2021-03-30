@@ -2,6 +2,7 @@ package com.wanxin.transaction.service;
 
 import com.wanxin.api.transaction.model.*;
 import com.wanxin.common.domain.PageVO;
+import com.wanxin.transaction.entity.Project;
 
 import java.util.List;
 
@@ -11,6 +12,14 @@ import java.util.List;
  * @since 1.8
  */
 public interface ProjectService {
+    /**
+     * 修改标的状态为还款中
+     *
+     * @param project
+     * @return
+     */
+    Boolean updateProjectStatusAndStartRepayment(Project project);
+
     /**
      * 审核标的满标放款
      *

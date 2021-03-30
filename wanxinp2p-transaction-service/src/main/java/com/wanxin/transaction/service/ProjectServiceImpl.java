@@ -56,6 +56,13 @@ public class ProjectServiceImpl implements ProjectService {
     private TenderMapper tenderMapper;
 
     @Override
+    @Transactional(rollbackFor = BusinessException.class)
+    public Boolean updateProjectStatusAndStartRepayment(Project project) {
+        project.setProjectStatus(ProjectCode.REPAYING.getCode());
+        return projectMapper.updateById(project) == 1;
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public String loansApprovalStatus(Long id, String approveStatus, String commission) {
         if ("3".equals(approveStatus)) {
