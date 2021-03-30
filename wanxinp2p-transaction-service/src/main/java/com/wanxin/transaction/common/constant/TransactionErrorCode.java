@@ -89,21 +89,10 @@ public enum TransactionErrorCode implements ErrorCode {
     private int code;
     private String desc;
 
-    @Override
-    public int getCode() {
-        return code;
-    }
-
-    @Override
-    public String getDesc() {
-        return desc;
-    }
-
     private TransactionErrorCode(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
-
 
     public static TransactionErrorCode setErrorCode(int code) {
         for (TransactionErrorCode errorCode : TransactionErrorCode.values()) {
@@ -112,5 +101,15 @@ public enum TransactionErrorCode implements ErrorCode {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getDesc() {
+        return desc;
     }
 }

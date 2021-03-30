@@ -37,23 +37,21 @@ import java.util.Map;
 @RestController
 @Api(value = "用户服务API", tags = "Consumer")
 public class ConsumerController implements ConsumerAPI {
+    private final OkHttpClient okHttpClient = new OkHttpClient().newBuilder().build();
     @Value("${minio.appId}")
     private String appId;
     @Value("${minio.accessKey}")
     private String accessKey;
     @Value("${minio.secretKey}")
     private String secretKey;
-
     @Autowired
     private ConsumerService consumerService;
     @Autowired
     private BankCardService bankCardService;
     @Autowired
     private ConsumerDetailsService consumerDetailsService;
-
     @Value("${depository.url}")
     private String depositoryUrl;
-    private final OkHttpClient okHttpClient = new OkHttpClient().newBuilder().build();
 
     private RestResponse<BalanceDetailsDTO> getBalanceFromDepository(String userNo) {
         String url = depositoryUrl + "/balance-details/" + userNo;
@@ -74,7 +72,7 @@ public class ConsumerController implements ConsumerAPI {
     private RestResponse<BigDecimal> getBankCardDetailsFromDepository(String bankCardId) {
         String url = depositoryUrl + "/bank-cards/card-number/" + bankCardId;
         Request request = new Request.Builder().url(url).build();
-        try(Response response = okHttpClient.newCall(request).execute()) {
+        try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 assert response.body() != null;
                 String body = response.body().string();

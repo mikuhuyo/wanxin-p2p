@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -84,7 +83,7 @@ public class ProjectDTO {
 
     /**
      * 标的状态
-     *
+     * <p>
      * COLLECTING 募集中
      * MISCARRY 流标
      * REPAYING 还款中

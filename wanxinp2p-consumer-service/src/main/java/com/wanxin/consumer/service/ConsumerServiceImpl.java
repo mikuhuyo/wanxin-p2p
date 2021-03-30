@@ -1,6 +1,5 @@
 package com.wanxin.consumer.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.account.model.AccountDTO;
 import com.wanxin.api.account.model.AccountRegisterDTO;
@@ -22,10 +21,8 @@ import com.wanxin.consumer.mapper.BankCardMapper;
 import com.wanxin.consumer.mapper.ConsumerMapper;
 import com.wanxin.consumer.mapper.RechargeRecordMapper;
 import com.wanxin.consumer.mapper.WithdrawRecordMapper;
-import com.wanxin.consumer.utils.ApolloConfigUtil;
 import com.wanxin.consumer.utils.CheckBankCardUtil;
 import com.wanxin.consumer.utils.IdCardUtil;
-import com.wanxin.consumer.utils.OkHttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hmily.annotation.HmilyTCC;
 import org.springframework.beans.BeanUtils;

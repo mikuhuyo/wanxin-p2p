@@ -1,6 +1,9 @@
 package com.wanxin.consumer.service;
 
-import com.wanxin.api.consumer.model.*;
+import com.wanxin.api.consumer.model.BorrowerDTO;
+import com.wanxin.api.consumer.model.ConsumerDTO;
+import com.wanxin.api.consumer.model.ConsumerRegisterDTO;
+import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import com.wanxin.api.depository.model.DepositoryRechargeResponse;
 import com.wanxin.api.depository.model.DepositoryWithdrawResponse;

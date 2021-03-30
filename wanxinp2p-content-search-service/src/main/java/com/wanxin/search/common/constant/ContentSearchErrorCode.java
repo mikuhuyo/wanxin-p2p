@@ -23,21 +23,10 @@ public enum ContentSearchErrorCode implements ErrorCode {
     private int code;
     private String desc;
 
-    @Override
-	public int getCode() {
-        return code;
-    }
-
-    @Override
-	public String getDesc() {
-        return desc;
-    }
-
     private ContentSearchErrorCode(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
-
 
     public static ContentSearchErrorCode setErrorCode(int code) {
         for (ContentSearchErrorCode errorCode : ContentSearchErrorCode.values()) {
@@ -46,5 +35,15 @@ public enum ContentSearchErrorCode implements ErrorCode {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getDesc() {
+        return desc;
     }
 }

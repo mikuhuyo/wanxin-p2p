@@ -1,7 +1,6 @@
 package com.wanxin.depository.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.depository.model.DepositoryConsumerResponse;
 import com.wanxin.api.depository.model.DepositoryRechargeResponse;
 import com.wanxin.api.depository.model.DepositoryWithdrawResponse;

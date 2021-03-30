@@ -9,10 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -50,7 +47,7 @@ public class AuthFilter extends ZuulFilter {
         // 将当前登录的用户以及接入客户端的信息放入Map中
         OAuth2Authentication oauth2Authentication = (OAuth2Authentication) authentication;
         Map<String, String> jsonToken = new HashMap<>(oauth2Authentication.getOAuth2Request().getRequestParameters());
-        if(jsonToken.get("mobile") != null) {
+        if (jsonToken.get("mobile") != null) {
             requestContext.addZuulRequestHeader("jsonToken", EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(jsonToken)));
         }
         return null;

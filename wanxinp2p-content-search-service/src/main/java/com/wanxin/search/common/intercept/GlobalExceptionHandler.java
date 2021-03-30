@@ -24,29 +24,29 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-	@ExceptionHandler(value = Exception.class)
-	@ResponseBody
-	public RestResponse<Nullable> exceptionGet(HttpServletRequest req, HttpServletResponse response , Exception e) {
-		if (e instanceof BusinessException) {
-			BusinessException be = (BusinessException) e;
-			if(CommonErrorCode.CUSTOM.equals(be.getErrorCode())){
-				return new RestResponse<Nullable>(be.getErrorCode().getCode(), be.getMessage());
-			}else{
-				return new RestResponse<Nullable>(be.getErrorCode().getCode(), be.getErrorCode().getDesc());
-			}
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public RestResponse<Nullable> exceptionGet(HttpServletRequest req, HttpServletResponse response, Exception e) {
+        if (e instanceof BusinessException) {
+            BusinessException be = (BusinessException) e;
+            if (CommonErrorCode.CUSTOM.equals(be.getErrorCode())) {
+                return new RestResponse<Nullable>(be.getErrorCode().getCode(), be.getMessage());
+            } else {
+                return new RestResponse<Nullable>(be.getErrorCode().getCode(), be.getErrorCode().getDesc());
+            }
 
-		}else if(e instanceof NoHandlerFoundException){
-			return new RestResponse<Nullable>(404, "找不到资源");
-		}else if(e instanceof HttpRequestMethodNotSupportedException){
-			return new RestResponse<Nullable>(405, "method 方法不支持");
-		}else if(e instanceof HttpMediaTypeNotSupportedException){
-			return new RestResponse<Nullable>(415, "不支持媒体类型");
-		}
+        } else if (e instanceof NoHandlerFoundException) {
+            return new RestResponse<Nullable>(404, "找不到资源");
+        } else if (e instanceof HttpRequestMethodNotSupportedException) {
+            return new RestResponse<Nullable>(405, "method 方法不支持");
+        } else if (e instanceof HttpMediaTypeNotSupportedException) {
+            return new RestResponse<Nullable>(415, "不支持媒体类型");
+        }
 
-		LOGGER.error("[系统异常]-{}", e);
-		return  new RestResponse<Nullable>(CommonErrorCode.UNKOWN.getCode(), CommonErrorCode.UNKOWN.getDesc());
-	}
+        LOGGER.error("[系统异常]-{}", e);
+        return new RestResponse<Nullable>(CommonErrorCode.UNKOWN.getCode(), CommonErrorCode.UNKOWN.getDesc());
+    }
 
 }

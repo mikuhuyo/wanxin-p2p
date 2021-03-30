@@ -1,6 +1,8 @@
 package com.wanxin.repayment.config;
 
+import com.wanxin.repayment.interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -10,6 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    /**
+     * 添加自定义拦截器
+     *
+     * @param registry 拦截器注册对象
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TokenInterceptor()).addPathPatterns("/**");
+    }
+
     /**
      * 添加静态资源文件, 外部可以直接访问地址
      *

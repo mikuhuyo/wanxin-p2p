@@ -22,7 +22,8 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) {
         String jsonToken = httpServletRequest.getParameter("jsonToken");
         if (StringUtils.isNotBlank(jsonToken)) {
-            LoginUser loginUser = JSON.parseObject(EncryptUtil.decodeUTF8StringBase64(jsonToken), new TypeReference<LoginUser>() {});
+            LoginUser loginUser = JSON.parseObject(EncryptUtil.decodeUTF8StringBase64(jsonToken), new TypeReference<LoginUser>() {
+            });
             httpServletRequest.setAttribute("jsonToken", loginUser);
         }
         return true;

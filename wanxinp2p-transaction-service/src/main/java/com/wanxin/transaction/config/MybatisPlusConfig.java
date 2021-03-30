@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParser
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * <P>
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @MapperScan("com.wanxin.**.mapper")
+@EnableTransactionManagement(proxyTargetClass = true)
 public class MybatisPlusConfig {
     /**
      * 分页插件

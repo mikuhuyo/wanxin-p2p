@@ -3,7 +3,6 @@ package com.wanxin.api.transaction.model;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
