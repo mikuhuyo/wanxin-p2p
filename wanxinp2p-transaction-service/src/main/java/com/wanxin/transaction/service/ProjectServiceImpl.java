@@ -21,6 +21,7 @@ import com.wanxin.transaction.entity.Project;
 import com.wanxin.transaction.entity.Tender;
 import com.wanxin.transaction.mapper.ProjectMapper;
 import com.wanxin.transaction.mapper.TenderMapper;
+import com.wanxin.transaction.message.TransactionProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -54,6 +55,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ContentSearchApiAgent contentSearchApiAgent;
     @Autowired
     private TenderMapper tenderMapper;
+    @Autowired
+    private TransactionProducer transactionProducer;
 
     @Override
     @Transactional(rollbackFor = BusinessException.class)
@@ -117,6 +120,9 @@ public class ProjectServiceImpl implements ProjectService {
                     projectWithTendersDTO.setCommissionInvestorAnnualRate(configService.getCommissionInvestorAnnualRate());
                     // 封装借款人让利
                     projectWithTendersDTO.setCommissionBorrowerAnnualRate(configService.getCommissionBorrowerAnnualRate());
+
+                    transactionProducer.updateProjectStatusAndStartRepayment(project, projectWithTendersDTO);
+
                     // 调用还款服务, 启动还款(生成还款计划, 应收明细)
                     return "审核成功";
                 } else {

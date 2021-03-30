@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RocketMQTransactionListener(txProducerGroup = "PID_START_REPAYMENT")
-public class P2pTransactionListenerImpl implements RocketMQLocalTransactionListener {
+public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
     @Autowired
     private ProjectService projectService;
     @Autowired
