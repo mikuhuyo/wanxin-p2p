@@ -223,7 +223,7 @@ CREATE TABLE `Permission` (
   PRIMARY KEY (`Id`),
   KEY `IX_TargetId_PermissionType` (`TargetId`(191),`PermissionType`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=869 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
+) ENGINE=InnoDB AUTO_INCREMENT=873 DEFAULT CHARSET=utf8mb4 COMMENT='permission表';
 
 -- ----------------------------
 -- Records of Permission
@@ -1006,6 +1006,10 @@ INSERT INTO `Permission` VALUES (865, 'ModifyNamespace', 'repayment-service+micr
 INSERT INTO `Permission` VALUES (866, 'ReleaseNamespace', 'repayment-service+micro_service.mybatis-plus', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `Permission` VALUES (867, 'ModifyNamespace', 'repayment-service+micro_service.mybatis-plus+DEV', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `Permission` VALUES (868, 'ReleaseNamespace', 'repayment-service+micro_service.mybatis-plus+DEV', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
+INSERT INTO `Permission` VALUES (869, 'ModifyNamespace', 'transaction-service+micro_service.spring-rocketmq', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `Permission` VALUES (870, 'ReleaseNamespace', 'transaction-service+micro_service.spring-rocketmq', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `Permission` VALUES (871, 'ModifyNamespace', 'transaction-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `Permission` VALUES (872, 'ReleaseNamespace', 'transaction-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
 COMMIT;
 
 -- ----------------------------
@@ -1023,7 +1027,7 @@ CREATE TABLE `Role` (
   PRIMARY KEY (`Id`),
   KEY `IX_RoleName` (`RoleName`(191)),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=825 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=829 DEFAULT CHARSET=utf8mb4 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of Role
@@ -1446,6 +1450,10 @@ INSERT INTO `Role` VALUES (821, 'ModifyNamespace+repayment-service+micro_service
 INSERT INTO `Role` VALUES (822, 'ReleaseNamespace+repayment-service+micro_service.mybatis-plus', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `Role` VALUES (823, 'ModifyNamespace+repayment-service+micro_service.mybatis-plus+DEV', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `Role` VALUES (824, 'ReleaseNamespace+repayment-service+micro_service.mybatis-plus+DEV', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
+INSERT INTO `Role` VALUES (825, 'ModifyNamespace+transaction-service+micro_service.spring-rocketmq', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `Role` VALUES (826, 'ReleaseNamespace+transaction-service+micro_service.spring-rocketmq', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `Role` VALUES (827, 'ModifyNamespace+transaction-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `Role` VALUES (828, 'ReleaseNamespace+transaction-service+micro_service.spring-rocketmq+DEV', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
 COMMIT;
 
 -- ----------------------------
@@ -1465,7 +1473,7 @@ CREATE TABLE `RolePermission` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_PermissionId` (`PermissionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=869 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=873 DEFAULT CHARSET=utf8mb4 COMMENT='角色和权限的绑定表';
 
 -- ----------------------------
 -- Records of RolePermission
@@ -1952,6 +1960,10 @@ INSERT INTO `RolePermission` VALUES (865, 821, 865, b'0', 'apollo', '2021-03-18 
 INSERT INTO `RolePermission` VALUES (866, 822, 866, b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `RolePermission` VALUES (867, 823, 867, b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `RolePermission` VALUES (868, 824, 868, b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
+INSERT INTO `RolePermission` VALUES (869, 825, 869, b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `RolePermission` VALUES (870, 826, 870, b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `RolePermission` VALUES (871, 827, 871, b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `RolePermission` VALUES (872, 828, 872, b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
 COMMIT;
 
 -- ----------------------------
@@ -2003,7 +2015,7 @@ CREATE TABLE `UserRole` (
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_RoleId` (`RoleId`),
   KEY `IX_UserId_RoleId` (`UserId`,`RoleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=419 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
+) ENGINE=InnoDB AUTO_INCREMENT=421 DEFAULT CHARSET=utf8mb4 COMMENT='用户和role的绑定表';
 
 -- ----------------------------
 -- Records of UserRole
@@ -2427,6 +2439,8 @@ INSERT INTO `UserRole` VALUES (415, 'apollo', 817, b'0', 'apollo', '2021-03-18 1
 INSERT INTO `UserRole` VALUES (416, 'apollo', 818, b'0', 'apollo', '2021-03-18 17:06:50', 'apollo', '2021-03-18 17:06:50');
 INSERT INTO `UserRole` VALUES (417, 'apollo', 821, b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
 INSERT INTO `UserRole` VALUES (418, 'apollo', 822, b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
+INSERT INTO `UserRole` VALUES (419, 'apollo', 825, b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
+INSERT INTO `UserRole` VALUES (420, 'apollo', 826, b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
 COMMIT;
 
 -- ----------------------------

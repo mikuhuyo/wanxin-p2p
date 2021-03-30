@@ -129,7 +129,7 @@ CREATE TABLE `Audit` (
   `DataChange_LastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=2648 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
+) ENGINE=InnoDB AUTO_INCREMENT=2690 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
 
 -- ----------------------------
 -- Records of Audit
@@ -2782,6 +2782,48 @@ INSERT INTO `Audit` VALUES (2644, 'Namespace', 270, 'INSERT', NULL, b'0', 'apoll
 INSERT INTO `Audit` VALUES (2645, 'Namespace', 271, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:06:50', NULL, '2021-03-18 17:06:50');
 INSERT INTO `Audit` VALUES (2646, 'Namespace', 268, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 17:07:13', NULL, '2021-03-18 17:07:13');
 INSERT INTO `Audit` VALUES (2647, 'Namespace', 272, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:07:55', NULL, '2021-03-18 17:07:55');
+INSERT INTO `Audit` VALUES (2648, 'Item', 646, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:52:07', NULL, '2021-03-18 17:52:07');
+INSERT INTO `Audit` VALUES (2649, 'Item', 647, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:52:07', NULL, '2021-03-18 17:52:07');
+INSERT INTO `Audit` VALUES (2650, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:52:07', NULL, '2021-03-18 17:52:07');
+INSERT INTO `Audit` VALUES (2651, 'Release', 380, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:52:14', NULL, '2021-03-18 17:52:14');
+INSERT INTO `Audit` VALUES (2652, 'ReleaseHistory', 385, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:52:14', NULL, '2021-03-18 17:52:14');
+INSERT INTO `Audit` VALUES (2653, 'Item', 647, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 17:53:23', NULL, '2021-03-18 17:53:23');
+INSERT INTO `Audit` VALUES (2654, 'Release', 381, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:53:29', NULL, '2021-03-18 17:53:29');
+INSERT INTO `Audit` VALUES (2655, 'ReleaseHistory', 386, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 17:53:29', NULL, '2021-03-18 17:53:29');
+INSERT INTO `Audit` VALUES (2656, 'Item', 648, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:22:36', NULL, '2021-03-18 18:22:36');
+INSERT INTO `Audit` VALUES (2657, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:22:36', NULL, '2021-03-18 18:22:36');
+INSERT INTO `Audit` VALUES (2658, 'Item', 646, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 18:22:36', NULL, '2021-03-18 18:22:36');
+INSERT INTO `Audit` VALUES (2659, 'ItemSet', NULL, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 18:22:36', NULL, '2021-03-18 18:22:36');
+INSERT INTO `Audit` VALUES (2660, 'Release', 382, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:22:38', NULL, '2021-03-18 18:22:38');
+INSERT INTO `Audit` VALUES (2661, 'ReleaseHistory', 387, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:22:38', NULL, '2021-03-18 18:22:38');
+INSERT INTO `Audit` VALUES (2662, 'Namespace', 273, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:23:06', NULL, '2021-03-18 18:23:06');
+INSERT INTO `Audit` VALUES (2663, 'Item', 649, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:23:22', NULL, '2021-03-18 18:23:22');
+INSERT INTO `Audit` VALUES (2664, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:23:22', NULL, '2021-03-18 18:23:22');
+INSERT INTO `Audit` VALUES (2665, 'Release', 383, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:23:25', NULL, '2021-03-18 18:23:25');
+INSERT INTO `Audit` VALUES (2666, 'ReleaseHistory', 388, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:23:25', NULL, '2021-03-18 18:23:25');
+INSERT INTO `Audit` VALUES (2667, 'Item', 650, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:35:02', NULL, '2021-03-18 18:35:02');
+INSERT INTO `Audit` VALUES (2668, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:35:02', NULL, '2021-03-18 18:35:02');
+INSERT INTO `Audit` VALUES (2669, 'Release', 384, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:35:04', NULL, '2021-03-18 18:35:04');
+INSERT INTO `Audit` VALUES (2670, 'ReleaseHistory', 389, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:35:04', NULL, '2021-03-18 18:35:04');
+INSERT INTO `Audit` VALUES (2671, 'Item', 649, 'UPDATE', NULL, b'0', 'apollo', '2021-03-18 18:38:42', NULL, '2021-03-18 18:38:42');
+INSERT INTO `Audit` VALUES (2672, 'ItemSet', NULL, 'UPDATE', NULL, b'0', 'apollo', '2021-03-18 18:38:42', NULL, '2021-03-18 18:38:42');
+INSERT INTO `Audit` VALUES (2673, 'Release', 385, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:38:44', NULL, '2021-03-18 18:38:44');
+INSERT INTO `Audit` VALUES (2674, 'ReleaseHistory', 390, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:38:44', NULL, '2021-03-18 18:38:44');
+INSERT INTO `Audit` VALUES (2675, 'Item', 649, 'UPDATE', NULL, b'0', 'apollo', '2021-03-18 18:48:28', NULL, '2021-03-18 18:48:28');
+INSERT INTO `Audit` VALUES (2676, 'ItemSet', NULL, 'UPDATE', NULL, b'0', 'apollo', '2021-03-18 18:48:28', NULL, '2021-03-18 18:48:28');
+INSERT INTO `Audit` VALUES (2677, 'Release', 386, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:48:30', NULL, '2021-03-18 18:48:30');
+INSERT INTO `Audit` VALUES (2678, 'ReleaseHistory', 391, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:48:30', NULL, '2021-03-18 18:48:30');
+INSERT INTO `Audit` VALUES (2679, 'Item', 651, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:56:01', NULL, '2021-03-18 18:56:01');
+INSERT INTO `Audit` VALUES (2680, 'Item', 652, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:56:01', NULL, '2021-03-18 18:56:01');
+INSERT INTO `Audit` VALUES (2681, 'ItemSet', NULL, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:56:01', NULL, '2021-03-18 18:56:01');
+INSERT INTO `Audit` VALUES (2682, 'Item', 648, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 18:56:01', NULL, '2021-03-18 18:56:01');
+INSERT INTO `Audit` VALUES (2683, 'ItemSet', NULL, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 18:56:01', NULL, '2021-03-18 18:56:01');
+INSERT INTO `Audit` VALUES (2684, 'Release', 387, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:56:03', NULL, '2021-03-18 18:56:03');
+INSERT INTO `Audit` VALUES (2685, 'ReleaseHistory', 392, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 18:56:03', NULL, '2021-03-18 18:56:03');
+INSERT INTO `Audit` VALUES (2686, 'Item', 651, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 20:32:37', NULL, '2021-03-18 20:32:37');
+INSERT INTO `Audit` VALUES (2687, 'Item', 652, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 20:32:39', NULL, '2021-03-18 20:32:39');
+INSERT INTO `Audit` VALUES (2688, 'Release', 388, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 20:32:41', NULL, '2021-03-18 20:32:41');
+INSERT INTO `Audit` VALUES (2689, 'ReleaseHistory', 393, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 20:32:41', NULL, '2021-03-18 20:32:41');
 COMMIT;
 
 -- ----------------------------
@@ -2843,7 +2885,7 @@ CREATE TABLE `Commit` (
   KEY `AppId` (`AppId`(191)),
   KEY `ClusterName` (`ClusterName`(191)),
   KEY `NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=413 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=423 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
 
 -- ----------------------------
 -- Records of Commit
@@ -3089,6 +3131,16 @@ INSERT INTO `Commit` VALUES (409, '{\"createItems\":[{\"namespaceId\":77,\"key\"
 INSERT INTO `Commit` VALUES (410, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":257,\"key\":\"server.servlet.context-path\",\"value\":\"/content-search\",\"comment\":\"\",\"lineNum\":2,\"id\":628,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-02 04:25:12\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-02 04:25:12\"},\"newItem\":{\"namespaceId\":257,\"key\":\"server.servlet.context-path\",\"value\":\"/search\",\"comment\":\"\",\"lineNum\":2,\"id\":628,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-02 04:25:12\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-18 13:29:20\"}}],\"deleteItems\":[]}', 'content-search-service', 'default', 'application', NULL, b'0', 'apollo', '2021-03-18 05:29:21', 'apollo', '2021-03-18 05:29:21');
 INSERT INTO `Commit` VALUES (411, '{\"createItems\":[{\"namespaceId\":77,\"key\":\"zuul.routes.repayment-service-router.path\",\"value\":\"/repayment/**\",\"comment\":\"\",\"lineNum\":29,\"id\":641,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 00:58:40\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 00:58:40\"},{\"namespaceId\":77,\"key\":\"zuul.routes.repayment-service-router.stripPrefix\",\"value\":\"false\",\"comment\":\"\",\"lineNum\":30,\"id\":642,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 00:58:40\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 00:58:40\"},{\"namespaceId\":77,\"key\":\"zuul.routes.repayment-service-router.serviceId\",\"value\":\"repayment-service\",\"comment\":\"\",\"lineNum\":31,\"id\":643,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 00:58:40\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 00:58:40\"}],\"updateItems\":[],\"deleteItems\":[]}', 'gateway-server', 'default', 'application', NULL, b'0', 'apollo', '2021-03-18 16:58:41', 'apollo', '2021-03-18 16:58:41');
 INSERT INTO `Commit` VALUES (412, '{\"createItems\":[{\"namespaceId\":265,\"key\":\"server.servlet.context-path\",\"value\":\"/repayment\",\"comment\":\"\",\"lineNum\":2,\"id\":645,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 01:01:55\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 01:01:55\"}],\"updateItems\":[],\"deleteItems\":[]}', 'repayment-service', 'default', 'application', NULL, b'0', 'apollo', '2021-03-18 17:01:55', 'apollo', '2021-03-18 17:01:55');
+INSERT INTO `Commit` VALUES (413, '{\"createItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.producer.group\",\"value\":\"producer_start_repayment\",\"comment\":\"\",\"lineNum\":1,\"id\":646,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 01:52:07\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 01:52:07\"},{\"namespaceId\":271,\"key\":\"rocketmq.name-server\",\"value\":\"192.168.158.164:9876\",\"comment\":\"\",\"lineNum\":2,\"id\":647,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 01:52:07\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 01:52:07\"}],\"updateItems\":[],\"deleteItems\":[]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 17:52:07', 'apollo', '2021-03-18 17:52:07');
+INSERT INTO `Commit` VALUES (414, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.name-server\",\"value\":\"192.168.158.164:9876\",\"comment\":\"\",\"lineNum\":2,\"id\":647,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 01:52:07\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 01:53:22\"}]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 17:53:23', 'apollo', '2021-03-18 17:53:23');
+INSERT INTO `Commit` VALUES (415, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.producer.group\",\"value\":\"producer_start_repayment\",\"comment\":\"\",\"lineNum\":1,\"id\":646,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 01:52:07\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:22:35\"}]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:22:36', 'apollo', '2021-03-18 18:22:36');
+INSERT INTO `Commit` VALUES (416, '{\"createItems\":[{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"producer_start_repayment\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:21\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:23:21\"}],\"updateItems\":[],\"deleteItems\":[]}', 'transaction-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:23:22', 'apollo', '2021-03-18 18:23:22');
+INSERT INTO `Commit` VALUES (417, '{\"createItems\":[{\"namespaceId\":222,\"key\":\"rocketmq.consumer.group\",\"value\":\"CID_P2P_GATEWAY_NOTIFY\",\"comment\":\"\",\"lineNum\":1,\"id\":650,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:35:01\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:35:01\"}],\"updateItems\":[],\"deleteItems\":[]}', 'consumer-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:35:02', 'apollo', '2021-03-18 18:35:02');
+INSERT INTO `Commit` VALUES (418, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"producer_start_repayment\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:23:22\"},\"newItem\":{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_PRODUCER_START_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:38:41\"}}],\"deleteItems\":[]}', 'transaction-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:38:42', 'apollo', '2021-03-18 18:38:42');
+INSERT INTO `Commit` VALUES (419, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_PRODUCER_START_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:38:42\"},\"newItem\":{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_START_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:48:28\"}}],\"deleteItems\":[]}', 'transaction-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:48:28', 'apollo', '2021-03-18 18:48:28');
+INSERT INTO `Commit` VALUES (420, '{\"createItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":651,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:00\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:56:00\"},{\"namespaceId\":271,\"key\":\"rocketmq.consumer.group\",\"value\":\"CID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":2,\"id\":652,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:00\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:56:00\"}],\"updateItems\":[],\"deleteItems\":[]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:56:01', 'apollo', '2021-03-18 18:56:01');
+INSERT INTO `Commit` VALUES (421, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":651,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:01\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 04:32:36\"}]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 20:32:37', 'apollo', '2021-03-18 20:32:37');
+INSERT INTO `Commit` VALUES (422, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.consumer.group\",\"value\":\"CID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":2,\"id\":652,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:01\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 04:32:38\"}]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 20:32:39', 'apollo', '2021-03-18 20:32:39');
 COMMIT;
 
 -- ----------------------------
@@ -3989,7 +4041,7 @@ CREATE TABLE `Item` (
   PRIMARY KEY (`Id`),
   KEY `IX_GroupId` (`NamespaceId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=646 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
+) ENGINE=InnoDB AUTO_INCREMENT=653 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
 
 -- ----------------------------
 -- Records of Item
@@ -4240,6 +4292,13 @@ INSERT INTO `Item` VALUES (642, 77, 'zuul.routes.repayment-service-router.stripP
 INSERT INTO `Item` VALUES (643, 77, 'zuul.routes.repayment-service-router.serviceId', 'repayment-service', '', 31, b'0', 'apollo', '2021-03-18 16:58:41', 'apollo', '2021-03-18 16:58:41');
 INSERT INTO `Item` VALUES (644, 265, '', '', '# 微服务访问路径', 1, b'0', 'apollo', '2021-03-18 17:01:55', 'apollo', '2021-03-18 17:01:55');
 INSERT INTO `Item` VALUES (645, 265, 'server.servlet.context-path', '/repayment', '', 2, b'0', 'apollo', '2021-03-18 17:01:55', 'apollo', '2021-03-18 17:01:55');
+INSERT INTO `Item` VALUES (646, 271, 'rocketmq.producer.group', 'producer_start_repayment', '', 1, b'1', 'apollo', '2021-03-18 17:52:07', 'apollo', '2021-03-18 18:22:36');
+INSERT INTO `Item` VALUES (647, 271, 'rocketmq.name-server', '192.168.158.164:9876', '', 2, b'1', 'apollo', '2021-03-18 17:52:07', 'apollo', '2021-03-18 17:53:23');
+INSERT INTO `Item` VALUES (648, 271, '', '', '', 1, b'1', 'apollo', '2021-03-18 18:22:36', 'apollo', '2021-03-18 18:56:01');
+INSERT INTO `Item` VALUES (649, 273, 'rocketmq.producer.group', 'PID_START_REPAYMENT', '', 1, b'0', 'apollo', '2021-03-18 18:23:22', 'apollo', '2021-03-18 18:48:28');
+INSERT INTO `Item` VALUES (650, 222, 'rocketmq.consumer.group', 'CID_P2P_GATEWAY_NOTIFY', '', 1, b'0', 'apollo', '2021-03-18 18:35:02', 'apollo', '2021-03-18 18:35:02');
+INSERT INTO `Item` VALUES (651, 271, 'rocketmq.producer.group', 'PID_CONFIRM_REPAYMENT', '', 1, b'1', 'apollo', '2021-03-18 18:56:01', 'apollo', '2021-03-18 20:32:37');
+INSERT INTO `Item` VALUES (652, 271, 'rocketmq.consumer.group', 'CID_CONFIRM_REPAYMENT', '', 2, b'1', 'apollo', '2021-03-18 18:56:01', 'apollo', '2021-03-18 20:32:39');
 COMMIT;
 
 -- ----------------------------
@@ -4260,7 +4319,7 @@ CREATE TABLE `Namespace` (
   KEY `AppId_ClusterName_NamespaceName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8mb4 COMMENT='命名空间';
+) ENGINE=InnoDB AUTO_INCREMENT=274 DEFAULT CHARSET=utf8mb4 COMMENT='命名空间';
 
 -- ----------------------------
 -- Records of Namespace
@@ -4355,6 +4414,7 @@ INSERT INTO `Namespace` VALUES (269, 'repayment-service', 'default', 'micro_serv
 INSERT INTO `Namespace` VALUES (270, 'repayment-service', 'default', 'micro_service.spring-ribbon', b'0', 'apollo', '2021-03-18 17:06:18', 'apollo', '2021-03-18 17:06:18');
 INSERT INTO `Namespace` VALUES (271, 'repayment-service', 'default', 'micro_service.spring-rocketmq', b'0', 'apollo', '2021-03-18 17:06:50', 'apollo', '2021-03-18 17:06:50');
 INSERT INTO `Namespace` VALUES (272, 'repayment-service', 'default', 'micro_service.mybatis-plus', b'0', 'apollo', '2021-03-18 17:07:55', 'apollo', '2021-03-18 17:07:55');
+INSERT INTO `Namespace` VALUES (273, 'transaction-service', 'default', 'micro_service.spring-rocketmq', b'0', 'apollo', '2021-03-18 18:23:06', 'apollo', '2021-03-18 18:23:06');
 COMMIT;
 
 -- ----------------------------
@@ -4397,7 +4457,7 @@ CREATE TABLE `Release` (
   KEY `AppId_ClusterName_GroupName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_ReleaseKey` (`ReleaseKey`)
-) ENGINE=InnoDB AUTO_INCREMENT=380 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
+) ENGINE=InnoDB AUTO_INCREMENT=389 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
 
 -- ----------------------------
 -- Records of Release
@@ -4624,6 +4684,15 @@ INSERT INTO `Release` VALUES (376, '20210318132922-e1f298e8b884c4ed', '202103181
 INSERT INTO `Release` VALUES (377, '20210319005843-df7a98e8b884c4ee', '20210326205622-release', '', 'gateway-server', 'default', 'application', '{\"zuul.retryable\":\"true\",\"zuul.ignoredServices\":\"*\",\"zuul.add-host-header\":\"true\",\"zuul.routes.consumer-service-router.path\":\"/consumer/**\",\"zuul.routes.consumer-service-router.stripPrefix\":\"false\",\"zuul.routes.consumer-service-router.serviceId\":\"consumer-service\",\"zuul.routes.account-service-router.path\":\"/account/**\",\"zuul.routes.account-service-router.stripPrefix\":\"false\",\"zuul.routes.account-service-router.serviceId\":\"account-service\",\"zuul.routes.uaa-service-router.path\":\"/uaa/**\",\"zuul.routes.uaa-service-router.stripPrefix\":\"false\",\"zuul.routes.uaa-service-router.serviceId\":\"uaa-service\",\"zuul.routes.depository-agent-service-router.path\":\"/depository/**\",\"zuul.routes.depository-agent-service-router.stripPrefix\":\"false\",\"zuul.routes.depository-agent-service-router.serviceId\":\"depository-agent-service\",\"zuul.routes.transaction-service-router.path\":\"/transaction/**\",\"zuul.routes.transaction-service-router.stripPrefix\":\"false\",\"zuul.routes.transaction-service-router.serviceId\":\"transaction-service\",\"zuul.routes.search-service-router.path\":\"/search/**\",\"zuul.routes.search-service-router.stripPrefix\":\"false\",\"zuul.routes.search-service-router.serviceId\":\"content-search-service\",\"zuul.routes.repayment-service-router.path\":\"/repayment/**\",\"zuul.routes.repayment-service-router.stripPrefix\":\"false\",\"zuul.routes.repayment-service-router.serviceId\":\"repayment-service\"}', b'0', b'0', 'apollo', '2021-03-18 16:58:44', 'apollo', '2021-03-18 16:58:44');
 INSERT INTO `Release` VALUES (378, '20210319005843-bcab98e8b884c4ef', '20210326205622-release', '', 'gateway-server', '20201222141332-df7a5a8cbda0256c', 'application', '{\"zuul.retryable\":\"true\",\"zuul.ignoredServices\":\"*\",\"zuul.add-host-header\":\"true\",\"zuul.routes.consumer-service-router.path\":\"/consumer/**\",\"zuul.routes.consumer-service-router.stripPrefix\":\"false\",\"zuul.routes.consumer-service-router.serviceId\":\"consumer-service\",\"zuul.routes.account-service-router.path\":\"/account/**\",\"zuul.routes.account-service-router.stripPrefix\":\"false\",\"zuul.routes.account-service-router.serviceId\":\"account-service\",\"zuul.routes.uaa-service-router.path\":\"/uaa/**\",\"zuul.routes.uaa-service-router.stripPrefix\":\"false\",\"zuul.routes.uaa-service-router.serviceId\":\"uaa-service\",\"zuul.routes.depository-agent-service-router.path\":\"/depository/**\",\"zuul.routes.depository-agent-service-router.stripPrefix\":\"false\",\"zuul.routes.depository-agent-service-router.serviceId\":\"depository-agent-service\",\"zuul.routes.transaction-service-router.path\":\"/transaction/**\",\"zuul.routes.transaction-service-router.stripPrefix\":\"false\",\"zuul.routes.transaction-service-router.serviceId\":\"transaction-service\",\"zuul.routes.search-service-router.path\":\"/search/**\",\"zuul.routes.search-service-router.stripPrefix\":\"false\",\"zuul.routes.search-service-router.serviceId\":\"content-search-service\",\"zuul.routes.repayment-service-router.path\":\"/repayment/**\",\"zuul.routes.repayment-service-router.stripPrefix\":\"false\",\"zuul.routes.repayment-service-router.serviceId\":\"repayment-service\"}', b'0', b'0', 'apollo', '2021-03-18 16:58:44', 'apollo', '2021-03-18 16:58:44');
 INSERT INTO `Release` VALUES (379, '20210319010157-dc2998e8b884c4f0', '20210326205936-release', '', 'repayment-service', 'default', 'application', '{\"server.servlet.context-path\":\"/repayment\"}', b'0', b'0', 'apollo', '2021-03-18 17:01:57', 'apollo', '2021-03-18 17:01:57');
+INSERT INTO `Release` VALUES (380, '20210319015213-185d98e8b884c4f1', '20210330170119-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"producer_start_repayment\",\"rocketmq.name-server\":\"192.168.158.164:9876\"}', b'0', b'0', 'apollo', '2021-03-18 17:52:14', 'apollo', '2021-03-18 17:52:14');
+INSERT INTO `Release` VALUES (381, '20210319015328-185d98e8b884c4f2', '20210330170232-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"producer_start_repayment\"}', b'0', b'0', 'apollo', '2021-03-18 17:53:29', 'apollo', '2021-03-18 17:53:29');
+INSERT INTO `Release` VALUES (382, '20210319022237-185d98e8b884c4f3', '20210330173143-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{}', b'0', b'0', 'apollo', '2021-03-18 18:22:38', 'apollo', '2021-03-18 18:22:38');
+INSERT INTO `Release` VALUES (383, '20210319022324-cd0898e8b884c4f4', '20210330173230-release', '', 'transaction-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"producer_start_repayment\"}', b'0', b'0', 'apollo', '2021-03-18 18:23:25', 'apollo', '2021-03-18 18:23:25');
+INSERT INTO `Release` VALUES (384, '20210319023503-002098e8b884c4f5', '20210330174409-release', '', 'consumer-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.consumer.group\":\"CID_P2P_GATEWAY_NOTIFY\"}', b'0', b'0', 'apollo', '2021-03-18 18:35:04', 'apollo', '2021-03-18 18:35:04');
+INSERT INTO `Release` VALUES (385, '20210319023844-cd0898e8b884c4f6', '20210330174750-release', '', 'transaction-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"PID_PRODUCER_START_REPAYMENT\"}', b'0', b'0', 'apollo', '2021-03-18 18:38:44', 'apollo', '2021-03-18 18:38:44');
+INSERT INTO `Release` VALUES (386, '20210319024830-cd0898e8b884c4f7', '20210330175736-release', '', 'transaction-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"PID_START_REPAYMENT\"}', b'0', b'0', 'apollo', '2021-03-18 18:48:30', 'apollo', '2021-03-18 18:48:30');
+INSERT INTO `Release` VALUES (387, '20210319025603-185d98e8b884c4f8', '20210330180509-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"PID_CONFIRM_REPAYMENT\",\"rocketmq.consumer.group\":\"CID_CONFIRM_REPAYMENT\"}', b'0', b'0', 'apollo', '2021-03-18 18:56:03', 'apollo', '2021-03-18 18:56:03');
+INSERT INTO `Release` VALUES (388, '20210319043240-185d98e8b884c4f9', '20210330194146-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{}', b'0', b'0', 'apollo', '2021-03-18 20:32:41', 'apollo', '2021-03-18 20:32:41');
 COMMIT;
 
 -- ----------------------------
@@ -4649,7 +4718,7 @@ CREATE TABLE `ReleaseHistory` (
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`,`BranchName`),
   KEY `IX_ReleaseId` (`ReleaseId`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=385 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
+) ENGINE=InnoDB AUTO_INCREMENT=394 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
 
 -- ----------------------------
 -- Records of ReleaseHistory
@@ -4879,6 +4948,15 @@ INSERT INTO `ReleaseHistory` VALUES (381, 'content-search-service', 'default', '
 INSERT INTO `ReleaseHistory` VALUES (382, 'gateway-server', 'default', 'application', 'default', 377, 374, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 16:58:44', 'apollo', '2021-03-18 16:58:44');
 INSERT INTO `ReleaseHistory` VALUES (383, 'gateway-server', 'default', 'application', '20201222141332-df7a5a8cbda0256c', 378, 375, 5, '{\"baseReleaseId\":377,\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 16:58:44', 'apollo', '2021-03-18 16:58:44');
 INSERT INTO `ReleaseHistory` VALUES (384, 'repayment-service', 'default', 'application', 'default', 379, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 17:01:57', 'apollo', '2021-03-18 17:01:57');
+INSERT INTO `ReleaseHistory` VALUES (385, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 380, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 17:52:14', 'apollo', '2021-03-18 17:52:14');
+INSERT INTO `ReleaseHistory` VALUES (386, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 381, 380, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 17:53:29', 'apollo', '2021-03-18 17:53:29');
+INSERT INTO `ReleaseHistory` VALUES (387, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 382, 381, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:22:38', 'apollo', '2021-03-18 18:22:38');
+INSERT INTO `ReleaseHistory` VALUES (388, 'transaction-service', 'default', 'micro_service.spring-rocketmq', 'default', 383, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:23:25', 'apollo', '2021-03-18 18:23:25');
+INSERT INTO `ReleaseHistory` VALUES (389, 'consumer-service', 'default', 'micro_service.spring-rocketmq', 'default', 384, 317, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:35:04', 'apollo', '2021-03-18 18:35:04');
+INSERT INTO `ReleaseHistory` VALUES (390, 'transaction-service', 'default', 'micro_service.spring-rocketmq', 'default', 385, 383, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:38:44', 'apollo', '2021-03-18 18:38:44');
+INSERT INTO `ReleaseHistory` VALUES (391, 'transaction-service', 'default', 'micro_service.spring-rocketmq', 'default', 386, 385, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:48:30', 'apollo', '2021-03-18 18:48:30');
+INSERT INTO `ReleaseHistory` VALUES (392, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 387, 382, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:56:03', 'apollo', '2021-03-18 18:56:03');
+INSERT INTO `ReleaseHistory` VALUES (393, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 388, 387, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 20:32:41', 'apollo', '2021-03-18 20:32:41');
 COMMIT;
 
 -- ----------------------------
@@ -4892,7 +4970,7 @@ CREATE TABLE `ReleaseMessage` (
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Message` (`Message`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=550 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
+) ENGINE=InnoDB AUTO_INCREMENT=559 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
 
 -- ----------------------------
 -- Records of ReleaseMessage
@@ -5027,7 +5105,6 @@ INSERT INTO `ReleaseMessage` VALUES (453, 'common-template+default+micro_service
 INSERT INTO `ReleaseMessage` VALUES (459, 'uaa-service+default+micro_service.spring-freemarker', '2020-12-24 09:04:41');
 INSERT INTO `ReleaseMessage` VALUES (465, 'common-template+default+micro_service.spring-freemarker', '2020-12-24 11:41:45');
 INSERT INTO `ReleaseMessage` VALUES (467, 'account-service+default+micro_service.spring-rocketmq', '2020-12-24 13:41:18');
-INSERT INTO `ReleaseMessage` VALUES (479, 'consumer-service+default+micro_service.spring-rocketmq', '2020-12-24 19:26:23');
 INSERT INTO `ReleaseMessage` VALUES (483, 'common-template+default+application', '2020-12-24 19:43:46');
 INSERT INTO `ReleaseMessage` VALUES (485, 'common-template+default+micro_service.spring-boot-http', '2020-12-24 19:49:29');
 INSERT INTO `ReleaseMessage` VALUES (487, 'consumer-service+default+micro_service.spring-boot-http', '2020-12-24 19:50:49');
@@ -5068,6 +5145,9 @@ INSERT INTO `ReleaseMessage` VALUES (546, 'content-search-service+default+applic
 INSERT INTO `ReleaseMessage` VALUES (547, 'gateway-server+default+application', '2021-03-18 16:58:44');
 INSERT INTO `ReleaseMessage` VALUES (548, 'repayment-service+default+application', '2021-03-18 17:01:57');
 INSERT INTO `ReleaseMessage` VALUES (549, 'repayment-service+default+micro_service.spring-boot-mysql', '2021-03-18 17:07:13');
+INSERT INTO `ReleaseMessage` VALUES (554, 'consumer-service+default+micro_service.spring-rocketmq', '2021-03-18 18:35:04');
+INSERT INTO `ReleaseMessage` VALUES (556, 'transaction-service+default+micro_service.spring-rocketmq', '2021-03-18 18:48:30');
+INSERT INTO `ReleaseMessage` VALUES (558, 'repayment-service+default+micro_service.spring-rocketmq', '2021-03-18 20:32:41');
 COMMIT;
 
 -- ----------------------------
