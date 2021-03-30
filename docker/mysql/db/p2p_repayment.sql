@@ -35,7 +35,8 @@ CREATE TABLE `receivable_plan` (
   `RECEIVABLE_STATUS` tinyint(4) DEFAULT NULL COMMENT '状态：0,.未收 1.已收  2.部分收到',
   `CREATE_DATE` datetime DEFAULT NULL COMMENT '创建时间',
   `COMMISSION` decimal(10,2) DEFAULT NULL COMMENT '年化利率(平台佣金，利差)',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `plan_unique` (`CONSUMER_ID`,`PROJECT_ID`,`NUMBER_OF_PERIODS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='投资人应收明细';
 
 -- ----------------------------
