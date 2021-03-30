@@ -27,20 +27,12 @@ spring:
             inline:
               sharding‐column: ID
               algorithm‐expression: db$->{ID % 2}
-#          tableStrategy:
-#            inline:
-#              shardingColumn: ID
-#              algorithmExpression: project
         tender:
           actualDataNodes: db$->{0..1}.tender
           database‐strategy:
             inline:
               sharding‐column: PROJECT_ID
               algorithm‐expression: db$->{PROJECT_ID % 2}
-#          tableStrategy:
-#            inline:
-#              shardingColumn: PROJECT_ID
-#              algorithmExpression: tender
     props:
       sql:
         show: true
@@ -54,7 +46,7 @@ apollo:
     enabled: true
     eagerLoad:
       enabled: true
-    namespaces: application,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-hystrix,micro_service.spring-feign,micro_service.spring-ribbon,micro_service.mybatis-plus
+    namespaces: application,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-hystrix,micro_service.spring-feign,micro_service.spring-ribbon,micro_service.mybatis-plus,micro_service.spring-rocketmq
 
 logging:
   config: classpath:log4j2-dev.xml
