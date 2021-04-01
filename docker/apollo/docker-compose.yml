@@ -7,7 +7,6 @@ services:
     restart: always
     network_mode: host
     hostname: mysql
-    build: ./
     environment:
       MYSQL_ROOT_PASSWORD: "yueliminvc@outlook.com"
       TZ: Asia/Shanghai
