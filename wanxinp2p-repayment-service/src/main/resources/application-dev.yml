@@ -9,20 +9,5 @@ apollo:
       enabled: true
     namespaces: micro_service.spring-boot-druid,application,micro_service.spring-boot-http,micro_service.spring-eureka,micro_service.spring-feign,micro_service.spring-ribbon,micro_service.mybatis-plus,micro_service.spring-rocketmq
 
-elasticjob:
-  reg-center:
-    server-lists: 192.168.158.164:2181
-    namespace: elasticjob-lite-springboot
-    connection-timeout-milliseconds: 3000
-  jobs:
-    simpleJob:
-      elasticJobClass: com.wanxin.repayment.job.RepaymentSimpleJob
-      cron: 0/5 * * * * ?
-      shardingTotalCount: 2
-  # Spring Boot 提供了作业信息导出端口快速配置, 只需在配置中指定导出所用的端口号即可启用导出功能.
-  # 如果没有指定端口号, 导出功能不会生效.
-  dump:
-    port: 9888
-
 logging:
   config: classpath:log4j2-dev.xml
