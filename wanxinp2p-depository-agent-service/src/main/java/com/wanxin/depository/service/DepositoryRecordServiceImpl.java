@@ -8,9 +8,11 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.*;
+import com.wanxin.api.repayment.model.RepaymentRequest;
 import com.wanxin.api.transaction.model.ModifyProjectStatusDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.common.domain.BusinessException;
+import com.wanxin.common.domain.PreprocessBusinessTypeCode;
 import com.wanxin.common.domain.StatusCode;
 import com.wanxin.common.util.EncryptUtil;
 import com.wanxin.common.util.RSAUtil;
@@ -125,6 +127,33 @@ public class DepositoryRecordServiceImpl implements DepositoryRecordService {
 
     private DepositoryRecord getEntityByRequestNo(String requestNo) {
         return depositoryRecordMapper.selectOne(new LambdaQueryWrapper<DepositoryRecord>().eq(DepositoryRecord::getRequestNo, requestNo));
+    }
+
+    @Override
+    public DepositoryResponseDTO<DepositoryBaseResponse> confirmRepayment(RepaymentRequest repaymentRequest) {
+        try {
+            //构造交易记录
+            DepositoryRecord depositoryRecord = new DepositoryRecord(repaymentRequest.getRequestNo(), PreprocessBusinessTypeCode.REPAYMENT.getCode(), "Repayment", repaymentRequest.getId());
+            // 分布式事务幂等性实现
+            DepositoryResponseDTO<DepositoryBaseResponse> responseDTO = handleIdempotent(depositoryRecord);
+            if (responseDTO != null) {
+                return responseDTO;
+            }
+
+            // 获取最新交易记录
+            depositoryRecord = getEntityByRequestNo(repaymentRequest.getRequestNo());
+
+            // 确认还款(调用银行存管系统)
+            final String jsonString = JSON.toJSONString(repaymentRequest);
+            // 业务数据报文, base64处理, 方便传输
+            String reqData = EncryptUtil.encodeUTF8StringBase64(jsonString);
+            // 拼接银行存管系统请求地址
+            String url = configService.getDepositoryUrl() + "/service";
+            // 封装通用方法, 请求银行存管系统
+            return sendHttpGet("CONFIRM_REPAYMENT", url, reqData, depositoryRecord);
+        } catch (Exception e) {
+            throw new  BusinessException(DepositoryErrorCode.E_160101);
+        }
     }
 
     @Override

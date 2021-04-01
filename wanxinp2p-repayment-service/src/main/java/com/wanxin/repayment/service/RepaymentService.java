@@ -15,6 +15,14 @@ import java.util.List;
  */
 public interface RepaymentService {
     /**
+     * 远程调用确认还款接口
+     *
+     * @param repaymentPlan
+     * @param repaymentRequest
+     */
+    void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest);
+
+    /**
      * 执行还款
      *
      * @param date

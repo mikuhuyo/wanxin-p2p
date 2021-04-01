@@ -1,6 +1,7 @@
 package com.wanxin.repayment.agent;
 
 import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
+import com.wanxin.api.repayment.model.RepaymentRequest;
 import com.wanxin.common.domain.BusinessException;
 import com.wanxin.common.domain.CommonErrorCode;
 import com.wanxin.common.domain.RestResponse;
@@ -21,6 +22,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface DepositoryAgentApiAgent {
 
     /**
+     * 确认还款
+     *
+     * @param repaymentRequest
+     * @return
+     */
+    @PostMapping("/depository-agent/l/confirm-repayment")
+    RestResponse<String> confirmRepayment(RepaymentRequest repaymentRequest);
+
+    /**
      * 还款预处理
      *
      * @param userAutoPreTransactionRequest
@@ -31,6 +41,11 @@ public interface DepositoryAgentApiAgent {
 }
 
 class DepositoryAgentApiAgentFallback implements DepositoryAgentApiAgent {
+
+    @Override
+    public RestResponse<String> confirmRepayment(RepaymentRequest repaymentRequest) {
+        throw new BusinessException(CommonErrorCode.E_999997);
+    }
 
     @Override
     public RestResponse<String> userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest) {

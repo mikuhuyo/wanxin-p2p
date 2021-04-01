@@ -56,6 +56,15 @@ public class RepaymentServiceImpl implements RepaymentService {
     private RepaymentProducer repaymentProducer;
 
     @Override
+    public void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest) {
+        RestResponse<String> repaymentResponse = depositoryAgentApiAgent.confirmRepayment(repaymentRequest);
+
+        if (!DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(repaymentResponse.getResult())) {
+            throw new RuntimeException("还款失败");
+        }
+    }
+
+    @Override
     public void executeRepayment(String date) {
         // 查询所有到期的还款计划
         List<RepaymentPlanDTO> repaymentPlanList = selectDueRepayment(date);

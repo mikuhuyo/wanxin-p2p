@@ -4,6 +4,7 @@ import com.wanxin.api.consumer.model.ConsumerRequest;
 import com.wanxin.api.consumer.model.RechargeRequest;
 import com.wanxin.api.consumer.model.WithdrawRequest;
 import com.wanxin.api.depository.model.*;
+import com.wanxin.api.repayment.model.RepaymentRequest;
 import com.wanxin.api.transaction.model.ModifyProjectStatusDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 
@@ -13,6 +14,14 @@ import com.wanxin.api.transaction.model.ProjectDTO;
  * @since 1.8
  */
 public interface DepositoryRecordService {
+    /**
+     * 还款确认
+     *
+     * @param repaymentRequest
+     * @return
+     */
+    DepositoryResponseDTO<DepositoryBaseResponse> confirmRepayment(RepaymentRequest repaymentRequest);
+
     /**
      * 修改标的状态
      *
