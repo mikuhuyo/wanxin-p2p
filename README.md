@@ -92,7 +92,7 @@ Ps: 万万没想到写文档和注释是这么痛苦.
 | Elasticsearch        | 搜索引擎            |
 | LogStash             | 日志收集工具        |
 | Jenkins              | 自动化部署工具      |
-| Elastic-Job | 分布式任务调度 |
+| SpringTask | 任务调度 |
 | RocketMQ | 消息中间件 |
 | Hmily | 分布式事务框架 |
 | ShardingSphere | 分库分表中间件 |
