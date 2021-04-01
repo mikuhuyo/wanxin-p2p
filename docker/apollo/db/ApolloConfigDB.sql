@@ -129,7 +129,7 @@ CREATE TABLE `Audit` (
   `DataChange_LastTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=2690 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
+) ENGINE=InnoDB AUTO_INCREMENT=2697 DEFAULT CHARSET=utf8mb4 COMMENT='日志审计表';
 
 -- ----------------------------
 -- Records of Audit
@@ -2824,6 +2824,13 @@ INSERT INTO `Audit` VALUES (2686, 'Item', 651, 'DELETE', NULL, b'0', 'apollo', '
 INSERT INTO `Audit` VALUES (2687, 'Item', 652, 'DELETE', NULL, b'0', 'apollo', '2021-03-18 20:32:39', NULL, '2021-03-18 20:32:39');
 INSERT INTO `Audit` VALUES (2688, 'Release', 388, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 20:32:41', NULL, '2021-03-18 20:32:41');
 INSERT INTO `Audit` VALUES (2689, 'ReleaseHistory', 393, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 20:32:41', NULL, '2021-03-18 20:32:41');
+INSERT INTO `Audit` VALUES (2690, 'Item', 649, 'UPDATE', NULL, b'0', 'apollo', '2021-03-18 21:34:17', NULL, '2021-03-18 21:34:17');
+INSERT INTO `Audit` VALUES (2691, 'ItemSet', NULL, 'UPDATE', NULL, b'0', 'apollo', '2021-03-18 21:34:17', NULL, '2021-03-18 21:34:17');
+INSERT INTO `Audit` VALUES (2692, 'Release', 389, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 21:34:19', NULL, '2021-03-18 21:34:19');
+INSERT INTO `Audit` VALUES (2693, 'ReleaseHistory', 394, 'INSERT', NULL, b'0', 'apollo', '2021-03-18 21:34:19', NULL, '2021-03-18 21:34:19');
+INSERT INTO `Audit` VALUES (2694, 'Item', 653, 'INSERT', NULL, b'0', 'apollo', '2021-03-19 00:56:35', NULL, '2021-03-19 00:56:35');
+INSERT INTO `Audit` VALUES (2695, 'Release', 390, 'INSERT', NULL, b'0', 'apollo', '2021-03-19 00:56:40', NULL, '2021-03-19 00:56:40');
+INSERT INTO `Audit` VALUES (2696, 'ReleaseHistory', 395, 'INSERT', NULL, b'0', 'apollo', '2021-03-19 00:56:40', NULL, '2021-03-19 00:56:40');
 COMMIT;
 
 -- ----------------------------
@@ -2885,7 +2892,7 @@ CREATE TABLE `Commit` (
   KEY `AppId` (`AppId`(191)),
   KEY `ClusterName` (`ClusterName`(191)),
   KEY `NamespaceName` (`NamespaceName`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=423 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
+) ENGINE=InnoDB AUTO_INCREMENT=425 DEFAULT CHARSET=utf8mb4 COMMENT='commit 历史表';
 
 -- ----------------------------
 -- Records of Commit
@@ -3141,6 +3148,8 @@ INSERT INTO `Commit` VALUES (419, '{\"createItems\":[],\"updateItems\":[{\"oldIt
 INSERT INTO `Commit` VALUES (420, '{\"createItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":651,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:00\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:56:00\"},{\"namespaceId\":271,\"key\":\"rocketmq.consumer.group\",\"value\":\"CID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":2,\"id\":652,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:00\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:56:00\"}],\"updateItems\":[],\"deleteItems\":[]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 18:56:01', 'apollo', '2021-03-18 18:56:01');
 INSERT INTO `Commit` VALUES (421, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":651,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:01\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 04:32:36\"}]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 20:32:37', 'apollo', '2021-03-18 20:32:37');
 INSERT INTO `Commit` VALUES (422, '{\"createItems\":[],\"updateItems\":[],\"deleteItems\":[{\"namespaceId\":271,\"key\":\"rocketmq.consumer.group\",\"value\":\"CID_CONFIRM_REPAYMENT\",\"comment\":\"\",\"lineNum\":2,\"id\":652,\"isDeleted\":true,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:56:01\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 04:32:38\"}]}', 'repayment-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 20:32:39', 'apollo', '2021-03-18 20:32:39');
+INSERT INTO `Commit` VALUES (423, '{\"createItems\":[],\"updateItems\":[{\"oldItem\":{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"PID_START_REPAYMENT\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 02:48:28\"},\"newItem\":{\"namespaceId\":273,\"key\":\"rocketmq.producer.group\",\"value\":\"producer_start_repayment\",\"comment\":\"\",\"lineNum\":1,\"id\":649,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 02:23:22\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 05:34:16\"}}],\"deleteItems\":[]}', 'transaction-service', 'default', 'micro_service.spring-rocketmq', NULL, b'0', 'apollo', '2021-03-18 21:34:17', 'apollo', '2021-03-18 21:34:17');
+INSERT INTO `Commit` VALUES (424, '{\"createItems\":[{\"namespaceId\":266,\"key\":\"spring.datasource.url\",\"value\":\"jdbc:mysql://192.168.158.164:3306/p2p_repayment?useUnicode\\u003dtrue\\u0026characterEncoding\\u003dutf-8\\u0026serverTimezone\\u003dAsia/Shanghai\",\"comment\":\"\",\"lineNum\":1,\"id\":653,\"isDeleted\":false,\"dataChangeCreatedBy\":\"apollo\",\"dataChangeCreatedTime\":\"2021-03-19 08:56:35\",\"dataChangeLastModifiedBy\":\"apollo\",\"dataChangeLastModifiedTime\":\"2021-03-19 08:56:35\"}],\"updateItems\":[],\"deleteItems\":[]}', 'repayment-service', 'default', 'micro_service.spring-boot-druid', NULL, b'0', 'apollo', '2021-03-19 00:56:35', 'apollo', '2021-03-19 00:56:35');
 COMMIT;
 
 -- ----------------------------
@@ -3297,7 +3306,7 @@ CREATE TABLE `InstanceConfig` (
   KEY `IX_ReleaseKey` (`ReleaseKey`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Valid_Namespace` (`ConfigAppId`,`ConfigClusterName`,`ConfigNamespaceName`,`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=1133 DEFAULT CHARSET=utf8mb4 COMMENT='应用实例的配置信息';
+) ENGINE=InnoDB AUTO_INCREMENT=1137 DEFAULT CHARSET=utf8mb4 COMMENT='应用实例的配置信息';
 
 -- ----------------------------
 -- Records of InstanceConfig
@@ -3862,7 +3871,7 @@ INSERT INTO `InstanceConfig` VALUES (969, 86, 'common-template', 'default', 'mic
 INSERT INTO `InstanceConfig` VALUES (970, 86, 'consumer-service', 'default', 'micro_service.mybatis-plus', '20201223153751-d524c84ad9afd91c', '2020-12-23 07:37:53', '2020-12-23 06:50:03', '2021-03-18 09:27:28');
 INSERT INTO `InstanceConfig` VALUES (971, 86, 'common-template', 'default', 'micro_service.mybatis-plus', '20201223154457-83e2c84ad9afd91d', '2020-12-23 07:44:59', '2020-12-23 06:50:03', '2021-03-18 09:27:28');
 INSERT INTO `InstanceConfig` VALUES (972, 86, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201226033459-aede39410fbc5feb', '2020-12-25 19:35:00', '2020-12-23 06:50:03', '2021-03-18 09:27:28');
-INSERT INTO `InstanceConfig` VALUES (973, 87, 'gateway-server', 'default', 'application', '20210318132900-df7a98e8b884c4eb', '2021-03-18 07:37:54', '2020-12-23 06:50:10', '2021-03-18 07:37:55');
+INSERT INTO `InstanceConfig` VALUES (973, 87, 'gateway-server', 'default', 'application', '20210319005843-df7a98e8b884c4ee', '2021-03-18 20:34:29', '2020-12-23 06:50:10', '2021-03-18 20:34:29');
 INSERT INTO `InstanceConfig` VALUES (974, 87, 'common-template', 'default', 'micro_service.spring-boot-http', '20201225034929-535139410fbc5fcc', '2020-12-24 19:49:30', '2020-12-23 06:50:10', '2021-03-18 07:37:55');
 INSERT INTO `InstanceConfig` VALUES (975, 87, 'common-template', 'default', 'micro_service.spring-eureka', '20201223144111-61dfc84ad9afd914', '2020-12-23 06:50:10', '2020-12-23 06:50:10', '2021-03-18 07:37:55');
 INSERT INTO `InstanceConfig` VALUES (976, 87, 'common-template', 'default', 'micro_service.spring-hystrix', '20210204064056-227d1edf7cb79da2', '2021-02-03 22:40:57', '2020-12-23 06:50:10', '2021-03-18 07:37:55');
@@ -3949,7 +3958,7 @@ INSERT INTO `InstanceConfig` VALUES (1056, 95, 'common-template', 'default', 'mi
 INSERT INTO `InstanceConfig` VALUES (1057, 95, 'common-template', 'default', 'micro_service.mybatis-plus', '20201223154457-83e2c84ad9afd91d', '2020-12-24 19:40:31', '2020-12-24 19:40:31', '2021-03-18 09:27:30');
 INSERT INTO `InstanceConfig` VALUES (1058, 95, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201226033459-aede39410fbc5feb', '2020-12-25 19:35:00', '2020-12-24 19:40:31', '2021-03-18 09:27:30');
 INSERT INTO `InstanceConfig` VALUES (1059, 95, 'common-template', 'default', 'micro_service.spring-boot-redis', '20201222143220-23465a8cbda0256e', '2020-12-24 19:40:31', '2020-12-24 19:40:31', '2021-03-18 09:27:30');
-INSERT INTO `InstanceConfig` VALUES (1060, 86, 'consumer-service', 'default', 'micro_service.spring-rocketmq', '20201225032623-002039410fbc5fc4', '2020-12-24 19:53:51', '2020-12-24 19:53:51', '2021-03-18 09:27:28');
+INSERT INTO `InstanceConfig` VALUES (1060, 86, 'consumer-service', 'default', 'micro_service.spring-rocketmq', '20210319023503-002098e8b884c4f5', '2021-03-18 20:34:02', '2020-12-24 19:53:51', '2021-03-18 20:34:02');
 INSERT INTO `InstanceConfig` VALUES (1061, 95, 'common-template', 'default', 'micro_service.spring-feign', '20201225080844-14bf39410fbc5fd7', '2020-12-25 01:20:30', '2020-12-25 01:20:30', '2021-03-18 09:27:30');
 INSERT INTO `InstanceConfig` VALUES (1062, 93, 'common-template', 'default', 'micro_service.spring-feign', '20201225080844-14bf39410fbc5fd7', '2020-12-25 01:20:35', '2020-12-25 01:20:35', '2021-03-18 09:27:36');
 INSERT INTO `InstanceConfig` VALUES (1063, 95, 'depository-agent-service', 'default', 'micro_service.spring-boot-http', '20201225094843-98ad39410fbc5fdc', '2020-12-25 01:48:44', '2020-12-25 01:32:28', '2021-03-18 09:27:30');
@@ -4020,6 +4029,10 @@ INSERT INTO `InstanceConfig` VALUES (1129, 103, 'common-template', 'default', 'm
 INSERT INTO `InstanceConfig` VALUES (1130, 103, 'common-template', 'default', 'micro_service.spring-ribbon', '20190505105409-f73c48b816809db0', '2021-03-18 17:12:36', '2021-03-18 17:12:36', '2021-03-18 17:12:36');
 INSERT INTO `InstanceConfig` VALUES (1131, 103, 'common-template', 'default', 'micro_service.mybatis-plus', '20201223154457-83e2c84ad9afd91d', '2021-03-18 17:12:36', '2021-03-18 17:12:36', '2021-03-18 17:12:36');
 INSERT INTO `InstanceConfig` VALUES (1132, 103, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201226033459-aede39410fbc5feb', '2021-03-18 17:12:36', '2021-03-18 17:12:36', '2021-03-18 17:12:36');
+INSERT INTO `InstanceConfig` VALUES (1133, 103, 'repayment-service', 'default', 'micro_service.spring-rocketmq', '20210319043240-185d98e8b884c4f9', '2021-03-18 20:35:13', '2021-03-18 20:35:13', '2021-03-18 20:35:13');
+INSERT INTO `InstanceConfig` VALUES (1134, 96, 'transaction-service', 'default', 'micro_service.spring-rocketmq', '20210319053419-cd0898e8b884c4fa', '2021-03-18 21:37:50', '2021-03-18 21:37:50', '2021-03-18 21:37:50');
+INSERT INTO `InstanceConfig` VALUES (1135, 96, 'common-template', 'default', 'micro_service.spring-rocketmq', '20201226033459-aede39410fbc5feb', '2021-03-18 21:37:50', '2021-03-18 21:37:50', '2021-03-18 21:37:50');
+INSERT INTO `InstanceConfig` VALUES (1136, 103, 'repayment-service', 'default', 'micro_service.spring-boot-druid', '20210319085639-6c4c98e8b884c4fb', '2021-03-19 00:56:41', '2021-03-19 00:56:41', '2021-03-19 00:56:41');
 COMMIT;
 
 -- ----------------------------
@@ -4041,7 +4054,7 @@ CREATE TABLE `Item` (
   PRIMARY KEY (`Id`),
   KEY `IX_GroupId` (`NamespaceId`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=653 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
+) ENGINE=InnoDB AUTO_INCREMENT=654 DEFAULT CHARSET=utf8mb4 COMMENT='配置项目';
 
 -- ----------------------------
 -- Records of Item
@@ -4295,10 +4308,11 @@ INSERT INTO `Item` VALUES (645, 265, 'server.servlet.context-path', '/repayment'
 INSERT INTO `Item` VALUES (646, 271, 'rocketmq.producer.group', 'producer_start_repayment', '', 1, b'1', 'apollo', '2021-03-18 17:52:07', 'apollo', '2021-03-18 18:22:36');
 INSERT INTO `Item` VALUES (647, 271, 'rocketmq.name-server', '192.168.158.164:9876', '', 2, b'1', 'apollo', '2021-03-18 17:52:07', 'apollo', '2021-03-18 17:53:23');
 INSERT INTO `Item` VALUES (648, 271, '', '', '', 1, b'1', 'apollo', '2021-03-18 18:22:36', 'apollo', '2021-03-18 18:56:01');
-INSERT INTO `Item` VALUES (649, 273, 'rocketmq.producer.group', 'PID_START_REPAYMENT', '', 1, b'0', 'apollo', '2021-03-18 18:23:22', 'apollo', '2021-03-18 18:48:28');
+INSERT INTO `Item` VALUES (649, 273, 'rocketmq.producer.group', 'producer_start_repayment', '', 1, b'0', 'apollo', '2021-03-18 18:23:22', 'apollo', '2021-03-18 21:34:17');
 INSERT INTO `Item` VALUES (650, 222, 'rocketmq.consumer.group', 'CID_P2P_GATEWAY_NOTIFY', '', 1, b'0', 'apollo', '2021-03-18 18:35:02', 'apollo', '2021-03-18 18:35:02');
 INSERT INTO `Item` VALUES (651, 271, 'rocketmq.producer.group', 'PID_CONFIRM_REPAYMENT', '', 1, b'1', 'apollo', '2021-03-18 18:56:01', 'apollo', '2021-03-18 20:32:37');
 INSERT INTO `Item` VALUES (652, 271, 'rocketmq.consumer.group', 'CID_CONFIRM_REPAYMENT', '', 2, b'1', 'apollo', '2021-03-18 18:56:01', 'apollo', '2021-03-18 20:32:39');
+INSERT INTO `Item` VALUES (653, 266, 'spring.datasource.url', 'jdbc:mysql://192.168.158.164:3306/p2p_repayment?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai', '', 1, b'0', 'apollo', '2021-03-19 00:56:35', 'apollo', '2021-03-19 00:56:35');
 COMMIT;
 
 -- ----------------------------
@@ -4457,7 +4471,7 @@ CREATE TABLE `Release` (
   KEY `AppId_ClusterName_GroupName` (`AppId`(191),`ClusterName`(191),`NamespaceName`(191)),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_ReleaseKey` (`ReleaseKey`)
-) ENGINE=InnoDB AUTO_INCREMENT=389 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
+) ENGINE=InnoDB AUTO_INCREMENT=391 DEFAULT CHARSET=utf8mb4 COMMENT='发布';
 
 -- ----------------------------
 -- Records of Release
@@ -4693,6 +4707,8 @@ INSERT INTO `Release` VALUES (385, '20210319023844-cd0898e8b884c4f6', '202103301
 INSERT INTO `Release` VALUES (386, '20210319024830-cd0898e8b884c4f7', '20210330175736-release', '', 'transaction-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"PID_START_REPAYMENT\"}', b'0', b'0', 'apollo', '2021-03-18 18:48:30', 'apollo', '2021-03-18 18:48:30');
 INSERT INTO `Release` VALUES (387, '20210319025603-185d98e8b884c4f8', '20210330180509-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"PID_CONFIRM_REPAYMENT\",\"rocketmq.consumer.group\":\"CID_CONFIRM_REPAYMENT\"}', b'0', b'0', 'apollo', '2021-03-18 18:56:03', 'apollo', '2021-03-18 18:56:03');
 INSERT INTO `Release` VALUES (388, '20210319043240-185d98e8b884c4f9', '20210330194146-release', '', 'repayment-service', 'default', 'micro_service.spring-rocketmq', '{}', b'0', b'0', 'apollo', '2021-03-18 20:32:41', 'apollo', '2021-03-18 20:32:41');
+INSERT INTO `Release` VALUES (389, '20210319053419-cd0898e8b884c4fa', '20210330204324-release', '', 'transaction-service', 'default', 'micro_service.spring-rocketmq', '{\"rocketmq.producer.group\":\"producer_start_repayment\"}', b'0', b'0', 'apollo', '2021-03-18 21:34:19', 'apollo', '2021-03-18 21:34:19');
+INSERT INTO `Release` VALUES (390, '20210319085639-6c4c98e8b884c4fb', '20210401165317-release', '', 'repayment-service', 'default', 'micro_service.spring-boot-druid', '{\"spring.datasource.url\":\"jdbc:mysql://192.168.158.164:3306/p2p_repayment?useUnicode\\u003dtrue\\u0026characterEncoding\\u003dutf-8\\u0026serverTimezone\\u003dAsia/Shanghai\"}', b'0', b'0', 'apollo', '2021-03-19 00:56:40', 'apollo', '2021-03-19 00:56:40');
 COMMIT;
 
 -- ----------------------------
@@ -4718,7 +4734,7 @@ CREATE TABLE `ReleaseHistory` (
   KEY `IX_Namespace` (`AppId`,`ClusterName`,`NamespaceName`,`BranchName`),
   KEY `IX_ReleaseId` (`ReleaseId`),
   KEY `IX_DataChange_LastTime` (`DataChange_LastTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=394 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
+) ENGINE=InnoDB AUTO_INCREMENT=396 DEFAULT CHARSET=utf8mb4 COMMENT='发布历史';
 
 -- ----------------------------
 -- Records of ReleaseHistory
@@ -4957,6 +4973,8 @@ INSERT INTO `ReleaseHistory` VALUES (390, 'transaction-service', 'default', 'mic
 INSERT INTO `ReleaseHistory` VALUES (391, 'transaction-service', 'default', 'micro_service.spring-rocketmq', 'default', 386, 385, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:48:30', 'apollo', '2021-03-18 18:48:30');
 INSERT INTO `ReleaseHistory` VALUES (392, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 387, 382, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 18:56:03', 'apollo', '2021-03-18 18:56:03');
 INSERT INTO `ReleaseHistory` VALUES (393, 'repayment-service', 'default', 'micro_service.spring-rocketmq', 'default', 388, 387, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 20:32:41', 'apollo', '2021-03-18 20:32:41');
+INSERT INTO `ReleaseHistory` VALUES (394, 'transaction-service', 'default', 'micro_service.spring-rocketmq', 'default', 389, 386, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-18 21:34:19', 'apollo', '2021-03-18 21:34:19');
+INSERT INTO `ReleaseHistory` VALUES (395, 'repayment-service', 'default', 'micro_service.spring-boot-druid', 'default', 390, 0, 0, '{\"isEmergencyPublish\":false}', b'0', 'apollo', '2021-03-19 00:56:40', 'apollo', '2021-03-19 00:56:40');
 COMMIT;
 
 -- ----------------------------
@@ -4970,7 +4988,7 @@ CREATE TABLE `ReleaseMessage` (
   PRIMARY KEY (`Id`),
   KEY `DataChange_LastTime` (`DataChange_LastTime`),
   KEY `IX_Message` (`Message`(191))
-) ENGINE=InnoDB AUTO_INCREMENT=559 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
+) ENGINE=InnoDB AUTO_INCREMENT=561 DEFAULT CHARSET=utf8mb4 COMMENT='发布消息';
 
 -- ----------------------------
 -- Records of ReleaseMessage
@@ -5037,7 +5055,6 @@ INSERT INTO `ReleaseMessage` VALUES (315, 'uaa-service+default+micro_service.spr
 INSERT INTO `ReleaseMessage` VALUES (316, 'uaa-service+default+micro_service.spring-boot-mysql', '2019-07-14 17:17:15');
 INSERT INTO `ReleaseMessage` VALUES (317, 'uaa-service+fat+application', '2019-07-14 17:17:15');
 INSERT INTO `ReleaseMessage` VALUES (319, 'repayment-service+default+micro_service.spring-boot-http', '2019-07-14 17:17:49');
-INSERT INTO `ReleaseMessage` VALUES (320, 'repayment-service+default+micro_service.spring-boot-druid', '2019-07-14 17:17:49');
 INSERT INTO `ReleaseMessage` VALUES (321, 'repayment-service+default+micro_service.mybatis-plus', '2019-07-14 17:17:49');
 INSERT INTO `ReleaseMessage` VALUES (322, 'repayment-service+default+micro_service.spring-eureka', '2019-07-14 17:17:49');
 INSERT INTO `ReleaseMessage` VALUES (323, 'repayment-service+default+micro_service.spring-cloud-feign', '2019-07-14 17:17:49');
@@ -5146,8 +5163,9 @@ INSERT INTO `ReleaseMessage` VALUES (547, 'gateway-server+default+application', 
 INSERT INTO `ReleaseMessage` VALUES (548, 'repayment-service+default+application', '2021-03-18 17:01:57');
 INSERT INTO `ReleaseMessage` VALUES (549, 'repayment-service+default+micro_service.spring-boot-mysql', '2021-03-18 17:07:13');
 INSERT INTO `ReleaseMessage` VALUES (554, 'consumer-service+default+micro_service.spring-rocketmq', '2021-03-18 18:35:04');
-INSERT INTO `ReleaseMessage` VALUES (556, 'transaction-service+default+micro_service.spring-rocketmq', '2021-03-18 18:48:30');
 INSERT INTO `ReleaseMessage` VALUES (558, 'repayment-service+default+micro_service.spring-rocketmq', '2021-03-18 20:32:41');
+INSERT INTO `ReleaseMessage` VALUES (559, 'transaction-service+default+micro_service.spring-rocketmq', '2021-03-18 21:34:19');
+INSERT INTO `ReleaseMessage` VALUES (560, 'repayment-service+default+micro_service.spring-boot-druid', '2021-03-19 00:56:40');
 COMMIT;
 
 -- ----------------------------
