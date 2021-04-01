@@ -18,12 +18,12 @@ logging:
   config: classpath:log4j2-dev.xml
 
 minio:
-  appId: '76fc8986f43f488487f43dfdb3fe9c35'
-  accessKey: 'JDJhJDEwJHZPTjMvcmV5OUg4RHJCTURMN3dIZWVpVktQTEY0aHlySEU1TFJPOWFKNnFTWnk4ZDFoZUVP'
-  secretKey: 'JDJhJDEwJHZPTjMvcmV5OUg4RHJCTURMN3dIZWVRZE05eTRVUUwxV3RJelRKeEozNThyMGlpRDh6YjlP'
+  appId: ''
+  accessKey: ''
+  secretKey: ''
   uploadUrl: 'http://127.0.0.1:56090/minio/image'
 
 baidu:
-  appId: 23658488
-  accessKey: 'h5BZdSGIcTyoDzXA6CrHLMt3'
-  secretKey: 'WtcHuBscFcQhyBjvzgazebXpkgPPwvkx'
+  appId: 123
+  accessKey: ''
+  secretKey: ''
