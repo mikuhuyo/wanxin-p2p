@@ -13,6 +13,16 @@ import java.util.List;
  * @since 1.8
  */
 public interface RepaymentService {
+
+    /**
+     * 还款预处理-冻结借款人应还金额
+     *
+     * @param repaymentPlan
+     * @param preRequestNo
+     * @return
+     */
+    Boolean preRepayment(RepaymentPlan repaymentPlan, String preRequestNo);
+
     /**
      * 根据还款计划生成还款明细并保存
      *

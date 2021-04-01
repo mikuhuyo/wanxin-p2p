@@ -1,23 +1,23 @@
 package com.wanxin.repayment.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.wanxin.api.depository.model.UserAutoPreTransactionRequest;
 import com.wanxin.api.repayment.model.EqualInterestRepayment;
 import com.wanxin.api.repayment.model.RepaymentPlanDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.api.transaction.model.ProjectWithTendersDTO;
 import com.wanxin.api.transaction.model.TenderDTO;
-import com.wanxin.common.domain.CodePrefixCode;
-import com.wanxin.common.domain.DepositoryReturnCode;
-import com.wanxin.common.domain.RepaymentWayCode;
-import com.wanxin.common.domain.StatusCode;
+import com.wanxin.common.domain.*;
 import com.wanxin.common.util.CodeNoUtil;
 import com.wanxin.common.util.DateUtil;
+import com.wanxin.repayment.agent.DepositoryAgentApiAgent;
 import com.wanxin.repayment.entity.ReceivablePlan;
 import com.wanxin.repayment.entity.RepaymentDetail;
 import com.wanxin.repayment.entity.RepaymentPlan;
+import com.wanxin.repayment.mapper.ReceivableDetailMapper;
+import com.wanxin.repayment.mapper.ReceivablePlanMapper;
 import com.wanxin.repayment.mapper.RepaymentDetailMapper;
 import com.wanxin.repayment.mapper.RepaymentPlanMapper;
-import com.wanxin.repayment.mapper.ReceivablePlanMapper;
 import com.wanxin.repayment.utils.RepaymentUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +42,46 @@ public class RepaymentServiceImpl implements RepaymentService {
     private ReceivablePlanMapper receivablePlanMapper;
     @Autowired
     private RepaymentDetailMapper repaymentDetailMapper;
+    @Autowired
+    private ReceivableDetailMapper receivableDetailMapper;
+    @Autowired
+    private DepositoryAgentApiAgent depositoryAgentApiAgent;
+
+    @Override
+    public Boolean preRepayment(RepaymentPlan repaymentPlan, String preRequestNo) {
+        // 构造请求数据
+        final UserAutoPreTransactionRequest userAutoPreTransactionRequest = generateUserAutoPreTransactionRequest(repaymentPlan, preRequestNo);
+        // 请求存管代理服务
+        final RestResponse<String> restResponse = depositoryAgentApiAgent.userAutoPreTransaction(userAutoPreTransactionRequest);
+        // 返回结果
+        return DepositoryReturnCode.RETURN_CODE_00000.getCode().equals(restResponse.getResult());
+    }
+
+    /**
+     * 构造存管代理服务预处理请求数据
+     *
+     * @param repaymentPlan
+     * @param preRequestNo
+     * @return
+     */
+    private UserAutoPreTransactionRequest generateUserAutoPreTransactionRequest(RepaymentPlan repaymentPlan, String preRequestNo) {
+        // 构造请求数据
+        UserAutoPreTransactionRequest userAutoPreTransactionRequest = new UserAutoPreTransactionRequest();
+        // 冻结金额
+        userAutoPreTransactionRequest.setAmount(repaymentPlan.getAmount());
+        // 预处理业务类型
+        userAutoPreTransactionRequest.setBizType(PreprocessBusinessTypeCode.REPAYMENT.getCode());
+        // 标的号
+        userAutoPreTransactionRequest.setProjectNo(repaymentPlan.getProjectNo());
+        // 请求流水号
+        userAutoPreTransactionRequest.setRequestNo(preRequestNo);
+        // 标的用户编码
+        userAutoPreTransactionRequest.setUserNo(repaymentPlan.getUserNo());
+        // 关联业务实体标识
+        userAutoPreTransactionRequest.setId(repaymentPlan.getId());
+        // 返回结果
+        return userAutoPreTransactionRequest;
+    }
 
     @Override
     public RepaymentDetail saveRepaymentDetail(RepaymentPlan repaymentPlan) {
