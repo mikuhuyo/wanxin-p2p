@@ -1,6 +1,7 @@
 package com.wanxin.repayment.service;
 
 import com.wanxin.api.repayment.model.RepaymentPlanDTO;
+import com.wanxin.api.repayment.model.RepaymentRequest;
 import com.wanxin.api.transaction.model.ProjectWithTendersDTO;
 import com.wanxin.repayment.entity.RepaymentDetail;
 import com.wanxin.repayment.entity.RepaymentPlan;
@@ -13,6 +14,21 @@ import java.util.List;
  * @since 1.8
  */
 public interface RepaymentService {
+    /**
+     * 执行还款
+     *
+     * @param date
+     */
+    void executeRepayment(String date);
+
+    /**
+     * 确认还款处理
+     *
+     * @param repaymentPlan
+     * @param repaymentRequest
+     * @return
+     */
+    Boolean confirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest);
 
     /**
      * 还款预处理-冻结借款人应还金额
