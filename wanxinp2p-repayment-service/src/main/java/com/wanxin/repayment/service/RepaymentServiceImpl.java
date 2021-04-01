@@ -1,21 +1,30 @@
 package com.wanxin.repayment.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wanxin.api.repayment.model.EqualInterestRepayment;
+import com.wanxin.api.repayment.model.RepaymentPlanDTO;
 import com.wanxin.api.transaction.model.ProjectDTO;
 import com.wanxin.api.transaction.model.ProjectWithTendersDTO;
 import com.wanxin.api.transaction.model.TenderDTO;
+import com.wanxin.common.domain.CodePrefixCode;
 import com.wanxin.common.domain.DepositoryReturnCode;
 import com.wanxin.common.domain.RepaymentWayCode;
+import com.wanxin.common.domain.StatusCode;
+import com.wanxin.common.util.CodeNoUtil;
 import com.wanxin.common.util.DateUtil;
 import com.wanxin.repayment.entity.ReceivablePlan;
+import com.wanxin.repayment.entity.RepaymentDetail;
 import com.wanxin.repayment.entity.RepaymentPlan;
-import com.wanxin.repayment.mapper.PlanMapper;
+import com.wanxin.repayment.mapper.RepaymentDetailMapper;
+import com.wanxin.repayment.mapper.RepaymentPlanMapper;
 import com.wanxin.repayment.mapper.ReceivablePlanMapper;
 import com.wanxin.repayment.utils.RepaymentUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +37,54 @@ import java.util.Map;
 @Service
 public class RepaymentServiceImpl implements RepaymentService {
     @Autowired
-    private PlanMapper planMapper;
+    private RepaymentPlanMapper planMapper;
     @Autowired
     private ReceivablePlanMapper receivablePlanMapper;
+    @Autowired
+    private RepaymentDetailMapper repaymentDetailMapper;
+
+    @Override
+    public RepaymentDetail saveRepaymentDetail(RepaymentPlan repaymentPlan) {
+        RepaymentDetail repaymentDetail = repaymentDetailMapper.selectOne(new LambdaQueryWrapper<RepaymentDetail>().eq(RepaymentDetail::getRepaymentPlanId, repaymentPlan.getId()));
+
+        if (repaymentDetail == null) {
+            repaymentDetail = new RepaymentDetail();
+            // 还款计划项标识
+            repaymentDetail.setRepaymentPlanId(repaymentPlan.getId());
+            // 实还本息
+            repaymentDetail.setAmount(repaymentPlan.getAmount());
+            // 实际还款时间
+            repaymentDetail.setRepaymentDate(LocalDateTime.now());
+            // 请求流水号
+            repaymentDetail.setRequestNo(CodeNoUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
+            // 未同步
+            repaymentDetail.setStatus(StatusCode.STATUS_OUT.getCode());
+            // 保存数据
+            repaymentDetailMapper.insert(repaymentDetail);
+        }
+
+        return repaymentDetail;
+    }
+
+    @Override
+    public List<RepaymentPlanDTO> selectDueRepayment(String date) {
+        return convertEntityList2DtoList(planMapper.selectDueRepayment(date));
+    }
+
+    private List<RepaymentPlanDTO> convertEntityList2DtoList(List<RepaymentPlan> repaymentPlanList) {
+        if (repaymentPlanList == null) {
+            return null;
+        }
+
+        List<RepaymentPlanDTO> repaymentPlanDTOList = new ArrayList<>();
+        repaymentPlanList.forEach(repaymentPlan -> {
+            RepaymentPlanDTO repaymentPlanDTO = new RepaymentPlanDTO();
+            BeanUtils.copyProperties(repaymentPlan, repaymentPlanDTO);
+            repaymentPlanDTOList.add(repaymentPlanDTO);
+        });
+
+        return repaymentPlanDTOList;
+    }
 
     @Override
     public String startRepayment(ProjectWithTendersDTO projectWithTendersDTO) {
