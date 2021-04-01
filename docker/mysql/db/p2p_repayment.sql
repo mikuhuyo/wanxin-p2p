@@ -71,7 +71,8 @@ CREATE TABLE `repayment_plan` (
   `REPAYMENT_STATUS` varchar(50) DEFAULT NULL COMMENT '应还状态0.待还,1.已还， 2.部分还款',
   `CREATE_DATE` datetime DEFAULT NULL COMMENT '计划创建时间',
   `COMMISSION` decimal(10,2) DEFAULT NULL COMMENT '年化利率(平台佣金，利差)',
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `plan_unique` (`CONSUMER_ID`,`PROJECT_ID`,`NUMBER_OF_PERIODS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='借款人还款计划';
 
 SET FOREIGN_KEY_CHECKS = 1;
